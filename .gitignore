@@ -1,0 +1,12 @@
+# Lokal källdata med spelarnamn; ska inte publiceras i Git-repot.
+Matchfordelning_FBC_Sollentuna_P17_v3_dynamisk (1).xlsx
+
+# Lokala miljöfiler och vanliga byggartefakter.
+.env
+.env.*
+!.env.example
+node_modules/
+.next/
+coverage/
+*.log
+
