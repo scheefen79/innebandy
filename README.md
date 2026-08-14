@@ -4,7 +4,7 @@ Ett mobile-first planeringsverktyg för tränare i FBC Sollentuna P17. Tjänsten
 
 ## Status
 
-Projektet befinner sig i planerings- och beslutsfas. Ingen applikation är ännu skapad.
+Projektets Next.js-skelett är skapat och verifierat. Nästa steg i Implementation 01 är Supabase-migrationer, autentisering, Row Level Security och den läsbara spelarlistan.
 
 ## Dokumentation
 
@@ -14,6 +14,7 @@ Projektet befinner sig i planerings- och beslutsfas. Ingen applikation är ännu
 - [Aktuell milstolpe](docs/planning/current-milestone.md)
 - [Implementation 01: säker grund och spelarlista](docs/planning/implementation-01-foundation.md)
 - [Definition of Done](docs/quality/definition-of-done.md)
+- [Checklista för oberoende granskning](docs/quality/review-checklist.md)
 - [Testfall för matchfördelning](docs/quality/allocation-test-cases.md)
 - [Arkitekturbeslut](docs/architecture/decisions/)
 - [Agentinstruktioner](AGENTS.md)
@@ -25,3 +26,25 @@ Projektet använder Next.js, TypeScript, Tailwind CSS, Supabase/PostgreSQL och V
 ## Arbetsflöde
 
 Större funktioner går från krav och acceptanskriterier till design, implementation, automatiska tester och manuell verifiering. Viktiga beslut dokumenteras så att både människor och agenter kan förstå varför lösningen ser ut som den gör.
+
+Innan integration granskas ändringen av en separat skrivskyddad agent enligt [granskningschecklistan](docs/quality/review-checklist.md). Implementerande agent bedömer fynden och ansvarar för rättningar och slutlig verifiering. Commit, push och pull request kräver fortfarande uttryckligt godkännande.
+
+## Lokal utveckling
+
+Krav: Node.js 20.9 eller senare och pnpm.
+
+```bash
+pnpm install
+pnpm dev
+```
+
+Verifiering:
+
+```bash
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm build
+```
+
+Kopiera `.env.example` till `.env.local` när Supabase-integrationen påbörjas. Lägg aldrig riktiga hemligheter i Git.
