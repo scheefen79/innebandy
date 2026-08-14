@@ -7,6 +7,9 @@ Matchfordelning_FBC_Sollentuna_P17_v3_dynamisk (1).xlsx
 !.env.example
 node_modules/
 .next/
+out/
+.vercel/
 coverage/
 *.log
-
+*.tsbuildinfo
+next-env.d.ts

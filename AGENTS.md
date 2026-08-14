@@ -40,6 +40,20 @@ Produktens källa är `docs/product/FBC_P17_DESIGN_TECH_SPEC.md`. Lägg inte til
 - Persondata ska minimeras. Behörighet och Row Level Security ska verifieras, inte bara konfigureras.
 - En agent får inte kalla arbete färdigt utan att redovisa utförd verifiering och kvarvarande osäkerheter.
 
+## Oberoende kodgranskning
+
+När en separat agent får rollen som granskare ska den vara skrivskyddad och oberoende av implementationen:
+
+- Läs först `AGENTS.md`, relevant planering, `docs/quality/definition-of-done.md` och berörda arkitekturbeslut.
+- Granska hela ändringen mot avsedd bas, inklusive nya filer som ännu inte är spårade av Git.
+- Kör gärna relevanta icke-destruktiva kontroller, men ändra inte filer och installera inte beroenden.
+- Skapa inte commit, push, pull request, GitHub-kommentar eller merge.
+- Rapportera endast konkreta fynd som kan beläggas. Ange prioritet, fil och rad, konsekvens, evidens och rekommenderad rättning.
+- Använd prioriteterna P0 (blockerande), P1 (allvarlig), P2 (bör rättas) och P3 (förbättring).
+- Skriv uttryckligen när inga fynd finns och redovisa då även vad som kontrollerades och kvarvarande osäkerheter.
+
+Huvudagenten ska själv bedöma granskarens fynd, göra eventuella rättningar och köra slutlig verifiering. En ändring är inte redo att integreras med öppna P0- eller P1-fynd. P2-fynd ska rättas eller uttryckligen accepteras med motivering.
+
 ## Lärande och kommunikation
 
 Användaren vill förstå arbetssättet. Vid viktiga beslut ska agenten kort förklara:
@@ -50,4 +64,3 @@ Användaren vill förstå arbetssättet. Vid viktiga beslut ska agenten kort fö
 - vad som skulle kunna få beslutet att ändras senare
 
 Undvik onödig teori när ett konkret exempel i projektet förklarar bättre.
-
