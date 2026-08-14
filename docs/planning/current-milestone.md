@@ -19,13 +19,13 @@ Skapa en verifierad grund för implementation utan att börja bygga funktioner p
 - [x] Första implementationens scope och verifieringsplan definierade.
 - [x] Första implementationens scope och verifieringsplan godkända.
 - [x] Next.js-applikationsskelett skapat och verifierat.
+- [x] Supabase-migrationer, syntetisk seeddata och RLS-tester skapade och verifierade lokalt.
 
 ## Rekommenderad ordning
 
-1. Implementera Supabase-migrationer och RLS-tester.
-2. Implementera login och skyddad applikationsyta.
-3. Implementera den läsbara spelarlistan.
-4. Implementera algoritmtesterna före eller tillsammans med fördelningsmotorn.
+1. Implementera login och skyddad applikationsyta.
+2. Implementera den läsbara spelarlistan.
+3. Implementera algoritmtesterna före eller tillsammans med fördelningsmotorn.
 
 ## Milstolpen är klar när
 

@@ -15,6 +15,7 @@ Projektets Next.js-skelett är skapat och verifierat. Nästa steg i Implementati
 - [Implementation 01: säker grund och spelarlista](docs/planning/implementation-01-foundation.md)
 - [Definition of Done](docs/quality/definition-of-done.md)
 - [Checklista för oberoende granskning](docs/quality/review-checklist.md)
+- [Lokal Supabase-utveckling](docs/development/supabase-local.md)
 - [Testfall för matchfördelning](docs/quality/allocation-test-cases.md)
 - [Arkitekturbeslut](docs/architecture/decisions/)
 - [Agentinstruktioner](AGENTS.md)
@@ -46,5 +47,7 @@ pnpm typecheck
 pnpm test
 pnpm build
 ```
+
+Databasmigrationer och RLS-tester körs enligt [guiden för lokal Supabase-utveckling](docs/development/supabase-local.md).
 
 Kopiera `.env.example` till `.env.local` när Supabase-integrationen påbörjas. Lägg aldrig riktiga hemligheter i Git.
