@@ -10,11 +10,21 @@ export function AppShell({ children }: AppShellProps) {
   return (
     <div className="min-h-screen bg-[#F5F7FA] pb-20 md:pb-0">
       <header className="bg-[#082B4C] text-white md:hidden">
-        <div className="mx-auto max-w-5xl px-4 py-4">
-          <p className="text-xs font-medium uppercase tracking-[0.16em] text-blue-200">
-            FBC Sollentuna
-          </p>
-          <p className="mt-1 text-lg font-semibold">P17</p>
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
+          <div>
+            <p className="text-xs font-medium uppercase tracking-[0.16em] text-blue-200">
+              FBC Sollentuna
+            </p>
+            <p className="mt-1 text-lg font-semibold">P17</p>
+          </div>
+          <form action="/auth/logout" method="post">
+            <button
+              className="min-h-11 rounded-xl px-3 text-sm font-semibold text-blue-100 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              type="submit"
+            >
+              Logga ut
+            </button>
+          </form>
         </div>
       </header>
 
@@ -40,6 +50,14 @@ export function AppShell({ children }: AppShellProps) {
               ))}
             </ul>
           </nav>
+          <form action="/auth/logout" className="mt-10" method="post">
+            <button
+              className="min-h-11 w-full rounded-xl border border-blue-300/30 px-3 text-sm font-semibold text-blue-100 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              type="submit"
+            >
+              Logga ut
+            </button>
+          </form>
         </aside>
 
         <main className="w-full px-4 py-6 sm:px-6 md:px-8 md:py-10">{children}</main>

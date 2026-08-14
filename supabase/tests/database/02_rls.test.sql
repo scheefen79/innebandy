@@ -7,12 +7,12 @@ select plan(16);
 
 insert into auth.users (id, email)
 values
-  ('a0000000-0000-4000-8000-000000000001', 'coach-1@example.test'),
-  ('a0000000-0000-4000-8000-000000000002', 'coach-2@example.test'),
-  ('a0000000-0000-4000-8000-000000000003', 'coach-3@example.test'),
-  ('a0000000-0000-4000-8000-000000000004', 'outsider@example.test'),
-  ('a0000000-0000-4000-8000-000000000005', 'other-team@example.test'),
-  ('a0000000-0000-4000-8000-000000000006', 'inactive@example.test');
+  ('a0000000-0000-4000-8000-000000000001', 'pgtap-coach-1@example.test'),
+  ('a0000000-0000-4000-8000-000000000002', 'pgtap-coach-2@example.test'),
+  ('a0000000-0000-4000-8000-000000000003', 'pgtap-coach-3@example.test'),
+  ('a0000000-0000-4000-8000-000000000004', 'pgtap-outsider@example.test'),
+  ('a0000000-0000-4000-8000-000000000005', 'pgtap-other-team@example.test'),
+  ('a0000000-0000-4000-8000-000000000006', 'pgtap-inactive@example.test');
 
 insert into public.teams (id, name, slug)
 values
