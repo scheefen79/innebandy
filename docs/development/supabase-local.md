@@ -11,6 +11,13 @@ pnpm db:test
 pnpm db:lint
 ```
 
+Hämta de publika lokala värdena med `pnpm exec supabase status` och lägg URL samt publishable key i en ignorerad `.env.local`:
+
+```dotenv
+NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=<LOKAL_PUBLISHABLE_KEY>
+```
+
 Stoppa miljön när den inte används:
 
 ```bash

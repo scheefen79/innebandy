@@ -4,7 +4,7 @@ Ett mobile-first planeringsverktyg för tränare i FBC Sollentuna P17. Tjänsten
 
 ## Status
 
-Projektets Next.js-skelett är skapat och verifierat. Nästa steg i Implementation 01 är Supabase-migrationer, autentisering, Row Level Security och den läsbara spelarlistan.
+Projektets Next.js- och Supabase-grund är skapad och verifierad. Autentisering, lagbehörighet och skyddad applikationsyta är implementerade. Nästa steg i Implementation 01 är den läsbara spelarlistan.
 
 ## Dokumentation
 
@@ -50,4 +50,4 @@ pnpm build
 
 Databasmigrationer och RLS-tester körs enligt [guiden för lokal Supabase-utveckling](docs/development/supabase-local.md).
 
-Kopiera `.env.example` till `.env.local` när Supabase-integrationen påbörjas. Lägg aldrig riktiga hemligheter i Git.
+Kopiera `.env.example` till `.env.local` och fyll i Supabase URL samt publishable key. Lägg aldrig riktiga hemligheter i Git.

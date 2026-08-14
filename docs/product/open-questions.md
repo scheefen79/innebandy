@@ -4,6 +4,10 @@ Frågorna nedan behöver avgöras före eller under den första milstolpen. De �
 
 ## Måste avgöras före implementation
 
+### 0. Inloggningsmetod
+
+**Beslut:** MVP använder e-post och lösenord med tre manuellt skapade Supabase Auth-konton. Magic link avvaktas för att undvika beroende av produktions-SMTP och e-postcallback i denna fas. Sessionsarkitekturen dokumenteras i ADR-004.
+
 ### 1. Tränare och lagbehörighet
 
 **Beslut:** De tre tränarna har varsitt användarkonto och delar åtkomst till samma lag. Användarna kopplas till laget genom `team_members` med rollen `coach`.

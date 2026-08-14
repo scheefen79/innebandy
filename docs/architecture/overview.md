@@ -2,7 +2,7 @@
 
 ## Status
 
-Applikationsstacken är accepterad i ADR-001. Detaljerade beslut för behörighet och uttagningsmodell finns i ADR-002 och ADR-003.
+Applikationsstacken är accepterad i ADR-001. Detaljerade beslut för behörighet, uttagningsmodell och autentisering finns i ADR-002, ADR-003 och ADR-004.
 
 ## Systemgräns
 
