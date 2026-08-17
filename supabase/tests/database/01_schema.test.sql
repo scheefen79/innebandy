@@ -3,7 +3,7 @@ begin;
 create extension if not exists pgtap with schema extensions;
 set local search_path = public, extensions;
 
-select plan(14);
+select plan(15);
 
 select has_table('public', 'teams', 'teams exists');
 select has_table('public', 'team_members', 'team_members exists');
@@ -58,6 +58,18 @@ select results_eq(
 
 select col_not_null('public', 'players', 'level', 'player level is required');
 select col_not_null('public', 'players', 'rotation_order', 'rotation order is required');
+
+select ok(
+  exists (
+    select 1
+    from pg_index
+    join pg_class on pg_class.oid = pg_index.indexrelid
+    where pg_class.relname = 'seasons_one_active_per_team_idx'
+      and pg_index.indisunique
+      and pg_get_expr(pg_index.indpred, pg_index.indrelid) = 'is_active'
+  ),
+  'a team can only have one active season'
+);
 
 select ok(
   (select relrowsecurity from pg_class where oid = 'public.players'::regclass),

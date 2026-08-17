@@ -2,11 +2,12 @@ import type { ReactNode } from "react";
 
 type AppShellProps = {
   children: ReactNode;
+  currentItem?: (typeof navigation)[number];
 };
 
 const navigation = ["Översikt", "Matcher", "Spelare"];
 
-export function AppShell({ children }: AppShellProps) {
+export function AppShell({ children, currentItem = "Översikt" }: AppShellProps) {
   return (
     <div className="min-h-screen bg-[#F5F7FA] pb-20 md:pb-0">
       <header className="bg-[#082B4C] text-white md:hidden">
@@ -36,12 +37,12 @@ export function AppShell({ children }: AppShellProps) {
           <p className="mt-1 text-xl font-semibold">P17</p>
           <nav aria-label="Huvudnavigation" className="mt-10">
             <ul className="space-y-2">
-              {navigation.map((item, index) => (
+              {navigation.map((item) => (
                 <li key={item}>
                   <span
-                    aria-current={index === 0 ? "page" : undefined}
+                    aria-current={item === currentItem ? "page" : undefined}
                     className={`block rounded-xl px-3 py-3 text-sm font-medium ${
-                      index === 0 ? "bg-white text-[#082B4C]" : "text-blue-100"
+                      item === currentItem ? "bg-white text-[#082B4C]" : "text-blue-100"
                     }`}
                   >
                     {item}
@@ -68,12 +69,12 @@ export function AppShell({ children }: AppShellProps) {
         className="fixed inset-x-0 bottom-0 border-t border-slate-200 bg-white md:hidden"
       >
         <ul className="mx-auto grid max-w-lg grid-cols-3">
-          {navigation.map((item, index) => (
+          {navigation.map((item) => (
             <li key={item}>
               <span
-                aria-current={index === 0 ? "page" : undefined}
+                aria-current={item === currentItem ? "page" : undefined}
                 className={`flex min-h-16 items-center justify-center px-2 text-xs font-semibold ${
-                  index === 0 ? "text-blue-700" : "text-slate-500"
+                  item === currentItem ? "text-blue-700" : "text-slate-500"
                 }`}
               >
                 {item}
