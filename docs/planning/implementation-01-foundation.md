@@ -1,7 +1,8 @@
 # Implementation 01: säker grund och spelarlista
 
-- Status: Godkänd
+- Status: Genomförd och verifierad
 - Godkänd: 2026-08-13
+- Verifierad: 2026-08-14
 
 ## Syfte
 

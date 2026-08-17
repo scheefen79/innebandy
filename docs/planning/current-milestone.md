@@ -1,4 +1,4 @@
-# Aktuell milstolpe: beslutsgrund och projektskelett
+# Slutförd milstolpe: beslutsgrund och Implementation 01
 
 ## Mål
 
@@ -21,10 +21,11 @@ Skapa en verifierad grund för implementation utan att börja bygga funktioner p
 - [x] Next.js-applikationsskelett skapat och verifierat.
 - [x] Supabase-migrationer, syntetisk seeddata och RLS-tester skapade och verifierade lokalt.
 - [x] E-post/lösenordsinloggning, SSR-session, lagbehörighet och utloggning verifierade lokalt.
+- [x] Läsbar spelarlista med aktiva spelare och samtliga design states implementerad.
 
 ## Rekommenderad ordning
 
-1. Implementera den läsbara spelarlistan.
+1. Definiera nästa implementation och dess acceptanskriterier.
 2. Implementera algoritmtesterna före eller tillsammans med fördelningsmotorn.
 
 ## Milstolpen är klar när
