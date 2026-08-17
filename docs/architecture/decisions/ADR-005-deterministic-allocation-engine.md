@@ -14,7 +14,7 @@ Rättvis matchfördelning är produktens viktigaste affärsregel. Om logiken byg
 - Domänmodulen får inte läsa aktuell tid, använda slump, anropa nätverk eller importera Next.js, React eller Supabase.
 - Match- och spelar-id:n samt `rotationOrder` används för stabil identitet och deterministisk utslagsordning. Spelarnamn används aldrig som tie-breaker.
 - Ordinarie fördelning och extra rekommendation implementeras som separata funktioner med separata historikfält.
-- Omfördelning uttrycks som ett suffix av matcher plus en rättvise-baseline som inkluderar genomförda och bevarade ordinarie tilldelningar före suffixet. Domänmotorn kan därmed inte ändra frysta matcher.
+- Omfördelning uttrycks som ett suffix av matcher plus en rättvise-baseline som inkluderar både antal och senaste genomförda eller bevarade ordinarie tilldelning före suffixet. Domänmotorn kan därmed inte ändra frysta matcher.
 - Ordinarie nivå används endast för matchernas sammansättning, aldrig för att ge fler ordinarie matcher totalt.
 - Manuella ordinarie tillägg och borttagningar är explicita inputbegränsningar som måste bevaras.
 - Applikationslagret ansvarar för att extrafunktionen endast får aktiva och valbara kandidater som inte redan är uttagna i den aktuella matchen.

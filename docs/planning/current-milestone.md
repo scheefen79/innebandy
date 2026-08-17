@@ -10,12 +10,12 @@ Detaljerat scope och acceptanskriterier finns i `docs/planning/implementation-02
 
 - [x] Implementation 02 avgränsad och godkänd.
 - [x] Domänmotorns arkitektur dokumenterad i ADR-005.
-- [ ] TypeScript-kontrakt för input, output, varningar och fel.
-- [ ] Deterministisk ordinarie fördelningsmotor.
-- [ ] Separat rangordning för extra inhoppare.
-- [ ] Automatiserade normalfall, tie-breakers och skyddsregler.
-- [ ] Referensfallet 23 spelare × 9 matcher × 12 platser verifierat.
-- [ ] Oberoende skrivskyddad agentgranskning genomförd.
+- [x] TypeScript-kontrakt för input, output, varningar och fel.
+- [x] Deterministisk ordinarie fördelningsmotor.
+- [x] Separat rangordning för extra inhoppare.
+- [x] Automatiserade normalfall, tie-breakers och skyddsregler.
+- [x] Referensfallet 23 spelare × 9 matcher × 12 platser verifierat.
+- [x] Oberoende skrivskyddad agentgranskning genomförd.
 
 ## Rekommenderad ordning
 

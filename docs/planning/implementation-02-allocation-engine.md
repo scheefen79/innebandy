@@ -1,7 +1,8 @@
 # Implementation 02: deterministisk fördelningsmotor
 
-- Status: Godkänd
+- Status: Genomförd och verifierad
 - Godkänd: 2026-08-17
+- Verifierad: 2026-08-17
 
 ## Syfte
 
@@ -28,7 +29,7 @@ Vanliga TypeScript-objekt för:
 - aktiva spelare med id, nivå och fast rotationsordning
 - suffixet av planerade matcher som faktiskt ska genereras, med id, ordning och target-antal
 - rättvise-baseline per spelare som summerar genomförda ordinarie matcher och alla bevarade ordinarie tilldelningar före omfördelningsgränsen
-- senaste genomförda ordinarie match per spelare
+- senaste genomförda eller bevarade planerade ordinarie match före suffixet per spelare
 - manuellt tillagda och borttagna ordinarie uttagningar
 - genomförda extra inhopp och senaste inhoppsdatum
 - ordinarie uttagningar, extrarekommendationer, varningar och fel
