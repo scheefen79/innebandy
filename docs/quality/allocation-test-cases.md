@@ -103,6 +103,7 @@ Givet fem planerade matcher och att tränaren väljer omfördelning från match 
 Förväntat:
 
 - match 1 och 2 ändras inte
+- ordinarie tilldelningar i match 1 och 2 ingår i rättvise-baseline för match 3–5
 - automatiska platser i match 3–5 får räknas om
 - manuella ändringar i match 3–5 bevaras
 
@@ -148,3 +149,12 @@ Förväntat: spelaren exkluderas från automatisk ordinarie fördelning och appe
 
 Förväntat: besluten bevaras och resultatet redovisar den minsta uppnådda skillnaden samt en varning.
 
+### F4: Manuella borttagningar lämnar för få kandidater
+
+Givet en match där manuella borttagningar gör att antalet tillgängliga spelare understiger matchens target.
+
+Förväntat:
+
+- den nya genereringen stoppas med ett strukturerat fel
+- inga nya partiella uttagningar returneras
+- befintliga uttagningar ska därför kunna lämnas oförändrade av applikationslagret

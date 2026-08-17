@@ -1,36 +1,35 @@
-# Slutförd milstolpe: beslutsgrund och Implementation 01
+# Aktuell milstolpe: Implementation 02 – fördelningsmotor
 
 ## Mål
 
-Skapa en verifierad grund för implementation utan att börja bygga funktioner på oklara antaganden.
+Implementera och verifiera rättvis ordinarie matchfördelning och separat rekommendation av extra inhoppare som ren, deterministisk domänlogik.
+
+Detaljerat scope och acceptanskriterier finns i `docs/planning/implementation-02-allocation-engine.md`. Arkitekturbeslutet finns i ADR-005.
 
 ## Leverabler
 
-- [x] Git-repo initierat och kopplat till GitHub.
-- [x] Produktspecifikationen placerad under `docs/product/`.
-- [x] Grundläggande agentinstruktioner skapade.
-- [x] Öppna frågor identifierade.
-- [x] Föreslagen arkitektur beskriven.
-- [x] Öppna blockerande frågor beslutade.
-- [x] Teknikstack bekräftad i ADR-001.
-- [x] Behörighetsmodell dokumenterad i ADR-002.
-- [x] Uttagnings- och deltagandemodell dokumenterad i ADR-003.
-- [x] Fördelningsmotorns regler uttryckta som testfall.
-- [x] Första implementationens scope och verifieringsplan definierade.
-- [x] Första implementationens scope och verifieringsplan godkända.
-- [x] Next.js-applikationsskelett skapat och verifierat.
-- [x] Supabase-migrationer, syntetisk seeddata och RLS-tester skapade och verifierade lokalt.
-- [x] E-post/lösenordsinloggning, SSR-session, lagbehörighet och utloggning verifierade lokalt.
-- [x] Läsbar spelarlista med aktiva spelare och samtliga design states implementerad.
+- [x] Implementation 02 avgränsad och godkänd.
+- [x] Domänmotorns arkitektur dokumenterad i ADR-005.
+- [ ] TypeScript-kontrakt för input, output, varningar och fel.
+- [ ] Deterministisk ordinarie fördelningsmotor.
+- [ ] Separat rangordning för extra inhoppare.
+- [ ] Automatiserade normalfall, tie-breakers och skyddsregler.
+- [ ] Referensfallet 23 spelare × 9 matcher × 12 platser verifierat.
+- [ ] Oberoende skrivskyddad agentgranskning genomförd.
 
 ## Rekommenderad ordning
 
-1. Definiera nästa implementation och dess acceptanskriterier.
-2. Implementera algoritmtesterna före eller tillsammans med fördelningsmotorn.
+1. Definiera typer och valideringsresultat.
+2. Implementera tester för normalfall och referensfall.
+3. Implementera ordinarie motorn tills testerna passerar.
+4. Implementera och testa den separata extrarekommendationen.
+5. Lägg till manuella begränsningar, fel och varningar.
+6. Kör full verifiering och oberoende granskning.
 
 ## Milstolpen är klar när
 
-- inga kända blockerande produktbeslut återstår för första implementationen
-- arkitekturvalen är dokumenterade med konsekvenser
-- det finns testbara acceptanskriterier för den första vertikala funktionen
-- användaren har granskat och förstått strukturen
+- alla relevanta fall i testmatrisen passerar
+- samma input ger identisk output
+- ordinarie och extra rättvisa är bevisligen separerade
+- domänmodulen saknar beroenden till UI, databas, nätverk och aktuell tid
+- inga oaccepterade granskningsfynd återstår
