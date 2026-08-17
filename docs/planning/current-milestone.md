@@ -1,35 +1,38 @@
-# Aktuell milstolpe: Implementation 02 – fördelningsmotor
+# Aktuell milstolpe: Implementation 03 – matchgrund
 
 ## Mål
 
-Implementera och verifiera rättvis ordinarie matchfördelning och separat rekommendation av extra inhoppare som ren, deterministisk domänlogik.
+Låt en behörig tränare skapa, lista och öppna matcher i lagets aktiva säsong genom ett säkert mobile-first-flöde.
 
-Detaljerat scope och acceptanskriterier finns i `docs/planning/implementation-02-allocation-engine.md`. Arkitekturbeslutet finns i ADR-005.
+Detaljerat scope och acceptanskriterier finns i `docs/planning/implementation-03-match-foundation.md`. Arkitekturbeslutet finns i ADR-006.
 
 ## Leverabler
 
-- [x] Implementation 02 avgränsad och godkänd.
-- [x] Domänmotorns arkitektur dokumenterad i ADR-005.
-- [x] TypeScript-kontrakt för input, output, varningar och fel.
-- [x] Deterministisk ordinarie fördelningsmotor.
-- [x] Separat rangordning för extra inhoppare.
-- [x] Automatiserade normalfall, tie-breakers och skyddsregler.
-- [x] Referensfallet 23 spelare × 9 matcher × 12 platser verifierat.
-- [x] Oberoende skrivskyddad agentgranskning genomförd.
+- [x] Implementation 03 avgränsad och godkänd.
+- [x] Matchgrundens arkitektur dokumenterad i ADR-006.
+- [ ] Reproducerbar `matches`-migration med dataintegritet och index.
+- [ ] Positiva och negativa pgTAP-test för schema, grants och RLS.
+- [ ] Syntetisk matchseed.
+- [ ] Servervaliderat formulär för att skapa match.
+- [ ] Mobile-first matchlista med `Kommande` och `Alla`.
+- [ ] Läsbar matchdetalj med generiskt not-found-beteende.
+- [ ] Loading, empty, error och populated states verifierade.
+- [ ] Lokal användarresa och 390 px-layout verifierade.
+- [ ] Oberoende skrivskyddad agentgranskning genomförd.
 
 ## Rekommenderad ordning
 
-1. Definiera typer och valideringsresultat.
-2. Implementera tester för normalfall och referensfall.
-3. Implementera ordinarie motorn tills testerna passerar.
-4. Implementera och testa den separata extrarekommendationen.
-5. Lägg till manuella begränsningar, fel och varningar.
-6. Kör full verifiering och oberoende granskning.
+1. Implementera och testa migration, index, grants och RLS.
+2. Lägg till syntetisk seedmatch och dokumenterad reset.
+3. Implementera servernära validering och create-use-case.
+4. Implementera matchlista och matchdetalj.
+5. Verifiera states, mobil, tangentbord och faktisk användarresa.
+6. Kör full kontroll och oberoende granskning.
 
 ## Milstolpen är klar när
 
-- alla relevanta fall i testmatrisen passerar
-- samma input ger identisk output
-- ordinarie och extra rättvisa är bevisligen separerade
-- domänmodulen saknar beroenden till UI, databas, nätverk och aktuell tid
+- en behörig tränare kan skapa och läsa en match end-to-end
+- en obehörig användare inte kan läsa eller skapa lagets matcher
+- matchdata är tidsmässigt och relationellt entydig
+- samtliga relevanta design states är verifierade
 - inga oaccepterade granskningsfynd återstår
