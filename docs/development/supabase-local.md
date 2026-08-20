@@ -16,7 +16,10 @@ Hämta de publika lokala värdena med `pnpm exec supabase status` och lägg URL 
 ```dotenv
 NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=<LOKAL_PUBLISHABLE_KEY>
+SUPABASE_SERVICE_ROLE_KEY=<LOKAL_SERVICE_ROLE_KEY>
 ```
+
+Service role-nyckeln används endast av Next.js-servern för den avgränsade atomiska sparfunktionen för uttagningar. Den får aldrig heta `NEXT_PUBLIC_*`, användas i webbläsarkod eller checkas in i Git. De lokala värdena visas av Supabase-statusen efter att miljön startats.
 
 Stoppa miljön när den inte används:
 

@@ -10,15 +10,15 @@ Detaljerat scope och acceptanskriterier finns i `docs/planning/implementation-04
 
 - [x] Implementation 04 avgränsad och godkänd.
 - [x] Atomisk persistens dokumenterad i ADR-007.
-- [ ] Reproducerbar `match_players`-migration med stark lagintegritet.
-- [ ] RLS, grants och atomisk persistens verifierade negativt.
-- [ ] Testbar mappning från databasunderlag till fördelningsmotorn.
-- [ ] Serverberäknad preview med versionsmärkt underlagsfingeravtryck.
-- [ ] Atomiskt och idempotent save-flöde med stale-preview-skydd.
-- [ ] Matchlista och matchdetalj visar sparade uttagningar.
-- [ ] Loading, empty, error, preview och saved states verifierade.
-- [ ] Lokal användarresa och 390 px-layout verifierade.
-- [ ] Oberoende skrivskyddad agentgranskning genomförd.
+- [x] Reproducerbar `match_players`-migration med stark lagintegritet.
+- [x] RLS, grants och atomisk persistens verifierade negativt.
+- [x] Testbar mappning från databasunderlag till fördelningsmotorn.
+- [x] Serverberäknad preview med versionsmärkt underlagsfingeravtryck.
+- [x] Atomiskt och idempotent save-flöde med stale-preview-skydd.
+- [x] Matchlista och matchdetalj visar sparade uttagningar.
+- [x] Loading, empty, error, preview och saved states verifierade.
+- [x] Lokal användarresa och 390 px-layout verifierade.
+- [x] Oberoende skrivskyddad agentgranskning genomförd utan kvarstående fynd.
 
 ## Rekommenderad ordning
 

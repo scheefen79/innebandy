@@ -66,7 +66,7 @@ Implementation 04 skriver endast:
 ### Atomisk persistens och samtidighet
 
 - Webbläsaren får aldrig skriva `match_players` direkt.
-- En behörighetskontrollerad PostgreSQL-funktion sparar hela fördelningen i en transaktion.
+- En behörighetskontrollerad PostgreSQL-funktion sparar hela fördelningen i en transaktion och kan endast anropas av Next.js-serverns server-only klient.
 - Funktionen låser berörda framtida matcher innan befintliga automatiska rader ersätts.
 - Förhandsgranskningen får ett versionsmärkt, serverberäknat underlagsfingeravtryck som omfattar aktiva spelare, nivåer, rotationsordning, framtida matcher, target och befintliga uttagningar.
 - Fingeravtryckets kanoniska JSON-format och sorteringsordning definieras gemensamt och testas med samma fixtures i TypeScript och PostgreSQL.
@@ -80,8 +80,8 @@ Implementation 04 skriver endast:
 - Aktiv lagmedlem får läsa lagets uttagningar.
 - Icke-medlem, inaktiv medlem och `anon` får inte läsa uttagningar.
 - `authenticated` får inte direkt `insert`, `update` eller `delete` på `match_players`.
-- Persistensfunktionen verifierar aktivt medlemskap, aktiv säsong, framtida `upcoming`-matcher och att varje spelare tillhör samma lag och säsong.
-- Funktionen accepterar aldrig ett godtyckligt lag-id som ensam behörighetsgrund; `auth.uid()` och medlemskapet är auktoritativa.
+- Persistensfunktionen accepterar endast serverrollen och verifierar det autentiserade användar-id som serverrouten skickar, aktivt medlemskap, aktiv säsong, framtida `upcoming`-matcher och att varje spelare tillhör samma lag och säsong.
+- Funktionen accepterar aldrig ett godtyckligt lag- eller användar-id som ensam behörighetsgrund; serverrollen, serverroutens verifierade `actor_user_id` och ett aktivt medlemskap kontrolleras tillsammans.
 
 ### Applikationslager
 
@@ -132,7 +132,7 @@ Domänmotorn förblir fri från Supabase-, Next.js- och React-typer.
 
 - Migrationerna kan appliceras från tom lokal databas.
 - Sammansatta foreign keys stoppar korskoppling mellan lag, säsong, match och spelare.
-- Endast aktiv medlem kan läsa lagets uttagningar och anropa persistensfunktionen.
+- Endast aktiv medlem kan läsa lagets uttagningar och initiera persistens via den skyddade serverrouten. Rollen `authenticated` saknar direkt `EXECUTE` på persistensfunktionen.
 - Direkta klientmutationer av `match_players` nekas.
 - Felaktig target, okänd spelare, dubblett eller fel lag stoppas atomiskt.
 - Ett ändrat underlag mellan preview och save ger stale-preview-fel utan ändrade rader.

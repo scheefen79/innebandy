@@ -8,6 +8,7 @@
     "db:stop": "supabase stop",
     "db:reset": "supabase db reset",
     "db:test": "supabase test db",
+    "db:test:concurrency": "bash supabase/tests/database/selection_concurrency.sh",
     "db:lint": "supabase db lint --local",
     "build": "next build --webpack",
     "start": "next start",
