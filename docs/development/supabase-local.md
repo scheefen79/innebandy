@@ -24,7 +24,7 @@ Stoppa miljön när den inte används:
 pnpm db:stop
 ```
 
-`db:reset` återskapar den lokala databasen, kör alla migrationer och laddar exempeldata. Kommandot ska endast användas mot den lokala Supabase-miljön.
+`db:reset` återskapar den lokala databasen, kör alla migrationer och laddar exempeldata, inklusive den syntetiska matchen. Kommandot ska endast användas mot den lokala Supabase-miljön. Det raderar även lokalt skapade Auth-konton, som därför behöver skapas och kopplas till laget igen efter en reset.
 
 ## Koppla de tre tränarna till laget
 
@@ -50,4 +50,4 @@ Vanliga autentiserade användare har avsiktligt inte rätt att ändra `team_memb
 
 ## Exempeldata
 
-Seed-filen innehåller endast syntetiska namn: ett lag, en säsong och tre exempelspelare på nivå 1–3. Riktiga spelarnamn eller tränaruppgifter ska inte läggas i repot.
+Seed-filen innehåller endast syntetiska namn: ett lag, en säsong, tre exempelspelare på nivå 1–3 och en kommande exempelmatch. Riktiga spelarnamn, motståndare, platser eller tränaruppgifter ska inte läggas i repot.

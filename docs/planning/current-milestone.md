@@ -10,15 +10,15 @@ Detaljerat scope och acceptanskriterier finns i `docs/planning/implementation-03
 
 - [x] Implementation 03 avgränsad och godkänd.
 - [x] Matchgrundens arkitektur dokumenterad i ADR-006.
-- [ ] Reproducerbar `matches`-migration med dataintegritet och index.
-- [ ] Positiva och negativa pgTAP-test för schema, grants och RLS.
-- [ ] Syntetisk matchseed.
-- [ ] Servervaliderat formulär för att skapa match.
-- [ ] Mobile-first matchlista med `Kommande` och `Alla`.
-- [ ] Läsbar matchdetalj med generiskt not-found-beteende.
+- [x] Reproducerbar `matches`-migration med dataintegritet och index.
+- [x] Positiva och negativa pgTAP-test för schema, grants och RLS.
+- [x] Syntetisk matchseed.
+- [x] Servervaliderat formulär för att skapa match.
+- [x] Mobile-first matchlista med `Kommande` och `Alla`.
+- [x] Läsbar matchdetalj med generiskt not-found-beteende.
 - [ ] Loading, empty, error och populated states verifierade.
 - [ ] Lokal användarresa och 390 px-layout verifierade.
-- [ ] Oberoende skrivskyddad agentgranskning genomförd.
+- [x] Oberoende skrivskyddad agentgranskning genomförd.
 
 ## Rekommenderad ordning
 

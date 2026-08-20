@@ -1,11 +1,16 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 
 type AppShellProps = {
   children: ReactNode;
-  currentItem?: (typeof navigation)[number];
+  currentItem?: "Översikt" | "Matcher" | "Spelare";
 };
 
-const navigation = ["Översikt", "Matcher", "Spelare"];
+const navigation = [
+  { href: undefined, label: "Översikt" },
+  { href: "/matches", label: "Matcher" },
+  { href: "/", label: "Spelare" },
+] as const;
 
 export function AppShell({ children, currentItem = "Översikt" }: AppShellProps) {
   return (
@@ -38,15 +43,16 @@ export function AppShell({ children, currentItem = "Översikt" }: AppShellProps)
           <nav aria-label="Huvudnavigation" className="mt-10">
             <ul className="space-y-2">
               {navigation.map((item) => (
-                <li key={item}>
-                  <span
-                    aria-current={item === currentItem ? "page" : undefined}
+                <li key={item.label}>
+                  {item.href ? <Link
+                    aria-current={item.label === currentItem ? "page" : undefined}
+                    href={item.href}
                     className={`block rounded-xl px-3 py-3 text-sm font-medium ${
-                      item === currentItem ? "bg-white text-[#082B4C]" : "text-blue-100"
+                      item.label === currentItem ? "bg-white text-[#082B4C]" : "text-blue-100 hover:bg-white/10"
                     }`}
                   >
-                    {item}
-                  </span>
+                    {item.label}
+                  </Link> : <span className="block rounded-xl px-3 py-3 text-sm font-medium text-blue-300">{item.label}</span>}
                 </li>
               ))}
             </ul>
@@ -70,15 +76,16 @@ export function AppShell({ children, currentItem = "Översikt" }: AppShellProps)
       >
         <ul className="mx-auto grid max-w-lg grid-cols-3">
           {navigation.map((item) => (
-            <li key={item}>
-              <span
-                aria-current={item === currentItem ? "page" : undefined}
+            <li key={item.label}>
+              {item.href ? <Link
+                aria-current={item.label === currentItem ? "page" : undefined}
+                href={item.href}
                 className={`flex min-h-16 items-center justify-center px-2 text-xs font-semibold ${
-                  item === currentItem ? "text-blue-700" : "text-slate-500"
+                  item.label === currentItem ? "text-blue-700" : "text-slate-500"
                 }`}
               >
-                {item}
-              </span>
+                {item.label}
+              </Link> : <span className="flex min-h-16 items-center justify-center px-2 text-xs font-semibold text-slate-400">{item.label}</span>}
             </li>
           ))}
         </ul>
