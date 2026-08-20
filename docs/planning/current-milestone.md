@@ -1,38 +1,35 @@
-# Aktuell milstolpe: Implementation 04 – ordinarie laguttagningar
+# Aktuell milstolpe: Implementation 05 – manuella ordinarie byten
 
 ## Mål
 
-Låt en behörig tränare generera, förhandsgranska, spara och läsa en komplett ordinarie fördelning för den aktiva säsongens framtida matcher.
+Låt en behörig tränare flytta en ordinarie matchplats mellan två spelare, bevara beslutet vid framtida generering och återställa bytet säkert.
 
-Detaljerat scope och acceptanskriterier finns i `docs/planning/implementation-04-selection-persistence.md`. Arkitekturbeslutet finns i ADR-007.
+Detaljerat föreslaget scope och acceptanskriterier finns i `docs/planning/implementation-05-manual-regular-adjustments.md`. Föreslaget arkitekturbeslut finns i ADR-008.
 
 ## Leverabler
 
-- [x] Implementation 04 avgränsad och godkänd.
-- [x] Atomisk persistens dokumenterad i ADR-007.
-- [x] Reproducerbar `match_players`-migration med stark lagintegritet.
-- [x] RLS, grants och atomisk persistens verifierade negativt.
-- [x] Testbar mappning från databasunderlag till fördelningsmotorn.
-- [x] Serverberäknad preview med versionsmärkt underlagsfingeravtryck.
-- [x] Atomiskt och idempotent save-flöde med stale-preview-skydd.
-- [x] Matchlista och matchdetalj visar sparade uttagningar.
-- [x] Loading, empty, error, preview och saved states verifierade.
-- [x] Lokal användarresa och 390 px-layout verifierade.
-- [x] Oberoende skrivskyddad agentgranskning genomförd utan kvarstående fynd.
+- [x] Implementation 05 granskad och godkänd.
+- [x] Manuellt byteskontrakt accepterat i ADR-008.
+- [ ] Atomiskt create/restore med stale-skydd implementerat.
+- [ ] Direkta klientmutationer och RPC-anrop negativt verifierade.
+- [ ] Manuella include/exclude-beslut bevaras vid generering.
+- [ ] Matchdetalj visar manuellt tillagd och borttagen spelare.
+- [ ] Lokal create/restore-resa och 390 px-layout verifierade.
+- [ ] Oberoende skrivskyddad agentgranskning genomförd.
 
 ## Rekommenderad ordning
 
-1. Implementera och testa `match_players`, sammansatta nycklar, grants och RLS.
-2. Implementera kanoniskt underlag, fingerprint och mapper till domänmotorn.
-3. Implementera preview och svensk fel-/varningspresentation.
-4. Implementera atomisk persistens med låsning och stale-preview-skydd.
-5. Visa uttagningar i matchlista samt `Lag` och `Står över`.
+1. Godkänn Implementation 05 och ADR-008.
+2. Implementera constraints, server-only create/restore och negativa databastester.
+3. Implementera kandidatlista, formulär och svensk felpresentation.
+4. Visa manuella etiketter och återställning på matchdetaljen.
+5. Verifiera bevarande vid generering och faktisk samtidighet.
 6. Verifiera hela användarresan och genomför oberoende granskning.
 
 ## Milstolpen är klar när
 
-- en behörig tränare kan generera, förhandsgranska, spara och läsa fördelningen
-- en obehörig användare inte kan läsa eller mutera uttagningar
-- hela resultatet sparas atomiskt och endast mot oförändrat underlag
-- varje framtida match har exakt target unika ordinarie spelare
+- en behörig tränare kan skapa och återställa ett ordinarie byte
+- matchens target bevaras och bytet överlever framtida generering
+- en obehörig eller stale operation inte kan mutera uttagningen
+- create och restore är atomiska även vid samtidiga tränare
 - inga oaccepterade granskningsfynd återstår
