@@ -28,8 +28,13 @@ Produktens källa är `docs/product/FBC_P17_DESIGN_TECH_SPEC.md`. Lägg inte til
 
 - Vid analys, planering, diagnos eller granskning: inspektera och rapportera, men ändra inte implementationen om det inte efterfrågas.
 - Vid uttrycklig begäran att bygga, ändra eller rätta: gör relevanta lokala ändringar och kör icke-destruktiv verifiering.
+- När användaren har godkänt en implementationsplan gäller godkännandet som stående mandat att slutföra hela det dokumenterade scopet lokalt. Agenten får då skapa arbetsgren, ändra kod, migrationer, tester och dokumentation, köra icke-destruktiva kontroller, använda en skrivskyddad granskningsagent och rätta verifierade P0–P2-fynd utan nya delgodkännanden.
+- Agenten får själv fatta små, reversibla teknik- och UI-beslut inom godkänd plan när de följer befintlig specifikation, ADR:er och etablerade mönster. Besluten ska dokumenteras när de påverkar arkitektur eller framtida arbete.
+- Be endast om ett nytt produktbeslut när rimliga alternativ ger materiellt olika användarbeteende, rättviselogik, datamodell eller säkerhetsnivå och svaret inte redan finns dokumenterat.
 - Be om godkännande före commit, push, pull request, deployment, externa skrivningar, destruktiva åtgärder eller väsentligt utökat scope.
 - Bevara användarens befintliga ändringar och avbryt om de inte säkert kan separeras från uppgiften.
+
+Det fullständiga mandatet och stoppunkterna finns i `docs/workflow/autonomy-contract.md`.
 
 ## Kvalitetskrav
 

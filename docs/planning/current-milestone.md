@@ -1,38 +1,38 @@
-# Aktuell milstolpe: Implementation 03 – matchgrund
+# Aktuell milstolpe: Implementation 04 – ordinarie laguttagningar
 
 ## Mål
 
-Låt en behörig tränare skapa, lista och öppna matcher i lagets aktiva säsong genom ett säkert mobile-first-flöde.
+Låt en behörig tränare generera, förhandsgranska, spara och läsa en komplett ordinarie fördelning för den aktiva säsongens framtida matcher.
 
-Detaljerat scope och acceptanskriterier finns i `docs/planning/implementation-03-match-foundation.md`. Arkitekturbeslutet finns i ADR-006.
+Detaljerat scope och acceptanskriterier finns i `docs/planning/implementation-04-selection-persistence.md`. Arkitekturbeslutet finns i ADR-007.
 
 ## Leverabler
 
-- [x] Implementation 03 avgränsad och godkänd.
-- [x] Matchgrundens arkitektur dokumenterad i ADR-006.
-- [x] Reproducerbar `matches`-migration med dataintegritet och index.
-- [x] Positiva och negativa pgTAP-test för schema, grants och RLS.
-- [x] Syntetisk matchseed.
-- [x] Servervaliderat formulär för att skapa match.
-- [x] Mobile-first matchlista med `Kommande` och `Alla`.
-- [x] Läsbar matchdetalj med generiskt not-found-beteende.
-- [ ] Loading, empty, error och populated states verifierade.
+- [x] Implementation 04 avgränsad och godkänd.
+- [x] Atomisk persistens dokumenterad i ADR-007.
+- [ ] Reproducerbar `match_players`-migration med stark lagintegritet.
+- [ ] RLS, grants och atomisk persistens verifierade negativt.
+- [ ] Testbar mappning från databasunderlag till fördelningsmotorn.
+- [ ] Serverberäknad preview med versionsmärkt underlagsfingeravtryck.
+- [ ] Atomiskt och idempotent save-flöde med stale-preview-skydd.
+- [ ] Matchlista och matchdetalj visar sparade uttagningar.
+- [ ] Loading, empty, error, preview och saved states verifierade.
 - [ ] Lokal användarresa och 390 px-layout verifierade.
-- [x] Oberoende skrivskyddad agentgranskning genomförd.
+- [ ] Oberoende skrivskyddad agentgranskning genomförd.
 
 ## Rekommenderad ordning
 
-1. Implementera och testa migration, index, grants och RLS.
-2. Lägg till syntetisk seedmatch och dokumenterad reset.
-3. Implementera servernära validering och create-use-case.
-4. Implementera matchlista och matchdetalj.
-5. Verifiera states, mobil, tangentbord och faktisk användarresa.
-6. Kör full kontroll och oberoende granskning.
+1. Implementera och testa `match_players`, sammansatta nycklar, grants och RLS.
+2. Implementera kanoniskt underlag, fingerprint och mapper till domänmotorn.
+3. Implementera preview och svensk fel-/varningspresentation.
+4. Implementera atomisk persistens med låsning och stale-preview-skydd.
+5. Visa uttagningar i matchlista samt `Lag` och `Står över`.
+6. Verifiera hela användarresan och genomför oberoende granskning.
 
 ## Milstolpen är klar när
 
-- en behörig tränare kan skapa och läsa en match end-to-end
-- en obehörig användare inte kan läsa eller skapa lagets matcher
-- matchdata är tidsmässigt och relationellt entydig
-- samtliga relevanta design states är verifierade
+- en behörig tränare kan generera, förhandsgranska, spara och läsa fördelningen
+- en obehörig användare inte kan läsa eller mutera uttagningar
+- hela resultatet sparas atomiskt och endast mot oförändrat underlag
+- varje framtida match har exakt target unika ordinarie spelare
 - inga oaccepterade granskningsfynd återstår
