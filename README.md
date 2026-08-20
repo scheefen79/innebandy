@@ -4,7 +4,7 @@ Ett mobile-first planeringsverktyg för tränare i FBC Sollentuna P17. Tjänsten
 
 ## Status
 
-Projektets Next.js- och Supabase-grund, autentisering, lagbehörighet, spelarlista och fördelningsmotor är implementerade. Implementation 03 bygger matchskapande, matchlista och matchdetalj.
+Projektets grund, autentisering, lagbehörighet, spelarlista, fördelningsmotor och matchgrund är implementerade. Nästa steg är Implementation 04: generera och spara ordinarie laguttagningar.
 
 ## Dokumentation
 
@@ -14,8 +14,10 @@ Projektets Next.js- och Supabase-grund, autentisering, lagbehörighet, spelarlis
 - [Aktuell milstolpe](docs/planning/current-milestone.md)
 - [Implementation 01: säker grund och spelarlista](docs/planning/implementation-01-foundation.md)
 - [Implementation 03: matchgrund](docs/planning/implementation-03-match-foundation.md)
+- [Implementation 04: ordinarie laguttagningar](docs/planning/implementation-04-selection-persistence.md)
 - [Definition of Done](docs/quality/definition-of-done.md)
 - [Checklista för oberoende granskning](docs/quality/review-checklist.md)
+- [Autonomikontrakt för agentarbetet](docs/workflow/autonomy-contract.md)
 - [Lokal Supabase-utveckling](docs/development/supabase-local.md)
 - [Testfall för matchfördelning](docs/quality/allocation-test-cases.md)
 - [Arkitekturbeslut](docs/architecture/decisions/)
