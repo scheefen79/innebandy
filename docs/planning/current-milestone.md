@@ -10,12 +10,12 @@ Detaljerat föreslaget scope och acceptanskriterier finns i `docs/planning/imple
 
 - [x] Implementation 05 granskad och godkänd.
 - [x] Manuellt byteskontrakt accepterat i ADR-008.
-- [ ] Atomiskt create/restore med stale-skydd implementerat.
-- [ ] Direkta klientmutationer och RPC-anrop negativt verifierade.
-- [ ] Manuella include/exclude-beslut bevaras vid generering.
-- [ ] Matchdetalj visar manuellt tillagd och borttagen spelare.
-- [ ] Lokal create/restore-resa och 390 px-layout verifierade.
-- [ ] Oberoende skrivskyddad agentgranskning genomförd.
+- [x] Atomiskt create/restore med stale-skydd implementerat.
+- [x] Direkta klientmutationer och RPC-anrop negativt verifierade.
+- [x] Manuella include/exclude-beslut bevaras vid generering.
+- [x] Matchdetalj visar manuellt tillagd och borttagen spelare.
+- [x] Lokal create/restore-resa och 390 px-layout verifierade.
+- [x] Oberoende skrivskyddad agentgranskning genomförd utan kvarstående fynd.
 
 ## Rekommenderad ordning
 
