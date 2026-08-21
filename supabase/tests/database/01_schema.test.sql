@@ -3,7 +3,7 @@ begin;
 create extension if not exists pgtap with schema extensions;
 set local search_path = public, extensions;
 
-select plan(34);
+select plan(38);
 
 select has_table('public', 'teams', 'teams exists');
 select has_table('public', 'team_members', 'team_members exists');
@@ -139,6 +139,14 @@ select results_eq(
 select has_trigger('public', 'match_players', 'match_players_set_updated_at', 'selections maintain updated_at');
 select has_function('public', 'get_regular_allocation_source', array['uuid', 'uuid', 'timestamp with time zone'], 'source function exists');
 select has_function('public', 'save_regular_allocation', array['uuid', 'uuid', 'uuid', 'timestamp with time zone', 'text', 'jsonb'], 'server-only atomic save function exists');
+select has_function('public', 'get_manual_adjustment_source', array['uuid', 'uuid', 'uuid'], 'manual adjustment source function exists');
+select has_function('public', 'create_manual_regular_adjustment', array['uuid', 'uuid', 'uuid', 'uuid', 'uuid', 'uuid', 'text'], 'manual adjustment create function exists');
+select has_function('public', 'restore_manual_regular_adjustment', array['uuid', 'uuid', 'uuid', 'uuid', 'uuid', 'uuid', 'text'], 'manual adjustment restore function exists');
+select results_eq(
+  $$select tgdeferrable::text || ':' || tginitdeferred::text from pg_trigger where tgname = 'match_players_validate_manual_pair'$$,
+  array['true:true'::text],
+  'manual pair validation is deferred until transaction end'
+);
 
 select ok(
   exists (
