@@ -134,7 +134,8 @@ Visa:
 
 Stort kort med:
 
-- motståndare
+- matchrubrik i formatet `FBC vs. [motståndare]`
+- FBC Sollentunas och motståndarens föreningslogotyper
 - datum
 - tid
 - plats om angivet
@@ -153,7 +154,7 @@ Sollentunahallen
 Visa nästa 4–5 matcher kompakt:
 
 - datum
-- motståndare
+- motståndare med föreningslogotyp
 
 ### Matchfördelning
 
