@@ -1,35 +1,34 @@
-# Aktuell milstolpe: Implementation 09 – översikt
+# Aktuell milstolpe: Implementation 10 – produktionssättning och pilot
 
 ## Mål
 
-Ge de tre tränarna en snabb och tillförlitlig startsida som svarar på vad som händer härnäst och om den ordinarie matchfördelningen behöver uppmärksamhet.
+Gör den verifierade applikationen säker och reproducerbar att använda för de tre tränarna med verkliga data i en skarp Supabase- och Vercelmiljö.
 
-Detaljerat föreslaget scope och acceptanskriterier finns i `docs/planning/implementation-09-overview.md`.
+Detaljerat föreslaget scope och acceptanskriterier finns i `docs/planning/implementation-10-production-pilot.md`. Miljöstrategin finns i ADR-012 och den operativa ordningen i `docs/deployment/production-runbook.md`.
 
 ## Leverabler
 
-- [x] Implementation 09 granskad och godkänd.
-- [x] Kanoniskt, behörighetskontrollerat översiktsunderlag implementerat.
-- [x] Nästa match och kommande matcher implementerade.
-- [x] Ordinarie rättvisefördelning implementerad utan att extra inhopp blandas in.
-- [x] `/` används för Översikt och spelarlistan har en stabil `/players`-route.
-- [x] Loading, empty, error och populated states verifierade.
-- [ ] Lokal användarresa och 390 px-layout verifierade.
-- [x] Oberoende skrivskyddad agentgranskning genomförd.
+- [x] Implementation 10 och ADR-012 granskade och godkända.
+- [ ] Produktionscheck och releasekommandon dokumenterade och verifierade.
+- [ ] Skarp Supabase-miljö skapad och länkad.
+- [ ] Migrationer applicerade utan utvecklingsseed.
+- [ ] Lag, aktiv säsong och tre tränarkonton skapade kontrollerat.
+- [ ] Vercel Production konfigurerad med rätt miljövariabler.
+- [ ] Skarp smoke test och mobil acceptans genomförda.
+- [ ] Återställningsväg och ägarskap dokumenterade.
+- [ ] Oberoende skrivskyddad granskning genomförd.
 
-## Rekommenderad ordning
+## Stoppunkter
 
-1. Granska och godkänn Implementation 09.
-2. Implementera och testa det atomiska översiktsunderlaget.
-3. Flytta spelarlistan till `/players` och aktivera navigationen.
-4. Implementera nästa match, kommande matcher och rättvisefördelning.
-5. Verifiera användarresan och genomför oberoende granskning.
+- Skapande av molnprojekt, länkning, `db push`, Auth-konton, Vercel-konfiguration och deployment kräver uttryckligt godkännande.
+- Riktiga tränaruppgifter och säsongsdata måste bekräftas innan bootstrap.
+- `supabase db reset --linked` och `db push --include-seed` får aldrig köras mot produktion.
 
 ## Milstolpen är klar när
 
-- startsidan visar rätt nästa match och upp till fem kommande matcher
-- tränaren kan öppna nästa match direkt
-- ordinarie rättvisa visas begripligt och extra inhopp inte påverkar indikatorn
-- tomma och felaktiga underlag ger en tydlig svensk åtgärdsväg
-- navigationen fungerar konsekvent på mobil och desktop
-- inga oaccepterade granskningsfynd återstår
+- de tre tränarna kan logga in i den skarpa tjänsten
+- verkliga spelare och matcher kan administreras utan exempeldata
+- samtliga centrala användarresor fungerar på mobil
+- produktionshemligheter endast finns i godkända secret stores
+- RLS, loggar, backup och rollback har kontrollerats
+- piloten har en namngiven ägare och en enkel incidentväg

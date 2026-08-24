@@ -4,7 +4,7 @@ Ett mobile-first planeringsverktyg för tränare i FBC Sollentuna P17. Tjänsten
 
 ## Status
 
-Projektets grund, autentisering, lagbehörighet, spelarlista, fördelningsmotor och matchgrund är implementerade. Nästa steg är Implementation 04: generera och spara ordinarie laguttagningar.
+Den lokala MVP:n har autentisering, lagbehörighet, översikt, spelarhantering, matcher, ordinarie fördelning, manuella byten, extra inhopp och matchcompletion. Nästa milstolpe är Implementation 10: säker produktionssättning och pilot för tre tränare.
 
 ## Dokumentation
 
@@ -15,6 +15,8 @@ Projektets grund, autentisering, lagbehörighet, spelarlista, fördelningsmotor 
 - [Implementation 01: säker grund och spelarlista](docs/planning/implementation-01-foundation.md)
 - [Implementation 03: matchgrund](docs/planning/implementation-03-match-foundation.md)
 - [Implementation 04: ordinarie laguttagningar](docs/planning/implementation-04-selection-persistence.md)
+- [Implementation 10: produktionssättning och pilot](docs/planning/implementation-10-production-pilot.md)
+- [Produktionsrunbook](docs/deployment/production-runbook.md)
 - [Definition of Done](docs/quality/definition-of-done.md)
 - [Checklista för oberoende granskning](docs/quality/review-checklist.md)
 - [Autonomikontrakt för agentarbetet](docs/workflow/autonomy-contract.md)
