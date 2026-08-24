@@ -17,20 +17,10 @@ Skriv inte lösenord, tokens eller service-role-nycklar i denna fil.
 ## 2. Lokal releasekontroll
 
 ```bash
-pnpm lint
-pnpm typecheck
-pnpm test -- --run
-pnpm db:reset
-pnpm db:test
-pnpm db:lint
-pnpm db:test:concurrency
-pnpm db:test:manual-concurrency
-pnpm db:test:extra-concurrency
-pnpm db:test:completion-concurrency
-pnpm db:test:player-concurrency
-pnpm build
-git diff --check
+pnpm release:preflight
 ```
+
+Preflighten kör kod-, databas-, samtidighets-, bootstrap-, build- och secret-kontroller lokalt. Den skriver inte till något fjärrsystem.
 
 ## 3. Supabase-migrering
 
@@ -50,12 +40,14 @@ supabase db push --include-seed
 
 ## 4. Bootstrap
 
-1. Kör den granskade bootstrapmallen med bekräftat lag och säsong.
+1. Kopiera `supabase/bootstrap/01_team_and_season.sql.example` till en ignorerad temporär fil utanför repot, ersätt samtliga platshållare och kör den i Supabase SQL Editor.
 2. Skapa tre användare i Supabase Auth.
-3. Hämta deras UUID:n utan att kopiera lösenord.
-4. Kör medlemskapsdelen av bootstrapmallen.
+3. Verifiera att exakt de tre bekräftade e-postadresserna finns i Auth. Kopiera inte lösenord eller användaruppgifter till repot.
+4. Kopiera `supabase/bootstrap/02_coach_memberships.sql.example` till en ignorerad temporär fil, ersätt samtliga platshållare och kör den i SQL Editor.
 5. Stäng `Allow new users to sign up`.
 6. Kontrollera att varje tränare kan logga in och att outsider nekas.
+
+Mallarna är transaktionella och idempotenta. De ska kunna köras om med exakt samma värden utan dubbletter. Lägg aldrig den ifyllda kopian i repot.
 
 ## 5. Vercel
 

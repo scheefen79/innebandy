@@ -1,0 +1,52 @@
+begin;
+
+do $$
+declare
+  configured_team_name constant text := '<TEAM_NAME>';
+  configured_team_slug constant text := '<TEAM_SLUG>';
+  configured_season_name constant text := '<SEASON_NAME>';
+  configured_starts_on constant date := '<START_DATE>';
+  configured_ends_on constant date := '<END_DATE>';
+  configured_team_id uuid;
+  existing_team public.teams%rowtype;
+  existing_season public.seasons%rowtype;
+begin
+  if configured_team_name like '<%>'
+    or configured_team_slug like '<%>'
+    or configured_season_name like '<%>'
+    or configured_starts_on::text like '<%>'
+    or configured_ends_on::text like '<%>' then
+    raise exception 'BOOTSTRAP_PLACEHOLDERS_REMAIN';
+  end if;
+
+  if configured_starts_on > configured_ends_on then
+    raise exception 'INVALID_SEASON_DATES';
+  end if;
+
+  select * into existing_team from public.teams where slug=configured_team_slug for update;
+  if found then
+    if existing_team.name<>configured_team_name then raise exception 'TEAM_BOOTSTRAP_CONFLICT'; end if;
+    configured_team_id:=existing_team.id;
+  else
+    insert into public.teams(name,slug) values(configured_team_name,configured_team_slug) returning id into configured_team_id;
+  end if;
+
+  if exists(select 1 from public.seasons where team_id=configured_team_id and is_active and name<>configured_season_name) then
+    raise exception 'ACTIVE_SEASON_CONFLICT';
+  end if;
+
+  select * into existing_season from public.seasons where team_id=configured_team_id and name=configured_season_name for update;
+  if found then
+    if existing_season.starts_on<>configured_starts_on
+      or existing_season.ends_on<>configured_ends_on
+      or not existing_season.is_active then
+      raise exception 'SEASON_BOOTSTRAP_CONFLICT';
+    end if;
+  else
+    insert into public.seasons(team_id,name,starts_on,ends_on,is_active)
+    values(configured_team_id,configured_season_name,configured_starts_on,configured_ends_on,true);
+  end if;
+end;
+$$;
+
+commit;
