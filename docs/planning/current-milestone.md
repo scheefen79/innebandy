@@ -1,37 +1,38 @@
-# Aktuell milstolpe: Implementation 06 – extra inhoppare
+# Aktuell milstolpe: Implementation 07 – genomför match
 
 ## Mål
 
-Låt en behörig tränare få en rättvis, nivåoberoende rekommendation och lägga till eller ta bort planerade extra inhoppare utan att påverka ordinarie uttagning.
+Låt en behörig tränare registrera faktiskt deltagande och atomiskt flytta en spelad match från `Planerad` till `Genomförd`, så att ordinarie historik och extrarotation uppdateras korrekt.
 
-Detaljerat föreslaget scope och acceptanskriterier finns i `docs/planning/implementation-06-extra-substitutes.md`. Föreslaget arkitekturbeslut finns i ADR-009.
+Detaljerat föreslaget scope och acceptanskriterier finns i `docs/planning/implementation-07-match-completion.md`. Föreslaget arkitekturbeslut finns i ADR-010.
 
 ## Leverabler
 
-- [x] Implementation 06 granskad och godkänd.
-- [x] Separat extrauttagningskontrakt accepterat i ADR-009.
-- [x] Kanonisk extra historik och kandidatrankning implementerad.
-- [x] Atomiskt tillägg/borttagning med stale-skydd implementerat.
-- [x] Direkta klientmutationer och RPC-anrop negativt verifierade.
-- [x] Ordinarie target, generering och manuella byten bevarar extra rader.
-- [x] Matchdetalj visar och hanterar extra inhoppare separat.
-- [x] Lokal add/remove-resa och 390 px-layout verifierade.
-- [x] Oberoende skrivskyddad agentgranskning genomförd utan kvarstående fynd.
+- [x] Implementation 07 granskad och godkänd.
+- [x] Completion- och deltagandekontrakt accepterat i ADR-010.
+- [ ] Kanoniskt deltagandeunderlag och fingeravtryck implementerat.
+- [ ] Atomisk matchcompletion med stale- och first-write-wins-skydd implementerad.
+- [ ] Manuella ordinarie par stödjer genomfört deltagande säkert.
+- [ ] Direkta klientmutationer och RPC-anrop negativt verifierade.
+- [ ] Ordinarie och extra historik verifierad separat.
+- [ ] Matchdetalj och completion-vy visar deltagande begripligt.
+- [ ] Lokal completion-resa och 390 px-layout verifierade.
+- [ ] Oberoende skrivskyddad agentgranskning genomförd.
 
 ## Rekommenderad ordning
 
-1. Granska och godkänn Implementation 06 och ADR-009.
-2. Implementera kanonisk historikkälla, server-only add/remove och negativa databastester.
-3. Koppla Implementation 02:s extrarankning till applikationslagret.
-4. Implementera kandidatlista, bekräftelse, svensk felpresentation och borttagning.
-5. Verifiera bevarande vid ordinarie generering och faktiska samtidighetsfall.
+1. Granska och godkänn Implementation 07 och ADR-010.
+2. Anpassa parintegriteten och implementera kanoniskt completion-underlag.
+3. Implementera server-only completion och negativa databas-/samtidighetstester.
+4. Implementera deltagarformulär, sammanfattning och svensk felpresentation.
+5. Visa sparat deltagande och verifiera historikregressioner.
 6. Verifiera hela användarresan och genomför oberoende granskning.
 
 ## Milstolpen är klar när
 
-- en behörig tränare kan se en rättvis rekommendation och välja valfri valbar kandidat
-- planerade extra inhoppare kan läggas till och tas bort atomiskt
-- endast genomförda extra inhopp används som historik
-- ordinarie uttagning, target och rättvisa förblir oförändrade
-- obehöriga, stale och samtidiga operationer inte kan skapa ett ogiltigt läge
+- en behörig tränare kan korrigera föreslaget deltagande och genomföra matchen
+- matchstatus och alla `played`-värden sparas atomiskt
+- frånvaro inte räknas som genomförd ordinarie match eller extra inhopp
+- identiska retries konvergerar och olika samtidiga beslut inte skriver över varandra
+- genomförd match inte längre kan ändras av planeringsflödena
 - inga oaccepterade granskningsfynd återstår
