@@ -1,35 +1,37 @@
-# Aktuell milstolpe: Implementation 05 – manuella ordinarie byten
+# Aktuell milstolpe: Implementation 06 – extra inhoppare
 
 ## Mål
 
-Låt en behörig tränare flytta en ordinarie matchplats mellan två spelare, bevara beslutet vid framtida generering och återställa bytet säkert.
+Låt en behörig tränare få en rättvis, nivåoberoende rekommendation och lägga till eller ta bort planerade extra inhoppare utan att påverka ordinarie uttagning.
 
-Detaljerat föreslaget scope och acceptanskriterier finns i `docs/planning/implementation-05-manual-regular-adjustments.md`. Föreslaget arkitekturbeslut finns i ADR-008.
+Detaljerat föreslaget scope och acceptanskriterier finns i `docs/planning/implementation-06-extra-substitutes.md`. Föreslaget arkitekturbeslut finns i ADR-009.
 
 ## Leverabler
 
-- [x] Implementation 05 granskad och godkänd.
-- [x] Manuellt byteskontrakt accepterat i ADR-008.
-- [x] Atomiskt create/restore med stale-skydd implementerat.
-- [x] Direkta klientmutationer och RPC-anrop negativt verifierade.
-- [x] Manuella include/exclude-beslut bevaras vid generering.
-- [x] Matchdetalj visar manuellt tillagd och borttagen spelare.
-- [x] Lokal create/restore-resa och 390 px-layout verifierade.
-- [x] Oberoende skrivskyddad agentgranskning genomförd utan kvarstående fynd.
+- [x] Implementation 06 granskad och godkänd.
+- [x] Separat extrauttagningskontrakt accepterat i ADR-009.
+- [ ] Kanonisk extra historik och kandidatrankning implementerad.
+- [ ] Atomiskt tillägg/borttagning med stale-skydd implementerat.
+- [ ] Direkta klientmutationer och RPC-anrop negativt verifierade.
+- [ ] Ordinarie target, generering och manuella byten bevarar extra rader.
+- [ ] Matchdetalj visar och hanterar extra inhoppare separat.
+- [ ] Lokal add/remove-resa och 390 px-layout verifierade.
+- [ ] Oberoende skrivskyddad agentgranskning genomförd.
 
 ## Rekommenderad ordning
 
-1. Godkänn Implementation 05 och ADR-008.
-2. Implementera constraints, server-only create/restore och negativa databastester.
-3. Implementera kandidatlista, formulär och svensk felpresentation.
-4. Visa manuella etiketter och återställning på matchdetaljen.
-5. Verifiera bevarande vid generering och faktisk samtidighet.
+1. Granska och godkänn Implementation 06 och ADR-009.
+2. Implementera kanonisk historikkälla, server-only add/remove och negativa databastester.
+3. Koppla Implementation 02:s extrarankning till applikationslagret.
+4. Implementera kandidatlista, bekräftelse, svensk felpresentation och borttagning.
+5. Verifiera bevarande vid ordinarie generering och faktiska samtidighetsfall.
 6. Verifiera hela användarresan och genomför oberoende granskning.
 
 ## Milstolpen är klar när
 
-- en behörig tränare kan skapa och återställa ett ordinarie byte
-- matchens target bevaras och bytet överlever framtida generering
-- en obehörig eller stale operation inte kan mutera uttagningen
-- create och restore är atomiska även vid samtidiga tränare
+- en behörig tränare kan se en rättvis rekommendation och välja valfri valbar kandidat
+- planerade extra inhoppare kan läggas till och tas bort atomiskt
+- endast genomförda extra inhopp används som historik
+- ordinarie uttagning, target och rättvisa förblir oförändrade
+- obehöriga, stale och samtidiga operationer inte kan skapa ett ogiltigt läge
 - inga oaccepterade granskningsfynd återstår

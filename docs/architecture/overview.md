@@ -2,7 +2,7 @@
 
 ## Status
 
-Applikationsstacken är accepterad i ADR-001. Detaljerade beslut för behörighet, uttagningsmodell, autentisering, fördelningsmotor, matchgrund och atomisk uttagningspersistens finns i ADR-002 till ADR-007.
+Applikationsstacken är accepterad i ADR-001. Detaljerade beslut för behörighet, uttagningsmodell, autentisering, fördelningsmotor, matchgrund, atomisk persistens, manuella ordinarie byten och planerade extra inhoppare finns i ADR-002 till ADR-009.
 
 ## Systemgräns
 
@@ -61,3 +61,5 @@ PostgreSQL lagrar projektets tillstånd. Supabase Auth identifierar tränaren oc
 - ADR-005: ren och deterministisk fördelningsmotor
 - ADR-006: matchgrund, tidsmodell och behörighetsgräns
 - ADR-007: atomisk persistens och samtidighet för uttagningar
+- ADR-008: manuella ordinarie byten som kopplade beslut
+- ADR-009: planerade extra inhopp som separat uttagning
