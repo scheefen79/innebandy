@@ -10,6 +10,7 @@
     "db:test": "supabase test db",
     "db:test:concurrency": "bash supabase/tests/database/selection_concurrency.sh",
     "db:test:manual-concurrency": "bash supabase/tests/database/manual_adjustment_concurrency.sh",
+    "db:test:extra-concurrency": "bash supabase/tests/database/extra_substitute_concurrency.sh",
     "db:lint": "supabase db lint --local",
     "build": "next build --webpack",
     "start": "next start",
