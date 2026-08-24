@@ -9,7 +9,7 @@ Detaljerat föreslaget scope och acceptanskriterier finns i `docs/planning/imple
 ## Leverabler
 
 - [x] Implementation 10 och ADR-012 granskade och godkända.
-- [ ] Produktionscheck och releasekommandon dokumenterade och verifierade.
+- [x] Produktionscheck och releasekommandon dokumenterade och verifierade.
 - [ ] Skarp Supabase-miljö skapad och länkad.
 - [ ] Migrationer applicerade utan utvecklingsseed.
 - [ ] Lag, aktiv säsong och tre tränarkonton skapade kontrollerat.

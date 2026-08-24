@@ -53,6 +53,12 @@ pnpm test
 pnpm build
 ```
 
+Full lokal releasekontroll inför produktionssättning:
+
+```bash
+pnpm release:preflight
+```
+
 Databasmigrationer och RLS-tester körs enligt [guiden för lokal Supabase-utveckling](docs/development/supabase-local.md).
 
 Kopiera `.env.example` till `.env.local` och fyll i Supabase URL samt publishable key. Lägg aldrig riktiga hemligheter i Git.

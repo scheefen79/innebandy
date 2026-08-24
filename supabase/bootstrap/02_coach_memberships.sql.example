@@ -1,0 +1,59 @@
+begin;
+
+do $$
+declare
+  configured_team_slug constant text := '<TEAM_SLUG>';
+  configured_coach_emails constant text[] := array[
+    '<COACH_1_EMAIL>',
+    '<COACH_2_EMAIL>',
+    '<COACH_3_EMAIL>'
+  ];
+  configured_team_id uuid;
+  matched_users integer;
+begin
+  if configured_team_slug like '<%>'
+    or exists(select 1 from unnest(configured_coach_emails) email where email like '<%>') then
+    raise exception 'BOOTSTRAP_PLACEHOLDERS_REMAIN';
+  end if;
+
+  if cardinality(configured_coach_emails)<>3
+    or (select count(distinct lower(email)) from unnest(configured_coach_emails) email)<>3 then
+    raise exception 'THREE_UNIQUE_COACH_EMAILS_REQUIRED';
+  end if;
+
+  select id into configured_team_id from public.teams where slug=configured_team_slug;
+  if configured_team_id is null then raise exception 'TEAM_NOT_FOUND'; end if;
+
+  select count(*) into matched_users
+  from auth.users
+  where lower(email) in (select lower(email) from unnest(configured_coach_emails) email);
+  if matched_users<>3 then raise exception 'ALL_COACH_AUTH_USERS_REQUIRED'; end if;
+
+  perform 1 from auth.users
+  where lower(email) in (select lower(email) from unnest(configured_coach_emails) email)
+  order by id for update;
+
+  perform 1 from public.team_members
+  where user_id in (
+    select id from auth.users
+    where lower(email) in (select lower(email) from unnest(configured_coach_emails) email)
+  )
+  order by user_id,team_id for update;
+
+  if exists(
+    select 1 from public.team_members
+    where is_active and team_id<>configured_team_id and user_id in (
+      select id from auth.users
+      where lower(email) in (select lower(email) from unnest(configured_coach_emails) email)
+    )
+  ) then raise exception 'COACH_ALREADY_ACTIVE_IN_ANOTHER_TEAM'; end if;
+
+  insert into public.team_members(team_id,user_id,role,is_active)
+  select configured_team_id,id,'coach',true
+  from auth.users
+  where lower(email) in (select lower(email) from unnest(configured_coach_emails) email)
+  on conflict(team_id,user_id) do update set role='coach',is_active=true;
+end;
+$$;
+
+commit;
