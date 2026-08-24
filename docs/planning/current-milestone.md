@@ -8,7 +8,7 @@ Detaljerat föreslaget scope och acceptanskriterier finns i `docs/planning/imple
 
 ## Leverabler
 
-- [ ] Implementation 09 granskad och godkänd.
+- [x] Implementation 09 granskad och godkänd.
 - [ ] Kanoniskt, behörighetskontrollerat översiktsunderlag implementerat.
 - [ ] Nästa match och kommande matcher implementerade.
 - [ ] Ordinarie rättvisefördelning implementerad utan att extra inhopp blandas in.

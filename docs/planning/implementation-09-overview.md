@@ -1,6 +1,7 @@
 # Implementation 09: översikt
 
-- Status: Föreslagen
+- Status: Godkänd
+- Godkänd: 2026-08-24
 
 ## Syfte
 
