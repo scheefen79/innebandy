@@ -3,7 +3,7 @@ begin;
 create extension if not exists pgtap with schema extensions;
 set local search_path = public, extensions;
 
-select plan(42);
+select plan(46);
 
 select has_table('public', 'teams', 'teams exists');
 select has_table('public', 'team_members', 'team_members exists');
@@ -145,6 +145,16 @@ select has_function('public', 'restore_manual_regular_adjustment', array['uuid',
 select has_function('public', 'get_extra_substitute_source', array['uuid', 'uuid', 'uuid'], 'extra candidate source function exists');
 select has_function('public', 'add_extra_substitute', array['uuid', 'uuid', 'uuid', 'uuid', 'uuid', 'text'], 'server-only extra add function exists');
 select has_function('public', 'remove_extra_substitute', array['uuid', 'uuid', 'uuid', 'uuid', 'uuid', 'text'], 'server-only extra remove function exists');
+select has_function('public', 'get_match_completion_source', array['uuid', 'uuid', 'uuid'], 'match completion source function exists');
+select has_function('public', 'complete_match', array['uuid', 'uuid', 'uuid', 'uuid', 'text', 'jsonb'], 'server-only completion function exists');
+select results_eq(
+  $$select tgdeferrable::text || ':' || tginitdeferred::text from pg_trigger where tgname = 'match_players_validate_participation'$$,
+  array['true:true'::text], 'selection participation validation is deferred'
+);
+select results_eq(
+  $$select tgdeferrable::text || ':' || tginitdeferred::text from pg_trigger where tgname = 'matches_validate_participation'$$,
+  array['true:true'::text], 'match participation validation is deferred'
+);
 select results_eq(
   $$select pg_get_constraintdef(oid) from pg_constraint where conname = 'match_players_extra_shape_check'$$,
   array[format('CHECK (((selection_type <> %L::text) OR ((selection_source = %L::text) AND (selection_status = %L::text) AND (replaced_player_id IS NULL))))', 'extra', 'manual', 'selected')],
