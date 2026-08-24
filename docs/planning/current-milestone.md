@@ -10,13 +10,13 @@ Detaljerat föreslaget scope och acceptanskriterier finns i `docs/planning/imple
 
 - [x] Implementation 06 granskad och godkänd.
 - [x] Separat extrauttagningskontrakt accepterat i ADR-009.
-- [ ] Kanonisk extra historik och kandidatrankning implementerad.
-- [ ] Atomiskt tillägg/borttagning med stale-skydd implementerat.
-- [ ] Direkta klientmutationer och RPC-anrop negativt verifierade.
-- [ ] Ordinarie target, generering och manuella byten bevarar extra rader.
-- [ ] Matchdetalj visar och hanterar extra inhoppare separat.
-- [ ] Lokal add/remove-resa och 390 px-layout verifierade.
-- [ ] Oberoende skrivskyddad agentgranskning genomförd.
+- [x] Kanonisk extra historik och kandidatrankning implementerad.
+- [x] Atomiskt tillägg/borttagning med stale-skydd implementerat.
+- [x] Direkta klientmutationer och RPC-anrop negativt verifierade.
+- [x] Ordinarie target, generering och manuella byten bevarar extra rader.
+- [x] Matchdetalj visar och hanterar extra inhoppare separat.
+- [x] Lokal add/remove-resa och 390 px-layout verifierade.
+- [x] Oberoende skrivskyddad agentgranskning genomförd utan kvarstående fynd.
 
 ## Rekommenderad ordning
 

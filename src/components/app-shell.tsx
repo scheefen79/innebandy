@@ -67,7 +67,7 @@ export function AppShell({ children, currentItem = "Översikt" }: AppShellProps)
           </form>
         </aside>
 
-        <main className="w-full px-4 py-6 sm:px-6 md:px-8 md:py-10">{children}</main>
+        <main className="min-w-0 w-full px-4 py-6 sm:px-6 md:px-8 md:py-10">{children}</main>
       </div>
 
       <nav
