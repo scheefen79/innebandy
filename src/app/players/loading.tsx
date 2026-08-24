@@ -1,0 +1,2 @@
+import {AppShell} from "@/components/app-shell";
+export default function PlayersLoading(){return <AppShell currentItem="Spelare"><div aria-busy="true" className="mx-auto max-w-3xl"><span className="sr-only">Laddar spelare</span><div className="h-9 w-40 animate-pulse rounded bg-slate-200"/><div className="mt-6 h-12 animate-pulse rounded-xl bg-slate-200"/><div className="mt-5 grid gap-3 sm:grid-cols-2">{[1,2,3,4].map(item=><div key={item} className="h-32 animate-pulse rounded-2xl bg-slate-200"/>)}</div></div></AppShell>}

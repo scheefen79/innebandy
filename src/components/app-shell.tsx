@@ -7,9 +7,9 @@ type AppShellProps = {
 };
 
 const navigation = [
-  { href: undefined, label: "Översikt" },
+  { href: "/", label: "Översikt" },
   { href: "/matches", label: "Matcher" },
-  { href: "/", label: "Spelare" },
+  { href: "/players", label: "Spelare" },
 ] as const;
 
 export function AppShell({ children, currentItem = "Översikt" }: AppShellProps) {
@@ -44,7 +44,7 @@ export function AppShell({ children, currentItem = "Översikt" }: AppShellProps)
             <ul className="space-y-2">
               {navigation.map((item) => (
                 <li key={item.label}>
-                  {item.href ? <Link
+                  <Link
                     aria-current={item.label === currentItem ? "page" : undefined}
                     href={item.href}
                     className={`block rounded-xl px-3 py-3 text-sm font-medium ${
@@ -52,7 +52,7 @@ export function AppShell({ children, currentItem = "Översikt" }: AppShellProps)
                     }`}
                   >
                     {item.label}
-                  </Link> : <span className="block rounded-xl px-3 py-3 text-sm font-medium text-blue-300">{item.label}</span>}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -77,7 +77,7 @@ export function AppShell({ children, currentItem = "Översikt" }: AppShellProps)
         <ul className="mx-auto grid max-w-lg grid-cols-3">
           {navigation.map((item) => (
             <li key={item.label}>
-              {item.href ? <Link
+              <Link
                 aria-current={item.label === currentItem ? "page" : undefined}
                 href={item.href}
                 className={`flex min-h-16 items-center justify-center px-2 text-xs font-semibold ${
@@ -85,7 +85,7 @@ export function AppShell({ children, currentItem = "Översikt" }: AppShellProps)
                 }`}
               >
                 {item.label}
-              </Link> : <span className="flex min-h-16 items-center justify-center px-2 text-xs font-semibold text-slate-400">{item.label}</span>}
+              </Link>
             </li>
           ))}
         </ul>
