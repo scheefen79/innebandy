@@ -250,7 +250,7 @@ select throws_ok(
   'new row violates row-level security policy for table "matches"',
   'a coach cannot create a match in an inactive season'
 );
-select lives_ok(
+select throws_ok(
   $$
     insert into players (
       team_id,
@@ -268,17 +268,19 @@ select lives_ok(
       2
     )
   $$,
-  'a coach can create a player in their team'
+  '42501',
+  'permission denied for table players',
+  'a coach cannot create a player directly'
 );
-select results_eq(
+select throws_ok(
   $$
     update players
     set first_name = 'Otillåten ändring'
     where id = 'd0000000-0000-4000-8000-000000000002'
-    returning 1
   $$,
-  'select 1 where false',
-  'a coach cannot update another team player'
+  '42501',
+  'permission denied for table players',
+  'a coach cannot update players directly'
 );
 
 set local request.jwt.claim.sub = 'a0000000-0000-4000-8000-000000000004';
@@ -334,7 +336,7 @@ select throws_ok(
     )
   $$,
   '42501',
-  'new row violates row-level security policy for table "players"',
+  'permission denied for table players',
   'a user without membership cannot create players'
 );
 

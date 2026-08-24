@@ -3,7 +3,7 @@ begin;
 create extension if not exists pgtap with schema extensions;
 set local search_path = public, extensions;
 
-select plan(46);
+select plan(52);
 
 select has_table('public', 'teams', 'teams exists');
 select has_table('public', 'team_members', 'team_members exists');
@@ -147,6 +147,12 @@ select has_function('public', 'add_extra_substitute', array['uuid', 'uuid', 'uui
 select has_function('public', 'remove_extra_substitute', array['uuid', 'uuid', 'uuid', 'uuid', 'uuid', 'text'], 'server-only extra remove function exists');
 select has_function('public', 'get_match_completion_source', array['uuid', 'uuid', 'uuid'], 'match completion source function exists');
 select has_function('public', 'complete_match', array['uuid', 'uuid', 'uuid', 'uuid', 'text', 'jsonb'], 'server-only completion function exists');
+select has_column('public', 'players', 'updated_at', 'players track updates for stale protection');
+select has_column('public', 'players', 'create_request_id', 'players retain create idempotency key');
+select has_function('public', 'get_player_profile', array['uuid','uuid','uuid'], 'player profile source exists');
+select has_function('public', 'create_player', array['uuid','uuid','uuid','text','text','integer','uuid'], 'server-only player create exists');
+select has_function('public', 'update_player', array['uuid','uuid','uuid','uuid','text','text','integer','text'], 'server-only player update exists');
+select has_function('public', 'deactivate_player', array['uuid','uuid','uuid','uuid','text'], 'server-only player deactivate exists');
 select results_eq(
   $$select tgdeferrable::text || ':' || tginitdeferred::text from pg_trigger where tgname = 'match_players_validate_participation'$$,
   array['true:true'::text], 'selection participation validation is deferred'

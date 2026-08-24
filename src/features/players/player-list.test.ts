@@ -30,12 +30,14 @@ describe("toPlayerListItems", () => {
         name: "Ada Lovelace",
         level: 1,
         levelLabel: "Nivå 1 · Högst",
+        plannedRegular: 0, completedRegular: 0, plannedExtra: 0, completedExtra: 0,
       },
       {
         id: "second",
         name: "Bo",
         level: 3,
         levelLabel: "Nivå 3 · Lägst",
+        plannedRegular: 0, completedRegular: 0, plannedExtra: 0, completedExtra: 0,
       },
     ]);
   });
@@ -56,14 +58,14 @@ describe("toPlayerListItems", () => {
 });
 
 describe("PlayerListView", () => {
-  it("visar empty-läget utan en funktionslös CRUD-knapp", () => {
+  it("visar empty-läget med en fungerande väg att lägga till spelare", () => {
     const html = renderToStaticMarkup(
       createElement(PlayerListView, { players: [], seasonName: "Testsäsong" }),
     );
 
     expect(html).toContain("Inga spelare ännu");
     expect(html).toContain("0 aktiva");
-    expect(html).not.toContain("Lägg till spelare");
+    expect(html).toContain("Lägg till spelare");
   });
 
   it("visar namn och entydig nivå i populated-läget", () => {
@@ -75,6 +77,7 @@ describe("PlayerListView", () => {
             name: "Ada Lovelace",
             level: 1,
             levelLabel: "Nivå 1 · Högst",
+            plannedRegular: 1, completedRegular: 2, plannedExtra: 0, completedExtra: 1,
           },
         ],
         seasonName: "Testsäsong",

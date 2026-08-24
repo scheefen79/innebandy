@@ -1,0 +1,9 @@
+export function PlayerForm({ action, submitLabel, defaults, requestId, fingerprint }: { action: string; submitLabel: string; defaults?: { firstName: string; lastName: string | null; level: number }; requestId?: string; fingerprint?: string }) {
+  return <form action={action} method="post" className="space-y-5 rounded-2xl bg-white p-5 shadow-sm">
+    {requestId ? <input type="hidden" name="request_id" value={requestId} /> : null}{fingerprint ? <input type="hidden" name="fingerprint" value={fingerprint} /> : null}
+    <div><label htmlFor="first-name" className="text-sm font-semibold text-slate-800">Förnamn</label><input id="first-name" name="first_name" required maxLength={100} defaultValue={defaults?.firstName} className="mt-2 min-h-12 w-full rounded-xl border border-slate-300 px-4" /></div>
+    <div><label htmlFor="last-name" className="text-sm font-semibold text-slate-800">Efternamn <span className="font-normal text-slate-500">(valfritt)</span></label><input id="last-name" name="last_name" maxLength={100} defaultValue={defaults?.lastName ?? ""} className="mt-2 min-h-12 w-full rounded-xl border border-slate-300 px-4" /></div>
+    <fieldset><legend className="text-sm font-semibold text-slate-800">Nivå</legend><p className="mt-1 text-xs text-slate-500">Nivå 1 är högst och nivå 3 lägst. Nivån påverkar bara lagbalansen.</p><div className="mt-3 grid grid-cols-3 gap-2">{[1,2,3].map((level) => <label key={level} className="flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-xl border border-slate-300 has-[:checked]:border-blue-700 has-[:checked]:bg-blue-50"><input type="radio" name="level" value={level} required defaultChecked={(defaults?.level ?? 2) === level} />Nivå {level}</label>)}</div></fieldset>
+    <button className="min-h-12 w-full rounded-xl bg-blue-700 px-4 font-semibold text-white">{submitLabel}</button>
+  </form>;
+}

@@ -13,13 +13,19 @@ export type PlayerListItem = {
   name: string;
   level: PlayerLevel;
   levelLabel: string;
+  plannedRegular: number;
+  completedRegular: number;
+  plannedExtra: number;
+  completedExtra: number;
 };
 
 function isPlayerLevel(level: number): level is PlayerLevel {
   return level === 1 || level === 2 || level === 3;
 }
 
-export function toPlayerListItems(rows: PlayerRow[]): PlayerListItem[] {
+export type PlayerListCounts = Record<string, { plannedRegular: number; completedRegular: number; plannedExtra: number; completedExtra: number }>;
+
+export function toPlayerListItems(rows: PlayerRow[], counts: PlayerListCounts = {}): PlayerListItem[] {
   return [...rows]
     .sort((left, right) => left.rotation_order - right.rotation_order)
     .map((row) => {
@@ -32,6 +38,7 @@ export function toPlayerListItems(rows: PlayerRow[]): PlayerListItem[] {
         name: [row.first_name.trim(), row.last_name?.trim()].filter(Boolean).join(" "),
         level: row.level,
         levelLabel: getPlayerLevelLabel(row.level),
+        ...(counts[row.id] ?? { plannedRegular: 0, completedRegular: 0, plannedExtra: 0, completedExtra: 0 }),
       };
     });
 }
