@@ -23,8 +23,8 @@ describe("loadMatchRoster", () => {
     const from = vi.fn((table: string) => table === "players" ? players.query : selections.query);
 
     await expect(loadMatchRoster({ from } as unknown as SupabaseClient, "team-1", "season-1", "match-1")).resolves.toEqual([
-      { id: "player-1", name: "Ada Ett", level: 1, isActive: true, selected: false, selectionSource: null, selectionStatus: null, selectionType: null, replacedPlayerId: null },
-      { id: "player-2", name: "Bea", level: 2, isActive: true, selected: true, selectionSource: "manual", selectionStatus: "selected", selectionType: "regular", replacedPlayerId: "player-1" },
+      { id: "player-1", name: "Ada Ett", level: 1, isActive: true, selected: false, selectionSource: null, selectionStatus: null, selectionType: null, replacedPlayerId: null, played: false },
+      { id: "player-2", name: "Bea", level: 2, isActive: true, selected: true, selectionSource: "manual", selectionStatus: "selected", selectionType: "regular", replacedPlayerId: "player-1", played: false },
     ]);
     expect(players.filters).toEqual([["team_id", "team-1"], ["season_id", "season-1"]]);
     expect(selections.filters).toEqual([

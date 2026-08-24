@@ -10,14 +10,14 @@ Detaljerat föreslaget scope och acceptanskriterier finns i `docs/planning/imple
 
 - [x] Implementation 07 granskad och godkänd.
 - [x] Completion- och deltagandekontrakt accepterat i ADR-010.
-- [ ] Kanoniskt deltagandeunderlag och fingeravtryck implementerat.
-- [ ] Atomisk matchcompletion med stale- och first-write-wins-skydd implementerad.
-- [ ] Manuella ordinarie par stödjer genomfört deltagande säkert.
-- [ ] Direkta klientmutationer och RPC-anrop negativt verifierade.
-- [ ] Ordinarie och extra historik verifierad separat.
-- [ ] Matchdetalj och completion-vy visar deltagande begripligt.
+- [x] Kanoniskt deltagandeunderlag och fingeravtryck implementerat.
+- [x] Atomisk matchcompletion med stale- och first-write-wins-skydd implementerad.
+- [x] Manuella ordinarie par stödjer genomfört deltagande säkert.
+- [x] Direkta klientmutationer och RPC-anrop negativt verifierade.
+- [x] Ordinarie och extra historik verifierad separat.
+- [x] Matchdetalj och completion-vy visar deltagande begripligt.
 - [ ] Lokal completion-resa och 390 px-layout verifierade.
-- [ ] Oberoende skrivskyddad agentgranskning genomförd.
+- [x] Oberoende skrivskyddad agentgranskning genomförd.
 
 ## Rekommenderad ordning
 
