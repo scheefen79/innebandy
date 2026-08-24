@@ -51,13 +51,14 @@ Domänkontraktet får inte exponera Supabase-, React- eller Next.js-typer.
 
 Returnera en kandidatordning baserad på:
 
-1. färst genomförda extra inhopp
-2. längst tid sedan senaste genomförda extra inhopp
-3. fast rotationsordning
+1. lägst antal genomförda extra inhopp
+2. lägst antal ordinarie matcher
+3. längst tid sedan senaste genomförda extra inhopp
+4. fast rotationsordning
 
 Applikationslagret skickar en explicit `eligibleCandidates`-lista. Varje kandidat ska vara aktiv, tillgänglig enligt de regler som finns i MVP och varken ordinarie uttagen eller redan registrerad som extra i den aktuella matchen. MVP har ingen separat kalender för annan frånvaro; sådan tillgänglighet ligger utanför systemet tills ett produktbeslut inför den.
 
-Spelarnivå och ordinarie matchhistorik får inte påverka resultatet. Funktionen får inte själv ändra räknare eller historik och får endast rangordna kandidaterna i `eligibleCandidates`.
+Spelarnivå får inte påverka resultatet. Antalet ordinarie matcher används endast när kandidater har lika många genomförda extra inhopp. Funktionen får inte själv ändra räknare eller historik och får endast rangordna kandidaterna i `eligibleCandidates`.
 
 ### Omfördelningsgräns
 
@@ -112,7 +113,7 @@ Strukturen får justeras om ansvaren förblir lika tydligt separerade.
 
 ### Extra inhopp
 
-- Färst genomförda extra inhopp prioriteras oberoende av nivå.
+- Lägst antal genomförda extra inhopp prioriteras oberoende av nivå.
 - Äldsta senaste inhopp prioriteras vid lika antal.
 - Fast rotation avgör återstående lika lägen.
 - En spelare utan genomfört inhopp behandlas som att den väntat längst.

@@ -5,6 +5,7 @@ export type ExtraSubstituteCandidate = {
   id: string;
   name: string;
   completedExtraCount: number;
+  regularCount: number;
   lastCompletedExtraAt: string | null;
   recommended: boolean;
 };
@@ -23,6 +24,7 @@ type RawCandidate = {
   lastName?: unknown;
   rotationOrder?: unknown;
   completedExtraCount?: unknown;
+  regularCount?: unknown;
   lastCompletedExtraAt?: unknown;
 };
 
@@ -48,6 +50,7 @@ export async function loadExtraSubstituteSource(
       id: String(candidate.id ?? ""),
       rotationOrder: Number(candidate.rotationOrder),
       completedExtraCount: Number(candidate.completedExtraCount),
+      regularCount: Number(candidate.regularCount),
       lastCompletedExtraAt: candidate.lastCompletedExtraAt === null ? null : String(candidate.lastCompletedExtraAt ?? ""),
     })),
   });
@@ -61,6 +64,7 @@ export async function loadExtraSubstituteSource(
         id,
         name: [candidate.firstName, candidate.lastName].filter((value) => typeof value === "string" && value).join(" "),
         completedExtraCount: Number(candidate.completedExtraCount),
+        regularCount: Number(candidate.regularCount),
         lastCompletedExtraAt: candidate.lastCompletedExtraAt === null ? null : String(candidate.lastCompletedExtraAt),
         recommended: index === 0,
       };

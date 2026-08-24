@@ -2,7 +2,7 @@ begin;
 
 create extension if not exists pgtap with schema extensions;
 set local search_path = public, extensions;
-select plan(27);
+select plan(28);
 
 insert into auth.users (id, email) values
   ('c1000000-0000-4000-8000-000000000001', 'extra-coach@example.test'),
@@ -29,6 +29,7 @@ insert into public.matches (id, team_id, season_id, opponent, starts_at, target_
 insert into public.match_players (team_id, season_id, match_id, player_id, selection_type, selection_source, selection_status, played, created_at, updated_at) values
   ('c2000000-0000-4000-8000-000000000001', 'c3000000-0000-4000-8000-000000000001', 'c5000000-0000-4000-8000-000000000001', 'c4000000-0000-4000-8000-000000000001', 'regular', 'automatic', 'selected', false, now(), now()),
   ('c2000000-0000-4000-8000-000000000001', 'c3000000-0000-4000-8000-000000000001', 'c5000000-0000-4000-8000-000000000002', 'c4000000-0000-4000-8000-000000000003', 'extra', 'manual', 'selected', true, '2026-08-20', '2026-08-21'),
+  ('c2000000-0000-4000-8000-000000000001', 'c3000000-0000-4000-8000-000000000001', 'c5000000-0000-4000-8000-000000000002', 'c4000000-0000-4000-8000-000000000002', 'regular', 'automatic', 'selected', true, '2026-08-20', '2026-08-21'),
   ('c2000000-0000-4000-8000-000000000001', 'c3000000-0000-4000-8000-000000000001', 'c5000000-0000-4000-8000-000000000003', 'c4000000-0000-4000-8000-000000000002', 'extra', 'manual', 'selected', false, now(), now());
 
 select throws_ok(
@@ -50,6 +51,10 @@ select results_eq(
 select results_eq(
   $$select (candidate->>'completedExtraCount')::integer from jsonb_array_elements(public.get_extra_substitute_source('c2000000-0000-4000-8000-000000000001','c3000000-0000-4000-8000-000000000001','c5000000-0000-4000-8000-000000000001')->'candidates') candidate where candidate->>'id'='c4000000-0000-4000-8000-000000000002'$$,
   array[0], 'planned extra rows do not count as completed history'
+);
+select results_eq(
+  $$select (candidate->>'regularCount')::integer from jsonb_array_elements(public.get_extra_substitute_source('c2000000-0000-4000-8000-000000000001','c3000000-0000-4000-8000-000000000001','c5000000-0000-4000-8000-000000000001')->'candidates') candidate where candidate->>'id'='c4000000-0000-4000-8000-000000000002'$$,
+  array[1], 'regular count includes completed regular matches where the player participated'
 );
 select throws_ok(
   $$select public.add_extra_substitute('c1000000-0000-4000-8000-000000000001','c2000000-0000-4000-8000-000000000001','c3000000-0000-4000-8000-000000000001','c5000000-0000-4000-8000-000000000001','c4000000-0000-4000-8000-000000000002','x')$$,

@@ -50,6 +50,7 @@ export function extraCandidate(
   return {
     id,
     completedExtraCount,
+    regularCount: 0,
     lastCompletedExtraAt,
     rotationOrder: numericId,
     ...overrides,

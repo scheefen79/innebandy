@@ -22,6 +22,9 @@ export function recommendExtraPlayers(
     if (!Number.isInteger(candidate.completedExtraCount) || candidate.completedExtraCount < 0) {
       errors.push({ code: "INVALID_EXTRA_COUNT", playerId: candidate.id });
     }
+    if (!Number.isInteger(candidate.regularCount) || candidate.regularCount < 0) {
+      errors.push({ code: "INVALID_REGULAR_COUNT", playerId: candidate.id });
+    }
     if (
       candidate.lastCompletedExtraAt !== null &&
       (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/.test(
@@ -44,6 +47,9 @@ export function recommendExtraPlayers(
     .sort((left, right) => {
       const countDifference = left.completedExtraCount - right.completedExtraCount;
       if (countDifference !== 0) return countDifference;
+
+      const regularCountDifference = left.regularCount - right.regularCount;
+      if (regularCountDifference !== 0) return regularCountDifference;
 
       if (left.lastCompletedExtraAt === null && right.lastCompletedExtraAt !== null) return -1;
       if (left.lastCompletedExtraAt !== null && right.lastCompletedExtraAt === null) return 1;

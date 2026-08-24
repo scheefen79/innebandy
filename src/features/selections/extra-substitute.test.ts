@@ -10,13 +10,14 @@ describe("extra substitutes", () => {
 
   it("ranks canonical history without using player level", async () => {
     const rpc = vi.fn().mockResolvedValue({ data: { fingerprint: "fp", candidates: [
-      { id: "later", firstName: "Sen", lastName: null, level: 1, rotationOrder: 1, completedExtraCount: 1, lastCompletedExtraAt: "2026-08-10T10:00:00Z" },
-      { id: "none", firstName: "Ingen", lastName: "Historik", level: 3, rotationOrder: 2, completedExtraCount: 0, lastCompletedExtraAt: null },
-      { id: "earlier", firstName: "Tidigare", lastName: null, level: 2, rotationOrder: 3, completedExtraCount: 1, lastCompletedExtraAt: "2026-08-01T10:00:00Z" },
+      { id: "later", firstName: "Sen", lastName: null, level: 1, rotationOrder: 1, completedExtraCount: 1, regularCount: 4, lastCompletedExtraAt: "2026-08-10T10:00:00Z" },
+      { id: "none", firstName: "Ingen", lastName: "Historik", level: 3, rotationOrder: 2, completedExtraCount: 0, regularCount: 5, lastCompletedExtraAt: null },
+      { id: "earlier", firstName: "Tidigare", lastName: null, level: 2, rotationOrder: 3, completedExtraCount: 1, regularCount: 4, lastCompletedExtraAt: "2026-08-01T10:00:00Z" },
     ] }, error: null });
     const result = await loadExtraSubstituteSource({ rpc } as unknown as SupabaseClient, "team", "season", "match");
     expect(result.candidates.map(({ id }) => id)).toEqual(["none", "earlier", "later"]);
     expect(result.candidates[0].recommended).toBe(true);
+    expect(result.candidates[0].regularCount).toBe(5);
   });
 
   it("sends mutations only through the server client and maps safe errors", async () => {

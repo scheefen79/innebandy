@@ -27,7 +27,7 @@ Nivån används för att skapa balanserade matchtrupper och får inte påverka h
 - Ordinarie uttagningar fördelas enligt säsongens vanliga rotations- och nivåbalansregler.
 - Extra inhopp fördelas i en separat rotation så att samma spelare inte återkommande får extramatcherna.
 - Ett extra inhopp påverkar inte spelarens framtida ordinarie matchfördelning.
-- En ordinarie uttagning påverkar inte spelarens prioritet i rotationen för extra inhopp.
+- En ordinarie uttagning används endast som sekundärt kriterium när spelare har lika många genomförda extra inhopp.
 - När en match markeras som genomförd registreras ordinarie uttagna och extra inkallade som spelade som standard. Tränaren kan markera återbud eller frånvaro individuellt.
 - Endast ett faktiskt genomfört extra inhopp ökar spelarens inhoppsräknare.
 - Förfrågningar och avböjanden registreras inte i MVP.
@@ -35,9 +35,10 @@ Nivån används för att skapa balanserade matchtrupper och får inte påverka h
 
 Prioriteringsordning för extra inhopp:
 
-1. Färst genomförda extra inhopp.
-2. Längst tid sedan senaste genomförda extra inhopp.
-3. Säsongens fasta, reproducerbara rotationsordning som sista utslagsregel.
+1. Lägst antal genomförda extra inhopp.
+2. Lägst antal ordinarie matcher.
+3. Längst tid sedan senaste genomförda extra inhopp.
+4. Säsongens fasta, reproducerbara rotationsordning som sista utslagsregel.
 
 Tränaren kan alltid välja en annan tillgänglig spelare än den som appen rekommenderar.
 

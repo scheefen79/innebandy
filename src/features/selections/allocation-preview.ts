@@ -66,6 +66,7 @@ export const allocationErrorText: Record<AllocationError["code"], string> = {
   DUPLICATE_ROTATION_ORDER: "Två spelare har samma rotationsplats.",
   INVALID_BASELINE_COUNT: "Matchhistoriken innehåller ett ogiltigt antal.",
   INVALID_EXTRA_COUNT: "Historiken för extra inhopp är ogiltig.",
+  INVALID_REGULAR_COUNT: "Historiken för ordinarie matcher är ogiltig.",
   INVALID_MATCH_ORDER: "Matchordningen är ogiltig.",
   INVALID_HISTORY_DATE: "Historiken innehåller ett ogiltigt datum.",
   INCONSISTENT_EXTRA_HISTORY: "Historiken för extra inhopp är inkonsekvent.",

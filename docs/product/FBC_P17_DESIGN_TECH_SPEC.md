@@ -366,9 +366,10 @@ Extra inhopp hanteras separat från ordinarie matchfördelning.
 
 Prioriteringsordning:
 
-1. färst genomförda extra inhopp
-2. längst tid sedan senaste genomförda extra inhopp
-3. säsongens fasta, reproducerbara rotationsordning
+1. lägst antal genomförda extra inhopp
+2. lägst antal ordinarie matcher
+3. längst tid sedan senaste genomförda extra inhopp
+4. säsongens fasta, reproducerbara rotationsordning
 
 Spelarnivå påverkar inte rekommendationen. Tränaren kan alltid välja en annan tillgänglig spelare. Endast ett faktiskt genomfört inhopp ökar räknaren; förfrågningar och avböjanden lagras inte i MVP.
 
@@ -896,7 +897,7 @@ Undvik tekniska termer i gränssnittet.
 - nivåerna fördelas balanserat
 - manuell ändring är möjlig
 - ordinarie matcher och extra inhopp redovisas och fördelas separat
-- extra inhopp rekommenderas efter färst genomförda inhopp och längst väntetid, utan hänsyn till nivå
+- extra inhopp rekommenderas efter lägst antal genomförda inhopp, därefter lägst antal ordinarie matcher och längst väntetid, utan hänsyn till nivå
 - samma input ger samma automatiska fördelning
 - manuella ändringar bevaras vid omfördelning
 

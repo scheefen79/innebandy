@@ -25,9 +25,11 @@ Tränaren ska kunna ta bort en planerad extra inhoppare före matchstart. Förfr
 
 - Ordinarie uttagningar och extra inhopp är två oberoende rättvisesystem.
 - Kandidater rangordnas med Implementation 02:s deterministiska extrafunktion:
-  1. färst genomförda extra inhopp
-  2. längst tid sedan senaste genomförda extra inhopp
-  3. säsongens fasta `rotation_order`
+  1. lägst antal genomförda extra inhopp
+  2. lägst antal ordinarie matcher
+  3. längst tid sedan senaste genomförda extra inhopp
+  4. säsongens fasta `rotation_order`
+- Det ordinarie antalet används endast när spelarna har lika många genomförda extra inhopp. Separata extraräknare är därför fortfarande det primära rättvisekriteriet.
 - Spelarnivå används inte och visas inte som skäl för rekommendationen.
 - Endast `extra`-rader i genomförda matcher där `played=true` räknas i historiken.
 - `lastCompletedExtraAt` hämtas kanoniskt från den senaste räknade matchens `starts_at`, inte från uttagningsradens `created_at`, `updated_at` eller tidpunkten då deltagandet sparades.
@@ -79,7 +81,7 @@ Extra raden ökar inte matchens `target_players`, ersätter ingen ordinarie plat
 
 - Matchdetaljen visar `Lägg till extra inhoppare` för framtida planerade matcher med sparad ordinarie uttagning.
 - Kandidatvyn visar en tydligt märkt rekommendation först och därefter övriga valbara spelare i rättvis ordning.
-- Varje kandidat visar namn och genomförda extra inhopp. Vid behov visas kort text om väntetid, men ingen nivå.
+- Varje kandidat visar namn, ordinarie matcher och genomförda extra inhopp. Vid behov visas kort text om väntetid, men ingen nivå.
 - Tränaren väljer en spelare och ser en sammanfattning före bekräftelse.
 - Matchdetaljen visar sparade spelare under en separat rubrik `Extra inhoppare`.
 - Varje planerad extra inhoppare kan tas bort efter tydlig bekräftelse.
@@ -99,9 +101,9 @@ Extra raden ökar inte matchens `target_players`, ersätter ingen ordinarie plat
 
 ### Domän och data
 
-- Kandidater rangordnas efter genomförda extra inhopp, väntetid och `rotation_order` i den ordningen.
+- Kandidater rangordnas efter genomförda extra inhopp, ordinarie matcher, väntetid och `rotation_order` i den ordningen.
 - Väntetiden använder `starts_at` från spelarens senaste genomförda match med `extra/played=true`, även om uttagningsradens skapande eller uppdatering skedde vid en annan tidpunkt.
-- Ordinarie historik och spelarnivå påverkar inte extrarekommendationen.
+- Ordinarie matcher används som sekundärt rättvisekriterium; spelarnivå påverkar inte extrarekommendationen.
 - Endast faktiskt genomförda `extra/played=true`-rader påverkar historiken.
 - En vald kandidat sparas exakt en gång som planerad extra och förändrar inga ordinarie rader eller `target_players`.
 - Inaktiv, redan uttagen, manuellt borttagen eller redan extra spelare kan inte läggas till.
@@ -130,7 +132,7 @@ Extra raden ökar inte matchens `target_players`, ersätter ingen ordinarie plat
 
 1. `git diff --check`, lint, typkontroll, Vitest och produktionsbygge.
 2. Deterministiska tester för extrarankning, inklusive nollhistorik, olika antal, väntetid från matchens `starts_at` och rotationsordning; radens egna tidsstämplar ska inte påverka ordningen.
-3. Tester som visar att ordinarie historik och nivå inte påverkar resultatet.
+3. Tester som visar att ordinarie antal endast bryter lika extrahistorik och att nivå inte påverkar resultatet.
 4. pgTAP för kanonisk historikkälla, radform, grants, serverroll, medlemskap, matchstatus, kandidatregler och atomisk rollback.
 5. Databasnära samtidighetstest för dubbelt tillägg samt tillägg mot samtidig borttagning.
 6. Test som visar att idempotent sluttillstånd prövas före stale och att ändrad historik inte stoppar ett fortfarande valbart manuellt val.

@@ -2,6 +2,7 @@
 
 - Status: Accepterad
 - Datum: 2026-08-21
+- Ändrad: 2026-08-24
 
 ## Kontext
 
@@ -11,7 +12,7 @@ Tränarna behöver fylla tillfälliga luckor utan att ge samma spelare alla extr
 
 - En planerad extra inhoppare lagras som en egen `match_players`-rad med `extra/manual/selected`, `played=false` och utan `replaced_player_id`.
 - Extra raden ligger utanför matchens ordinarie `target_players` och förändrar eller ersätter aldrig en ordinarie plats.
-- Kandidatordningen byggs server-side från endast genomförda extra inhopp och använder ADR-005:s deterministiska extrafunktion. Den senaste genomförda extratidpunkten är den räknade matchens `starts_at`; uttagningsradens revisionsfält eller tiden då deltagandet sparades används inte. Nivå och ordinarie historik ingår inte.
+- Kandidatordningen byggs server-side och använder ADR-005:s deterministiska extrafunktion. Lägst antal genomförda extra inhopp är första kriterium. Vid lika extrahistorik prioriteras lägst antal ordinarie matcher, därefter längst väntetid och fast rotationsordning. Den senaste genomförda extratidpunkten är den räknade matchens `starts_at`; uttagningsradens revisionsfält eller tiden då deltagandet sparades används inte. Nivå ingår inte.
 - Kandidaten måste vara aktiv i samma lag och aktiva säsong och får inte ha någon uttagningsrad i matchen. Den regeln är starkare än enbart ”inte uttagen” eftersom datamodellen har `unique(match_id, player_id)` och ett manuellt borttaget ordinarie beslut ska förbli entydigt.
 - Tränaren får välja en annan valbar kandidat än den högst rankade. Valet lagras först vid bekräftelse; förfrågningar och avböjanden lagras inte.
 - Lägg till och ta bort är separata atomiska server-only-funktioner med samma sessions-, medlemskaps-, stale- och låsmönster som ADR-007 och ADR-008. Match- och spelar-id identifierar operationens mål entydigt. Kontrollordningen är lås, behörighet/målidentitet, actionspecifika domänvillkor, exakt sluttillstånd, stale-fingeravtryck och sist mutation. Identiska giltiga retries konvergerar därmed utan dubblett eller falskt stale-fel, men en genomförd, inställd eller passerad match kan aldrig godkännas som idempotent. Add kräver aktiv spelare även vid retry; remove får ta bort en befintlig planerad extra rad för en spelare som hunnit bli inaktiv.
@@ -21,7 +22,7 @@ Tränarna behöver fylla tillfälliga luckor utan att ge samma spelare alla extr
 
 ## Konsekvenser
 
-- Extra rättvisa kan förklaras och testas oberoende av ordinarie rättvisa.
+- Extra rättvisa styrs primärt av en separat extraräknare; ordinarie antal används endast för att bryta lika extrahistorik.
 - En planerad extra spelare påverkar inte historiken förrän deltagandet faktiskt sparas.
 - Flera extra inhoppare kan registreras till samma match utan att matchens ordinarie target förändras.
 - En manuellt borttagen ordinarie spelare visas inte som extrakandidat i samma match. Om produkten senare ska stödja det krävs en förändrad unikhets- och beslutmodell.

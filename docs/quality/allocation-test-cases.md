@@ -48,11 +48,17 @@ Förväntat:
 
 ## Extra inhopp
 
-### E1: Färst inhopp prioriteras
+### E1: Lägst antal inhopp prioriteras
 
 Givet spelare A med 0, B med 1 och C med 2 genomförda extra inhopp.
 
 Förväntat: A rekommenderas först oberoende av spelarnivå.
+
+### E1b: Ordinarie antal bryter lika extrahistorik
+
+Givet två spelare med lika många genomförda extra inhopp men 4 respektive 5 ordinarie matcher.
+
+Förväntat: spelaren med 4 ordinarie matcher rekommenderas först.
 
 ### E2: Längst väntetid avgör lika antal
 

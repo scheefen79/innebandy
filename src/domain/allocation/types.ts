@@ -51,6 +51,7 @@ export type AllocationErrorCode =
   | "DUPLICATE_ROTATION_ORDER"
   | "INVALID_BASELINE_COUNT"
   | "INVALID_EXTRA_COUNT"
+  | "INVALID_REGULAR_COUNT"
   | "INVALID_MATCH_ORDER"
   | "INVALID_HISTORY_DATE"
   | "INCONSISTENT_EXTRA_HISTORY"
@@ -84,6 +85,7 @@ export type RegularAllocationResult =
 export type ExtraCandidate = {
   id: string;
   completedExtraCount: number;
+  regularCount: number;
   lastCompletedExtraAt: string | null;
   rotationOrder: number;
 };

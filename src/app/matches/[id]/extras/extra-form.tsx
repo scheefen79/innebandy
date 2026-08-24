@@ -14,10 +14,10 @@ export function ExtraForm({ action, candidates, fingerprint }: {
     <input type="hidden" name="fingerprint" value={fingerprint} />
     <fieldset>
       <legend className="text-lg font-semibold text-slate-950">Välj extra inhoppare</legend>
-      <p className="mt-1 text-sm text-slate-600">Rekommendationen bygger bara på genomförda extra inhopp.</p>
+      <p className="mt-1 text-sm text-slate-600">Rekommendationen prioriterar lägst antal extra inhopp och därefter lägst antal ordinarie matcher.</p>
       <div className="mt-4 space-y-2">{candidates.map((candidate) => <label key={candidate.id} className="flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 has-[:checked]:border-blue-700 has-[:checked]:bg-blue-50">
         <input required type="radio" name="playerId" value={candidate.id} checked={playerId === candidate.id} onChange={() => setPlayerId(candidate.id)} className="h-5 w-5" />
-        <span className="min-w-0 flex-1"><span className="block truncate font-medium text-slate-900">{candidate.name}</span><span className="mt-1 block text-xs text-slate-600">{candidate.completedExtraCount} genomförda extra inhopp</span></span>
+        <span className="min-w-0 flex-1"><span className="block truncate font-medium text-slate-900">{candidate.name}</span><span className="mt-1 block text-xs text-slate-600">Ordinarie matcher: {candidate.regularCount} · Extra inhopp: {candidate.completedExtraCount}</span></span>
         {candidate.recommended ? <span className="shrink-0 rounded-full bg-emerald-50 px-2 py-1 text-xs font-semibold text-emerald-800">Rekommenderad</span> : null}
       </label>)}</div>
     </fieldset>

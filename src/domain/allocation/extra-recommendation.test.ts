@@ -4,7 +4,7 @@ import { recommendExtraPlayers } from "./extra-recommendation";
 import { extraCandidate } from "./test-builders";
 
 describe("recommendExtraPlayers", () => {
-  it("prioriterar färst genomförda extra inhopp", () => {
+  it("prioriterar lägst antal genomförda extra inhopp", () => {
     const result = recommendExtraPlayers({
       eligibleCandidates: [
         extraCandidate("p1", { completedExtraCount: 1 }),
@@ -14,6 +14,28 @@ describe("recommendExtraPlayers", () => {
     });
 
     expect(result).toEqual({ ok: true, candidateIds: ["p2", "p1", "p3"] });
+  });
+
+  it("prioriterar lägst antal ordinarie matcher vid lika många extra inhopp", () => {
+    const result = recommendExtraPlayers({
+      eligibleCandidates: [
+        extraCandidate("p1", { regularCount: 5 }),
+        extraCandidate("p2", { regularCount: 4 }),
+      ],
+    });
+
+    expect(result).toEqual({ ok: true, candidateIds: ["p2", "p1"] });
+  });
+
+  it("låter lägst antal extra inhopp väga tyngre än ordinarie matcher", () => {
+    const result = recommendExtraPlayers({
+      eligibleCandidates: [
+        extraCandidate("p1", { completedExtraCount: 0, regularCount: 5 }),
+        extraCandidate("p2", { completedExtraCount: 1, regularCount: 4 }),
+      ],
+    });
+
+    expect(result).toEqual({ ok: true, candidateIds: ["p1", "p2"] });
   });
 
   it("prioriterar den som väntat längst vid lika antal", () => {
@@ -97,6 +119,7 @@ describe("recommendExtraPlayers", () => {
       eligibleCandidates: [
         extraCandidate("p1", {
           completedExtraCount: -1,
+          regularCount: -1,
           lastCompletedExtraAt: "inte-ett-datum",
           rotationOrder: 0,
         }),
@@ -111,6 +134,7 @@ describe("recommendExtraPlayers", () => {
         "DUPLICATE_PLAYER_ID",
         "DUPLICATE_ROTATION_ORDER",
         "INVALID_EXTRA_COUNT",
+        "INVALID_REGULAR_COUNT",
         "INVALID_HISTORY_DATE",
         "INVALID_ROTATION_ORDER",
       ]),
