@@ -9,13 +9,13 @@ Detaljerat föreslaget scope och acceptanskriterier finns i `docs/planning/imple
 ## Leverabler
 
 - [x] Implementation 09 granskad och godkänd.
-- [ ] Kanoniskt, behörighetskontrollerat översiktsunderlag implementerat.
-- [ ] Nästa match och kommande matcher implementerade.
-- [ ] Ordinarie rättvisefördelning implementerad utan att extra inhopp blandas in.
-- [ ] `/` används för Översikt och spelarlistan har en stabil `/players`-route.
-- [ ] Loading, empty, error och populated states verifierade.
+- [x] Kanoniskt, behörighetskontrollerat översiktsunderlag implementerat.
+- [x] Nästa match och kommande matcher implementerade.
+- [x] Ordinarie rättvisefördelning implementerad utan att extra inhopp blandas in.
+- [x] `/` används för Översikt och spelarlistan har en stabil `/players`-route.
+- [x] Loading, empty, error och populated states verifierade.
 - [ ] Lokal användarresa och 390 px-layout verifierade.
-- [ ] Oberoende skrivskyddad agentgranskning genomförd.
+- [x] Oberoende skrivskyddad agentgranskning genomförd.
 
 ## Rekommenderad ordning
 
