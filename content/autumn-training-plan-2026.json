@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "blocks": [
+    {"block":1,"focus":"Passning och spelbarhet","message":"PASSA → FLYTTA → VISA DIG","dates":["2026-09-05","2026-09-07","2026-09-12","2026-09-14","2026-09-19","2026-09-21"],"monday":["Dragpassningar","Passa och flytta","Passning till nedfälld bänk","Passa 4 mot 2","3 mot 3"],"saturday":["Passningsleken","Passning och mottagning i rörelse","Passning till nedfälld bänk","Spelbarhet – innebandydoppboll","3 mot 3"]},
+    {"block":2,"focus":"Bollkontroll och utmana","message":"BLICKEN UPP → UTMANA → BYT RIKTNING","dates":["2026-09-26","2026-09-28","2026-10-03","2026-10-05","2026-10-10","2026-10-12"],"monday":["Bollkontroll och vickningar","Vända och byta riktning","Driva, utmana och avsluta","1 mot 1","4-målsmatchen"],"saturday":["Bollkontroll","Driva boll med riktningsförändringar","Färgbollen","1 mot 1 / 2 mot 2","3 mot 3 smålagsspel"]},
+    {"block":3,"focus":"Avslut och göra mål","message":"HITTA LÄGET → SIKTA → AVSLUTA","dates":["2026-10-17","2026-10-19","2026-10-24","2026-11-02","2026-11-07","2026-11-09"],"monday":["Grundläggande avslut","Skottormen","Driva boll och avsluta","2 mot 1","Målen i mitten"],"saturday":["Avslut efter passning","Direktskott","Passa, få tillbaka, avsluta","Avslutsövning","3 mot 3 med snabba avslut"]},
+    {"block":4,"focus":"Försvar och vinna boll","message":"NÄRA → BROMSA → VINN BOLLEN","dates":["2026-11-14","2026-11-16","2026-11-21","2026-11-23","2026-11-28","2026-11-30"],"monday":["Fotarbete och spegelövning","Styra bollförare","1 mot 1 längs sarg","Sargduell","3 mot 3 med aktiv press"],"saturday":["Spegelövning","1 mot 1 – skydda och vinn boll","Press och bollvinst","Press- och duellövning","3 mot 3 med pressfokus"]},
+    {"block":5,"focus":"Använd allt i spel","message":"SPELA → BESLUTA → HA KUL","dates":["2026-12-05","2026-12-07","2026-12-12"],"monday":["Passningschallenge","1 mot 1-challenge","Skottchallenge","2 mot 2 eller 3 mot 3","3 mot 3 med varierade regler"],"saturday":["Bollkontrollschallenge","Passningschallenge","Skottchallenge","3 mot 3","3 mot 3-turnering"]}
+  ]
+}

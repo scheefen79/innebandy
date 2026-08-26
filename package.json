@@ -21,6 +21,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "release:preflight": "bash scripts/release-preflight.sh"
+    ,"training:bootstrap": "node --env-file=.env.local scripts/bootstrap-training-plan.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.4",

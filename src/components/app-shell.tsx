@@ -3,13 +3,14 @@ import Link from "next/link";
 
 type AppShellProps = {
   children: ReactNode;
-  currentItem?: "Översikt" | "Matcher" | "Spelare";
+  currentItem?: "Översikt" | "Matcher" | "Spelare" | "Träningar";
 };
 
 const navigation = [
   { href: "/", label: "Översikt" },
   { href: "/matches", label: "Matcher" },
   { href: "/players", label: "Spelare" },
+  { href: "/trainings", label: "Träningar" },
 ] as const;
 
 export function AppShell({ children, currentItem = "Översikt" }: AppShellProps) {
@@ -74,7 +75,7 @@ export function AppShell({ children, currentItem = "Översikt" }: AppShellProps)
         aria-label="Huvudnavigation"
         className="fixed inset-x-0 bottom-0 border-t border-slate-200 bg-white md:hidden"
       >
-        <ul className="mx-auto grid max-w-lg grid-cols-3">
+        <ul className="mx-auto grid max-w-lg grid-cols-4">
           {navigation.map((item) => (
             <li key={item.label}>
               <Link
