@@ -1,7 +1,7 @@
 begin;
 create extension if not exists pgtap with schema extensions;
 set local search_path=public,extensions;
-select plan(7);
+select plan(8);
 
 insert into auth.users(id,email) values('f1000000-0000-4000-8000-000000000001','content-coach@example.test');
 insert into teams(id,name,slug) values('f2000000-0000-4000-8000-000000000001','Content team','content-team');
@@ -19,10 +19,11 @@ set local role authenticated;set local request.jwt.claim.sub='f1000000-0000-4000
 select throws_ok($$select enrich_training_items('f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001','[]')$$,'42501','permission denied for function enrich_training_items','client cannot enrich content');
 
 reset role;set local role service_role;set local request.jwt.claims='{"role":"service_role"}';
-select results_eq($$select enrich_training_items('f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001','[{"title":"Dragpassningar","purpose":"Säkra passningar och mottagningar.","instructions":"Arbeta parvis med passningar längs golvet och flytta efter varje passning.","coachingPoints":["Blicken upp","Mjuk mottagning"],"sourceUrl":"https://innebandy.se/ovningsbanken/dragpassningar","sourceImageUrl":"https://innebandy.se/media/test.png"}]')$$,array[1],'one untouched item enriched');
+select results_eq($$select enrich_training_items('f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001','[{"title":"Dragpassningar","sourceTitle":"Dragpassningar","purpose":"Säkra passningar och mottagningar.","instructions":"Arbeta parvis med passningar längs golvet och flytta efter varje passning.","coachingPoints":["Blicken upp","Mjuk mottagning"],"sourceUrl":"https://innebandy.se/ovningsbanken/dragpassningar","sourceImageUrl":"https://innebandy.se/media/test.png"}]')$$,array[1],'one untouched item enriched');
 select results_eq($$select purpose from training_items where training_session_id='f4000000-0000-4000-8000-000000000001'$$,array['Säkra passningar och mottagningar.'],'purpose updated');
 select results_eq($$select source_image_url from training_items where training_session_id='f4000000-0000-4000-8000-000000000001'$$,array['https://innebandy.se/media/test.png'],'image source updated');
+select results_eq($$select source_title from training_items where training_session_id='f4000000-0000-4000-8000-000000000001'$$,array['Dragpassningar'],'source title updated');
 select results_eq($$select instructions from training_items where training_session_id='f4000000-0000-4000-8000-000000000002'$$,array['Tränarens egen text'],'edited plan is preserved');
-select results_eq($$select enrich_training_items('f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001','[{"title":"Dragpassningar","purpose":"Säkra passningar och mottagningar.","instructions":"Arbeta parvis med passningar längs golvet och flytta efter varje passning.","coachingPoints":["Blicken upp","Mjuk mottagning"],"sourceUrl":"https://innebandy.se/ovningsbanken/dragpassningar","sourceImageUrl":"https://innebandy.se/media/test.png"}]')$$,array[0],'repeat is idempotent');
-select throws_ok($$select enrich_training_items('f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001','[{"title":"X","purpose":"X","instructions":"X","coachingPoints":[],"sourceUrl":"https://example.com/x","sourceImageUrl":""}]')$$,'P0001','INVALID_TRAINING_CONTENT','untrusted source rejected');
+select results_eq($$select enrich_training_items('f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001','[{"title":"Dragpassningar","sourceTitle":"Dragpassningar","purpose":"Säkra passningar och mottagningar.","instructions":"Arbeta parvis med passningar längs golvet och flytta efter varje passning.","coachingPoints":["Blicken upp","Mjuk mottagning"],"sourceUrl":"https://innebandy.se/ovningsbanken/dragpassningar","sourceImageUrl":"https://innebandy.se/media/test.png"}]')$$,array[1],'repeat reapplies audited content safely');
+select throws_ok($$select enrich_training_items('f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001','[{"title":"X","sourceTitle":"X","purpose":"X","instructions":"X","coachingPoints":[],"sourceUrl":"https://example.com/x","sourceImageUrl":""}]')$$,'P0001','INVALID_TRAINING_CONTENT','untrusted source rejected');
 select * from finish();rollback;

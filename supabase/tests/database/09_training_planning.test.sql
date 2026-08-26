@@ -1,7 +1,7 @@
 begin;
 create extension if not exists pgtap with schema extensions;
 set local search_path=public,extensions;
-select plan(22);
+select plan(23);
 select has_table('public','training_sessions','training_sessions exists');
 select has_table('public','training_items','training_items exists');
 select col_type_is('public','training_sessions','starts_at','timestamp with time zone','starts_at is timezone aware');
@@ -29,10 +29,11 @@ select results_eq($$select count(*) from training_sessions$$,array[0::bigint],'o
 select throws_ok($$select get_training_plan('e2000000-0000-4000-8000-000000000001','e3000000-0000-4000-8000-000000000001','e4000000-0000-4000-8000-000000000001')$$,'42501','NOT_AUTHORIZED','outsider RPC denied');
 
 reset role;set local role service_role;set local request.jwt.claims='{"role":"service_role"}';
-select results_eq($$select save_training_plan('e1000000-0000-4000-8000-000000000001','e2000000-0000-4000-8000-000000000001','e3000000-0000-4000-8000-000000000001','e4000000-0000-4000-8000-000000000001',1,'save-1','Nytt fokus','NYTT','Anteckning','planned','[{"section":"technique","title":"Ny övning","guideMinutes":15,"coachingPoints":["Titta upp"]}]')$$,array[2],'valid save increments revision');
-select results_eq($$select save_training_plan('e1000000-0000-4000-8000-000000000001','e2000000-0000-4000-8000-000000000001','e3000000-0000-4000-8000-000000000001','e4000000-0000-4000-8000-000000000001',1,'save-1','Nytt fokus','NYTT','Anteckning','planned','[{"section":"technique","title":"Ny övning","guideMinutes":15,"coachingPoints":["Titta upp"]}]')$$,array[2],'exact retry is idempotent');
+select results_eq($$select save_training_plan('e1000000-0000-4000-8000-000000000001','e2000000-0000-4000-8000-000000000001','e3000000-0000-4000-8000-000000000001','e4000000-0000-4000-8000-000000000001',1,'save-1','Nytt fokus','NYTT','Anteckning','planned','[{"section":"technique","title":"Ny övning","guideMinutes":15,"coachingPoints":["Titta upp"],"sourceTitle":"Originalövning"}]')$$,array[2],'valid save increments revision');
+select results_eq($$select save_training_plan('e1000000-0000-4000-8000-000000000001','e2000000-0000-4000-8000-000000000001','e3000000-0000-4000-8000-000000000001','e4000000-0000-4000-8000-000000000001',1,'save-1','Nytt fokus','NYTT','Anteckning','planned','[{"section":"technique","title":"Ny övning","guideMinutes":15,"coachingPoints":["Titta upp"],"sourceTitle":"Originalövning"}]')$$,array[2],'exact retry is idempotent');
 select results_eq($$select focus||':'||status::text||':'||revision from training_sessions where id='e4000000-0000-4000-8000-000000000001'$$,array['Nytt fokus:planned:2'],'save updates session');
 select results_eq($$select title from training_items where training_session_id='e4000000-0000-4000-8000-000000000001'$$,array['Ny övning'],'save atomically replaces items');
+select results_eq($$select source_title from training_items where training_session_id='e4000000-0000-4000-8000-000000000001'$$,array['Originalövning'],'save preserves source title');
 select throws_ok($$select save_training_plan('e1000000-0000-4000-8000-000000000001','e2000000-0000-4000-8000-000000000001','e3000000-0000-4000-8000-000000000001','e4000000-0000-4000-8000-000000000001',1,'save-stale','Stale','X','','planned','[]')$$,'P0001','STALE_TRAINING_PLAN','stale revision rejected');
 select throws_ok($$select save_training_plan('e1000000-0000-4000-8000-000000000001','e2000000-0000-4000-8000-000000000001','e3000000-0000-4000-8000-000000000001','e4000000-0000-4000-8000-000000000001',2,'save-invalid','X','X','','planned','[{"section":"technique","title":"X","coachingPoints":[{"bad":true}]}]')$$,'P0001','INVALID_TRAINING_PLAN','invalid coaching points rejected');
 select results_eq($$select save_training_plan('e1000000-0000-4000-8000-000000000001','e2000000-0000-4000-8000-000000000001','e3000000-0000-4000-8000-000000000001','e4000000-0000-4000-8000-000000000001',2,'save-2','Nytt fokus','NYTT','Anteckning','completed','[]')$$,array[3],'planned can become completed');
