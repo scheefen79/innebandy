@@ -2,7 +2,7 @@
 
 ## Status
 
-Applikationsstacken är accepterad i ADR-001. Detaljerade beslut för behörighet, uttagningsmodell, autentisering, fördelningsmotor, matchgrund, atomisk persistens, manuella ordinarie byten, planerade extra inhoppare, atomisk matchcompletion, atomisk spelarhantering samt produktionsmiljö och releasegräns finns i ADR-002 till ADR-012. Föreslagen modell för gemensam träningsplanering finns i ADR-013.
+Applikationsstacken är accepterad i ADR-001. Detaljerade beslut för behörighet, uttagningsmodell, autentisering, fördelningsmotor, matchgrund, atomisk persistens, manuella ordinarie byten, planerade extra inhoppare, atomisk matchcompletion, atomisk spelarhantering samt produktionsmiljö och releasegräns finns i ADR-002 till ADR-012. Gemensam träningsplanering finns i ADR-013 och källhostade övningsbilder i ADR-014.
 
 ## Systemgräns
 
@@ -67,3 +67,4 @@ PostgreSQL lagrar projektets tillstånd. Supabase Auth identifierar tränaren oc
 - ADR-011: atomisk spelarhantering och spelarhistorik
 - ADR-012: produktionsmiljöer och releasegräns
 - ADR-013: delade träningsplaner som självständiga tillfällen
+- ADR-014: källhostade övningsbilder med attribution
