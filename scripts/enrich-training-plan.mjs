@@ -11,7 +11,7 @@ const catalog=JSON.parse(await fs.readFile(new URL("../content/training-exercise
 const exercises=Object.entries(catalog.aliases).map(([title,sourceKey])=>{
   const source=catalog.sources[sourceKey];
   if(!source)throw new Error(`Källa saknas för ${title}.`);
-  return {title,purpose:source.purpose,instructions:source.instructions,coachingPoints:source.coachingPoints,sourceUrl:source.url,sourceImageUrl:source.imageUrl??""};
+  return {title,sourceTitle:catalog.sourceTitles[sourceKey],purpose:source.purpose,instructions:source.instructions,coachingPoints:source.coachingPoints,sourceUrl:source.url,sourceImageUrl:source.imageUrl??""};
 });
 const supabase=createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false}});
 const {data:team,error:teamError}=await supabase.from("teams").select("id").eq("slug",teamSlug).single();

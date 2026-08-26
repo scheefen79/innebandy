@@ -9,7 +9,7 @@ Tränarna behöver övningsbilder i planeringen. Bilderna kommer från Svensk In
 
 ## Beslut
 
-Appen lagrar originalsidans URL och en HTTPS-adress till den statiska bilden på `innebandy.se`. Bilden visas med attribution och en tydlig länk till originalövningen. Endast värddomänen `innebandy.se/media/**` tillåts av bildkomponenten och berikningsfunktionen.
+Appen lagrar originalsidans officiella titel, URL och en HTTPS-adress till den statiska bilden på `innebandy.se`. Bilden visas med attribution och en tydlig länk till originalövningen. Den officiella titeln gör skillnaden mellan vår planerade variant och källövningen synlig. Endast värddomänen `innebandy.se/media/**` tillåts av bildkomponenten och berikningsfunktionen.
 
 Om en övning saknar statisk originalbild visas text och källänk utan tom bildyta. Nyskrivna instruktioner lagras lokalt; källans längre beskrivning kopieras inte.
 

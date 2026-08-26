@@ -11,7 +11,9 @@ describe("training exercise content",()=>{
   expect(Object.keys(catalog.aliases).sort()).toEqual([...titles].sort());
   for(const title of titles){
    const source=catalog.sources[catalog.aliases[title]];
+   const sourceTitle=catalog.sourceTitles[catalog.aliases[title]];
    expect(source,`source for ${title}`).toBeTruthy();
+   expect(sourceTitle,`source title for ${title}`).toBeTruthy();
    expect(source.url).toMatch(/^https:\/\/innebandy\.se\/ovningsbanken\//);
    expect(source.purpose.length).toBeGreaterThan(20);
    expect(source.instructions.length).toBeGreaterThan(80);

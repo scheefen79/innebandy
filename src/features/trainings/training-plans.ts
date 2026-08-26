@@ -2,7 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 
 export type TrainingStatus="draft"|"planned"|"completed";
 export type TrainingSection="gathering"|"warmup"|"technique"|"match_exercise"|"closing";
-export type TrainingItem={id:string;section:TrainingSection;position:number;title:string;guideMinutes:number|null;purpose:string|null;instructions:string|null;coachingPoints:string[];sourceUrl:string|null;sourceImageUrl:string|null};
+export type TrainingItem={id:string;section:TrainingSection;position:number;title:string;guideMinutes:number|null;purpose:string|null;instructions:string|null;coachingPoints:string[];sourceTitle?:string|null;sourceUrl:string|null;sourceImageUrl:string|null};
 export type TrainingSummary={id:string;startsAt:string;endsAt:string;themeBlock:number;focus:string;keyMessage:string;status:TrainingStatus;revision:number;updatedAt:string;updatedBy:string};
 export type TrainingPlan=TrainingSummary&{coachNotes:string|null;items:TrainingItem[]};
 
@@ -28,7 +28,7 @@ export async function loadTrainingPlan(supabase:SupabaseClient,teamId:string,sea
  const {data,error}=await supabase.rpc("get_training_plan",{target_team_id:teamId,target_season_id:seasonId,target_training_id:trainingId});
  if(error||!data||typeof data!=="object"||Array.isArray(data))throw new Error("Det gick inte att hämta träningsplanen.");
  const raw=data as Record<string,unknown>; if(!Array.isArray(raw.items))throw new Error("Träningsunderlaget är ogiltigt.");
- const items=raw.items.map((value,index)=>{const item=value as Record<string,unknown>;const section=text(item.section) as TrainingSection;const coachingPoints=Array.isArray(item.coachingPoints)?item.coachingPoints.map(text).filter(Boolean):[];const parsed={id:text(item.id),section,position:Number(item.position),title:text(item.title),guideMinutes:item.guideMinutes===null?null:Number(item.guideMinutes),purpose:nullableText(item.purpose),instructions:nullableText(item.instructions),coachingPoints,sourceUrl:nullableText(item.sourceUrl),sourceImageUrl:nullableText(item.sourceImageUrl)};if(!parsed.id||!parsed.title||!sections.has(section)||parsed.position!==index+1)throw new Error("Träningsunderlaget är ogiltigt.");return parsed;});
+ const items=raw.items.map((value,index)=>{const item=value as Record<string,unknown>;const section=text(item.section) as TrainingSection;const coachingPoints=Array.isArray(item.coachingPoints)?item.coachingPoints.map(text).filter(Boolean):[];const parsed={id:text(item.id),section,position:Number(item.position),title:text(item.title),guideMinutes:item.guideMinutes===null?null:Number(item.guideMinutes),purpose:nullableText(item.purpose),instructions:nullableText(item.instructions),coachingPoints,sourceTitle:nullableText(item.sourceTitle),sourceUrl:nullableText(item.sourceUrl),sourceImageUrl:nullableText(item.sourceImageUrl)};if(!parsed.id||!parsed.title||!sections.has(section)||parsed.position!==index+1)throw new Error("Träningsunderlaget är ogiltigt.");return parsed;});
  return {...parseSummary(raw),coachNotes:nullableText(raw.coachNotes),items};
 }
 
