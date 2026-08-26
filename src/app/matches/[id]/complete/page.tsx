@@ -5,6 +5,7 @@ import { loadMatch } from "@/features/matches/load-matches";
 import { loadMatchCompletionSource } from "@/features/selections/match-completion";
 import { loadMatchRoster } from "@/features/selections/load-match-roster";
 import { loadTeamContext } from "@/lib/auth/team-context";
+import { getVerifiedUserId } from "@/lib/auth/verified-user";
 import { createClient } from "@/lib/supabase/server";
 import { CompletionForm } from "./completion-form";
 
@@ -13,8 +14,8 @@ export const dynamic = "force-dynamic";
 export default async function CompleteMatchPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ error?: string }> }) {
   const { id } = await params;
   const supabase = await createClient();
-  const { data } = await supabase.auth.getClaims();
-  if (!data?.claims?.sub) redirect(`/login?next=${encodeURIComponent(`/matches/${id}/complete`)}`);
+  const userId = await getVerifiedUserId();
+  if (!userId) redirect(`/login?next=${encodeURIComponent(`/matches/${id}/complete`)}`);
   const context = await loadTeamContext(supabase);
   if (!context) redirect("/access-denied");
   const match = await loadMatch(supabase, context.teamId, context.seasonId, id);

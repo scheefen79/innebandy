@@ -8,6 +8,7 @@ import { loadMatchRoster } from "@/features/selections/load-match-roster";
 import { loadExtraSubstituteSource, shouldLoadExtraSubstituteSource } from "@/features/selections/extra-substitute";
 import { loadManualAdjustmentFingerprint } from "@/features/selections/manual-adjustment";
 import { loadTeamContext } from "@/lib/auth/team-context";
+import { getVerifiedUserId } from "@/lib/auth/verified-user";
 import { createClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
@@ -15,8 +16,8 @@ export const dynamic = "force-dynamic";
 export default async function MatchPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ tab?: string; adjustment?: string; extra?: string; completion?: string }> }) {
   const { id } = await params;
   const supabase = await createClient();
-  const { data } = await supabase.auth.getClaims();
-  if (!data?.claims?.sub) redirect(`/login?next=${encodeURIComponent(`/matches/${id}`)}`);
+  const userId = await getVerifiedUserId();
+  if (!userId) redirect(`/login?next=${encodeURIComponent(`/matches/${id}`)}`);
   const context = await loadTeamContext(supabase);
   if (!context) redirect("/access-denied");
   const match = await loadMatch(supabase, context.teamId, context.seasonId, id);

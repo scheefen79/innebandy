@@ -5,8 +5,11 @@ const state = vi.hoisted(() => ({ authenticated: true, result: "ok" as "ok" | "s
 const mutate = vi.hoisted(() => vi.fn());
 vi.mock("@/lib/supabase/route-handler", () => ({ createRouteHandlerClient: () => ({
   applyAuthState: (response: Response) => response,
-  supabase: { auth: { getClaims: async () => ({ data: state.authenticated ? { claims: { sub: "a1000000-0000-4000-8000-000000000001" } } : null }) } },
+  supabase: {},
 }) }));
+vi.mock("@/lib/auth/verified-user", () => ({
+  getVerifiedUserId: async () => (state.authenticated ? "a1000000-0000-4000-8000-000000000001" : null),
+}));
 vi.mock("@/lib/auth/team-context", () => ({ loadTeamContext: async () => ({ teamId: "a2000000-0000-4000-8000-000000000001", seasonId: "a3000000-0000-4000-8000-000000000001", seasonName: "Säsong" }) }));
 vi.mock("@/lib/supabase/admin", () => ({ createAdminClient: () => ({ kind: "admin" }) }));
 vi.mock("@/features/selections/manual-adjustment", () => ({ mutateManualAdjustment: mutate }));

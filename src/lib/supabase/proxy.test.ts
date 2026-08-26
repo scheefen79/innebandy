@@ -93,4 +93,17 @@ describe("updateSession", () => {
     expect(response.headers.get("cache-control")).toContain("private");
     expect(response.headers.get("cache-control")).toContain("no-store");
   });
+
+  it("forwards the verified user id to the request so pages skip a second claims check", async () => {
+    authState.authenticated = true;
+
+    const response = await updateSession(new NextRequest("https://app.example/"));
+
+    expect(response.headers.get("x-middleware-override-headers")).toContain(
+      "x-innebandy-verified-user-id",
+    );
+    expect(response.headers.get("x-middleware-request-x-innebandy-verified-user-id")).toBe(
+      "coach-id",
+    );
+  });
 });

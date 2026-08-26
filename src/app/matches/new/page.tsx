@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { AppShell } from "@/components/app-shell";
 import { loadTeamContext } from "@/lib/auth/team-context";
+import { getVerifiedUserId } from "@/lib/auth/verified-user";
 import { createClient } from "@/lib/supabase/server";
 import { SubmitButton } from "./submit-button";
 
@@ -9,8 +10,8 @@ export const dynamic = "force-dynamic";
 
 export default async function NewMatchPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   const supabase = await createClient();
-  const { data } = await supabase.auth.getClaims();
-  if (!data?.claims?.sub) redirect("/login?next=/matches/new");
+  const userId = await getVerifiedUserId();
+  if (!userId) redirect("/login?next=/matches/new");
   const context = await loadTeamContext(supabase);
   if (!context) redirect("/access-denied");
 
