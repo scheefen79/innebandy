@@ -3,6 +3,7 @@ import Image from "next/image";
 import {notFound,redirect} from "next/navigation";
 import {AppShell} from "@/components/app-shell";
 import {loadTeamContext} from "@/lib/auth/team-context";
+import {getVerifiedUserId} from "@/lib/auth/verified-user";
 import {createClient} from "@/lib/supabase/server";
 import {loadTrainingPlan,trainingStatusText} from "@/features/trainings/training-plans";
 import {formatTrainingTime} from "@/features/trainings/training-time";
@@ -19,8 +20,8 @@ const sectionStyle={
 export default async function TrainingPage({params,searchParams}:{params:Promise<{id:string}>;searchParams:Promise<{change?:string}>}){
  const {id}=await params;
  const supabase=await createClient();
- const {data}=await supabase.auth.getClaims();
- if(!data?.claims?.sub)redirect(`/login?next=${encodeURIComponent(`/trainings/${id}`)}`);
+ const userId=await getVerifiedUserId();
+ if(!userId)redirect(`/login?next=${encodeURIComponent(`/trainings/${id}`)}`);
  const context=await loadTeamContext(supabase);
  if(!context)redirect("/access-denied");
  let training;

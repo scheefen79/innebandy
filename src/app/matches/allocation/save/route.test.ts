@@ -7,8 +7,11 @@ const saveAllocationMock = vi.hoisted(() => vi.fn());
 vi.mock("@/lib/supabase/route-handler", () => ({
   createRouteHandlerClient: () => ({
     applyAuthState: (response: Response) => response,
-    supabase: { auth: { getClaims: async () => ({ data: state.authenticated ? { claims: { sub: "coach-1" } } : null }) } },
+    supabase: {},
   }),
+}));
+vi.mock("@/lib/auth/verified-user", () => ({
+  getVerifiedUserId: async () => (state.authenticated ? "coach-1" : null),
 }));
 vi.mock("@/lib/auth/team-context", () => ({
   loadTeamContext: async () => ({ teamId: "team-1", seasonId: "season-1", seasonName: "Säsong" }),

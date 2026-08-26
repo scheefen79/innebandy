@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { saveAllocation } from "@/features/selections/save-allocation";
 import { loadTeamContext } from "@/lib/auth/team-context";
+import { getVerifiedUserId } from "@/lib/auth/verified-user";
 import { createRouteHandlerClient } from "@/lib/supabase/route-handler";
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -12,8 +13,8 @@ function redirectTo(request: NextRequest, path: string) {
 
 export async function POST(request: NextRequest) {
   const { applyAuthState, supabase } = createRouteHandlerClient(request);
-  const { data } = await supabase.auth.getClaims();
-  if (!data?.claims?.sub) return applyAuthState(redirectTo(request, "/login?next=/matches"));
+  const userId = await getVerifiedUserId();
+  if (!userId) return applyAuthState(redirectTo(request, "/login?next=/matches"));
   const context = await loadTeamContext(supabase);
   if (!context) return applyAuthState(redirectTo(request, "/access-denied"));
 
@@ -27,7 +28,7 @@ export async function POST(request: NextRequest) {
   const result = await saveAllocation(
     supabase,
     createAdminClient(),
-    data.claims.sub,
+    userId,
     context.teamId,
     context.seasonId,
     boundary,

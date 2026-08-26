@@ -3,6 +3,7 @@ import { createMatch } from "@/features/matches/create-match";
 import { validateMatchInput } from "@/features/matches/match-validation";
 import { createSupabaseMatchRepository } from "@/features/matches/supabase-match-repository";
 import { loadTeamContext } from "@/lib/auth/team-context";
+import { getVerifiedUserId } from "@/lib/auth/verified-user";
 import { createRouteHandlerClient } from "@/lib/supabase/route-handler";
 
 export const dynamic = "force-dynamic";
@@ -13,8 +14,8 @@ function redirectTo(request: NextRequest, path: string) {
 
 export async function POST(request: NextRequest) {
   const { applyAuthState, supabase } = createRouteHandlerClient(request);
-  const { data } = await supabase.auth.getClaims();
-  if (!data?.claims?.sub) return applyAuthState(redirectTo(request, "/login?next=/matches/new"));
+  const userId = await getVerifiedUserId();
+  if (!userId) return applyAuthState(redirectTo(request, "/login?next=/matches/new"));
   const context = await loadTeamContext(supabase);
   if (!context) return applyAuthState(redirectTo(request, "/access-denied"));
 

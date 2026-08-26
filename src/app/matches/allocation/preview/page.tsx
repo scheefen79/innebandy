@@ -10,6 +10,7 @@ import {
   loadAllocationPreview,
 } from "@/features/selections/allocation-preview";
 import { loadTeamContext } from "@/lib/auth/team-context";
+import { getVerifiedUserId } from "@/lib/auth/verified-user";
 import { createClient } from "@/lib/supabase/server";
 import { SaveAllocationButton } from "./save-allocation-button";
 
@@ -17,8 +18,8 @@ export const dynamic = "force-dynamic";
 
 export default async function AllocationPreviewPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   const supabase = await createClient();
-  const { data } = await supabase.auth.getClaims();
-  if (!data?.claims?.sub) redirect("/login?next=/matches/allocation/preview");
+  const userId = await getVerifiedUserId();
+  if (!userId) redirect("/login?next=/matches/allocation/preview");
   const context = await loadTeamContext(supabase);
   if (!context) redirect("/access-denied");
 

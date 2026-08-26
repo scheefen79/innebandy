@@ -4,8 +4,9 @@ import { NextRequest } from "next/server";
 const mutate = vi.hoisted(() => vi.fn().mockResolvedValue("ok"));
 vi.mock("@/lib/supabase/route-handler", () => ({ createRouteHandlerClient: () => ({
   applyAuthState: (response: Response) => response,
-  supabase: { auth: { getClaims: async () => ({ data: { claims: { sub: "a1000000-0000-4000-8000-000000000001" } } }) } },
+  supabase: {},
 }) }));
+vi.mock("@/lib/auth/verified-user", () => ({ getVerifiedUserId: async () => "a1000000-0000-4000-8000-000000000001" }));
 vi.mock("@/lib/auth/team-context", () => ({ loadTeamContext: async () => ({ teamId: "a2000000-0000-4000-8000-000000000001", seasonId: "a3000000-0000-4000-8000-000000000001", seasonName: "Säsong" }) }));
 vi.mock("@/lib/supabase/admin", () => ({ createAdminClient: () => ({ kind: "admin" }) }));
 vi.mock("@/features/selections/manual-adjustment", () => ({ mutateManualAdjustment: mutate }));

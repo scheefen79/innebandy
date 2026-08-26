@@ -5,14 +5,15 @@ import { OpponentLabel } from "@/components/team-logo";
 import { formatStockholmDateTime } from "@/features/matches/match-time";
 import { loadMatches } from "@/features/matches/load-matches";
 import { loadTeamContext } from "@/lib/auth/team-context";
+import { getVerifiedUserId } from "@/lib/auth/verified-user";
 import { createClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 
 export default async function MatchesPage({ searchParams }: { searchParams: Promise<{ allocation?: string; view?: string }> }) {
   const supabase = await createClient();
-  const { data } = await supabase.auth.getClaims();
-  if (!data?.claims?.sub) redirect("/login?next=/matches");
+  const userId = await getVerifiedUserId();
+  if (!userId) redirect("/login?next=/matches");
   const context = await loadTeamContext(supabase);
   if (!context) redirect("/access-denied");
 

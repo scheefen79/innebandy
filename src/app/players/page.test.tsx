@@ -7,7 +7,8 @@ const loadTeamContextMock=vi.hoisted(()=>vi.fn());
 const loadPlayerListMock=vi.hoisted(()=>vi.fn());
 
 vi.mock("next/navigation",()=>({redirect:redirectMock}));
-vi.mock("@/lib/supabase/server",()=>({createClient:vi.fn(async()=>({auth:{getClaims:vi.fn(async()=>({data:{claims:state.authenticated?{sub:"coach"}:null}}))}}))}));
+vi.mock("@/lib/supabase/server",()=>({createClient:vi.fn(async()=>({}))}));
+vi.mock("@/lib/auth/verified-user",()=>({getVerifiedUserId:vi.fn(async()=>state.authenticated?"coach":null)}));
 vi.mock("@/lib/auth/team-context",()=>({loadTeamContext:loadTeamContextMock}));
 vi.mock("@/features/players/load-player-list",()=>({loadPlayerList:loadPlayerListMock}));
 

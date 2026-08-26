@@ -27,3 +27,7 @@ MVP:n används av tre tränare med separata Supabase Auth-konton. Produktspecifi
 
 - Magic link: avvaktas eftersom det kräver e-postcallback, mallar och tillförlitlig SMTP för skarp drift.
 - Delat tränarkonto: avvisat i ADR-002 eftersom separata konton krävs för säkerhet och spårbarhet.
+
+## Uppdatering
+
+ADR-015 ändrar hur skyddade sidor tar del av proxyns verifiering (en delad request-header istället för att varje sida anropar `getClaims()` igen) och rättar samtidigt att `proxy.ts` låg fel i filträdet och aldrig kördes. Proxyns roll och RLS som auktoritativ kontroll är oförändrade.

@@ -1,7 +1,7 @@
 begin;
 create extension if not exists pgtap with schema extensions;
 set local search_path=public,extensions;
-select plan(12);
+select plan(19);
 
 insert into auth.users(id,email) values
  ('a1000000-0000-4000-8000-000000000001','overview-coach@example.test'),
@@ -21,6 +21,9 @@ insert into matches(id,team_id,season_id,opponent,starts_at,target_players,statu
  ('a5000000-0000-4000-8000-000000000002','a2000000-0000-4000-8000-000000000001','a3000000-0000-4000-8000-000000000001','Past upcoming',now()-interval '1 day',2,'upcoming','a6000000-0000-4000-8000-000000000002'),
  ('a5000000-0000-4000-8000-000000000003','a2000000-0000-4000-8000-000000000001','a3000000-0000-4000-8000-000000000001','Completed',now()-interval '2 days',2,'completed','a6000000-0000-4000-8000-000000000003'),
  ('a5000000-0000-4000-8000-000000000004','a2000000-0000-4000-8000-000000000001','a3000000-0000-4000-8000-000000000001','Cancelled',now()+interval '2 days',2,'cancelled','a6000000-0000-4000-8000-000000000004');
+insert into training_sessions(id,team_id,season_id,starts_at,ends_at,theme_block,focus,key_message,updated_by) values
+ ('a7000000-0000-4000-8000-000000000001','a2000000-0000-4000-8000-000000000001','a3000000-0000-4000-8000-000000000001',now()+interval '12 hours',now()+interval '13 hours',2,'Next training','FLYTTA','a1000000-0000-4000-8000-000000000001'),
+ ('a7000000-0000-4000-8000-000000000002','a2000000-0000-4000-8000-000000000001','a3000000-0000-4000-8000-000000000001',now()-interval '12 hours',now()-interval '11 hours',1,'Past training','PASSA','a1000000-0000-4000-8000-000000000001');
 insert into match_players(team_id,season_id,match_id,player_id,selection_type,selection_source,selection_status,played) values
  ('a2000000-0000-4000-8000-000000000001','a3000000-0000-4000-8000-000000000001','a5000000-0000-4000-8000-000000000001','a4000000-0000-4000-8000-000000000001','regular','automatic','selected',false),
  ('a2000000-0000-4000-8000-000000000001','a3000000-0000-4000-8000-000000000001','a5000000-0000-4000-8000-000000000001','a4000000-0000-4000-8000-000000000002','extra','manual','selected',false),
@@ -30,6 +33,8 @@ insert into match_players(team_id,season_id,match_id,player_id,selection_type,se
  ('a2000000-0000-4000-8000-000000000001','a3000000-0000-4000-8000-000000000001','a5000000-0000-4000-8000-000000000004','a4000000-0000-4000-8000-000000000001','regular','automatic','selected',false);
 
 select has_function('public','get_overview',array['uuid'],'overview function exists');
+select has_function('public','get_home_overview',array[]::text[],'atomic home function exists');
+select has_function('public','get_team_context',array[]::text[],'single-call context function exists');
 set local role authenticated;set local request.jwt.claim.sub='a1000000-0000-4000-8000-000000000001';
 select lives_ok($$select get_overview('a2000000-0000-4000-8000-000000000001')$$,'active coach reads overview');
 select results_eq($$select get_overview('a2000000-0000-4000-8000-000000000001')->>'seasonName'$$,array['Overview season'::text],'active season is returned');
@@ -38,10 +43,15 @@ select results_eq($$select (get_overview('a2000000-0000-4000-8000-000000000001')
 select results_eq($$select jsonb_array_length(get_overview('a2000000-0000-4000-8000-000000000001')->'players')$$,array[2],'only active players are included');
 select results_eq($$select (jsonb_path_query_first(get_overview('a2000000-0000-4000-8000-000000000001')->'players','$[*] ? (@.id == "a4000000-0000-4000-8000-000000000001")')->>'regularCount')::integer$$,array[3],'played completed and selected upcoming regular rows count');
 select results_eq($$select (jsonb_path_query_first(get_overview('a2000000-0000-4000-8000-000000000001')->'players','$[*] ? (@.id == "a4000000-0000-4000-8000-000000000002")')->>'regularCount')::integer$$,array[0],'extra and completed absence do not count as regular fairness');
+select results_eq($$select get_overview('a2000000-0000-4000-8000-000000000001')->'nextTraining'->>'id'$$,array['a7000000-0000-4000-8000-000000000001'],'nearest future training is returned');
+select lives_ok($$select get_home_overview()$$,'home overview loads without a separate context query');
+select results_eq($$select get_home_overview()->'nextTraining'->>'focus'$$,array['Next training'],'home overview includes next training');
+select results_eq($$select get_team_context()->>'seasonName'$$,array['Overview season'],'team context returns active season in one call');
 reset role;set local role anon;
 select throws_ok($$select get_overview('a2000000-0000-4000-8000-000000000001')$$,'42501','permission denied for function get_overview','anon cannot call overview');
 reset role;set local role authenticated;set local request.jwt.claim.sub='a1000000-0000-4000-8000-000000000002';
 select throws_ok($$select get_overview('a2000000-0000-4000-8000-000000000001')$$,'42501','NOT_AUTHORIZED','outsider is rejected');
+select throws_ok($$select get_home_overview()$$,'42501','NOT_AUTHORIZED','outsider home overview is rejected');
 set local request.jwt.claim.sub='a1000000-0000-4000-8000-000000000003';
 select throws_ok($$select get_overview('a2000000-0000-4000-8000-000000000001')$$,'42501','NOT_AUTHORIZED','inactive member is rejected');
 reset role;update seasons set is_active=false where id='a3000000-0000-4000-8000-000000000001';set local role authenticated;set local request.jwt.claim.sub='a1000000-0000-4000-8000-000000000001';

@@ -2,6 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { applyPrivateResponseHeaders } from "@/lib/auth/private-response";
 import { getSafeNextPath } from "@/lib/auth/safe-next-path";
+import { VERIFIED_USER_HEADER } from "@/lib/auth/verified-user-header";
 import { getSupabaseConfig } from "@/lib/supabase/config";
 
 export async function updateSession(request: NextRequest) {
@@ -39,6 +40,18 @@ export async function updateSession(request: NextRequest) {
   const { data: verifiedSession } = await supabase.auth.getClaims();
   const claims = verifiedSession?.claims;
   const isLoginRoute = request.nextUrl.pathname === "/login";
+
+  if (claims?.sub) {
+    request.headers.set(VERIFIED_USER_HEADER, claims.sub);
+    response = NextResponse.next({ request });
+    applyPrivateResponseHeaders(response.headers);
+    refreshedCookies.forEach(({ name, options, value }) => {
+      response.cookies.set(name, value, options);
+    });
+    Object.entries(refreshedHeaders).forEach(([name, value]) => {
+      response.headers.set(name, value);
+    });
+  }
 
   function redirectWithRefreshedSession(url: URL) {
     const redirectResponse = NextResponse.redirect(url);
