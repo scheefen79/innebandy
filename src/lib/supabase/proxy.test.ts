@@ -94,6 +94,15 @@ describe("updateSession", () => {
     expect(response.headers.get("cache-control")).toContain("no-store");
   });
 
+  it("lets an unauthenticated credential submission reach the login route", async () => {
+    const response = await updateSession(
+      new NextRequest("https://app.example/auth/login", { method: "POST" }),
+    );
+
+    expect(response.status).toBe(200);
+    expect(response.headers.get("location")).toBeNull();
+  });
+
   it("forwards the verified user id to the request so pages skip a second claims check", async () => {
     authState.authenticated = true;
 

@@ -40,6 +40,7 @@ export async function updateSession(request: NextRequest) {
   const { data: verifiedSession } = await supabase.auth.getClaims();
   const claims = verifiedSession?.claims;
   const isLoginRoute = request.nextUrl.pathname === "/login";
+  const isPublicAuthRoute = isLoginRoute || request.nextUrl.pathname === "/auth/login";
 
   if (claims?.sub) {
     request.headers.set(VERIFIED_USER_HEADER, claims.sub);
@@ -65,7 +66,7 @@ export async function updateSession(request: NextRequest) {
     return redirectResponse;
   }
 
-  if (!claims?.sub && !isLoginRoute) {
+  if (!claims?.sub && !isPublicAuthRoute) {
     const loginUrl = request.nextUrl.clone();
     loginUrl.pathname = "/login";
     loginUrl.search = "";
