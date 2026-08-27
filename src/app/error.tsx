@@ -9,9 +9,9 @@ type ErrorPageProps = {
 
 export default function ErrorPage({ reset }: ErrorPageProps) {
   return (
-    <AppShell currentItem="Översikt">
+    <AppShell currentItem="Kommande">
       <section className="rounded-2xl bg-white px-5 py-10 text-center shadow-sm" role="alert">
-        <h1 className="text-xl font-semibold text-slate-950">Översikten kunde inte hämtas</h1>
+        <h1 className="text-xl font-semibold text-slate-950">Sidan kunde inte hämtas</h1>
         <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-600">
           Försök igen. Om problemet kvarstår kan du kontrollera anslutningen senare.
         </p>

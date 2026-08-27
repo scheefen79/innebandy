@@ -3,17 +3,17 @@ import Link from "next/link";
 
 type AppShellProps = {
   children: ReactNode;
-  currentItem?: "Översikt" | "Matcher" | "Spelare" | "Träningar";
+  currentItem?: "Kommande" | "Träningar" | "Matcher" | "Spelare";
 };
 
 const navigation = [
-  { href: "/", label: "Översikt" },
+  { href: "/", label: "Kommande" },
+  { href: "/trainings", label: "Träningar" },
   { href: "/matches", label: "Matcher" },
   { href: "/players", label: "Spelare" },
-  { href: "/trainings", label: "Träningar" },
 ] as const;
 
-export function AppShell({ children, currentItem = "Översikt" }: AppShellProps) {
+export function AppShell({ children, currentItem = "Kommande" }: AppShellProps) {
   return (
     <div className="min-h-screen bg-[#F5F7FA] pb-20 md:pb-0">
       <header className="bg-[#082B4C] text-white md:hidden">
