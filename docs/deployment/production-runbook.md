@@ -61,7 +61,16 @@ SUPABASE_SERVICE_ROLE_KEY
 
 Importera GitHub-repot, välj `main` som Production Branch och verifiera första builden innan domänen delas.
 
-## 6. Verklig data och smoke test
+## 6. Medlemsadministration (Implementation 14)
+
+Krävs innan adminvyns inbjudnings- eller lösenordsåterställningsflöde kan användas skarpt:
+
+1. Konfigurera custom SMTP i Supabase Dashboard → Authentication → Emails/SMTP Settings. Supabases inbyggda avsändare klarar bara 2 mejl/timme för hela projektet, vilket inte räcker i praktiken. Se ADR-017 och `docs/planning/implementation-14-team-membership-admin.md` för det valda alternativet (Gmail SMTP via ett dedikerat konto och ett App Password, eftersom laget saknar egen domän).
+2. Lägg till `https://<produktionsdomän>/auth/set-password` under Authentication → URL Configuration → Redirect URLs. Utan detta faller inbjudningslänkar tillbaka till startsidan istället för sätt-lösenord-sidan.
+3. Skicka en testinbjudan till en riktig adress via adminvyn (`/team`) och bekräfta att mejlet kommer fram och att länken leder till en fungerande "Sätt ditt lösenord"-sida.
+4. SQL Editor-flödet i steg 4 (Bootstrap) kvarstår som reservväg om adminvyn av någon anledning inte går att nå.
+
+## 7. Verklig data och smoke test
 
 1. Lägg in spelare via appen.
 2. Dubbelkontrollera namn och nivå 1–3 med en andra tränare.
@@ -70,7 +79,7 @@ Importera GitHub-repot, välj `main` som Production Branch och verifiera första
 5. Testa de centrala flödena och 390 px.
 6. Kontrollera Vercel- och Supabase-loggar.
 
-## 7. Rollback
+## 8. Rollback
 
 - Frontend: återpromota senast verifierade Vercel-deployment.
 - Behörighet: inaktivera berört medlemskap och återkalla sessioner.

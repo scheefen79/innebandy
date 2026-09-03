@@ -103,6 +103,15 @@ describe("updateSession", () => {
     expect(response.headers.get("location")).toBeNull();
   });
 
+  it("lets an unauthenticated visitor reach the set-password page for an invite or recovery link", async () => {
+    const response = await updateSession(
+      new NextRequest("https://app.example/auth/set-password"),
+    );
+
+    expect(response.status).toBe(200);
+    expect(response.headers.get("location")).toBeNull();
+  });
+
   it("forwards the verified user id to the request so pages skip a second claims check", async () => {
     authState.authenticated = true;
 

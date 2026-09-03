@@ -49,7 +49,11 @@ values
   ('10000000-0000-4000-8000-000000000001', '<TRAINARE_3_UUID>', 'coach');
 ```
 
-Vanliga autentiserade användare har avsiktligt inte rätt att ändra `team_members`. Initial koppling görs därför av projektägaren i SQL Editor eller genom en kontrollerad serveradministrativ process. Lägg aldrig service role-nyckeln i webbläsarkod eller i Git.
+Vanliga autentiserade användare har avsiktligt inte rätt att ändra `team_members` direkt. Sedan Implementation 14 är det primära sättet att bjuda in, ändra roll för och inaktivera medlemmar adminvyn i appen (`/team`, coach-only) — den anropar Supabase Admin Auth och de coach-verifierade databasfunktionerna, inte tabellen direkt. SQL Editor-flödet ovan kvarstår som reservväg för den allra första kopplingen (innan någon coach finns) eller om adminvyn av någon anledning inte går att nå. Lägg aldrig service role-nyckeln i webbläsarkod eller i Git.
+
+### Testa inbjudningsflödet lokalt
+
+Lokal Supabase fångar utgående e-post i Mailpit (`pnpm exec supabase status` visar `MAILPIT_URL`, normalt `http://127.0.0.1:54324`) istället för att skicka riktiga mejl. Bjud in en testadress via adminvyn, öppna Mailpit och klicka länken i det mottagna mejlet för att komma till "Sätt ditt lösenord". Ingen custom SMTP-konfiguration behövs lokalt.
 
 ## Exempeldata
 

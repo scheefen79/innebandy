@@ -35,3 +35,5 @@ RLS för lagägda tabeller tillåter åtkomst endast när den inloggade använda
 ## Uppdatering
 
 ADR-016 utökar medlemsmodellen med den begränsade läsrollen `viewer`. Beslutet om individuella konton, aktivt lagmedlemskap, ingen medlemsadministration och RLS som auktoritativ gräns är oförändrat. Formuleringen att MVP endast använder `coach` är därmed ersatt.
+
+ADR-017 ersätter formuleringen "ingen inbjudnings- eller medlemssida byggs" för produktionsbruk: en coach-skyddad adminvy för att bjuda in, ändra roll för och inaktivera lagmedlemmar byggs i appen. RLS förblir den auktoritativa gränsen — adminvyn skriver aldrig direkt till `team_members`, utan enbart genom coach- och service-role-verifierade databasfunktioner.

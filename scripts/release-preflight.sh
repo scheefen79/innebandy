@@ -33,6 +33,7 @@ pnpm db:test:manual-concurrency
 pnpm db:test:extra-concurrency
 pnpm db:test:completion-concurrency
 pnpm db:test:player-concurrency
+pnpm db:test:team-concurrency
 pnpm db:test:production-bootstrap
 pnpm build
 git diff --check

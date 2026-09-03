@@ -4,7 +4,7 @@ import type { TeamRole } from "@/lib/auth/team-context";
 
 type AppShellProps = {
   children: ReactNode;
-  currentItem?: "Kommande" | "Träningar" | "Matcher" | "Spelare";
+  currentItem?: "Kommande" | "Träningar" | "Matcher" | "Spelare" | "Medlemmar";
   role?: TeamRole;
 };
 
@@ -13,10 +13,13 @@ const navigation = [
   { href: "/trainings", label: "Träningar" },
   { href: "/matches", label: "Matcher" },
   { href: "/players", label: "Spelare" },
+  { href: "/team", label: "Medlemmar" },
 ] as const;
 
+const coachOnlyLabels = new Set(["Spelare", "Medlemmar"]);
+
 export function AppShell({ children, currentItem = "Kommande", role }: AppShellProps) {
-  const visibleNavigation = navigation.filter((item) => item.label !== "Spelare" || role === "coach");
+  const visibleNavigation = navigation.filter((item) => !coachOnlyLabels.has(item.label) || role === "coach");
   return (
     <div className="min-h-screen bg-[#F5F7FA] pb-20 md:pb-0">
       <header className="bg-[#082B4C] text-white md:hidden">
@@ -78,7 +81,11 @@ export function AppShell({ children, currentItem = "Kommande", role }: AppShellP
         aria-label="Huvudnavigation"
         className="fixed inset-x-0 bottom-0 border-t border-slate-200 bg-white md:hidden"
       >
-        <ul className={`mx-auto grid max-w-lg ${visibleNavigation.length === 4 ? "grid-cols-4" : "grid-cols-3"}`}>
+        <ul
+          className={`mx-auto grid max-w-lg ${
+            visibleNavigation.length === 5 ? "grid-cols-5" : visibleNavigation.length === 4 ? "grid-cols-4" : "grid-cols-3"
+          }`}
+        >
           {visibleNavigation.map((item) => (
             <li key={item.label}>
               <Link
