@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 const mutate = vi.hoisted(() => vi.fn().mockResolvedValue("ok"));
 vi.mock("@/lib/supabase/route-handler", () => ({ createRouteHandlerClient: () => ({ applyAuthState: (response: Response) => response, supabase: {} }) }));
 vi.mock("@/lib/auth/verified-user", () => ({ getVerifiedUserId: async () => "c1000000-0000-4000-8000-000000000001" }));
-vi.mock("@/lib/auth/team-context", () => ({ loadTeamContext: async () => ({ teamId: "c2000000-0000-4000-8000-000000000001", seasonId: "c3000000-0000-4000-8000-000000000001", seasonName: "Säsong" }) }));
+vi.mock("@/lib/auth/team-context", () => ({ loadTeamContext: async () => ({ teamId: "c2000000-0000-4000-8000-000000000001", seasonId: "c3000000-0000-4000-8000-000000000001", seasonName: "Säsong", role: "coach" }) }));
 vi.mock("@/lib/supabase/admin", () => ({ createAdminClient: () => ({ kind: "admin" }) }));
 vi.mock("@/features/selections/extra-substitute", () => ({ mutateExtraSubstitute: mutate }));
 import { POST } from "./route";

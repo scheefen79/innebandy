@@ -10,7 +10,7 @@ vi.mock("@/lib/supabase/route-handler", () => ({ createRouteHandlerClient: () =>
 vi.mock("@/lib/auth/verified-user", () => ({
   getVerifiedUserId: async () => (state.authenticated ? "a1000000-0000-4000-8000-000000000001" : null),
 }));
-vi.mock("@/lib/auth/team-context", () => ({ loadTeamContext: async () => ({ teamId: "a2000000-0000-4000-8000-000000000001", seasonId: "a3000000-0000-4000-8000-000000000001", seasonName: "Säsong" }) }));
+vi.mock("@/lib/auth/team-context", () => ({ loadTeamContext: async () => ({ teamId: "a2000000-0000-4000-8000-000000000001", seasonId: "a3000000-0000-4000-8000-000000000001", seasonName: "Säsong", role: "coach" }) }));
 vi.mock("@/lib/supabase/admin", () => ({ createAdminClient: () => ({ kind: "admin" }) }));
 vi.mock("@/features/selections/manual-adjustment", () => ({ mutateManualAdjustment: mutate }));
 

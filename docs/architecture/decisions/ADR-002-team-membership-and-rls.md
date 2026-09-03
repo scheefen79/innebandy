@@ -32,3 +32,6 @@ RLS för lagägda tabeller tillåter åtkomst endast när den inloggade använda
 - `owner_user_id` direkt på laget: avvisas eftersom tre tränare ska dela laget.
 - Avancerad RBAC: avvisas som onödigt för MVP.
 
+## Uppdatering
+
+ADR-016 utökar medlemsmodellen med den begränsade läsrollen `viewer`. Beslutet om individuella konton, aktivt lagmedlemskap, ingen medlemsadministration och RLS som auktoritativ gräns är oförändrat. Formuleringen att MVP endast använder `coach` är därmed ersatt.

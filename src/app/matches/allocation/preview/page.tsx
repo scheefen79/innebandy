@@ -21,7 +21,7 @@ export default async function AllocationPreviewPage({ searchParams }: { searchPa
   const userId = await getVerifiedUserId();
   if (!userId) redirect("/login?next=/matches/allocation/preview");
   const context = await loadTeamContext(supabase);
-  if (!context) redirect("/access-denied");
+  if (!context || context.role !== "coach") redirect("/access-denied");
 
   const boundary = new Date().toISOString();
   const [previewResult, matches, playerList] = await Promise.all([
@@ -32,13 +32,13 @@ export default async function AllocationPreviewPage({ searchParams }: { searchPa
   const error = (await searchParams).error;
 
   if (!previewResult.ok) {
-    return <AppShell currentItem="Matcher"><div className="mx-auto max-w-2xl"><Link href="/matches" className="inline-flex min-h-11 items-center text-sm font-semibold text-blue-700">← Till matcher</Link><div role="alert" className="mt-4 rounded-2xl border border-red-200 bg-white p-6"><h1 className="text-xl font-bold text-slate-950">Fördelningen kunde inte skapas</h1><ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-red-800">{previewResult.errors.map((item, index) => <li key={`${item.code}-${index}`}>{allocationErrorText[item.code]}</li>)}</ul></div></div></AppShell>;
+    return <AppShell currentItem="Matcher" role={context.role}><div className="mx-auto max-w-2xl"><Link href="/matches" className="inline-flex min-h-11 items-center text-sm font-semibold text-blue-700">← Till matcher</Link><div role="alert" className="mt-4 rounded-2xl border border-red-200 bg-white p-6"><h1 className="text-xl font-bold text-slate-950">Fördelningen kunde inte skapas</h1><ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-red-800">{previewResult.errors.map((item, index) => <li key={`${item.code}-${index}`}>{allocationErrorText[item.code]}</li>)}</ul></div></div></AppShell>;
   }
 
   const matchById = new Map(matches.map((match) => [match.id, match]));
   const playerById = new Map(playerList.players.map((player) => [player.id, player]));
 
-  return <AppShell currentItem="Matcher"><div className="mx-auto max-w-3xl">
+  return <AppShell currentItem="Matcher" role={context.role}><div className="mx-auto max-w-3xl">
     <Link href="/matches" className="inline-flex min-h-11 items-center text-sm font-semibold text-blue-700">← Till matcher</Link>
     <h1 className="mt-2 text-3xl font-bold text-slate-950">Förhandsgranska fördelning</h1>
     <p className="mt-2 text-sm text-slate-600">Kontrollera lagen innan hela fördelningen sparas.</p>

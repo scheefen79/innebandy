@@ -4,14 +4,14 @@ import type { PlayerLevel } from "@/domain/player-level";
 export type RosterPlayer = {
   id: string;
   name: string;
-  level: PlayerLevel;
+  level: PlayerLevel | null;
   isActive: boolean;
   selected: boolean;
   selectionSource: "automatic" | "manual" | null;
   selectionStatus: "selected" | "removed" | null;
   selectionType: "regular" | "extra" | null;
   replacedPlayerId: string | null;
-  played: boolean;
+  played: boolean | null;
 };
 
 export async function loadMatchRoster(
@@ -20,24 +20,16 @@ export async function loadMatchRoster(
   seasonId: string,
   matchId: string,
 ): Promise<RosterPlayer[]> {
-  const [{ data: players, error: playersError }, { data: selections, error: selectionsError }] = await Promise.all([
-    supabase.from("players").select("id, first_name, last_name, level, rotation_order, is_active")
-      .eq("team_id", teamId).eq("season_id", seasonId).order("rotation_order"),
-    supabase.from("match_players").select("player_id, selection_type, selection_source, selection_status, replaced_player_id, played")
-      .eq("team_id", teamId).eq("season_id", seasonId).eq("match_id", matchId),
-  ]);
-  if (playersError || selectionsError) throw new Error("Det gick inte att hämta laguttagningen.");
-  const selectionsByPlayer = new Map((selections ?? []).map((item) => [item.player_id, item]));
-  return (players ?? []).map((player) => ({
-    id: player.id,
-    name: [player.first_name, player.last_name].filter(Boolean).join(" "),
-    level: player.level as PlayerLevel,
-    isActive: player.is_active,
-    selected: selectionsByPlayer.get(player.id)?.selection_status === "selected",
-    selectionSource: selectionsByPlayer.get(player.id)?.selection_source ?? null,
-    selectionStatus: selectionsByPlayer.get(player.id)?.selection_status ?? null,
-    selectionType: selectionsByPlayer.get(player.id)?.selection_type ?? null,
-    replacedPlayerId: selectionsByPlayer.get(player.id)?.replaced_player_id ?? null,
-    played: selectionsByPlayer.get(player.id)?.played ?? false,
-  }));
+  const {data,error}=await supabase.rpc("get_match_roster",{target_team_id:teamId,target_season_id:seasonId,target_match_id:matchId});
+  if(error||!Array.isArray(data))throw new Error("Det gick inte att hämta laguttagningen.");
+  return (data as Array<Record<string,unknown>>).map((player)=>{
+    if(typeof player.id!=="string"||typeof player.name!=="string")throw new Error("Laguttagningen är ogiltig.");
+    if(player.rosterGroup==="team"||player.rosterGroup==="resting"||player.rosterGroup==="extra")return {
+      id:player.id,name:player.name,level:null,isActive:true,selected:player.rosterGroup!=="resting",
+      selectionSource:null,selectionStatus:player.rosterGroup==="resting"?null:"selected",
+      selectionType:player.rosterGroup==="extra"?"extra":player.rosterGroup==="team"?"regular":null,
+      replacedPlayerId:null,played:null,
+    } satisfies RosterPlayer;
+    return player as RosterPlayer;
+  });
 }

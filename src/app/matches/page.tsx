@@ -21,11 +21,11 @@ export default async function MatchesPage({ searchParams }: { searchParams: Prom
   const filter = resolvedSearchParams.view === "all" ? "all" : "upcoming";
   const matches = await loadMatches(supabase, context.teamId, context.seasonId, filter, new Date().toISOString());
 
-  return <AppShell currentItem="Matcher">
+  return <AppShell currentItem="Matcher" role={context.role}>
     <div className="mx-auto max-w-3xl">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div><p className="text-sm font-semibold text-blue-700">{context.seasonName}</p><h1 className="mt-1 text-3xl font-bold text-slate-950">Matcher</h1></div>
-        <div className="flex flex-wrap gap-2"><Link href="/matches/allocation/preview" className="flex min-h-11 items-center rounded-xl border border-blue-700 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700">Generera fördelning</Link><Link href="/matches/new" className="flex min-h-11 items-center rounded-xl bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700">Ny match</Link></div>
+        {context.role === "coach" ? <div className="flex flex-wrap gap-2"><Link href="/matches/allocation/preview" className="flex min-h-11 items-center rounded-xl border border-blue-700 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700">Generera fördelning</Link><Link href="/matches/new" className="flex min-h-11 items-center rounded-xl bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700">Ny match</Link></div> : null}
       </div>
       {resolvedSearchParams.allocation === "saved" ? <p role="status" className="mt-5 rounded-xl border border-green-200 bg-green-50 p-4 text-sm font-medium text-green-900">Fördelningen är sparad.</p> : null}
       <nav aria-label="Filtrera matcher" className="mt-6 flex gap-2 border-b border-slate-200">

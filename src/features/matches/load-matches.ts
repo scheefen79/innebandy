@@ -7,8 +7,8 @@ export type MatchListItem = {
 };
 
 type MatchRow = {
-  id: string; opponent: string; starts_at: string; location: string | null;
-  target_players: number; status: MatchListItem["status"];
+  id:string; opponent:string; starts_at:string; location:string|null;
+  target_players:number; status:MatchListItem["status"];
 };
 
 export async function loadMatches(
@@ -18,27 +18,9 @@ export async function loadMatches(
   filter: "upcoming" | "all",
   now: string,
 ): Promise<MatchListItem[]> {
-  let query = supabase.from("matches")
-    .select("id, opponent, starts_at, location, target_players, status")
-    .eq("team_id", teamId).eq("season_id", seasonId);
-
-  if (filter === "upcoming") query = query.eq("status", "upcoming").gte("starts_at", now);
-  const { data, error } = await query.order("starts_at", { ascending: filter === "upcoming" });
-  if (error) throw new Error("Det gick inte att hämta matcherna.");
-  const rows = (data ?? []) as MatchRow[];
-  const counts = new Map<string, number>();
-  if (rows.length > 0) {
-    const { data: selections, error: selectionsError } = await supabase.from("match_players")
-      .select("match_id").in("match_id", rows.map((row) => row.id))
-      .eq("selection_type", "regular").eq("selection_status", "selected");
-    if (selectionsError) throw new Error("Det gick inte att räkna laguttagningarna.");
-    for (const selection of selections ?? []) counts.set(selection.match_id, (counts.get(selection.match_id) ?? 0) + 1);
-  }
-  return rows.map((row) => ({
-    id: row.id, opponent: row.opponent, startsAt: row.starts_at,
-    location: row.location, selectedPlayers: counts.get(row.id) ?? 0,
-    targetPlayers: row.target_players, status: row.status,
-  }));
+  const {data,error}=await supabase.rpc("get_match_list",{target_team_id:teamId,target_season_id:seasonId,requested_filter:filter,requested_now:now});
+  if(error||!Array.isArray(data))throw new Error("Det gick inte att hämta matcherna.");
+  return data as MatchListItem[];
 }
 
 export async function loadMatch(

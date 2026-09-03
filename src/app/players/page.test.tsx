@@ -15,7 +15,7 @@ vi.mock("@/features/players/load-player-list",()=>({loadPlayerList:loadPlayerLis
 import PlayersPage from "./page";
 
 describe("players page route",()=>{
- beforeEach(()=>{state.authenticated=true;redirectMock.mockClear();loadTeamContextMock.mockResolvedValue({teamId:"team",seasonId:"season",seasonName:"Säsong"});loadPlayerListMock.mockResolvedValue({seasonName:"Säsong",players:[]});});
+ beforeEach(()=>{state.authenticated=true;redirectMock.mockClear();loadTeamContextMock.mockResolvedValue({teamId:"team",seasonId:"season",seasonName:"Säsong",role:"coach"});loadPlayerListMock.mockResolvedValue({seasonName:"Säsong",players:[]});});
  it("redirects an unauthenticated visitor to login with the new route",async()=>{state.authenticated=false;await expect(PlayersPage()).rejects.toThrow("REDIRECT:/login?next=/players");expect(redirectMock).toHaveBeenCalledWith("/login?next=/players");});
  it("redirects a visitor without active team context",async()=>{loadTeamContextMock.mockResolvedValue(null);await expect(PlayersPage()).rejects.toThrow("REDIRECT:/access-denied");expect(redirectMock).toHaveBeenCalledWith("/access-denied");});
  it("renders the protected player list at /players",async()=>{const html=renderToStaticMarkup(await PlayersPage());expect(html).toContain("Spelare");expect(html).toContain("Inga spelare ännu");expect(loadPlayerListMock).toHaveBeenCalledWith(expect.anything(),"team");});

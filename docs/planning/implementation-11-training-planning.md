@@ -21,7 +21,7 @@ Planeringen ska vara ett praktiskt stöd på plats. Angivna minuter är riktmär
 
 ## Beslutad grund
 
-- Alla aktiva `team_members` med rollen `coach` får läsa och redigera samtliga träningar för sitt lag.
+- Alla aktiva `team_members` med rollen `coach` får läsa och redigera samtliga träningar för sitt lag. ADR-016 tillåter dessutom `viewer` att läsa träningar utan redigeringsmöjlighet.
 - Perioden innehåller 27 träningstillfällen från 5 september till 12 december 2026.
 - Träning sker måndagar 16:15–17:30 och lördagar 10:00–11:00.
 - Ingen träning skapas för 26 eller 31 oktober 2026.
@@ -135,7 +135,7 @@ Sektioner: `gathering`, `warmup`, `technique`, `match_exercise`, `closing`. Posi
 ## Behörighet och säkerhet
 
 - RLS följer samma aktiva lagmedlemskap som matcher och spelare.
-- Aktiv tränare får läsa träningar och moment för sitt eget lag och den aktiva säsongen.
+- Aktiv `coach` får läsa och ändra träningar och moment för sitt eget lag och den aktiva säsongen. Aktiv `viewer` får endast läsa dem.
 - Annat lag, outsider, inaktiv medlem och anonym användare nekas.
 - Direkt klientmutation nekas. En server-only databasfunktion sparar hela planen atomiskt, verifierar tränarens aktiva medlemskap och jämför förväntad `revision`.
 - `updated_by` sätts från den verifierade användaren på servern och accepteras inte från formuläret.
@@ -169,7 +169,7 @@ Sektioner: `gathering`, `warmup`, `technique`, `match_exercise`, `closing`. Posi
 - versionshistorik med återställning
 - skapa eller radera extra träningstillfällen
 - återöppna en genomförd träning
-- tränarspecifika roller utöver befintlig `coach`
+- ytterligare roller utöver `coach` och den senare beslutade läsrollen `viewer`
 
 ## Acceptanskriterier
 
@@ -186,7 +186,7 @@ Sektioner: `gathering`, `warmup`, `technique`, `match_exercise`, `closing`. Posi
 ### Data och säkerhet
 
 - Migrationerna skapar tabeller, typer, index, constraints, grants och RLS reproducerbart.
-- Aktiv tränare får läsa och spara eget lags plan; samtliga negativa behörighetsfall nekas.
+- Aktiv `coach` får läsa och spara eget lags plan. Aktiv `viewer` får läsa men nekas sparning; samtliga övriga negativa behörighetsfall nekas.
 - Samtidiga sparningar kan inte tyst skriva över varandra.
 - En misslyckad sparning lämnar session och moment oförändrade.
 - Genomförd träning kan inte ändras genom ordinarie skrivflöde.

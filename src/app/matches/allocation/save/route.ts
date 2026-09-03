@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
   const userId = await getVerifiedUserId();
   if (!userId) return applyAuthState(redirectTo(request, "/login?next=/matches"));
   const context = await loadTeamContext(supabase);
-  if (!context) return applyAuthState(redirectTo(request, "/access-denied"));
+  if (!context || context.role !== "coach") return applyAuthState(redirectTo(request, "/access-denied"));
 
   const formData = await request.formData();
   const fingerprint = String(formData.get("fingerprint") ?? "");

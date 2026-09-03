@@ -15,7 +15,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   const userId = await getVerifiedUserId();
   if (!userId) return redirectTo(`/login?next=${encodeURIComponent(`/matches/${id}`)}`);
   const context = await loadTeamContext(supabase);
-  if (!context) return redirectTo("/access-denied");
+  if (!context || context.role !== "coach") return redirectTo("/access-denied");
   const form = await request.formData();
   const outgoingPlayerId = String(form.get("outgoingPlayerId") ?? "");
   const incomingPlayerId = String(form.get("incomingPlayerId") ?? "");
