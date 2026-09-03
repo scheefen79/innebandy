@@ -10,9 +10,11 @@ Frågorna nedan behöver avgöras före eller under den första milstolpen. De �
 
 ### 1. Tränare och lagbehörighet
 
-**Beslut:** De tre tränarna har varsitt användarkonto och delar åtkomst till samma lag. Användarna kopplas till laget genom `team_members` med rollen `coach`.
+**Beslut:** De tre tränarna har varsitt användarkonto och delar åtkomst till samma lag. Användarna kopplas till laget genom `team_members` med rollen `coach`. Rollen `viewer` används för inloggade besökare med begränsad läsåtkomst.
 
-Datamodellen får stödja fler tränare, men MVP innehåller ingen sida för inbjudningar eller medlemsadministration. De första tre kontona kopplas till laget vid initial uppsättning. Row Level Security ska utgå från medlemskapet i `team_members`.
+Datamodellen får stödja fler tränare och besökare, men MVP innehåller ingen sida för inbjudningar eller medlemsadministration. Kontona kopplas till laget vid initial uppsättning. Row Level Security ska utgå från medlemskapet och rollen i `team_members`.
+
+`coach` får läsa och administrera all lagdata. `viewer` får läsa översikt, träningar, matcher och spelarnamn i matchuttagningar, men får inte se spelarnivåer, spelarlistan, spelarprofiler eller spelarhistorik och får aldrig ändra data. Ett spelarnamn får exponeras för `viewer` endast som del av en matchuttagning. ADR-016 beskriver säkerhetsgränsen.
 
 ### 2. Betydelsen av spelarnivå
 

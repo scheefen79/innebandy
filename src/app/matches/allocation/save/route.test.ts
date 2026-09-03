@@ -14,7 +14,7 @@ vi.mock("@/lib/auth/verified-user", () => ({
   getVerifiedUserId: async () => (state.authenticated ? "coach-1" : null),
 }));
 vi.mock("@/lib/auth/team-context", () => ({
-  loadTeamContext: async () => ({ teamId: "team-1", seasonId: "season-1", seasonName: "Säsong" }),
+  loadTeamContext: async () => ({ teamId: "team-1", seasonId: "season-1", seasonName: "Säsong", role: "coach" }),
 }));
 vi.mock("@/lib/supabase/admin", () => ({ createAdminClient: () => ({ kind: "admin" }) }));
 vi.mock("@/features/selections/save-allocation", () => ({ saveAllocation: saveAllocationMock }));

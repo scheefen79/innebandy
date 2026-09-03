@@ -6,7 +6,7 @@ Applikationsstacken är accepterad i ADR-001. Detaljerade beslut för behörighe
 
 ## Systemgräns
 
-MVP:n är en responsiv webbapplikation för tränare. Den hanterar lag, säsong, spelare, matcher, uttagningar och spelarhistorik. Publika spelarvyer, kommunikation, betalning och generell föreningsadministration ligger utanför systemgränsen.
+MVP:n är en responsiv webbapplikation för tränare och inloggade besökare. Den hanterar lag, säsong, spelare, matcher, uttagningar och spelarhistorik. Tränare administrerar lagdata. Besökare har en begränsad läsyta utan spelarnivåer, spelarlista, spelarprofiler eller spelarhistorik. Publika och anonyma spelarvyer, kommunikation, betalning och generell föreningsadministration ligger utanför systemgränsen.
 
 ## Föreslagen struktur
 
@@ -68,3 +68,5 @@ PostgreSQL lagrar projektets tillstånd. Supabase Auth identifierar tränaren oc
 - ADR-012: produktionsmiljöer och releasegräns
 - ADR-013: delade träningsplaner som självständiga tillfällen
 - ADR-014: källhostade övningsbilder med attribution
+- ADR-015: engångsverifierad identitet per request
+- ADR-016: rollbaserad tränar- och besökaråtkomst

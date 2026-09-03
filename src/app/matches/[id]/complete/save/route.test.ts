@@ -4,7 +4,7 @@ import { beforeEach, expect, it, vi } from "vitest";
 const complete = vi.hoisted(() => vi.fn().mockResolvedValue("ok"));
 vi.mock("@/lib/supabase/route-handler", () => ({ createRouteHandlerClient: () => ({ applyAuthState: (response: Response) => response, supabase: {} }) }));
 vi.mock("@/lib/auth/verified-user", () => ({ getVerifiedUserId: async () => "d1000000-0000-4000-8000-000000000001" }));
-vi.mock("@/lib/auth/team-context", () => ({ loadTeamContext: async () => ({ teamId: "d2000000-0000-4000-8000-000000000001", seasonId: "d3000000-0000-4000-8000-000000000001", seasonName: "Säsong" }) }));
+vi.mock("@/lib/auth/team-context", () => ({ loadTeamContext: async () => ({ teamId: "d2000000-0000-4000-8000-000000000001", seasonId: "d3000000-0000-4000-8000-000000000001", seasonName: "Säsong", role: "coach" }) }));
 vi.mock("@/lib/supabase/admin", () => ({ createAdminClient: () => ({ kind: "admin" }) }));
 vi.mock("@/features/selections/match-completion", async (importOriginal) => ({ ...(await importOriginal<typeof import("@/features/selections/match-completion")>()), completeMatch: complete }));
 import { POST } from "./route";

@@ -12,7 +12,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   const userId = await getVerifiedUserId();
   if (!userId) return go(`/login?next=${encodeURIComponent(`/trainings/${id}/edit`)}`);
   const context = await loadTeamContext(supabase);
-  if (!context) return go("/access-denied");
+  if (!context || context.role !== "coach") return go("/access-denied");
 
   const form = await request.formData();
   const validated = validateTrainingPayload({

@@ -46,17 +46,31 @@ Behöver kunna:
 
 MVP kan utgå från ett lag och en säsong.
 
+### Besökare
+
+En besökare är en inloggad lagmedlem med rollen `viewer`. Besökaren behöver kunna:
+
+- läsa översikt, träningar och matcher
+- se spelarnas namn i en matchuttagning, inklusive vilka som spelar och står över
+
+Besökaren får inte:
+
+- se spelarnivåer
+- nå spelarlistan, ett spelarkort eller spelarhistorik
+- skapa, ändra eller ta bort data
+
+Ett spelarnamn får exponeras för besökaren endast i sitt matchsammanhang. Besökaren får inte kunna hämta spelaren som en fristående resurs. Begränsningen ska upprätthållas i databas och serverlogik, inte enbart genom dold navigation.
+
 ---
 
 ## 4. Informationsarkitektur
 
 Bottom navigation på mobil:
 
-- Översikt
-- Matcher
-- Spelare
+- Tränare: Översikt, Träningar, Matcher och Spelare
+- Besökare: Översikt, Träningar och Matcher
 
-Desktop använder samma tre huvudvyer i en enkel sidomeny eller toppnavigation.
+Desktop använder samma rollanpassade huvudvyer i en enkel sidomeny eller toppnavigation.
 
 ---
 
@@ -214,8 +228,8 @@ Klick öppnar matchdetalj.
 Visa:
 
 - namn
-- nivå
-- eventuellt antal matcher hittills
+- nivå, endast för tränare
+- eventuellt antal matcher hittills, endast för tränare
 
 ### Justera laget
 
@@ -231,9 +245,13 @@ I redigeringsläge:
 
 Systemet ska inte blockera manuella val, bara varna.
 
+Besökare ser matchuttagningen utan redigeringskontroller och utan nivåer eller historikmått.
+
 ---
 
 ## 6.4 Spelare
+
+Vyn är endast tillgänglig för tränare. Besökare ska nekas även vid direkt navigation.
 
 ### Header
 
@@ -257,6 +275,8 @@ Klick öppnar spelarkort.
 ---
 
 ## 6.5 Spelarkort
+
+Vyn är endast tillgänglig för tränare. Besökare får inte kunna läsa spelarprofil eller spelarhistorik genom UI, route eller direkt dataanrop.
 
 Visa:
 
@@ -645,16 +665,16 @@ Returnera:
 
 # 16. Auth
 
-MVP har tre tränare med varsitt användarkonto och gemensam åtkomst till samma lag.
+MVP har tre tränare med varsitt användarkonto och gemensam åtkomst till samma lag. Inloggade besökare kan läggas till med begränsad läsåtkomst.
 
 Rekommenderat:
 
 - Supabase Auth
 - magic link eller email/password
 
-Användarna kopplas till laget genom `team_members` med rollen `coach`. MVP innehåller ingen sida för att bjuda in eller administrera tränare; de första tre medlemskapen skapas vid initial uppsättning.
+Användarna kopplas till laget genom `team_members` med rollen `coach` eller `viewer`. MVP innehåller ingen sida för att bjuda in eller administrera medlemmar; medlemskapen skapas vid initial uppsättning.
 
-Ingen publik spelarsida, spelarinloggning eller föräldrainloggning behövs.
+Ingen publik spelarsida, spelarinloggning eller föräldrainloggning införs. `viewer` är en autentiserad lagroll och får endast den begränsade lagyta som definieras i avsnitt 3.
 
 ---
 
@@ -677,7 +697,7 @@ Lagra inte:
 
 Använd Row Level Security i Supabase.
 
-En användare ska endast komma åt lag den har behörighet till.
+En användare ska endast komma åt lag och funktioner som dess aktiva medlemskap och roll tillåter. `viewer` får inte få spelarnivå eller individuell spelarhistorik i databas-, server- eller nätverkssvar.
 
 Row Level Security ska kontrollera ett aktivt medlemskap i `team_members`. Säkerheten ska testas både positivt och negativt.
 

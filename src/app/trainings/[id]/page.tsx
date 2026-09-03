@@ -28,7 +28,7 @@ export default async function TrainingPage({params,searchParams}:{params:Promise
  let training;
  try{training=await loadTrainingPlan(supabase,context.teamId,context.seasonId,id)}catch{notFound()}
  const query=await searchParams;
- return <AppShell currentItem="Träningar"><main className="mx-auto max-w-3xl">
+ return <AppShell currentItem="Träningar" role={context.role}><main className="mx-auto max-w-3xl">
   <Link href="/trainings" className="inline-flex min-h-11 items-center text-sm font-semibold text-blue-700">← Till träningar</Link>
   {query.change==="saved"?<p role="status" className="mb-4 rounded-xl bg-emerald-50 p-3 text-sm text-emerald-900">Träningsplanen är sparad.</p>:null}
   {query.change==="stale"?<p role="alert" className="mb-4 rounded-xl bg-amber-50 p-3 text-sm text-amber-950">En annan tränare har ändrat planen. Kontrollera den senaste versionen innan du försöker igen.</p>:null}
@@ -50,7 +50,7 @@ export default async function TrainingPage({params,searchParams}:{params:Promise
     </div>
    </li></Fragment>})})()}</ol>
    <p className="mt-6 text-xs text-slate-500">Senast ändrad av {training.updatedBy} · tiderna är vägledande.</p>
-   {training.status!=="completed"?<Link href={`/trainings/${id}/edit`} className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-blue-700 px-4 font-semibold text-white">Redigera planeringen</Link>:null}
+   {context.role==="coach"&&training.status!=="completed"?<Link href={`/trainings/${id}/edit`} className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-blue-700 px-4 font-semibold text-white">Redigera planeringen</Link>:null}
   </article>
  </main></AppShell>;
 }

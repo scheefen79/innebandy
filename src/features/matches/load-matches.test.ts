@@ -25,30 +25,16 @@ const row = {
 
 describe("match queries", () => {
   it("loads only future upcoming matches for the active team and season", async () => {
-    const source = createQuery({ data: [row], error: null });
-    const selections = createQuery({ data: [{ match_id: "match-1" }], error: null });
-    const from = vi.fn((table: string) => table === "matches" ? source.query : selections.query);
-    const result = await loadMatches({ from } as unknown as SupabaseClient, "team-1", "season-1", "upcoming", "2026-08-17T10:00:00.000Z");
-    expect(from).toHaveBeenCalledWith("matches");
-    expect(source.calls).toEqual([
-      ["eq", "team_id", "team-1"], ["eq", "season_id", "season-1"],
-      ["eq", "status", "upcoming"], ["gte", "starts_at", "2026-08-17T10:00:00.000Z"],
-      ["order", "starts_at", { ascending: true }],
-    ]);
-    expect(selections.calls).toEqual([
-      ["in", "match_id", ["match-1"]], ["eq", "selection_type", "regular"], ["eq", "selection_status", "selected"],
-    ]);
+    const rpc=vi.fn().mockResolvedValue({data:[{id:"match-1",opponent:"Täby FC",startsAt:row.starts_at,location:null,targetPlayers:8,status:"upcoming",selectedPlayers:1}],error:null});
+    const result = await loadMatches({ rpc } as unknown as SupabaseClient, "team-1", "season-1", "upcoming", "2026-08-17T10:00:00.000Z");
+    expect(rpc).toHaveBeenCalledWith("get_match_list",{target_team_id:"team-1",target_season_id:"season-1",requested_filter:"upcoming",requested_now:"2026-08-17T10:00:00.000Z"});
     expect(result[0]).toMatchObject({ id: "match-1", selectedPlayers: 1, startsAt: row.starts_at, targetPlayers: 8 });
   });
 
   it("loads all season matches descending without a time or status filter", async () => {
-    const source = createQuery({ data: [row], error: null });
-    const selections = createQuery({ data: [], error: null });
-    await loadMatches({ from: vi.fn((table: string) => table === "matches" ? source.query : selections.query) } as unknown as SupabaseClient, "team-1", "season-1", "all", "now");
-    expect(source.calls).toEqual([
-      ["eq", "team_id", "team-1"], ["eq", "season_id", "season-1"],
-      ["order", "starts_at", { ascending: false }],
-    ]);
+    const rpc=vi.fn().mockResolvedValue({data:[],error:null});
+    await loadMatches({rpc} as unknown as SupabaseClient,"team-1","season-1","all","now");
+    expect(rpc).toHaveBeenCalledWith("get_match_list",expect.objectContaining({requested_filter:"all"}));
   });
 
   it("scopes a detail lookup to both team and season and returns null when hidden", async () => {

@@ -17,7 +17,7 @@ export default async function AdjustMatchPage({ params, searchParams }: { params
   const userId = await getVerifiedUserId();
   if (!userId) redirect(`/login?next=${encodeURIComponent(`/matches/${id}/adjust`)}`);
   const context = await loadTeamContext(supabase);
-  if (!context) redirect("/access-denied");
+  if (!context || context.role !== "coach") redirect("/access-denied");
   const match = await loadMatch(supabase, context.teamId, context.seasonId, id);
   if (!match) notFound();
   if (match.status !== "upcoming" || Date.parse(match.startsAt) <= Date.parse(new Date().toISOString())) redirect(`/matches/${id}`);
@@ -25,11 +25,13 @@ export default async function AdjustMatchPage({ params, searchParams }: { params
     loadMatchRoster(supabase, context.teamId, context.seasonId, id),
     loadManualAdjustmentFingerprint(supabase, context.teamId, context.seasonId, id),
   ]);
-  const outgoing = roster.filter((player) => player.selectionType === "regular" && player.selectionSource === "automatic" && player.selectionStatus === "selected");
-  const incoming = roster.filter((player) => player.isActive && player.selectionStatus === null);
+  const leveledRoster=roster.filter((player):player is typeof player&{level:NonNullable<typeof player.level>}=>player.level!==null);
+  if(leveledRoster.length!==roster.length)throw new Error("Spelarnivåer saknas i tränarvyn.");
+  const outgoing = leveledRoster.filter((player) => player.selectionType === "regular" && player.selectionSource === "automatic" && player.selectionStatus === "selected");
+  const incoming = leveledRoster.filter((player) => player.isActive && player.selectionStatus === null);
   const error = (await searchParams).error;
 
-  return <AppShell currentItem="Matcher"><main className="mx-auto max-w-2xl">
+  return <AppShell currentItem="Matcher" role={context.role}><main className="mx-auto max-w-2xl">
     <Link href={`/matches/${id}`} className="inline-flex min-h-11 items-center text-sm font-semibold text-blue-700">← Till matchen</Link>
     <h1 className="mt-2 text-3xl font-bold text-slate-950">Justera ordinarie lag</h1>
     <p className="mt-2 text-slate-600">{match.opponent}. Bytet gäller endast denna match och påverkar inte extra inhopp.</p>

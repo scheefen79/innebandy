@@ -8,10 +8,11 @@ export default function AccessDeniedPage() {
           Åtkomst saknas
         </p>
         <h1 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">
-          Kontot är inte kopplat till laget
+          Sidan är inte tillgänglig för kontot
         </h1>
         <p className="mt-3 text-sm leading-6 text-slate-600">
-          Be projektägaren kontrollera att tränarkontot har ett aktivt lagmedlemskap.
+          Kontot saknar antingen ett aktivt lagmedlemskap eller den roll som krävs för den här sidan. Be
+          projektägaren kontrollera medlemskapet och rollen om du tror att detta är fel.
         </p>
         <form action="/auth/logout" className="mt-6" method="post">
           <button

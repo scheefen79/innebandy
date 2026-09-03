@@ -13,7 +13,7 @@ export default async function NewMatchPage({ searchParams }: { searchParams: Pro
   const userId = await getVerifiedUserId();
   if (!userId) redirect("/login?next=/matches/new");
   const context = await loadTeamContext(supabase);
-  if (!context) redirect("/access-denied");
+  if (!context || context.role !== "coach") redirect("/access-denied");
 
   const { count, error: countError } = await supabase.from("players").select("id", { count: "exact", head: true })
     .eq("team_id", context.teamId).eq("season_id", context.seasonId).eq("is_active", true);
@@ -21,7 +21,7 @@ export default async function NewMatchPage({ searchParams }: { searchParams: Pro
   const defaultTarget = count ? Math.ceil(count / 2) : undefined;
   const error = (await searchParams).error;
 
-  return <AppShell currentItem="Matcher"><div className="mx-auto max-w-xl">
+  return <AppShell currentItem="Matcher" role={context.role}><div className="mx-auto max-w-xl">
     <Link href="/matches" className="inline-flex min-h-11 items-center text-sm font-semibold text-blue-700">← Till matcher</Link>
     <h1 className="mt-2 text-3xl font-bold text-slate-950">Ny match</h1><p className="mt-2 text-sm text-slate-600">Datum och tid anges i svensk tid.</p>
     {error ? <div role="alert" className="mt-5 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-800">{error === "conflict" ? "Formuläret har redan använts med andra uppgifter. Ladda om sidan och försök igen." : error}</div> : null}

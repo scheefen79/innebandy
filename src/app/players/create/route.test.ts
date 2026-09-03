@@ -1,12 +1,14 @@
 import { NextRequest } from "next/server";
 import { beforeEach,expect,it,vi } from "vitest";
 const create=vi.hoisted(()=>vi.fn().mockResolvedValue({status:"ok",playerId:"f4000000-0000-4000-8000-000000000009"}));
+const membership=vi.hoisted(()=>({role:"coach" as "coach"|"viewer"}));
 vi.mock("@/lib/supabase/route-handler",()=>({createRouteHandlerClient:()=>({applyAuthState:(r:Response)=>r,supabase:{}})}));
 vi.mock("@/lib/auth/verified-user",()=>({getVerifiedUserId:async()=>"actor"}));
-vi.mock("@/lib/auth/team-context",()=>({loadTeamContext:async()=>({teamId:"team",seasonId:"season",seasonName:"S"})}));
+vi.mock("@/lib/auth/team-context",()=>({loadTeamContext:async()=>({teamId:"team",seasonId:"season",seasonName:"S",role:membership.role})}));
 vi.mock("@/lib/supabase/admin",()=>({createAdminClient:()=>({kind:"admin"})}));
 vi.mock("@/features/players/player-management",async(importOriginal)=>({...await importOriginal<typeof import("@/features/players/player-management")>(),createPlayer:create}));
 import { POST } from "./route";
-beforeEach(()=>create.mockReset().mockResolvedValue({status:"ok",playerId:"f4000000-0000-4000-8000-000000000009"}));
+beforeEach(()=>{membership.role="coach";create.mockReset().mockResolvedValue({status:"ok",playerId:"f4000000-0000-4000-8000-000000000009"});});
 it("creates a validated player through the server boundary",async()=>{const body=new URLSearchParams({first_name:"Ada",last_name:"Ett",level:"1",request_id:"f7000000-0000-4000-8000-000000000001"});const response=await POST(new NextRequest("https://app.example/players/create",{method:"POST",body}));expect(create).toHaveBeenCalledWith({kind:"admin"},expect.objectContaining({firstName:"Ada",level:1}));expect(response.headers.get("location")).toBe("https://app.example/players/f4000000-0000-4000-8000-000000000009?change=created");});
 it("rejects invalid input before mutation",async()=>{const response=await POST(new NextRequest("https://app.example/players/create",{method:"POST",body:new URLSearchParams({first_name:"",level:"2"})}));expect(create).not.toHaveBeenCalled();expect(response.headers.get("location")).toContain("/players/new?error=");});
+it("rejects a viewer before the server mutation",async()=>{membership.role="viewer";const body=new URLSearchParams({first_name:"Ada",level:"1",request_id:"f7000000-0000-4000-8000-000000000001"});const response=await POST(new NextRequest("https://app.example/players/create",{method:"POST",body}));expect(create).not.toHaveBeenCalled();expect(response.headers.get("location")).toBe("https://app.example/access-denied");});
