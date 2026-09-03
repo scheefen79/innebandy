@@ -40,7 +40,10 @@ export async function updateSession(request: NextRequest) {
   const { data: verifiedSession } = await supabase.auth.getClaims();
   const claims = verifiedSession?.claims;
   const isLoginRoute = request.nextUrl.pathname === "/login";
-  const isPublicAuthRoute = isLoginRoute || request.nextUrl.pathname === "/auth/login";
+  const isPublicAuthRoute =
+    isLoginRoute ||
+    request.nextUrl.pathname === "/auth/login" ||
+    request.nextUrl.pathname === "/auth/set-password";
 
   if (claims?.sub) {
     request.headers.set(VERIFIED_USER_HEADER, claims.sub);
