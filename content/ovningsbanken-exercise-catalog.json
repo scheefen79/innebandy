@@ -1,0 +1,2237 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-09-05T20:54:36.468Z",
+  "source": {
+    "name": "Svensk Innebandys Övningsbank",
+    "archiveUrl": "https://www.innebandy.se/ovningsbanken",
+    "attribution": "Övningarnas originalkälla är Svensk Innebandys Övningsbank. Appen lagrar endast katalogmetadata och länkar till originalet."
+  },
+  "exercises": [
+    {
+      "id": "3-mot-3-med-vaggar-skjuta-snabba-avslut",
+      "title": "3 mot 3 med väggar - Skjuta - snabba avslut",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/3-mot-3-med-vaggar-skjuta-snabba-avslut",
+      "sourceImageUrl": "https://www.innebandy.se/media/zarfqkru/bla-rod-snabba-avslut.png?width=1632&height=840&v=1dc6aac02776310&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142472435/rendition/720p/file.mp4%20%28720p%29.mp4?loc=external&signature=b35de68eca1a0b7d9afc357acdc3823f04a03c1354750cfc9ce62e87a635c711",
+      "summary": "Spel på begränsad yta med möjlighet till väggspel hos vilande spelare. I denna övning vill vi uppmuntra många avslut på olika sätt. ",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut"
+      ],
+      "skills": [
+        "Duellspel",
+        "Avslut",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Defensiv sortering",
+        "Markera",
+        "Pressa"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "360-kontroll-1-v-1",
+      "title": "360 kontroll - 1 v 1",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/360-kontroll-1-v-1",
+      "sourceImageUrl": null,
+      "sourceVideoUrl": null,
+      "summary": "Övningen syftar till att röra sig i alla olika riktningar med olika hastigheter och god bollkontroll. ",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Etablerat försvarsspel",
+        "Teknikträning"
+      ],
+      "skills": [
+        "Duellspel",
+        "Driva boll",
+        "Vända med boll",
+        "Bollbehandling",
+        "Utmana/dribbla"
+      ],
+      "levels": [
+        "Grön 6-9 år",
+        "Röd 12-16 år",
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "360-kontroll-innebandykull",
+      "title": "360 kontroll - Innebandykull",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/360-kontroll-innebandykull",
+      "sourceImageUrl": "https://www.innebandy.se/media/aujl5lu2/gron-bla-360-kontroll-innebandykull.png?width=1632&height=840&v=1dc6aac04de50f0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142469069/rendition/720p/file.mp4?loc=external&signature=9d430e067bb07a570af8f72d022061fa3245f013a2395b4873eb811781c38edf",
+      "summary": "Att kunna röra sig i alla olika riktningar med olika hastigheter och god bollkontroll kommer att hjälpa bollförare att navigera i den ständigt förändrade miljö som ett matchspel innebär. Också viktigt att ha en uppfattning om vad som händer runt dig och var motståndare som vill ta bollen av dig finns. ",
+      "themes": [
+        "Teknikträning"
+      ],
+      "skills": [
+        "Driva boll",
+        "Vända med boll",
+        "Bollbehandling",
+        "Offensiva beslut"
+      ],
+      "levels": [
+        "Grön 6-9 år",
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "360-kontroll-spegeln",
+      "title": "360 kontroll - spegeln",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/360-kontroll-spegeln",
+      "sourceImageUrl": "https://www.innebandy.se/media/rxiggk1z/gron-360-kontroll-spegeln.png?width=1632&height=840&v=1dc6aac0292da50&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142469335/rendition/720p/file.mp4?loc=external&signature=d653eb0c2004c008a7edeb2112c73b7f22fdb5b9de92a6f6fc8a5aaf37effca1",
+      "summary": "Övningen syftar till att röra sig i alla olika riktningar med olika hastigheter och god bollkontroll. ",
+      "themes": [
+        "Fysträning",
+        "Teknikträning"
+      ],
+      "skills": [
+        "Koordination",
+        "Bollbehandling",
+        "Driva boll"
+      ],
+      "levels": [
+        "Grön 6-9 år",
+        "Röd 12-16 år",
+        "Blå 9-12 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "armhavning",
+      "title": "Armhävning",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/armhavning",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142473969/rendition/720p/file.mp4?loc=external&signature=71d054932970a25fe0f5218b7b4cb21801ec9bb36f73c2b9c309f43161bd737e",
+      "summary": "Tränar i första hand styrkan i bröstmusklerna och triceps (armarnas baksida).",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Styrka"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "avslut-1-v-1-plus-1",
+      "title": "Avslut - 1 v 1 + 1",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/avslut-1-v-1-plus-1",
+      "sourceImageUrl": "https://www.innebandy.se/media/zq1furod/bla-skjuta-1-v-1-plus-1.png?width=1632&height=840&v=1dc6aac02d5fdd0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142469893/rendition/720p/file.mp4?loc=external&signature=14a76875c378cf61bf0ad4202db18f1ce57c353ac29eee22acee3e19d3814d65",
+      "summary": "Avslutsträning centralt i banan för att lära sig hitta lösningar och alternativ för avslut inne centralt i banan.",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Etablerat försvarsspel",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Avslut",
+        "Passning/mottagning",
+        "Spelbarhet",
+        "Defensiv sortering",
+        "Markera"
+      ],
+      "levels": [
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "avslut-markan",
+      "title": "Avslut - Markan",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/avslut-markan",
+      "sourceImageUrl": "https://www.innebandy.se/media/f0hjostb/bla-markan.png?width=1632&height=840&v=1dc6aac02ffa5e0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142469849/rendition/720p/file.mp4?loc=external&signature=f59cdbcb836cf467c86223e9096f3e2909042a156f7dc1f4c729f9a68af03348",
+      "summary": "Att träna avslut och när avslut ska tas är en viktig del i innebandy. Här jobbar vi med avslut kopplat till olika spelsituationer i varierande svårighetsgrad. ",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Avslut",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Pressa",
+        "Markera",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "avslut-skottormen",
+      "title": "Avslut - skottormen",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/avslut-skottormen",
+      "sourceImageUrl": "https://www.innebandy.se/media/zwhncwsl/gron-bla-avslut-skottormen.png?width=1632&height=840&v=1dc6aac034f7390&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142468862/rendition/720p/file.mp4?loc=external&signature=799041fb66028361272756bfde390cc6ddce160decc2de1d16d8c4316543c7dc",
+      "summary": "Driva boll i fart under lite stress (nästa spelare ska starta när du är halvvägs genom konerna) samt att skjuta mot mål i fart. ",
+      "themes": [
+        "Komma till avslut",
+        "Teknikträning"
+      ],
+      "skills": [
+        "Driva boll",
+        "Bollbehandling",
+        "Avslut"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "balansera-over-bankar",
+      "title": "Balansera över bänkar",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/balansera-over-bankar",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1145259297/rendition/720p/file.mp4?loc=external&signature=94f0434dc0c4dfd9c37e0fc76c38e54be0e9f0ca605ccb0476477ac59b2be122",
+      "summary": "Bollkontroll och grundteknik. Lär dig att hantera boll och klubba i olika typer av rörelser. ",
+      "themes": [
+        "Teknikträning"
+      ],
+      "skills": [
+        "Bollbehandling"
+      ],
+      "levels": [
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "balstrackning-med-boll",
+      "title": "Bålsträckning med boll",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/balstrackning-med-boll",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142474687/rendition/720p/file.mp4?loc=external&signature=5cfd84661952f251c7dfb08590e336aacb9503acbec9ec5d2491fdb21f5fd2a9",
+      "summary": "Tränar i första hand bålens muskulatur och förmågan att ha god bålkontroll.",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Styrka"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "benboj",
+      "title": "Benböj",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/benboj",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142474591/rendition/720p/file.mp4?loc=external&signature=3d2ad92ffd01102c3718c302397c738de18bb976b0bd045cfaf90bbcdc26fd8a",
+      "summary": "Tränar styrkan i benens muskler och bidrar till att spelaren kan utveckla mer kraft i olika rörelser.",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Styrka"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "british-bulldogs",
+      "title": "British Bulldogs",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/british-bulldogs",
+      "sourceImageUrl": "https://www.innebandy.se/media/ny3fsm5h/gron-british-bulldogs.png?width=1632&height=840&v=1dc6aac02adb550&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142468550/rendition/720p/file.mp4?loc=external&signature=012c497a41440ecf2f87d1403d6181fa1f1fa31166c1f4b3840798f58c16898d",
+      "summary": "Övningen är i grunden en lek, men som också syftar till att kunna driva boll och samtidigt ha koll på vad som händer runt sig. I detta fall, var är jägaren och hur tar jag mig förbi utan att min svans blir tagen. ",
+      "themes": [
+        "Teknikträning",
+        "Lek"
+      ],
+      "skills": [
+        "Driva boll",
+        "Offensiva beslut",
+        "Bollbehandling"
+      ],
+      "levels": [
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "copenhagen-hip",
+      "title": "Copenhagen Hip",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/copenhagen-hip",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142474746/rendition/720p/file.mp4?loc=external&signature=de143d14d3b11293b54a66bf219ba5ffd4e643560be20c0677fd08c206202a02",
+      "summary": "Tränar i första hand excentrisk styrka i ljumskens muskler.",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Koordination",
+        "Styrka"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "direktskott",
+      "title": "Direktskott",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/direktskott",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1145259157/rendition/720p/file.mp4%20%28720p%29.mp4?loc=external&signature=dd03d2d2baf1eb9833716a696e928957c10d67893acfca6ec20ed9ed8abd2dd9",
+      "summary": "Bollkontroll och grundteknik. Träna i lugnt tempo på att skjuta direktskott genom att släpa bladet i marken innan du träffar bollen. ",
+      "themes": [
+        "Teknikträning"
+      ],
+      "skills": [
+        "Bollbehandling",
+        "Avslut"
+      ],
+      "levels": [
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "dragpassningar",
+      "title": "Dragpassningar",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/dragpassningar",
+      "sourceImageUrl": "https://www.innebandy.se/media/dhjh5azp/dragpassningar.png?width=1632&height=840&v=1dc6aac04401520&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1066574991/rendition/720p/file.mp4?loc=external&signature=cb5a4a81d0abb6f5d508b83581fea99eb0d1d52e108f24ed4cf04d77915d2836",
+      "summary": "Grundteknik när det gäller att dra iväg passningar, men även att ta emot passningar med kontroll. ",
+      "themes": [
+        "Teknikträning"
+      ],
+      "skills": [
+        "Passning/mottagning",
+        "Bollbehandling"
+      ],
+      "levels": [
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "driva-boll-4-malsmatchen",
+      "title": "Driva boll - 4 målsmatchen",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/driva-boll-4-malsmatchen",
+      "sourceImageUrl": "https://www.innebandy.se/media/ijtdvkyh/bla-driva-2-mal-4-malsmatch.png?width=1632&height=840&v=1dc6aac04c3c410&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142470029/rendition/720p/file.mp4?loc=external&signature=62b1afbec14f0b3a066514af909813f9b3670fb4397180d99cde2d6e0ee7b109",
+      "summary": "Driva med boll är en central egenskap för att erövra ytor, utmana och ta sig förbi motståndare samt skapa nya passnings/avslutsmöjligheter. ",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Etablerat försvarsspel",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Utmana/dribbla",
+        "Avslut",
+        "Passning/mottagning",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "driva-boll-fargbollen",
+      "title": "Driva boll - färgbollen",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/driva-boll-fargbollen",
+      "sourceImageUrl": "https://www.innebandy.se/media/gl3ni2p5/bla-fargbollen.png?width=1632&height=840&v=1dc6aac03e68370&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142469757/rendition/720p/file.mp4?loc=external&signature=60973b4c49c0f478c0be3605a5a25f826cbc683ab9534cc2aa06c859c73fb8ff",
+      "summary": "Driva med boll är en central egenskap för att erövra ytor, utmana och ta sig förbi motståndare samt skapa nya passnings/avslutsmöjligheter. Behålla bollen inom laget.",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Teknikträning"
+      ],
+      "skills": [
+        "Driva boll",
+        "Vända med boll",
+        "Bollbehandling",
+        "Passning/mottagning",
+        "Offensiva beslut"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år"
+      ]
+    },
+    {
+      "id": "driva-boll-gatloppet",
+      "title": "Driva boll - gatloppet",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/driva-boll-gatloppet",
+      "sourceImageUrl": "https://www.innebandy.se/media/3ukjc0ke/gron-driva-gatloppet.png?width=1632&height=840&v=1dc6aac038884f0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142468591/rendition/720p/file.mp4?loc=external&signature=3579bc8ec31fb6f2ce52221dc679f8e6e27f20f37c6ce3746a3ff33cd60198b9",
+      "summary": "Driva boll på yta, utmana och ta sig förbi motståndare.",
+      "themes": [
+        "Teknikträning",
+        "Lek"
+      ],
+      "skills": [
+        "Driva boll",
+        "Bollbehandling",
+        "Utmana/dribbla"
+      ],
+      "levels": [
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "driva-boll-jaktlek",
+      "title": "Driva boll - Jaktlek",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/driva-boll-jaktlek",
+      "sourceImageUrl": "https://www.innebandy.se/media/yghoa2qz/gron-driva-jaktlek.png?width=1632&height=840&v=1dc6aac03f2b870&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142468633/rendition/720p/file.mp4?loc=external&signature=7896bce7c43f23c6bf05801003d61eabe19e65814b2895efd5d8222a9b998cbc",
+      "summary": "Driva boll med backcheckande spelare bakom dig. Hantera stressad situation och ändå kunna avsluta med kvalité. ",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Defensiv omställning"
+      ],
+      "skills": [
+        "Driva boll",
+        "Bollbehandling",
+        "Avslut",
+        "Duellspel",
+        "Utmana/dribbla"
+      ],
+      "levels": [
+        "Grön 6-9 år",
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "duell-och-direktpass",
+      "title": "Duell och direktpass",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/duell-och-direktpass",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1145264846/rendition/720p/file.mp4%20%28720p%29.mp4?loc=external&signature=e5bb4532c62d9123ec55711310e7f3eaecd0e22e78d7d028fee9725d689d12d5",
+      "summary": "I denna övning jobbar vi växelvis med passningar och att utmana sin motståndare. ",
+      "themes": [
+        "Teknikträning"
+      ],
+      "skills": [
+        "Passning/mottagning",
+        "Bollbehandling",
+        "Utmana/dribbla",
+        "Duellspel"
+      ],
+      "levels": [
+        "Grön 6-9 år",
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "duellspel-3-v-2",
+      "title": "Duellspel - 3 v 2",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/duellspel-3-v-2",
+      "sourceImageUrl": "https://www.innebandy.se/media/01qf1gk5/bla-rod-duellspel-3-v-2.png?width=1632&height=840&v=1dc6aac04a9d370&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142470095/rendition/720p/file.mp4?loc=external&signature=6bbe72d1223daf94d706cf949dc9a53b2b11fe76cd1b8564b0285ce1230f7322",
+      "summary": null,
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Etablerat försvarsspel",
+        "Förhindra avslut",
+        "Offensiv omställning",
+        "Defensiv omställning"
+      ],
+      "skills": [
+        "Duellspel",
+        "Avslut",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år"
+      ]
+    },
+    {
+      "id": "etablerat-anfall-forsvar-a",
+      "title": "Etablerat anfall & försvar A",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/etablerat-anfall-forsvar-a",
+      "sourceImageUrl": "https://www.innebandy.se/media/rjmpf1nu/svart-etablerat-anfall-och-forsvar-a.png?width=1632&height=840&v=1dc6aac05882580&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142474855/rendition/720p/file.mp4?loc=external&signature=de5b56477b06fff2abc05b7a2a262a19aae5010e3c48c046577956684d537cc7",
+      "summary": null,
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Etablerat försvarsspel",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Avslut",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Duellspel",
+        "Pressa",
+        "Markera",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "etablerat-anfall-forsvar-b",
+      "title": "Etablerat anfall & försvar B",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/etablerat-anfall-forsvar-b",
+      "sourceImageUrl": "https://www.innebandy.se/media/wodpcdgg/svart-etablerat-anfall-forsvar-b.png?width=1632&height=840&v=1dc6aac02226540&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142474962/rendition/720p/file.mp4?loc=external&signature=c941143ba7fc9af28ad0de2046d28722bfa4e94700112b44bb261acb05ac7d1b",
+      "summary": null,
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Etablerat försvarsspel",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Avslut",
+        "Offensiva beslut",
+        "Spelbarhet",
+        "Duellspel",
+        "Pressa",
+        "Markera",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "etablerat-anfall-forsvar-c",
+      "title": "Etablerat anfall & försvar C",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/etablerat-anfall-forsvar-c",
+      "sourceImageUrl": "https://www.innebandy.se/media/hdudugd5/svart-etablerat-anfall-forsvar-c.png?width=1632&height=840&v=1dc6aac022f0f70&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142475061/rendition/720p/file.mp4?loc=external&signature=da1b940654b599dd3d9aaed1995819d51702ce655693f0744e162297006db9f4",
+      "summary": null,
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Etablerat försvarsspel",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Avslut",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Duellspel",
+        "Pressa",
+        "Markera",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "evighetsstafett",
+      "title": "Evighetsstafett",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/evighetsstafett",
+      "sourceImageUrl": null,
+      "sourceVideoUrl": null,
+      "summary": "Fysfokus under tävlingsform. Övningen syftar till att jobba med uthållighet och repeterad sprintförmåga. Beroende på antal spelare i varje lag blir vilan olika lång och ställer således olika krav på den fysiska förmågan.",
+      "themes": [
+        "Fysträning",
+        "Lek"
+      ],
+      "skills": [
+        "Uthållighet"
+      ],
+      "levels": [
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "gyllene-kvadraten",
+      "title": "Gyllene Kvadraten",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/gyllene-kvadraten",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1145261149/rendition/720p/file.mp4?loc=external&signature=5800ca51907443ccf537e7fdcd97407a0e937285787c4cfaa1d78c2a369e9b61",
+      "summary": "I denna övning jobbar vi att ha kontroll på bollen samtidigt som du stöter på olika utmaningar, exempelvis i form av press från en motståndare. ",
+      "themes": [
+        "Teknikträning"
+      ],
+      "skills": [
+        "Bollbehandling",
+        "Utmana/dribbla",
+        "Duellspel",
+        "Driva boll",
+        "Vända med boll"
+      ],
+      "levels": [
+        "Grön 6-9 år",
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "hamstring-curl-pa-boll",
+      "title": "Hamstring curl på boll",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/hamstring-curl-pa-boll",
+      "sourceImageUrl": "https://www.innebandy.se/media/iocctvf0/tre-killar-med-klubba.jpg?cc=0,0.10340073529411765,0,0.2720588235294117&width=1632&height=840&v=1dc6aac054688a0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142475202/rendition/720p/file.mp4?loc=external&signature=8a004e9efc538e0cfca08b52f88cb759d72acae30e7d3cfccb5cbb5f13018837",
+      "summary": "Tränar i första hand styrkan i lårens baksida och i sätesmusklerna.",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Styrka"
+      ],
+      "levels": [
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "handledsskott",
+      "title": "Handledsskott",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/handledsskott",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1145259010/rendition/720p/file.mp4?loc=external&signature=233285a5f06b5b31ded56d6a0b07a889f9204372e92c7ebc5628c3ae86541900",
+      "summary": "Bollkontroll och grundteknik. Träna i lugnt tempo på att skjuta handledsskott. Våga flytta vikten över bollen och tryck ner/svikta klubban i marken. ",
+      "themes": [
+        "Teknikträning"
+      ],
+      "skills": [
+        "Bollbehandling",
+        "Avslut"
+      ],
+      "levels": [
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "hangande-rodd",
+      "title": "Hängande rodd",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/hangande-rodd",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142475447/rendition/720p/file.mp4?loc=external&signature=e2b445eb9d579a4a9c078bca8a37e63c1466455cf5c2414313f2ded2bab646b4",
+      "summary": "Tränar i första hand styrkan i ryggens övre muskler, biceps (armarnas framsida) och axlarna.",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Styrka"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "hantelpress-med-en-arm",
+      "title": "Hantelpress med en arm",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/hantelpress-med-en-arm",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142475289/rendition/720p/file.mp4?loc=external&signature=72d57dc15afd800409b2aa31a8dcd596069a4bf06a7413c9f40b4f01a3420e00",
+      "summary": "Tränar i första hand styrkan i bröstmusklerna, triceps (armens baksida) och axelmusklerna. ",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Styrka"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "hantelrodd",
+      "title": "Hantelrodd",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/hantelrodd",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142475367/rendition/720p/file.mp4?loc=external&signature=33a5e00ad6c791b20d2c06d3ef2cbbf0213c7a2c0af03f064dd04c0d1e921e8c",
+      "summary": "Tränar i första hand styrkan i ryggens övre muskler, biceps (armarnas framsida) och axlarna.",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Styrka"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "hinderbana",
+      "title": "Hinderbana",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/hinderbana",
+      "sourceImageUrl": "https://www.innebandy.se/media/ihfl5zfm/tumnagel-hinderbana.jpg?width=1632&height=840&v=1dc6aac056eaa10&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1066574886/rendition/720p/file.mp4?loc=external&signature=bd0b21def00ed8ed40f0ebf2ecbc9857be3c73c5666a97d36e187ca8b8d1f24a",
+      "summary": "Att bygga upp en hinderbana till uppvärmningen uppmuntrar barn att röra på sig på ett roligt och lekfullt sätt.",
+      "themes": [
+        "Lek",
+        "Fysträning"
+      ],
+      "skills": [
+        "Styrka",
+        "Koordination",
+        "Rörlighet"
+      ],
+      "levels": [
+        "Grön 6-9 år",
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "jag-och-bollen",
+      "title": "Jag och bollen",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/jag-och-bollen",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1145260905/rendition/720p/file.mp4?loc=external&signature=e4de07ef52382cd49bd7cb28e4b7ee59bd5491d3ba4422e9d05fde7b94728c54",
+      "summary": "I denna övning jobbar vi att ha kontroll på bollen genom att spegla rörelsen som din tränare framför dig gör.",
+      "themes": [
+        "Teknikträning"
+      ],
+      "skills": [
+        "Bollbehandling",
+        "Utmana/dribbla",
+        "Driva boll",
+        "Vända med boll"
+      ],
+      "levels": [
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "kast-i-sidled-med-medicinboll",
+      "title": "Kast i sidled med medicinboll",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/kast-i-sidled-med-medicinboll",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142475534/rendition/720p/file.mp4?loc=external&signature=a6fec1bc4bb8f997c9df759e10df6d2dbcb15f4d6aae92a5596f741b56126bfc",
+      "summary": "Tränar i första hand bålens muskulatur och förmågan att utveckla kraft i rotationer.",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Styrka",
+        "Koordination"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "knakontroll",
+      "title": "Knäkontrollen",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/knakontroll",
+      "sourceImageUrl": null,
+      "sourceVideoUrl": null,
+      "summary": "Starta med övningarna redan i de yngre åldrarna, genom att välja ut lättare övningar och övningar med lekfulla inslag, och sedan från ca 10-12 års ålder införa programmet i sin helhet.",
+      "themes": [
+        "Knäkontroll",
+        "Fysträning"
+      ],
+      "skills": [
+        "Koordination",
+        "Styrka"
+      ],
+      "levels": [
+        "Grön 6-9 år",
+        "Blå 9-12 år",
+        "Röd 12-16 år"
+      ]
+    },
+    {
+      "id": "kon-kaos",
+      "title": "Kon-kaos",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/kon-kaos",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1145260803/rendition/720p/file.mp4%20%28720p%29.mp4?loc=external&signature=9bb1c3ee7ac6305a13f9ebe3c47dca936f6c7aeb9ede59db9494929be54bcde9",
+      "summary": "Lek eller uppvärmningsövning som innehåller tävlingsmoment!",
+      "themes": [
+        "Fysträning",
+        "Lek"
+      ],
+      "skills": [
+        "Koordination",
+        "Rörlighet",
+        "Uthållighet"
+      ],
+      "levels": [
+        "Grön 6-9 år",
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "kontringar-stora-coast-to-coast",
+      "title": "Kontringar - stora coast to coast",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/kontringar-stora-coast-to-coast",
+      "sourceImageUrl": "https://www.innebandy.se/media/3jzhikxa/bla-rod-kontring-stora-coast-to-coast.png?width=1632&height=840&v=1dc6aac02851eb0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142472200/rendition/720p/file.mp4?loc=external&signature=f0b095ddc77dacddb6bb367c48fb524eba26e22806ebe7932447d6946aa2eafc",
+      "summary": null,
+      "themes": [
+        "Komma till avslut",
+        "Förhindra avslut",
+        "Offensiv omställning",
+        "Defensiv omställning"
+      ],
+      "skills": [
+        "Snabba förstapass",
+        "Offensiva beslut",
+        "Utmana/dribbla",
+        "Avslut",
+        "Passning/mottagning",
+        "Defensiv sortering",
+        "Duellspel"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "krabb-boll",
+      "title": "Krabb-boll",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/krabb-boll",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1145260744/rendition/720p/file.mp4%20%28720p%29.mp4?loc=external&signature=e01a7b297b8a6899378d7a149610cdaf3f9dc6c98660acae0cca1f80b0004adc",
+      "summary": "Lek eller uppvärmningsövning som innehåller tävlingsmoment!",
+      "themes": [
+        "Fysträning",
+        "Lek"
+      ],
+      "skills": [
+        "Koordination",
+        "Rörlighet",
+        "Uthållighet"
+      ],
+      "levels": [
+        "Grön 6-9 år",
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "malvakten-och-laget-inbagningar",
+      "title": "Målvakten och laget - inbågningar",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/malvakten-och-laget-inbagningar",
+      "sourceImageUrl": "https://www.innebandy.se/media/r43o1cgb/malvakten-och-laget-inbagning.png?width=1632&height=840&v=1dc6aac04674c30&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142475621/rendition/720p/file.mp4?loc=external&signature=9c3be668ac4b597e5fbb2933e10f62c9cb36e88619944b30a94e070a5ac80158",
+      "summary": "Rädda skott från ficka. Förflyttning från stolpe ut mot skytt. ",
+      "themes": [
+        "Målvakt"
+      ],
+      "skills": [],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "malvakten-och-laget-inspel-fran-horn-skanna",
+      "title": "Målvakten och laget - inspel från hörn, skanna",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/malvakten-och-laget-inspel-fran-horn-skanna",
+      "sourceImageUrl": "https://www.innebandy.se/media/wgklexg0/malvakten-och-laget-inspel-fran-horn-scanna.png?width=1632&height=840&v=1dc6aac035e40a0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142475756/rendition/720p/file.mp4?loc=external&signature=29b233281f7c14e5a8e952cf35959c12194b0f9b9e06a7b1da78b50fdc2179e4",
+      "summary": "Inspel från hörn till avslutare som ska skjuta direktskott. Jobba med att skanna uppåt i banan minst två gånger!",
+      "themes": [
+        "Målvakt"
+      ],
+      "skills": [
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "malvakten-och-laget-lasa-spelet-intentioner",
+      "title": "Målvakten och laget - läsa spelet, intentioner",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/malvakten-och-laget-lasa-spelet-intentioner",
+      "sourceImageUrl": "https://www.innebandy.se/media/ivibk2hd/malvakten-och-laget-lasa-spelet-intentioner.png?width=1632&height=840&v=1dc6aac03be6200&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142475880/rendition/720p/file.mp4?loc=external&signature=26353f42473878ff35c425ded4734a61877ad32ff5f64b7cc203c2c18cf00b0d",
+      "summary": "Övning som ger flera avslutsalternativ och syftar till att utmana målvakten att läsa vad den tror att bollförare kommer att göra. ",
+      "themes": [
+        "Målvakt"
+      ],
+      "skills": [
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "malvaktsovning-folja-john",
+      "title": "Målvaktsövning - följa John",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/malvaktsovning-folja-john",
+      "sourceImageUrl": "https://www.innebandy.se/media/3grfm1hy/malvaktsovningar-folja-john.png?width=1632&height=840&v=1dc6aac03a4e690&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142475979/rendition/720p/file.mp4?loc=external&signature=29ac837957aea4f530545eef593803cae2a77d87f3e9a71cf38c069d680beec9",
+      "summary": "Övning där målvakterna får träna olika typer av förflyttningar. ",
+      "themes": [
+        "Målvakt"
+      ],
+      "skills": [
+        "Koordination"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "malvaktsovning-hand-oga-koordination-med-skott",
+      "title": "Målvaktsövning - hand-öga koordination med skott",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/malvaktsovning-hand-oga-koordination-med-skott",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142476181/rendition/720p/file.mp4?loc=external&signature=3a7e9cd2e70ac2ae3e4aeb96f177c62b3b95346a41cb49599418a6abc15154a7",
+      "summary": "Övning där målvakterna får träna på sin hand-öga koordination. Detta tränar vi på genom att \"tracka\" bollen. ",
+      "themes": [
+        "Målvakt"
+      ],
+      "skills": [],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "malvaktsovning-hand-oga-koordination-parovning-kast",
+      "title": "Målvaktsövning - hand-öga koordination - parövning Kast",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/malvaktsovning-hand-oga-koordination-parovning-kast",
+      "sourceImageUrl": "https://www.innebandy.se/media/3grfm1hy/malvaktsovningar-folja-john.png?width=1632&height=840&v=1dc6aac03a4e690&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142476085/rendition/720p/file.mp4?loc=external&signature=4290b76747b06b0b7503badc0836638cb31f71d2ebd25ded0868db93297c25a2",
+      "summary": "Övning där målvakterna får träna på sin hand-öga koordination. Detta tränar vi på genom att \"tracka\" bollen. ",
+      "themes": [
+        "Målvakt"
+      ],
+      "skills": [],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "malvaktsovning-hand-oga-koordination-under-forflyttning-parovning",
+      "title": "Målvaktsövning - hand-öga koordination - under förflyttning parövning",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/malvaktsovning-hand-oga-koordination-under-forflyttning-parovning",
+      "sourceImageUrl": "https://www.innebandy.se/media/3grfm1hy/malvaktsovningar-folja-john.png?width=1632&height=840&v=1dc6aac03a4e690&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142476310/rendition/720p/file.mp4?loc=external&signature=11a35db229e68cb68672118ee3dd1a82bc0d309ddbec0259f97d6e8f7eb702ad",
+      "summary": "Övning där målvakterna får träna på sin hand-öga koordination. Detta tränar vi på genom att \"tracka\" bollen. ",
+      "themes": [
+        "Målvakt"
+      ],
+      "skills": [],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "malvaktsovning-returkontroll",
+      "title": "Målvaktsövning - returkontroll",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/malvaktsovning-returkontroll",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142476468/rendition/720p/file.mp4?loc=external&signature=e422e128344000397e0ae1aa2882413f992f09972f47ee0eb99a5816b232e1e4",
+      "summary": "Övning där målvakterna får träna på sin returkontroll. Att snabbt uppfatta var bollen tar vägen och ta kontroll på bollen. ",
+      "themes": [
+        "Målvakt"
+      ],
+      "skills": [],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "malvaktsovning-returkontroll-under-forflyttning",
+      "title": "Målvaktsövning - returkontroll under förflyttning",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/malvaktsovning-returkontroll-under-forflyttning",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142476397/rendition/720p/file.mp4?loc=external&signature=02f4d278c416939b01d13b2f5726ee10bbc600b949652e4ae4fd0320b708717f",
+      "summary": "Övning där målvakterna får träna på sin returkontroll efter de gjort en kort förflyttning. Att snabbt uppfatta var bollen tar vägen och ta kontroll på bollen. ",
+      "themes": [
+        "Målvakt"
+      ],
+      "skills": [],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "nordisk-hamstring",
+      "title": "Nordisk hamstring",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/nordisk-hamstring",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142476567/rendition/720p/file.mp4?loc=external&signature=fa8d42840e407f02eb1827f6dcf75ecaf7aedc858c6875d5704f012e38949778",
+      "summary": "Tränar i första hand excentrisk styrka i lårens baksida.",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Styrka",
+        "Koordination"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "omstallning-a",
+      "title": "Omställning A",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/omstallning-a",
+      "sourceImageUrl": "https://www.innebandy.se/media/soejzbbx/svart-omstallning-a.png?width=1632&height=840&v=1dc6aac044cbf50&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142476659/rendition/720p/file.mp4?loc=external&signature=014e5370cd1e02b759389e9067c10478b83e97dc460c5ca330d606c5bdb11d8a",
+      "summary": null,
+      "themes": [
+        "Komma till avslut",
+        "Förhindra avslut",
+        "Offensiv omställning",
+        "Defensiv omställning"
+      ],
+      "skills": [
+        "Passning/mottagning",
+        "Avslut",
+        "Utmana/dribbla",
+        "Spelbarhet",
+        "Snabba förstapass",
+        "Offensiva beslut",
+        "Defensiv sortering",
+        "Markera"
+      ],
+      "levels": [
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "omstallning-b",
+      "title": "Omställning B",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/omstallning-b",
+      "sourceImageUrl": "https://www.innebandy.se/media/akcbtrvs/svart-omstallning-b.png?width=1632&height=840&v=1dc6aac051fedd0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142476758/rendition/720p/file.mp4?loc=external&signature=845cb4e06bd8736659f69b927244e74b5d41efcbf2759cc40370918027f30e2a",
+      "summary": "Träna spelarnas färdigheter utifrån de spelbeteenden som krävs kopplat till omställningsspelet (både offensiva och defensiva omställningar).",
+      "themes": [
+        "Komma till avslut",
+        "Offensiv omställning",
+        "Defensiv omställning",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Avslut",
+        "Snabba förstapass",
+        "Offensiva beslut",
+        "Duellspel",
+        "Defensiv sortering",
+        "Pressa"
+      ],
+      "levels": [
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "pallof-press",
+      "title": "Pallof press",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/pallof-press",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142476871/rendition/720p/file.mp4?loc=external&signature=f47f9c2da0adf47f8ec9f6dba9e334ce6f22e08e746b12c9d1ab2eb050bf7d6d",
+      "summary": "Tränar i första hand bålens muskulatur och förmågan att ha god bålkontroll genom att motstå rotationer.",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Koordination",
+        "Styrka"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "passa-4-v-1",
+      "title": "Passa - 4 v 1",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/passa-4-v-1",
+      "sourceImageUrl": "https://www.innebandy.se/media/vklmvfk5/gron-passa-4-v-1.png?width=1632&height=840&v=1dc6aac04822730&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142469146/rendition/720p/file.mp4?loc=external&signature=da541b41a32ec92e826db7d13401c3f42823745fb5a73f7a8f2604693cb49300",
+      "summary": "Träna på passningar, hitta passningsvägar och göra sig spelbar utan bollen. Intensivt presspel utan boll för att kunna vinna boll och snabbt attackera något av målen. ",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Etablerat försvarsspel",
+        "Teknikträning"
+      ],
+      "skills": [
+        "Passning/mottagning",
+        "Spelbarhet",
+        "Pressa",
+        "Duellspel"
+      ],
+      "levels": [
+        "Grön 6-9 år",
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "passa-4-v-2",
+      "title": "Passa - 4 v 2",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/passa-4-v-2",
+      "sourceImageUrl": "https://www.innebandy.se/media/2nmf22nr/bla-passa-4-v-2.png?width=1632&height=840&v=1dc6aac03d8c7d0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142469146/rendition/720p/file.mp4?loc=external&signature=da541b41a32ec92e826db7d13401c3f42823745fb5a73f7a8f2604693cb49300",
+      "summary": "Träna på passningar, hitta passningsvägar och göra sig spelbar utan bollen. Intensivt presspel utan boll för att kunna vinna boll och snabbt attackera något av målen. ",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Passning/mottagning",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Pressa",
+        "Markera",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "passa-och-mottagning-basketbollen",
+      "title": "Passa och mottagning - Basketbollen",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/passa-och-mottagning-basketbollen",
+      "sourceImageUrl": null,
+      "sourceVideoUrl": null,
+      "summary": "Träna på passningar under rörelse, titta upp och kommunicera med medspelare.",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Teknikträning"
+      ],
+      "skills": [
+        "Passning/mottagning",
+        "Bollbehandling",
+        "Spelbarhet",
+        "Offensiva beslut"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "passa-passningsleken",
+      "title": "Passa - passningsleken",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/passa-passningsleken",
+      "sourceImageUrl": "https://www.innebandy.se/media/qi3bbwn0/gron-passa-passningsleken.png?width=1632&height=840&v=1dc6aac0554b970&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142468783/rendition/720p/file.mp4?loc=external&signature=6332e09f9084939b5bb789a49e19a75a5c8d15b14245080ebd9fa2db9e2ef4b0",
+      "summary": "Träna passningar och kommunikation i rörelse",
+      "themes": [
+        "Teknikträning",
+        "Etablerat anfallsspel"
+      ],
+      "skills": [
+        "Bollbehandling",
+        "Passning/mottagning",
+        "Spelbarhet",
+        "Offensiva beslut"
+      ],
+      "levels": [
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "passa-passningsleken-steg-2",
+      "title": "Passa - passningsleken Steg 2",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/passa-passningsleken-steg-2",
+      "sourceImageUrl": "https://www.innebandy.se/media/leshego4/gron-passa-passningsleken-steg-2.png?width=1632&height=840&v=1dc6aac023b4470&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142468783/rendition/720p/file.mp4?loc=external&signature=6332e09f9084939b5bb789a49e19a75a5c8d15b14245080ebd9fa2db9e2ef4b0",
+      "summary": "Träna passningar och kommunikation i rörelse. Undvik att bli av med bollen till motståndare. ",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Etablerat försvarsspel",
+        "Teknikträning"
+      ],
+      "skills": [
+        "Driva boll",
+        "Bollbehandling",
+        "Passning/mottagning",
+        "Utmana/dribbla",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Pressa"
+      ],
+      "levels": [
+        "Grön 6-9 år",
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "passning-spelbarhet-zon-till-zon",
+      "title": "Passning & spelbarhet - Zon till zon",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/passning-spelbarhet-zon-till-zon",
+      "sourceImageUrl": "https://www.innebandy.se/media/xwalyttt/rod-passa-zon-till-zon.png?width=1632&height=840&v=1dc6aac0326dcf0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142472367/rendition/720p/file.mp4?loc=external&signature=91f7dc809d38bfe50aa141badb20485182de15f6a4b70a2663d60391601c8d11",
+      "summary": null,
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Förhindra avslut",
+        "Etablerat försvarsspel"
+      ],
+      "skills": [
+        "Passning/mottagning",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Pressa",
+        "Markera",
+        "Defensiv sortering",
+        "Avslut"
+      ],
+      "levels": [
+        "Röd 12-16 år"
+      ]
+    },
+    {
+      "id": "passning-till-nedfalld-bank",
+      "title": "Passning till nedfälld bänk",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/passning-till-nedfalld-bank",
+      "sourceImageUrl": "https://www.innebandy.se/media/dhjh5azp/dragpassningar.png?width=1632&height=840&v=1dc6aac04401520&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1145258916/rendition/720p/file.mp4%20%28720p%29.mp4?loc=external&signature=e9b890a0a3a03550d16d6bbeedcd8730a50e52d3e8a22fb27223662461e09e94",
+      "summary": "Bollkontroll och passningsteknik i fart. I denna övning jobbar vi med att slå passningar och skjuta direktskott. ",
+      "themes": [
+        "Teknikträning"
+      ],
+      "skills": [
+        "Bollbehandling",
+        "Avslut",
+        "Passning/mottagning"
+      ],
+      "levels": [
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "passningar-ajax-leken",
+      "title": "Passningar - Ajax leken",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/passningar-ajax-leken",
+      "sourceImageUrl": "https://www.innebandy.se/media/tyagwwxv/bla-rod-passa-ajax-leken.png?width=1632&height=840&v=1dc6aac0341b7f0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142471981/rendition/720p/file.mp4?loc=external&signature=a4a31c70034d41ad4d87a2c481bcd5930dc3d9788675b9bcb2c8f9c5855ca343",
+      "summary": null,
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Etablerat försvarsspel",
+        "Offensiv omställning",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Duellspel",
+        "Passning/mottagning",
+        "Avslut",
+        "Spelbarhet",
+        "Snabba förstapass",
+        "Offensiva beslut",
+        "Defensiv sortering",
+        "Markera",
+        "Pressa"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år"
+      ]
+    },
+    {
+      "id": "pressa-1-v-2-2-v-1",
+      "title": "Pressa - 1 v 2 & 2 v 1",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/pressa-1-v-2-2-v-1",
+      "sourceImageUrl": "https://www.innebandy.se/media/ypon4xfo/rod-pressa-1v2-2v1.png?width=1632&height=840&v=1dc6aac036c7170&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142472130/rendition/720p/file.mp4?loc=external&signature=7df075e142d32f39a2fe5b8bae3e71b7989d6afa1dda29505e218c22cb005538",
+      "summary": null,
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Förhindra avslut",
+        "Etablerat försvarsspel"
+      ],
+      "skills": [
+        "Passning/mottagning",
+        "Utmana/dribbla",
+        "Avslut",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Pressa",
+        "Markera",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Röd 12-16 år"
+      ]
+    },
+    {
+      "id": "pressa-markera-3-v-5",
+      "title": "Pressa, Markera - 3 v 5",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/pressa-markera-3-v-5",
+      "sourceImageUrl": "https://www.innebandy.se/media/lmong14s/rod-pressa-markera-3-mot-5.png?width=1632&height=840&v=1dc6aac03b1b7d0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142472294/rendition/720p/file.mp4?loc=external&signature=901e8680c09c8b27a87db4cbb375991b4785ec6f60c580ebb3c05d922f8b53f9",
+      "summary": null,
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Etablerat försvarsspel",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Duellspel",
+        "Spelbarhet",
+        "Avslut",
+        "Offensiva beslut",
+        "Markera",
+        "Pressa",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "pressa-pressen",
+      "title": "Pressa - Pressen",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/pressa-pressen",
+      "sourceImageUrl": "https://www.innebandy.se/media/mjzjmig3/rod-pressa-pressen.png?width=1632&height=840&v=1dc6aac026820d0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142470181/rendition/720p/file.mp4?loc=external&signature=691b92b4082cb63d306ac53939298f0fdb69c7904bc0a9a88fd644258c37ae68",
+      "summary": "Spelövning som syftar till att träna på att förhindra speluppbyggnad. ",
+      "themes": [
+        "Speluppbyggnad",
+        "Komma till avslut",
+        "Förhindra uppspel",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Pressa",
+        "Markera",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "pressa-sargduellen",
+      "title": "Pressa - Sargduellen",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/pressa-sargduellen",
+      "sourceImageUrl": "https://www.innebandy.se/media/2tkbmlu3/bla-rod-sargduellen.png?width=1632&height=840&v=1dc6aac02a095f0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142469653/rendition/720p/file.mp4?loc=external&signature=4228cd2542420b7cbf45e1eec5ac716d75f94ded80723accbab722d0b6986856",
+      "summary": "Att spela ett aktivt presspel innebär att snabbt minska avståndet till motståndare och ta sig in i kroppen och bromsa dennes fart.",
+      "themes": [
+        "Etablerat försvarsspel",
+        "Förhindra uppspel"
+      ],
+      "skills": [
+        "Duellspel",
+        "Pressa"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år"
+      ]
+    },
+    {
+      "id": "pressa-tampa-deluxe",
+      "title": "Pressa - Tampa Deluxe",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/pressa-tampa-deluxe",
+      "sourceImageUrl": "https://www.innebandy.se/media/01qjshs4/bla-rod-pressa-pressen.png?width=1632&height=840&v=1dc6aac024a86b0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142469713/rendition/720p/file.mp4?loc=external&signature=ecbbd7fbc475e057aa8a4d0e9664cf19f4bc121ebca28aed5fe74be388775515",
+      "summary": "Att spela ett aktivt presspel innebär att snabbt minska avståndet till motståndare och ta sig in i kroppen och bromsa dennes fart.",
+      "themes": [
+        "Teknikträning",
+        "Etablerat anfallsspel",
+        "Etablerat försvarsspel"
+      ],
+      "skills": [
+        "Driva boll",
+        "Vända med boll",
+        "Bollbehandling",
+        "Duellspel",
+        "Pressa"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år"
+      ]
+    },
+    {
+      "id": "raka-marklyft",
+      "title": "Raka marklyft",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/raka-marklyft",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142476967/rendition/720p/file.mp4?loc=external&signature=6deacefbcd8e62444c40b0f9156b678231d6f1cfe1cc965181edbdb9f247cde9",
+      "summary": "Tränar i första hand styrkan i lårens baksida och i sätesmusklerna.",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Styrka"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "reflexen",
+      "title": "Reflexen",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/reflexen",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1145260675/rendition/720p/file.mp4?loc=external&signature=88b56c897541b037593afaf9d6112473512a9bf7de34f3dd3e6123794de31ef3",
+      "summary": "Lek som innehåller tävlingsmoment!",
+      "themes": [
+        "Lek"
+      ],
+      "skills": [
+        "Koordination"
+      ],
+      "levels": [
+        "Grön 6-9 år",
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "skivstangsrodd",
+      "title": "Skivstångsrodd",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/skivstangsrodd",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142477117/rendition/720p/file.mp4?loc=external&signature=42d27c4f43123e83074eb2337286a8c93350cd0ba177ec66db4bb27dfd16f614",
+      "summary": "Tränar i första hand styrkan i ryggens övre muskler, biceps (armarnas framsida) och axlarna.",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Styrka"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "skjuta-malen-i-mitten",
+      "title": "Skjuta - Målen i mitten",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/skjuta-malen-i-mitten",
+      "sourceImageUrl": "https://www.innebandy.se/media/1cspkznq/gron-bla-avslut-malen-i-mitten.png?width=1632&height=840&v=1dc6aac037a2d10&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142470214/rendition/720p/file.mp4?loc=external&signature=dd062b06756181a888f589ddb4125381a43e5d45b927d6297f4d50f6673d56fc",
+      "summary": "Syfte: Träna på att hitta avslutsmöjligheter samt lära sig försvara mot just avsluten. Avsluten i denna övning är inte spelsystemsberoende utan mängden avslut är i fokus.",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Avslut",
+        "Spelbarhet",
+        "Markera",
+        "Defensiv sortering",
+        "Utmana/dribbla",
+        "Bollbehandling"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "snurr-med-boll-grundteknik",
+      "title": "Snurr med boll grundteknik",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/snurr-med-boll-grundteknik",
+      "sourceImageUrl": "https://www.innebandy.se/media/j4aezfrk/snurr-med-boll.png?width=1632&height=840&v=1dc6aac048de700&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1066575106/rendition/720p/file.mp4?loc=external&signature=901ebc7c9ec4e62d5d265c934e9ab481c8443088d89b84cc997e097c25e3e19c",
+      "summary": "Grundteknik när det gäller att snurra med bollen. Vi tränar på att göra det med både forehand och backhand och i stegrande fart. ",
+      "themes": [
+        "Teknikträning"
+      ],
+      "skills": [
+        "Driva boll",
+        "Vända med boll",
+        "Bollbehandling"
+      ],
+      "levels": [
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "snurr-med-boll-rockringar",
+      "title": "Snurr med boll - rockringar",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/snurr-med-boll-rockringar",
+      "sourceImageUrl": "https://www.innebandy.se/media/j4aezfrk/snurr-med-boll.png?width=1632&height=840&v=1dc6aac048de700&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1145258790/rendition/720p/file.mp4%20%28720p%29.mp4?loc=external&signature=389bbdba3459c2802878b5d69654991b516e4fe350161459099505ec8da82732",
+      "summary": "Grundteknik när det gäller att snurra med bollen. Vi tränar på att göra det med både forehand och backhand och i stegrande fart. ",
+      "themes": [
+        "Teknikträning"
+      ],
+      "skills": [
+        "Driva boll",
+        "Vända med boll",
+        "Bollbehandling",
+        "Avslut"
+      ],
+      "levels": [
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "spelavstand-3-v-2",
+      "title": "Spelavstånd 3 v 2",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/spelavstand-3-v-2",
+      "sourceImageUrl": "https://www.innebandy.se/media/tdahzfxw/bla-rod-spelavstand-3-mot-2.png?width=1632&height=840&v=1dc6aac049b2d70&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142470339/rendition/720p/file.mp4?loc=external&signature=18781ca0dfe89ee8875fb09d467b8ecd2541e0c8ef4c20b050e9a67112d3beda",
+      "summary": null,
+      "themes": [
+        "Komma till avslut",
+        "Etablerat anfallsspel",
+        "Speluppbyggnad",
+        "Offensiv omställning",
+        "Förhindra avslut",
+        "Defensiv omställning"
+      ],
+      "skills": [
+        "Avslut",
+        "Spelbarhet",
+        "Passning/mottagning",
+        "Driva boll",
+        "Offensiva beslut",
+        "Pressa",
+        "Markera",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år"
+      ]
+    },
+    {
+      "id": "spelbarhet-2-v-2-plus-2",
+      "title": "Spelbarhet - 2 v 2 + 2",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/spelbarhet-2-v-2-plus-2",
+      "sourceImageUrl": "https://www.innebandy.se/media/0xxblahn/rod-spelbarhet-2-v-2-plus-2.png?width=1632&height=840&v=1dc6aac04336af0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142472488/rendition/720p/file.mp4?loc=external&signature=4dbb25745ed151d4e60c0c3b619e2170a642421a3902af8d778fa4c0a462d63c",
+      "summary": "Spelövning som syftar till att träna på speluppbyggnad samt etablerat anfall. Jobba med dina beslut med bollen och att behålla bollen inom laget. ",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Etablerat försvarsspel",
+        "Teknikträning"
+      ],
+      "skills": [],
+      "levels": [
+        "Röd 12-16 år"
+      ]
+    },
+    {
+      "id": "spelbarhet-centervandningen",
+      "title": "Spelbarhet - centervändningen",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/spelbarhet-centervandningen",
+      "sourceImageUrl": "https://www.innebandy.se/media/gsopr1ur/bla-rod-spelbredd-centervandningen.png?width=1632&height=840&v=1dc6aac0594cfb0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142472621/rendition/720p/file.mp4?loc=external&signature=ee3f92d54fcf4ce1e46bef8c36c819ac3eea6551bdaadd1fb4ec6b913c68e6ca",
+      "summary": "Att jobba med att flytta bollen från sida till sida för att skapa möjligheter att ta sig förbi sina motståndare. Genom rörelse utan bollen göra sig spelbar och redo att kunna attackera framåt. ",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Etablerat försvarsspel",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Passning/mottagning",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Duellspel",
+        "Pressa",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "spelbarhet-innebandydoppboll",
+      "title": "Spelbarhet - innebandydoppboll",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/spelbarhet-innebandydoppboll",
+      "sourceImageUrl": "https://www.innebandy.se/media/cfch35kt/bla-rod-innebandydoppboll.png?width=1632&height=840&v=1dc6aac05b1cd90&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142469937/rendition/720p/file.mp4?loc=external&signature=fa0aeb542f9ae1c5940504af776d158411ffa1d4fc4b9a2bbe4c1f8b0d6c0609",
+      "summary": "Att kunna implementera tanken kring att man som spelare ska passa bollen och hitta en ny yta för att kunna få tillbaka bollen är en viktig del i spelet innebandy. Därmed behöver man träna på det momentet väldigt mycket. Det är också ett sätt att lära sig läsa spelet bättre och lära sig vilka ytor återkommer i spelet. ",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Etablerat försvarsspel",
+        "Förhindra uppspel",
+        "Speluppbyggnad"
+      ],
+      "skills": [
+        "Bollbehandling",
+        "Passning/mottagning",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år"
+      ]
+    },
+    {
+      "id": "speldjup-jokerpoint",
+      "title": "Speldjup - jokerpoint",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/speldjup-jokerpoint",
+      "sourceImageUrl": "https://www.innebandy.se/media/xs2ekrzv/bla-rod-svart-speldjup-jokerpoint.png?width=1632&height=840&v=1dc6aac02f17510&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142471931/rendition/720p/file.mp4?loc=external&signature=a9882752e72ddf1c0006511b3d71dfdc12c20c5257292b866867e8f89b3da3ae",
+      "summary": "Syftar till att behålla bollen inom laget och så småningom anfalla och göra mål. Jobba med att göra sig spelbar. ",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Förhindra avslut",
+        "Etablerat försvarsspel"
+      ],
+      "skills": [
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Defensiv sortering",
+        "Duellspel"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "speldjup-spelovning-8-zonerna",
+      "title": "Speldjup - spelövning 8 Zonerna",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/speldjup-spelovning-8-zonerna",
+      "sourceImageUrl": "https://www.innebandy.se/media/35zeetiv/bla-rod-speldjup-zonerna.png?width=1632&height=840&v=1dc6aac030bdae0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142470434/rendition/720p/file.mp4?loc=external&signature=20ddad0ae5a4ba742e3050ccd834ae3c4e7ebaaae3d923adb566d7972972d16f",
+      "summary": null,
+      "themes": [
+        "Speluppbyggnad",
+        "Etablerat anfallsspel",
+        "Etablerat försvarsspel",
+        "Förhindra uppspel",
+        "Komma till avslut",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Passning/mottagning",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Pressa",
+        "Markera",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Blå 9-12 år"
+      ]
+    },
+    {
+      "id": "spelovning-anfall-a",
+      "title": "Spelövning - Anfall A",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/spelovning-anfall-a",
+      "sourceImageUrl": "https://www.innebandy.se/media/tl4bfqra/svart-anfall-a.png?width=1632&height=840&v=1dc6aac05067260&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142473616/rendition/720p/file.mp4?loc=external&signature=5671b2322f38a70612e217751b3d1f0ba083b958525ec4661ff545270443f780",
+      "summary": null,
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Speluppbyggnad",
+        "Etablerat försvarsspel",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Duellspel",
+        "Avslut",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Pressa",
+        "Markera",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "spelovning-anfall-b",
+      "title": "Spelövning - Anfall B",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/spelovning-anfall-b",
+      "sourceImageUrl": "https://www.innebandy.se/media/jbwhzwrh/svart-anfall-b.png?width=1632&height=840&v=1dc6aac0561ffe0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142473710/rendition/720p/file.mp4?loc=external&signature=e73dba3c8c44cc8b98fc15c9d481884b60f4c3f6647069a4f592443c4dcbea28",
+      "summary": null,
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Etablerat försvarsspel",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Avslut",
+        "Spelbarhet",
+        "Passning/mottagning",
+        "Utmana/dribbla",
+        "Offensiva beslut",
+        "Duellspel",
+        "Defensiv sortering",
+        "Pressa",
+        "Markera"
+      ],
+      "levels": [
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "spelovning-anfall-c",
+      "title": "Spelövning - Anfall C",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/spelovning-anfall-c",
+      "sourceImageUrl": "https://www.innebandy.se/media/qjmjbrt3/svart-anfall-c.png?width=1632&height=840&v=1dc6aac052c9800&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142473872/rendition/720p/file.mp4?loc=external&signature=685156ae3a704095921c3566f26ca6b6ce0bdab776cabbc668268899481a8373",
+      "summary": "Öva speluppbyggnad och offensiva principer.",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Etablerat försvarsspel",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Offensiva beslut",
+        "Spelbarhet",
+        "Utmana/dribbla",
+        "Pressa",
+        "Duellspel"
+      ],
+      "levels": [
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "spelovning-avslut-1a",
+      "title": "Spelövning - Avslut 1A",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/spelovning-avslut-1a",
+      "sourceImageUrl": "https://www.innebandy.se/media/xbqdm3kn/svart-avslut-1a.png?width=1632&height=840&v=1dc6aac0418de10&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1143784389/rendition/720p/file.mp4?loc=external&signature=c289b0fb19d6e4e7e4fe08d6b76e27444098f92c67f4b874d7a074a7b425eaee",
+      "summary": "Komma till avslut och göra mål!",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Avslut",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Duellspel",
+        "Markera"
+      ],
+      "levels": [
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "spelovning-avslut-1b",
+      "title": "Spelövning - Avslut 1B",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/spelovning-avslut-1b",
+      "sourceImageUrl": null,
+      "sourceVideoUrl": null,
+      "summary": null,
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Etablerat försvarsspel",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Avslut",
+        "Passning/mottagning",
+        "Spelbarhet",
+        "Snabba förstapass",
+        "Offensiva beslut",
+        "Markera",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "spelovning-avslut-1c",
+      "title": "Spelövning - Avslut 1C",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/spelovning-avslut-1c",
+      "sourceImageUrl": "https://www.innebandy.se/media/d1zos31s/svart-avslut-1c.png?width=1632&height=840&v=1dc6aac0425af50&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142474065/rendition/720p/file.mp4?loc=external&signature=38c2e043871e813f7403c7003b9a7b4bbb507cdfc416dfea6e68846604bb3444",
+      "summary": null,
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Etablerat försvarsspel",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Passning/mottagning",
+        "Avslut",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Pressa",
+        "Markera",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "spelovning-avslut-2a",
+      "title": "Spelövning - Avslut 2A",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/spelovning-avslut-2a",
+      "sourceImageUrl": "https://www.innebandy.se/media/ikdjlrn1/svart-avslut-2a.png?width=1632&height=840&v=1dc6aac05131c90&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142474201/rendition/720p/file.mp4?loc=external&signature=098e01dc712988766074a971e0f70f330bb2b6f7900a88887ebf3a22096b94c7",
+      "summary": "Syftar till att komma till avslut och göra mål samt speglingen förhindra avslut och rädda mål.",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Etablerat försvarsspel",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Avslut",
+        "Passning/mottagning",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Markera",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "spelovning-avslut-2b",
+      "title": "Spelövning - Avslut 2B",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/spelovning-avslut-2b",
+      "sourceImageUrl": "https://www.innebandy.se/media/n1wdptiw/svart-avslut-2b.png?width=1632&height=840&v=1dc6aac05394230&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142474345/rendition/720p/file.mp4?loc=external&signature=f0dbf932f8a7a585b843cb57bc51ad09d99130eeb7ad06f5f2c9a9738cfe9d46",
+      "summary": null,
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Etablerat försvarsspel",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Duellspel",
+        "Avslut",
+        "Spelbarhet",
+        "Utmana/dribbla",
+        "Offensiva beslut",
+        "Pressa",
+        "Markera"
+      ],
+      "levels": [
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "spelovning-avslut-2c",
+      "title": "Spelövning - Avslut 2C",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/spelovning-avslut-2c",
+      "sourceImageUrl": "https://www.innebandy.se/media/oigfeui3/svart-avslut-2c.png?width=1632&height=840&v=1dc6aac033582f0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142474466/rendition/720p/file.mp4?loc=external&signature=41416fdcbc738d5988f5076daa0234bdf1775c5daf82023795147dc1d2c007da",
+      "summary": "Öva på att komma till avslut respektive förhindra avslut och rädda mål. ",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Etablerat försvarsspel",
+        "Förhindra avslut"
+      ],
+      "skills": [
+        "Avslut",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Markera",
+        "Pressa",
+        "Defensiv sortering"
+      ],
+      "levels": [
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "spelovning-passa-spanska-kvadraten",
+      "title": "Spelövning - Passa - Spanska kvadraten",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/spelovning-passa-spanska-kvadraten",
+      "sourceImageUrl": "https://www.innebandy.se/media/uzfjqq3c/gron-rod-spelovning-spanska-kvadraten.png?width=1632&height=840&v=1dc6aac02c7a5f0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142469196/rendition/720p/file.mp4?loc=external&signature=5773563d1f8d42601c2dc7b6815b5999f39c2daef116310821cff0c0c109b9c8",
+      "summary": "Hålla bollen inom laget genom passningsspel och rörelse utan bollen (spelbar). Viktigt att kommunicera och berätta när du vill ha boll. ",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Etablerat försvarsspel"
+      ],
+      "skills": [
+        "Bollbehandling",
+        "Passning/mottagning",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Pressa"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Grön 6-9 år",
+        "Röd 12-16 år"
+      ]
+    },
+    {
+      "id": "spelovning-ytterzonen",
+      "title": "Spelövning - Ytterzonen",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/spelovning-ytterzonen",
+      "sourceImageUrl": "https://www.innebandy.se/media/02gngm3h/rod-spelbredd-ytterzonen.png?width=1632&height=840&v=1dc6aac02ba8690&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142472550/rendition/720p/file.mp4?loc=external&signature=03e9d5f2211fec776c55393a6962c3e3e4ed2eb7b9d176a35e5a8d80d244dff7",
+      "summary": "Spelövning som syftar till att träna beteenden kopplat till etablerat anfall och omställningar. ",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Komma till avslut",
+        "Offensiv omställning"
+      ],
+      "skills": [
+        "Snabba förstapass",
+        "Spelbarhet",
+        "Offensiva beslut",
+        "Utmana/dribbla",
+        "Avslut"
+      ],
+      "levels": [
+        "Röd 12-16 år"
+      ]
+    },
+    {
+      "id": "split-squat",
+      "title": "Split squat",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/split-squat",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142477194/rendition/720p/file.mp4?loc=external&signature=9813c572590b172e4261d4ce416e706ed0c6c6685e89f1b430a66ddc1405d5b8",
+      "summary": "Tränar styrkan i benens muskler och ökar förmågan att utveckla kraft i olika rörelser.",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Styrka"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "step-up",
+      "title": "Step up",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/step-up",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142477286/rendition/720p/file.mp4?loc=external&signature=dcc6b9f5ebf9843cde07cba40129a18bf88a0d8c4a2ded0bc6edf2d87dcf6cf0",
+      "summary": "Tränar styrkan i benens muskler och ökar förmågan att utveckla kraft i olika rörelser.",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Styrka",
+        "Koordination"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "teknikbana",
+      "title": "Teknikbana",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/teknikbana",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1145260123/rendition/720p/file.mp4?loc=external&signature=3d0621558fb23733c63f1e62f96c479ae3a7b9e46b7a06e90625dd2123f66fca",
+      "summary": "Jobba med teknik i olika former som en del av er ordinarie träning. Passar perfekt som en station att kombinera med andra moment på träning. ",
+      "themes": [
+        "Lek",
+        "Teknikträning"
+      ],
+      "skills": [
+        "Koordination",
+        "Driva boll",
+        "Vända med boll",
+        "Bollbehandling",
+        "Avslut"
+      ],
+      "levels": [
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "the-glider",
+      "title": "The glider",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/the-glider",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142477393/rendition/720p/file.mp4?loc=external&signature=861cabb0183e75d99005944f62a41a4bacdc9760e0c286dde41ec94cef14b2f0",
+      "summary": "Tränar i första hand excentrisk styrka i lårens baksida.",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Styrka"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "tjuva-koner",
+      "title": "Tjuva koner",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/tjuva-koner",
+      "sourceImageUrl": null,
+      "sourceVideoUrl": null,
+      "summary": "Syftar till att på ett lekfullt och tävlingsinriktat sätt jobba med att öka din uthållighet. Förbättra förmågan att upprepa korta intensiva intervaller under längre tid. Utveckla rumsuppfattning.",
+      "themes": [
+        "Fysträning",
+        "Lek"
+      ],
+      "skills": [
+        "Uthållighet"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år",
+        "Blå 9-12 år",
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "utmana-finta-dribbla-alla-mot-alla",
+      "title": "Utmana, finta, dribbla - alla mot alla",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/utmana-finta-dribbla-alla-mot-alla",
+      "sourceImageUrl": "https://www.innebandy.se/media/30pjo2ci/gron-utmana-finta-dribbla-alla-mot-alla.png?width=1632&height=840&v=1dc6aac03cc1da0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142468908/rendition/720p/file.mp4?loc=external&signature=c5599f72494ff39b0dc754cbbbbfbafb79643db926c9a43406c18c7246ff748f",
+      "summary": "Träna på att passera en motståndare med boll under kontroll. ",
+      "themes": [
+        "Teknikträning"
+      ],
+      "skills": [
+        "Driva boll",
+        "Vända med boll",
+        "Bollbehandling",
+        "Utmana/dribbla"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "utmana-finta-dribbla-trillingmatchen",
+      "title": "Utmana, finta, dribbla - Trillingmatchen",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/utmana-finta-dribbla-trillingmatchen",
+      "sourceImageUrl": "https://www.innebandy.se/media/d5cnfczq/gron-svart-utmana-dribbla-trillingmatchen.png?width=1632&height=840&v=1dc6aac047507d0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142469975/rendition/720p/file.mp4?loc=external&signature=50f202a7451883638613f5ac8f084f2909e52fda7d6c2901a97d4f0a1331f553",
+      "summary": "Träna på att slå din motståndare 1 mot 1 med boll och göra mål. I motsats också träna på att försvara 1 mot 1 och vinna bollen. Duellspel med och utan boll. ",
+      "themes": [
+        "Komma till avslut",
+        "Förhindra avslut",
+        "Etablerat anfallsspel"
+      ],
+      "skills": [
+        "Duellspel",
+        "Utmana/dribbla",
+        "Pressa"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Grön 6-9 år",
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "utmana-finta-dribbla-utmaningen",
+      "title": "Utmana, finta, dribbla - Utmaningen",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/utmana-finta-dribbla-utmaningen",
+      "sourceImageUrl": "https://www.innebandy.se/media/fjzn2aqr/gron-svart-possession-utmaningen.png?width=1632&height=840&v=1dc6aac02143470&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142469292/rendition/720p/file.mp4?loc=external&signature=ec5e2011bc5f5e508765a53bb4a979d8db64b7e6f57b82218530b6bc01b16c2b",
+      "summary": "Genom smålagsspel 3-3 träna på att äga bollen inom sitt lag.",
+      "themes": [
+        "Etablerat anfallsspel"
+      ],
+      "skills": [
+        "Driva boll",
+        "Bollbehandling",
+        "Passning/mottagning",
+        "Utmana/dribbla",
+        "Spelbarhet",
+        "Pressa",
+        "Markera"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Grön 6-9 år",
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "vanda-jaktlek",
+      "title": "Vända - Jaktlek",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/vanda-jaktlek",
+      "sourceImageUrl": "https://www.innebandy.se/media/uh2elhgc/gron-vanda-jaktleken.png?width=1632&height=840&v=1dc6aac04b719e0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142468994/rendition/720p/file.mp4?loc=external&signature=9c785fdaefbdc0fd716af0761babbf3ef1b9f5927ae072a273bb333069d8b399",
+      "summary": "Ta sig bort från motståndaren och hitta lediga spelytor. ",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Defensiv omställning",
+        "Komma till avslut"
+      ],
+      "skills": [
+        "Vända med boll",
+        "Driva boll",
+        "Bollbehandling",
+        "Pressa",
+        "Duellspel"
+      ],
+      "levels": [
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "vanda-vagg-till-vagg",
+      "title": "Vända - vägg till vägg",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/vanda-vagg-till-vagg",
+      "sourceImageUrl": "https://www.innebandy.se/media/5y1ehm2l/gron-bla-vandningar-vagg-till-vagg.png?width=1632&height=840&v=1dc6aac04f92bf0&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142469032/rendition/720p/file.mp4?loc=external&signature=ba53b78bde84118f9ac350368e5a3237a49015190db21c312d351cafcca6418c",
+      "summary": "Att kunna röra sig i alla olika riktningar med olika hastigheter och god bollkontroll. ",
+      "themes": [
+        "Etablerat anfallsspel",
+        "Etablerat försvarsspel"
+      ],
+      "skills": [
+        "Duellspel",
+        "Driva boll",
+        "Vända med boll",
+        "Bollbehandling",
+        "Utmana/dribbla",
+        "Pressa"
+      ],
+      "levels": [
+        "Blå 9-12 år",
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "vanda-vandningen",
+      "title": "Vända - Vändningen",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/vanda-vandningen",
+      "sourceImageUrl": "https://www.innebandy.se/media/4qnbrzoo/gron-vanda-vandningen.png?width=1632&height=840&v=1dc6aac057adf10&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142469112/rendition/720p/file.mp4?loc=external&signature=dbefc89603fae565bb37b3d537dbead89b552b159e8745a1bba8476357f6a944",
+      "summary": "Förbättra bollbehandling och jobba med vändningar och byta riktning. ",
+      "themes": [
+        "Etablerat anfallsspel"
+      ],
+      "skills": [
+        "Driva boll",
+        "Vända med boll",
+        "Bollbehandling"
+      ],
+      "levels": [
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "vaxlingar",
+      "title": "Växlingar",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/vaxlingar",
+      "sourceImageUrl": "https://www.innebandy.se/media/usjoqrih/vaxlingar.png?width=1632&height=840&v=1dc6aac02e31d30&quality=80&format=webp",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1066575203/rendition/720p/file.mp4?loc=external&signature=49dbc07765fda11e5c7cc79769939d50d0ac1ea26cfceb88c69bf550d41f541d",
+      "summary": "Grundteknik när det gäller att flytta bollen från sida till sida. Forehand till backhand.",
+      "themes": [
+        "Teknikträning"
+      ],
+      "skills": [
+        "Utmana/dribbla",
+        "Bollbehandling"
+      ],
+      "levels": [
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "vickningar",
+      "title": "Vickningar",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/vickningar",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1145259629/rendition/720p/file.mp4?loc=external&signature=926ab3ff3ceb26b6d1e48f3f3652ce9533947fd25c83c1fbd060d756100055b0",
+      "summary": "Grundteknik när det gäller att flytta bollen fram och tillbaka på sin forehandsida. ",
+      "themes": [
+        "Teknikträning"
+      ],
+      "skills": [
+        "Utmana/dribbla",
+        "Bollbehandling"
+      ],
+      "levels": [
+        "Grön 6-9 år"
+      ]
+    },
+    {
+      "id": "walkout-i-plankposition",
+      "title": "Walkout i plankposition",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/walkout-i-plankposition",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142477490/rendition/720p/file.mp4?loc=external&signature=a07c9d4531ffab7d48df2cff5a8632022107aa77c7aae81b1e5439dfd19d1d2e",
+      "summary": "Tränar i första hand bålens muskulatur och förmågan att ha god bålkontroll.",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Styrka"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    },
+    {
+      "id": "woodchoppers",
+      "title": "Woodchoppers",
+      "sourceUrl": "https://www.innebandy.se/ovningsbanken/woodchoppers",
+      "sourceImageUrl": "https://www.innebandy.se/images/placeholder-exercise.jpg?width=1088&height=453&format=webp&quality=90",
+      "sourceVideoUrl": "https://player.vimeo.com/progressive_redirect/playback/1142477607/rendition/720p/file.mp4?loc=external&signature=084276de35301bd399f2248659e0fcd3dfdd48c8911174279f2e3616d0a1e2a3",
+      "summary": "Tränar i första hand bålens muskulatur och de muskler som är aktiva vid rotationer.",
+      "themes": [
+        "Fysträning"
+      ],
+      "skills": [
+        "Styrka"
+      ],
+      "levels": [
+        "Röd 12-16 år",
+        "Svart/lila 16+ år"
+      ]
+    }
+  ],
+  "failures": []
+}

@@ -3,7 +3,8 @@ import { loadTeamContext } from "@/lib/auth/team-context";
 import { getVerifiedUserId } from "@/lib/auth/verified-user";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createRouteHandlerClient } from "@/lib/supabase/route-handler";
-import { saveTrainingPlan, validateTrainingPayload } from "@/features/trainings/training-plans";
+import { hasValidCatalogReplacements } from "@/features/trainings/exercise-catalog";
+import { loadTrainingPlan, saveTrainingPlan, validateTrainingPayload } from "@/features/trainings/training-plans";
 
 export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -24,6 +25,9 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   });
   const revision = Number(form.get("revision"));
   if (!validated.ok || !Number.isInteger(revision) || revision < 1) return go(`/trainings/${id}/edit?error=invalid`);
+  let existing;
+  try { existing = await loadTrainingPlan(supabase, context.teamId, context.seasonId, id); } catch { return go(`/trainings/${id}/edit?error=invalid`); }
+  if (existing.status === "completed" || !hasValidCatalogReplacements(validated.value.items, existing)) return go(`/trainings/${id}/edit?error=invalid`);
 
   const result = await saveTrainingPlan(createAdminClient(), {
     actorUserId: userId,

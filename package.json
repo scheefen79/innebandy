@@ -23,7 +23,8 @@
     "test": "vitest run",
     "release:preflight": "bash scripts/release-preflight.sh"
     ,"training:bootstrap": "node --env-file=.env.local scripts/bootstrap-training-plan.mjs",
-    "training:enrich": "node --env-file=.env.local scripts/enrich-training-plan.mjs"
+    "training:enrich": "node --env-file=.env.local scripts/enrich-training-plan.mjs",
+    "training:catalog": "node scripts/fetch-training-exercise-catalog.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.4",

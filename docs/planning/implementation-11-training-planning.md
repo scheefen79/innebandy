@@ -158,6 +158,15 @@ Sektioner: `gathering`, `warmup`, `technique`, `match_exercise`, `closing`. Posi
 - Om extern bild inte kan laddas ska text, instruktioner och källänk fortfarande fungera utan layoutfel.
 - AI-genererade bilder får inte ersätta befintliga originalbilder.
 
+## Byte av övning inom passet
+
+- En aktiv coach kan från redigeringsvyn välja `Byt övning` för ett moment i ett ej genomfört pass.
+- Förslag kommer endast från den versionshanterade, kuraterade katalogen och matchar Blå 9–12 år, temablock, momenttyp och träningsområde.
+- Innan ersättning visas sammanfattning, tillgänglig bild/video och en länk till originalövningen. Saknad media hanteras öppet med en fallback till originalet.
+- Ersättningen förändrar endast den lokala övningskopian i det aktuella tillfället och använder ordinarie atomiska sparning samt revisionskontroll.
+- Manuell ändring av källänk är fortsatt möjlig enligt grundflödet, men är separat från katalogbytet och markeras uttryckligen vid sparning.
+- Se ADR-017 för källa, uppdateringsflöde och säkerhetsgränser.
+
 ## Ingår inte
 
 - spelarnärvaro eller kallelser till träning
