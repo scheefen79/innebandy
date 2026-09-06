@@ -14,7 +14,7 @@ Ersätt träningsplanens generiska platshållartext med korta, praktiska instruk
 - Syfte, genomförande och coachingpunkter är nyskrivna sammanfattningar, inte kopior av källtexten.
 - Original-URL och eventuell bild-URL sparas per träningsmoment.
 - Bilden laddas från `innebandy.se`, visas med attribution och länkas till originalövningen.
-- Varje kort visar källövningens officiella titel så att egna varianter inte presenteras som exakta kopior.
+- Varje källövning använder Övningsbankens officiella titel som sin övningsrubrik; träningsfokus hör hemma på pass- eller blocknivå.
 - Teknikövningar markeras i blått och matchövningar i grönt med både bakgrund, ram och textetikett.
 - Originalbilder kopieras inte till repot. Övningar utan statisk originalbild fungerar fullständigt med text och källänk.
 - Berikningen får endast uppdatera orörda grundplaner med status `draft`, revision `1` och den tidigare platshållartexten. Tränarnas ändringar bevaras.
