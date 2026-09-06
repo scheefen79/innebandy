@@ -39,6 +39,15 @@ export function validateTrainingPayload(raw:{focus:string;keyMessage:string;coac
  return {ok:true as const,value:{focus:raw.focus.trim(),keyMessage:raw.keyMessage.trim(),coachNotes:raw.coachNotes.trim(),status:raw.status as TrainingStatus,items}};
 }
 
+export function canonicalizeSourceItemTitles(items:unknown[]){
+ return items.map(value=>{
+  if(!value||typeof value!=="object")return value;
+  const item=value as Record<string,unknown>;
+  const sourceUrl=nullableText(item.sourceUrl),sourceTitle=nullableText(item.sourceTitle);
+  return sourceTitle&&/^https:\/\/(www\.)?innebandy\.se\/ovningsbanken\//.test(sourceUrl??"")?{...item,title:sourceTitle}:item;
+ });
+}
+
 export async function saveTrainingPlan(admin:SupabaseClient,input:{actorUserId:string;teamId:string;seasonId:string;trainingId:string;revision:number;requestId:string;focus:string;keyMessage:string;coachNotes:string;status:TrainingStatus;items:unknown[]}){
  const {error}=await admin.rpc("save_training_plan",{actor_user_id:input.actorUserId,target_team_id:input.teamId,target_season_id:input.seasonId,target_training_id:input.trainingId,expected_revision:input.revision,request_id:input.requestId,requested_focus:input.focus,requested_key_message:input.keyMessage,requested_notes:input.coachNotes,requested_status:input.status,requested_items:input.items});
  if(!error)return "ok" as const;if(error.message.includes("STALE_TRAINING_PLAN"))return "stale" as const;if(error.message.includes("TRAINING_COMPLETED")||error.message.includes("INVALID_TRAINING"))return "invalid" as const;throw new Error("Det gick inte att spara träningsplanen.");
