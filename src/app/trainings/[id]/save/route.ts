@@ -4,7 +4,7 @@ import { getVerifiedUserId } from "@/lib/auth/verified-user";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createRouteHandlerClient } from "@/lib/supabase/route-handler";
 import { hasValidCatalogReplacements } from "@/features/trainings/exercise-catalog";
-import { loadTrainingPlan, saveTrainingPlan, validateTrainingPayload } from "@/features/trainings/training-plans";
+import { canonicalizeSourceItemTitles, loadTrainingPlan, saveTrainingPlan, validateTrainingPayload } from "@/features/trainings/training-plans";
 
 export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -25,9 +25,10 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   });
   const revision = Number(form.get("revision"));
   if (!validated.ok || !Number.isInteger(revision) || revision < 1) return go(`/trainings/${id}/edit?error=invalid`);
+  const items = canonicalizeSourceItemTitles(validated.value.items);
   let existing;
   try { existing = await loadTrainingPlan(supabase, context.teamId, context.seasonId, id); } catch { return go(`/trainings/${id}/edit?error=invalid`); }
-  if (existing.status === "completed" || !hasValidCatalogReplacements(validated.value.items, existing)) return go(`/trainings/${id}/edit?error=invalid`);
+  if (existing.status === "completed" || !hasValidCatalogReplacements(items, existing)) return go(`/trainings/${id}/edit?error=invalid`);
 
   const result = await saveTrainingPlan(createAdminClient(), {
     actorUserId: userId,
@@ -36,7 +37,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     trainingId: id,
     revision,
     requestId: `${id}:${revision}`,
-    ...validated.value,
+    ...validated.value, items,
   });
   if (result === "stale") return go(`/trainings/${id}?change=stale`);
   if (result === "invalid") return go(`/trainings/${id}/edit?error=invalid`);
