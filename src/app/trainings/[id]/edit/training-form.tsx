@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { ExerciseReplacementPicker } from "./exercise-replacement-picker";
+import { ExerciseAdditionPicker, ExerciseReplacementPicker } from "./exercise-replacement-picker";
 import type { ExerciseCatalogItem } from "@/features/trainings/exercise-catalog";
 import type { TrainingItem, TrainingPlan, TrainingSection } from "@/features/trainings/training-plans";
 
-type EditableTrainingItem = TrainingItem & { replacementCatalogId?: string; sourceChangeMode?: "manual" };
+type EditableTrainingItem = TrainingItem & { replacementCatalogId?: string; additionCatalogId?: string; sourceChangeMode?: "manual" };
 
 const sectionText: Record<TrainingSection, string> = { gathering: "Samling", warmup: "Uppvärmning", technique: "Teknik", match_exercise: "Matchövning", closing: "Avslutning" };
 
@@ -16,6 +16,8 @@ export function TrainingForm({ training }: { training: TrainingPlan }) {
     ...item, title: exercise.title, sourceTitle: exercise.title, sourceUrl: exercise.sourceUrl, sourceImageUrl: exercise.sourceImageUrl,
     purpose: exercise.summary, instructions: null, coachingPoints: [], replacementCatalogId: exercise.id
   } : item));
+  const addCatalogExercise = (exercise: ExerciseCatalogItem, section: TrainingSection) => setItems(current => [...current, { id: crypto.randomUUID(), section, position: current.length + 1, title: exercise.title, guideMinutes: null, purpose: exercise.summary, instructions: null, coachingPoints: [], sourceTitle: exercise.title, sourceUrl: exercise.sourceUrl, sourceImageUrl: exercise.sourceImageUrl, additionCatalogId: exercise.id }]);
+  const addManualExercise = () => setItems(current => [...current, { id: crypto.randomUUID(), section: "match_exercise", position: current.length + 1, title: "Ny övning", guideMinutes: null, purpose: null, instructions: null, coachingPoints: [], sourceUrl: null, sourceImageUrl: null }]);
   const move = (index: number, direction: -1 | 1) => {
     const target = index + direction;
     if (target < 0 || target >= items.length) return;
@@ -38,7 +40,7 @@ export function TrainingForm({ training }: { training: TrainingPlan }) {
         <label className="mt-3 block text-sm font-semibold">Coachingpunkter, en per rad<textarea value={item.coachingPoints.join("\n")} onChange={event => update(index, { coachingPoints: event.target.value.split("\n").map(value => value.trim()).filter(Boolean) })} rows={3} className="mt-1 w-full rounded-lg border border-slate-300 p-3" /></label>
         <label className="mt-3 block text-sm font-semibold">Källänk<input type="url" value={item.sourceUrl ?? ""} onChange={event => setItems(current => current.map((candidate, itemIndex) => itemIndex === index ? { ...candidate, sourceUrl: event.target.value || null, sourceTitle: null, sourceImageUrl: null, replacementCatalogId: undefined, sourceChangeMode: "manual" } : candidate))} className="mt-1 min-h-11 w-full rounded-lg border border-slate-300 px-3" /></label>
       </section>)}
-    </div><button type="button" onClick={() => setItems(current => [...current, { id: crypto.randomUUID(), section: "match_exercise", position: current.length + 1, title: "Ny övning", guideMinutes: null, purpose: null, instructions: null, coachingPoints: [], sourceUrl: null, sourceImageUrl: null }])} className="mt-4 min-h-11 rounded-xl border border-blue-700 px-4 font-semibold text-blue-700">Lägg till övning</button></fieldset>
+    </div><ExerciseAdditionPicker themeBlock={training.themeBlock} onAdd={addCatalogExercise} onCreateManual={addManualExercise} /></fieldset>
     <label className="block"><span className="font-semibold">Status</span><select name="status" defaultValue={training.status} className="mt-2 min-h-12 w-full rounded-xl border border-slate-300 px-3"><option value="draft">Ej planerad</option><option value="planned">Planerad</option>{training.status === "planned" ? <option value="completed">Genomförd</option> : null}</select></label>
     <button className="min-h-12 w-full rounded-xl bg-blue-700 px-4 font-semibold text-white">Spara träningsplan</button>
   </form>;

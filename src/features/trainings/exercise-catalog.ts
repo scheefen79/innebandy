@@ -62,6 +62,19 @@ export function replacementCandidates({ item, themeBlock }: { item: TrainingItem
     .sort((left, right) => left.title.localeCompare(right.title, "sv"));
 }
 
+export function additionCandidates({ themeBlock, section }: { themeBlock: number; section: TrainingSection }) {
+  const areas = blockAreas[themeBlock] ?? [];
+  return exercises
+    .filter(exercise => exercise.levels.includes(blueLevel))
+    .filter(exercise => isCompatibleSection(exercise, section))
+    .filter(exercise => exercise.skills.some(skill => areas.includes(skill)))
+    .sort((left, right) => left.title.localeCompare(right.title, "sv"));
+}
+
+export function getAdditionCandidate({ themeBlock, section, catalogId }: { themeBlock: number; section: TrainingSection; catalogId: string }) {
+  return additionCandidates({ themeBlock, section }).find(candidate => candidate.id === catalogId) ?? null;
+}
+
 export function candidateAreaText(item: TrainingItem, themeBlock: number) {
   return sharedAreas(getCatalogExercise(item.sourceUrl), themeBlock).join(" · ");
 }
@@ -88,11 +101,19 @@ export function hasValidCatalogReplacements(items: unknown[], existing: Training
     if (!value || typeof value !== "object") return false;
     const item = value as Record<string, unknown>;
     const catalogId = item.replacementCatalogId;
+    const additionCatalogId = item.additionCatalogId;
     const clientItemId = item.clientItemId;
     const previous = typeof clientItemId === "string" ? existing.items.find(candidate => candidate.id === clientItemId) : undefined;
     const sourceChanged = previous && (canonicalSourceUrl(typeof item.sourceUrl === "string" ? item.sourceUrl : null) !== canonicalSourceUrl(previous.sourceUrl)
       || (typeof item.sourceTitle === "string" ? item.sourceTitle : null) !== (previous.sourceTitle ?? null)
       || (typeof item.sourceImageUrl === "string" ? item.sourceImageUrl : null) !== previous.sourceImageUrl);
+    if (additionCatalogId != null) {
+      if (typeof additionCatalogId !== "string" || previous) return false;
+      const section = item.section as TrainingSection;
+      const addition = getAdditionCandidate({ themeBlock: existing.themeBlock, section, catalogId: additionCatalogId });
+      if (!addition || !isCatalogReplacementPayload({ item, candidate: addition })) return false;
+      continue;
+    }
     if (catalogId == null) {
       if (sourceChanged && item.sourceChangeMode !== "manual") return false;
       continue;
