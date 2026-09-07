@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { candidateAreaText, getReplacementCandidate, hasValidCatalogReplacements, isCatalogReplacementPayload, replacementCandidates } from "./exercise-catalog";
+import { candidateAreaText, getReplacementCandidate, hasValidCatalogReplacements, isCatalogReplacementPayload, preferredExerciseMedia, replacementCandidates } from "./exercise-catalog";
 import type { TrainingItem, TrainingPlan } from "./training-plans";
 
 const technique: TrainingItem = { id: "item", section: "technique", position: 1, title: "Passa", guideMinutes: 10, purpose: null, instructions: null, coachingPoints: [], sourceUrl: "https://www.innebandy.se/ovningsbanken/dragpassningar", sourceImageUrl: null };
@@ -28,6 +28,13 @@ describe("replacementCandidates", () => {
 
   it("does not suggest an area when the current source is unverified", () => {
     expect(replacementCandidates({ item: { ...technique, sourceUrl: "https://example.test/unknown" }, themeBlock: 1 })).toEqual([]);
+  });
+
+  it("prioritizes verified video, then a non-placeholder image, then no media", () => {
+    const withVideo = preferredExerciseMedia("https://innebandy.se/ovningsbanken/dragpassningar", "https://innebandy.se/media/fallback.png");
+    expect(withVideo.sourceVideoUrl).toMatch(/^https:\/\/player\.vimeo\.com\//);
+    expect(withVideo.sourceImageUrl).toMatch(/^https:\/\/www\.innebandy\.se\/media\//);
+    expect(preferredExerciseMedia("https://example.test/unknown", null)).toEqual({ sourceVideoUrl: null, sourceImageUrl: null });
   });
 
   it("recognizes only an unchanged catalog replacement payload", () => {

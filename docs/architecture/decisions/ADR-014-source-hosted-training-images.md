@@ -9,7 +9,7 @@ Tränarna behöver övningsbilder i planeringen. Bilderna kommer från Svensk In
 
 ## Beslut
 
-Appen lagrar originalsidans officiella titel, URL och en HTTPS-adress till den statiska bilden på `innebandy.se`. När en övning har en Övningsbanken-källa är den officiella titeln också den synliga övningsrubriken. Bilden visas med attribution och en tydlig länk till originalövningen. Endast värddomänen `innebandy.se/media/**` tillåts av bildkomponenten och berikningsfunktionen.
+Appen lagrar originalsidans officiella titel, URL och en HTTPS-adress till den statiska bilden på `innebandy.se`. När en övning har en Övningsbanken-källa är den officiella titeln också den synliga övningsrubriken. I träningsvyn prioriteras verifierad originalvideo, därefter originalbild; om båda saknas visas ingen medieyta. Bild och film visas med attribution och en tydlig länk till originalövningen. Endast värddomänen `innebandy.se/media/**` tillåts för bilder och verifierade Vimeo-URL:er tillåts för video.
 
 Om en övning saknar statisk originalbild visas text och källänk utan tom bildyta. Nyskrivna instruktioner lagras lokalt; källans längre beskrivning kopieras inte.
 
