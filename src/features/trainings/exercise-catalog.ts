@@ -45,6 +45,12 @@ export function getCatalogExercise(sourceUrl: string | null) {
   return exercises.find(exercise => canonicalSourceUrl(exercise.sourceUrl) === canonical);
 }
 
+export function preferredExerciseMedia(sourceUrl: string | null, fallbackImageUrl: string | null) {
+  const exercise = getCatalogExercise(sourceUrl);
+  const catalogImage = exercise?.sourceImageUrl?.includes("/images/placeholder-exercise.jpg") ? null : exercise?.sourceImageUrl ?? null;
+  return { sourceVideoUrl: exercise?.sourceVideoUrl ?? null, sourceImageUrl: catalogImage ?? fallbackImageUrl };
+}
+
 export function replacementCandidates({ item, themeBlock }: { item: TrainingItem; themeBlock: number }) {
   const source = getCatalogExercise(item.sourceUrl);
   const areas = sharedAreas(source, themeBlock);

@@ -1,6 +1,5 @@
 import {Fragment} from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {notFound,redirect} from "next/navigation";
 import {AppShell} from "@/components/app-shell";
 import {loadTeamContext} from "@/lib/auth/team-context";
@@ -8,6 +7,8 @@ import {getVerifiedUserId} from "@/lib/auth/verified-user";
 import {createClient} from "@/lib/supabase/server";
 import {loadTrainingPlan,trainingStatusText} from "@/features/trainings/training-plans";
 import {formatTrainingTime} from "@/features/trainings/training-time";
+import {preferredExerciseMedia} from "@/features/trainings/exercise-catalog";
+import {TrainingExerciseMedia} from "@/features/trainings/training-exercise-media";
 
 export const dynamic="force-dynamic";
 const sectionStyle={
@@ -40,7 +41,7 @@ export default async function TrainingPage({params,searchParams}:{params:Promise
     {index===firstTechniqueIndex?<li className="list-none pt-2 text-sm font-bold uppercase tracking-wide text-blue-700">TEKNIKÖVNINGAR</li>:null}
     {index===firstMatchExerciseIndex?<li className="list-none pt-2 text-sm font-bold uppercase tracking-wide text-emerald-700">MATCHÖVNINGAR</li>:null}
     <li className={`overflow-hidden rounded-xl border-2 ${style.card}`}>
-    {item.sourceImageUrl?<figure className="bg-white"><Image src={item.sourceImageUrl} alt={`Övningsbild från källövningen ${item.sourceTitle??item.title}`} width={900} height={506} className="aspect-[16/9] w-full object-contain"/><figcaption className="px-4 py-2 text-xs text-slate-600">Bild från källövningen hos Svensk Innebandy</figcaption></figure>:null}
+    {(()=>{const media=preferredExerciseMedia(item.sourceUrl,item.sourceImageUrl);return <TrainingExerciseMedia title={item.sourceTitle??item.title} {...media} />})()}
     <div className="p-4"><div className="mb-3 flex items-center justify-between gap-3"><span className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${style.badge}`}>{style.label}</span>{item.guideMinutes?<span className="shrink-0 text-sm text-slate-600">cirka {item.guideMinutes} min</span>:null}</div><h2 className="text-lg font-bold text-slate-950">{item.sourceTitle??item.title}</h2>
      {item.purpose?<p className="mt-2 text-sm"><strong>Syfte:</strong> {item.purpose}</p>:null}
      {item.instructions?<div className="mt-3"><h3 className="text-sm font-semibold text-slate-900">Så gör ni</h3><p className="mt-1 whitespace-pre-wrap text-sm leading-6 text-slate-700">{item.instructions}</p></div>:null}
