@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { candidateAreaText, getReplacementCandidate, hasValidCatalogReplacements, isCatalogReplacementPayload, preferredExerciseMedia, replacementCandidates } from "./exercise-catalog";
+import { additionCandidates, candidateAreaText, getReplacementCandidate, hasValidCatalogReplacements, isCatalogReplacementPayload, preferredExerciseMedia, replacementCandidates } from "./exercise-catalog";
 import type { TrainingItem, TrainingPlan } from "./training-plans";
 
 const technique: TrainingItem = { id: "item", section: "technique", position: 1, title: "Passa", guideMinutes: 10, purpose: null, instructions: null, coachingPoints: [], sourceUrl: "https://www.innebandy.se/ovningsbanken/dragpassningar", sourceImageUrl: null };
@@ -20,6 +20,14 @@ describe("replacementCandidates", () => {
     expect(candidates.length).toBeGreaterThan(0);
     expect(candidates.every(candidate => !candidate.themes.includes("Teknikträning"))).toBe(true);
     expect(candidates.every(candidate => candidate.skills.some(skill => ["Pressa", "Markera", "Duellspel", "Defensiv sortering"].includes(skill)))).toBe(true);
+  });
+
+  it("offers additions only within the block and selected moment type", () => {
+    const candidates = additionCandidates({ themeBlock: 3, section: "match_exercise" });
+    expect(candidates.length).toBeGreaterThan(0);
+    expect(candidates.every(candidate => candidate.levels.includes("Blå 9-12 år"))).toBe(true);
+    expect(candidates.every(candidate => !candidate.themes.includes("Teknikträning"))).toBe(true);
+    expect(candidates.every(candidate => candidate.skills.includes("Avslut"))).toBe(true);
   });
 
   it("explains the matching area from the current exercise", () => {
@@ -53,5 +61,7 @@ describe("replacementCandidates", () => {
     expect(hasValidCatalogReplacements([{ ...replacement, clientItemId: "other" }], plan)).toBe(false);
     expect(hasValidCatalogReplacements([{ clientItemId: "item", title: "Manuell", sourceUrl: "https://innebandy.se/ovningsbanken/handledsskott", sourceTitle: null, sourceImageUrl: null }], plan)).toBe(false);
     expect(hasValidCatalogReplacements([{ clientItemId: "item", title: "Manuell", sourceUrl: "https://innebandy.se/ovningsbanken/handledsskott", sourceTitle: null, sourceImageUrl: null, sourceChangeMode: "manual" }], plan)).toBe(true);
+    const addition = additionCandidates({ themeBlock: 1, section: "technique" })[0];
+    expect(hasValidCatalogReplacements([{ clientItemId: "new", additionCatalogId: addition.id, section: "technique", title: addition.title, sourceTitle: addition.title, sourceUrl: addition.sourceUrl, sourceImageUrl: addition.sourceImageUrl, purpose: addition.summary, instructions: null, coachingPoints: [] }], plan)).toBe(true);
   });
 });
