@@ -36,6 +36,14 @@ function sharedAreas(source: ExerciseCatalogItem | undefined, block: number) {
   return source.skills.filter(skill => allowed.includes(skill));
 }
 
+export function isRecommendedForBlock(exercise: ExerciseCatalogItem, themeBlock: number) {
+  return exercise.skills.some(skill => (blockAreas[themeBlock] ?? []).includes(skill));
+}
+
+function recommendedFirst(themeBlock: number) {
+  return (left: ExerciseCatalogItem, right: ExerciseCatalogItem) => Number(isRecommendedForBlock(right, themeBlock)) - Number(isRecommendedForBlock(left, themeBlock)) || left.title.localeCompare(right.title, "sv");
+}
+
 function canonicalSourceUrl(sourceUrl: string | null) {
   return sourceUrl?.replace("https://www.innebandy.se/", "https://innebandy.se/") ?? null;
 }
@@ -52,23 +60,18 @@ export function preferredExerciseMedia(sourceUrl: string | null, fallbackImageUr
 }
 
 export function replacementCandidates({ item, themeBlock }: { item: TrainingItem; themeBlock: number }) {
-  const source = getCatalogExercise(item.sourceUrl);
-  const areas = sharedAreas(source, themeBlock);
   return exercises
     .filter(exercise => canonicalSourceUrl(exercise.sourceUrl) !== canonicalSourceUrl(item.sourceUrl))
     .filter(exercise => exercise.levels.includes(blueLevel))
     .filter(exercise => isCompatibleSection(exercise, item.section))
-    .filter(exercise => exercise.skills.some(skill => areas.includes(skill)))
-    .sort((left, right) => left.title.localeCompare(right.title, "sv"));
+    .sort(recommendedFirst(themeBlock));
 }
 
 export function additionCandidates({ themeBlock, section }: { themeBlock: number; section: TrainingSection }) {
-  const areas = blockAreas[themeBlock] ?? [];
   return exercises
     .filter(exercise => exercise.levels.includes(blueLevel))
     .filter(exercise => isCompatibleSection(exercise, section))
-    .filter(exercise => exercise.skills.some(skill => areas.includes(skill)))
-    .sort((left, right) => left.title.localeCompare(right.title, "sv"));
+    .sort(recommendedFirst(themeBlock));
 }
 
 export function getAdditionCandidate({ themeBlock, section, catalogId }: { themeBlock: number; section: TrainingSection; catalogId: string }) {
