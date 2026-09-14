@@ -54,7 +54,7 @@ export default async function TrainingPage({params,searchParams}:{params:Promise
     </div>
    </li></Fragment>})})()}</ol>
    <p className="mt-6 text-xs text-slate-500">Senast ändrad av {training.updatedBy} · tiderna är vägledande.</p>
-   {context.role==="coach"&&training.status!=="completed"?<Link href={`/trainings/${id}/edit`} className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-blue-700 px-4 font-semibold text-white">Redigera planeringen</Link>:null}
+   {context.role==="coach"&&training.status!=="completed"&&training.status!=="cancelled"?<Link href={`/trainings/${id}/edit`} className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-blue-700 px-4 font-semibold text-white">Redigera planeringen</Link>:null}
   </article>
  </main></AppShell>;
 }
