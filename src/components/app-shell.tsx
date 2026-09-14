@@ -4,13 +4,14 @@ import type { TeamRole } from "@/lib/auth/team-context";
 
 type AppShellProps = {
   children: ReactNode;
-  currentItem?: "Kommande" | "Träningar" | "Matcher" | "Spelare" | "Medlemmar";
+  currentItem?: "Kommande" | "Träningar" | "Närvaro" | "Matcher" | "Spelare" | "Medlemmar";
   role?: TeamRole;
 };
 
 const navigation = [
   { href: "/", label: "Kommande" },
   { href: "/trainings", label: "Träningar" },
+  { href: "/training-attendance", label: "Närvaro" },
   { href: "/matches", label: "Matcher" },
   { href: "/players", label: "Spelare" },
   { href: "/team", label: "Medlemmar" },
@@ -83,7 +84,7 @@ export function AppShell({ children, currentItem = "Kommande", role }: AppShellP
       >
         <ul
           className={`mx-auto grid max-w-lg ${
-            visibleNavigation.length === 5 ? "grid-cols-5" : visibleNavigation.length === 4 ? "grid-cols-4" : "grid-cols-3"
+            visibleNavigation.length === 6 ? "grid-cols-6" : visibleNavigation.length === 5 ? "grid-cols-5" : visibleNavigation.length === 4 ? "grid-cols-4" : "grid-cols-3"
           }`}
         >
           {visibleNavigation.map((item) => (

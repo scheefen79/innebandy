@@ -9,6 +9,7 @@ import {loadTrainingPlan,trainingStatusText} from "@/features/trainings/training
 import {formatTrainingTime} from "@/features/trainings/training-time";
 import {preferredExerciseMedia} from "@/features/trainings/exercise-catalog";
 import {TrainingExerciseMedia} from "@/features/trainings/training-exercise-media";
+import {loadTrainingAttendance} from "@/features/trainings/training-attendance";
 
 export const dynamic="force-dynamic";
 const sectionStyle={
@@ -28,7 +29,9 @@ export default async function TrainingPage({params,searchParams}:{params:Promise
  if(!context)redirect("/access-denied");
  let training;
  try{training=await loadTrainingPlan(supabase,context.teamId,context.seasonId,id)}catch{notFound()}
- const query=await searchParams;
+ const [query,attendance]=await Promise.all([searchParams,loadTrainingAttendance(supabase,context.teamId,context.seasonId)]);
+ const responses=attendance.find(candidate=>candidate.id===id)?.responses??[];
+ const coming=responses.filter(response=>response.status==="coming");
  return <AppShell currentItem="Träningar" role={context.role}><main className="mx-auto max-w-3xl">
   <Link href="/trainings" className="inline-flex min-h-11 items-center text-sm font-semibold text-blue-700">← Till träningar</Link>
   {query.change==="saved"?<p role="status" className="mb-4 rounded-xl bg-emerald-50 p-3 text-sm text-emerald-900">Träningsplanen är sparad.</p>:null}
@@ -36,6 +39,7 @@ export default async function TrainingPage({params,searchParams}:{params:Promise
   <article className="rounded-2xl bg-white p-5 shadow-sm sm:p-7">
    <div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-sm font-semibold text-blue-700">Block {training.themeBlock}</p><h1 className="mt-1 text-3xl font-bold text-slate-950">{training.focus}</h1><p className="mt-2 text-slate-600">{formatTrainingTime(training.startsAt,training.endsAt)}</p></div><span className="rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-800">{trainingStatusText(training.status)}</span></div>
    <p className="mt-5 rounded-xl bg-blue-50 p-4 text-lg font-semibold text-[#082B4C]">{training.keyMessage}</p>
+   <section className="mt-6 rounded-xl border border-emerald-200 bg-emerald-50/60 p-4"><div className="flex items-center justify-between gap-3"><h2 className="font-semibold text-slate-950">Tränare på plats</h2><span className="rounded-full bg-emerald-700 px-3 py-1 text-sm font-semibold text-white">{coming.length} kommer</span></div>{coming.length?<p className="mt-2 text-sm text-slate-700">{coming.map(response=>response.name).join(", ")}</p>:<p className="mt-2 text-sm text-slate-600">Ingen har angett att den kommer ännu.</p>}<Link href="/training-attendance" className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-blue-700 underline">Ange eller se tränarnärvaro</Link></section>
    {training.coachNotes?<section className="mt-6"><h2 className="font-semibold">Tränaranteckningar</h2><p className="mt-2 whitespace-pre-wrap text-sm text-slate-700">{training.coachNotes}</p></section>:null}
    <ol className="mt-7 space-y-5">{(()=>{const firstTechniqueIndex=training.items.findIndex(candidate=>candidate.section==="technique");const firstMatchExerciseIndex=training.items.findIndex(candidate=>candidate.section==="match_exercise");return training.items.map((item,index)=>{const style=sectionStyle[item.section];return <Fragment key={item.id}>
     {index===firstTechniqueIndex?<li className="list-none pt-2 text-sm font-bold uppercase tracking-wide text-blue-700">TEKNIKÖVNINGAR</li>:null}

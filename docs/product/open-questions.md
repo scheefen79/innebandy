@@ -14,7 +14,7 @@ Frågorna nedan behöver avgöras före eller under den första milstolpen. De �
 
 Datamodellen får stödja fler tränare och besökare, men MVP innehåller ingen sida för inbjudningar eller medlemsadministration. Kontona kopplas till laget vid initial uppsättning. Row Level Security ska utgå från medlemskapet och rollen i `team_members`.
 
-`coach` får läsa och administrera all lagdata. `viewer` får läsa översikt, träningar, matcher och spelarnamn i matchuttagningar, men får inte se spelarnivåer, spelarlistan, spelarprofiler eller spelarhistorik och får aldrig ändra data. Ett spelarnamn får exponeras för `viewer` endast som del av en matchuttagning. ADR-016 beskriver säkerhetsgränsen.
+`coach` får läsa och administrera all lagdata. `viewer` får läsa översikt, träningar, matcher och spelarnamn i matchuttagningar, men får inte se spelarnivåer, spelarlistan, spelarprofiler eller spelarhistorik. Båda aktiva rollerna får ange och ändra endast sin egen planerade tränarnärvaro samt se närvaroöversikten. Ett spelarnamn får exponeras för `viewer` endast som del av en matchuttagning. ADR-016 och ADR-018 beskriver säkerhetsgränserna.
 
 ### 2. Betydelsen av spelarnivå
 

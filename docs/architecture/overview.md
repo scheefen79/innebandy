@@ -6,7 +6,7 @@ Applikationsstacken är accepterad i ADR-001. Detaljerade beslut för behörighe
 
 ## Systemgräns
 
-MVP:n är en responsiv webbapplikation för tränare och inloggade besökare. Den hanterar lag, säsong, spelare, matcher, uttagningar och spelarhistorik. Tränare administrerar lagdata. Besökare har en begränsad läsyta utan spelarnivåer, spelarlista, spelarprofiler eller spelarhistorik. Publika och anonyma spelarvyer, kommunikation, betalning och generell föreningsadministration ligger utanför systemgränsen.
+MVP:n är en responsiv webbapplikation för tränare och inloggade besökare. Den hanterar lag, säsong, spelare, matcher, uttagningar, träningsplaner och planerad tränarnärvaro. Tränare administrerar lagdata. Besökare har en begränsad läsyta utan spelarnivåer, spelarlista, spelarprofiler eller spelarhistorik, men kan ange sin egen planerade tränarnärvaro och se närvaroöversikten. Publika och anonyma spelarvyer, kommunikation, betalning och generell föreningsadministration ligger utanför systemgränsen.
 
 ## Föreslagen struktur
 
