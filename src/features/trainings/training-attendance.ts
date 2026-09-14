@@ -30,4 +30,11 @@ export async function saveTrainingAttendance(admin: SupabaseClient, input: { act
   throw new Error("Det gick inte att spara ditt svar.");
 }
 
+export async function cancelTrainingSession(admin: SupabaseClient, input: { actorUserId: string; teamId: string; seasonId: string; trainingId: string }) {
+ const { error } = await admin.rpc("cancel_training_session", { actor_user_id: input.actorUserId, target_team_id: input.teamId, target_season_id: input.seasonId, target_training_id: input.trainingId });
+ if (!error) return "ok" as const;
+ if (error.message.includes("TRAINING_COMPLETED") || error.message.includes("TRAINING_CANCELLED") || error.message.includes("TRAINING_PAST") || error.message.includes("TRAINING_NOT_AVAILABLE")) return "invalid" as const;
+ throw new Error("Det gick inte att ställa in träningen.");
+}
+
 export const trainingAttendanceStatusText = (status: TrainingAttendanceStatus) => status === "coming" ? "Kommer" : "Frånvarande";

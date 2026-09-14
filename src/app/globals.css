@@ -27,3 +27,12 @@ button,
 a {
   -webkit-tap-highlight-color: transparent;
 }
+
+a {
+  cursor: pointer;
+  transition: color 150ms ease, opacity 150ms ease;
+}
+
+a:hover {
+  opacity: 0.88;
+}

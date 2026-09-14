@@ -1,6 +1,6 @@
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(16);
+select plan(21);
 
 insert into auth.users(id,email) values
  ('f1000000-0000-4000-8000-000000000001','attendance-coach@example.test'),
@@ -46,6 +46,19 @@ set local role authenticated;
 set local request.jwt.claim.sub='f1000000-0000-4000-8000-000000000002';
 select is((select response->>'name' from jsonb_array_elements(public.get_training_attendance('f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001')->0->'responses') response where response->>'userId'='f1000000-0000-4000-8000-000000000001'),'Tränare ett','viewer sees the configured name of a coming trainer in the overview');
 select is((select response->>'status' from jsonb_array_elements(public.get_training_attendance('f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001')->0->'responses') response where response->>'userId'='f1000000-0000-4000-8000-000000000001'),'coming','viewer sees the coming status in the overview');
+
+reset role;
+set local role service_role;
+set local request.jwt.claims='{"role":"service_role"}';
+select lives_ok($$select public.cancel_training_session('f1000000-0000-4000-8000-000000000001','f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001','f4000000-0000-4000-8000-000000000001')$$,'server lets a coach cancel a future training');
+select is((select status::text from public.training_sessions where id='f4000000-0000-4000-8000-000000000001'),'cancelled','cancelled training is retained with cancelled status');
+select throws_ok($$select public.save_training_attendance('f1000000-0000-4000-8000-000000000001','f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001','f4000000-0000-4000-8000-000000000001','absent')$$,'P0001','TRAINING_CANCELLED','cancelled training rejects attendance changes');
+select throws_ok($$select public.cancel_training_session('f1000000-0000-4000-8000-000000000001','f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001','f4000000-0000-4000-8000-000000000002')$$,'P0001','TRAINING_COMPLETED','completed training cannot be cancelled');
+
+reset role;
+set local role authenticated;
+set local request.jwt.claim.sub='f1000000-0000-4000-8000-000000000002';
+select throws_ok($$select public.cancel_training_session('f1000000-0000-4000-8000-000000000002','f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001','f4000000-0000-4000-8000-000000000001')$$,'42501','permission denied for function cancel_training_session','viewer cannot call server-only cancellation directly');
 
 set local request.jwt.claim.sub='f1000000-0000-4000-8000-000000000003';
 select throws_ok($$select public.get_training_attendance('f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001')$$,'42501','NOT_AUTHORIZED','outsider cannot read attendance overview');

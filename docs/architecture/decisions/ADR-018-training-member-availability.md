@@ -10,6 +10,7 @@ Tränargruppen behöver se hur många och vilka tränare som planerar att vara p
 ## Beslut
 
 - En planerad närvaropost hör till exakt en träning och en inloggad lagmedlem, med status `coming` eller `absent`. Avsaknad av post betyder att medlemmen inte har svarat.
+- En coach kan markera dagens eller en kommande träning som inställd. Inställda pass behålls för tydlighet men kan inte få nya eller ändrade närvarosvar.
 - Alla aktiva lagmedlemmar kan läsa översikten, se namnen på dem som uppgett att de kommer och spara endast sin egen post.
 - Ett frivilligt visningsnamn lagras på lagmedlemskapet. Det används i närvaroöversikten och faller tillbaka till e-postprefix för äldre medlemskap utan visningsnamn.
 - Närvaron lagras separat från träningsplanen. Den ändrar inte planens revision, status eller övningsinnehåll.
@@ -20,4 +21,5 @@ Tränargruppen behöver se hur många och vilka tränare som planerar att vara p
 - Besökare får ett begränsat skrivflöde för sin egen planerade närvaro, men får ingen annan administrativ träningsbehörighet.
 - Träningsdetaljen och den nya närvarovyn visar samma aktuella antal och namn från en gemensam läsmodell.
 - Namn kan hållas team-specifika utan att personuppgifter behöver läggas i migreringar eller källkod.
+- Inställning är en coach-skyddad, server-only åtgärd; aktiva viewers kan fortsatt se statusen men kan inte ändra den.
 - Senare behov av anmärkningar, kallelser eller faktisk närvaro efter passet kräver ett separat produktbeslut.
