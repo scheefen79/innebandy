@@ -8,6 +8,11 @@ describe("training attendance", () => {
     await expect(loadTrainingAttendance({ rpc } as unknown as SupabaseClient, "team", "season")).resolves.toMatchObject([{ id: "t1", responses: [{ status: "coming" }] }]);
   });
 
+  it("loads a cancelled training so it can be shown as cancelled", async () => {
+    const rpc = vi.fn().mockResolvedValue({ data: [{ id: "t1", startsAt: "2026-09-05T08:00:00Z", endsAt: "2026-09-05T09:00:00Z", themeBlock: 1, focus: "Passning", status: "cancelled", responses: [] }], error: null });
+    await expect(loadTrainingAttendance({ rpc } as unknown as SupabaseClient, "team", "season")).resolves.toMatchObject([{ id: "t1", status: "cancelled" }]);
+  });
+
   it("rejects malformed responses and uses Swedish status text", async () => {
     const rpc = vi.fn().mockResolvedValue({ data: [{ id: "t1", startsAt: "2026-09-05T08:00:00Z", endsAt: "2026-09-05T09:00:00Z", themeBlock: 1, focus: "Passning", status: "planned", responses: [{ userId: "u1", name: "anders", status: "maybe" }] }], error: null });
     await expect(loadTrainingAttendance({ rpc } as unknown as SupabaseClient, "team", "season")).rejects.toThrow("ogiltig");

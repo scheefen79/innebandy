@@ -6,7 +6,7 @@ export type TrainingAttendanceResponse = { userId: string; name: string; status:
 export type TrainingAttendance = { id: string; startsAt: string; endsAt: string; themeBlock: number; focus: string; status: TrainingStatus; responses: TrainingAttendanceResponse[] };
 
 const statuses = new Set<TrainingAttendanceStatus>(["coming", "absent"]);
-const trainingStatuses = new Set<TrainingStatus>(["draft", "planned", "completed"]);
+const trainingStatuses = new Set<TrainingStatus>(["draft", "planned", "completed", "cancelled"]);
 
 export async function loadTrainingAttendance(supabase: SupabaseClient, teamId: string, seasonId: string): Promise<TrainingAttendance[]> {
   const { data, error } = await supabase.rpc("get_training_attendance", { target_team_id: teamId, target_season_id: seasonId });
@@ -26,7 +26,7 @@ export async function loadTrainingAttendance(supabase: SupabaseClient, teamId: s
 export async function saveTrainingAttendance(admin: SupabaseClient, input: { actorUserId: string; teamId: string; seasonId: string; trainingId: string; status: TrainingAttendanceStatus }) {
   const { error } = await admin.rpc("save_training_attendance", { actor_user_id: input.actorUserId, target_team_id: input.teamId, target_season_id: input.seasonId, target_training_id: input.trainingId, requested_status: input.status });
   if (!error) return "ok" as const;
-  if (error.message.includes("TRAINING_COMPLETED") || error.message.includes("TRAINING_NOT_AVAILABLE")) return "invalid" as const;
+  if (error.message.includes("TRAINING_COMPLETED") || error.message.includes("TRAINING_CANCELLED") || error.message.includes("TRAINING_NOT_AVAILABLE")) return "invalid" as const;
   throw new Error("Det gick inte att spara ditt svar.");
 }
 
