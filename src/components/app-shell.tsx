@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { MobileNavigation } from "@/components/mobile-navigation";
 import type { TeamRole } from "@/lib/auth/team-context";
 
 type AppShellProps = {
@@ -22,14 +23,17 @@ const coachOnlyLabels = new Set(["Spelare", "Medlemmar"]);
 export function AppShell({ children, currentItem = "Kommande", role }: AppShellProps) {
   const visibleNavigation = navigation.filter((item) => !coachOnlyLabels.has(item.label) || role === "coach");
   return (
-    <div className="min-h-screen bg-[#F5F7FA] pb-20 md:pb-0">
+    <div className="min-h-screen bg-[#F5F7FA]">
       <header className="bg-[#082B4C] text-white md:hidden">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
-          <div>
+          <div className="flex min-w-0 items-center gap-2">
+            <MobileNavigation items={visibleNavigation} currentItem={currentItem} />
+            <div>
             <p className="text-xs font-medium uppercase tracking-[0.16em] text-blue-200">
               FBC Sollentuna
             </p>
             <p className="mt-1 text-lg font-semibold">P17</p>
+            </div>
           </div>
           <form action="/auth/logout" method="post">
             <button
@@ -77,31 +81,6 @@ export function AppShell({ children, currentItem = "Kommande", role }: AppShellP
 
         <main className="min-w-0 w-full px-4 py-6 sm:px-6 md:px-8 md:py-10">{children}</main>
       </div>
-
-      <nav
-        aria-label="Huvudnavigation"
-        className="fixed inset-x-0 bottom-0 border-t border-slate-200 bg-white md:hidden"
-      >
-        <ul
-          className={`mx-auto grid max-w-lg ${
-            visibleNavigation.length === 6 ? "grid-cols-6" : visibleNavigation.length === 5 ? "grid-cols-5" : visibleNavigation.length === 4 ? "grid-cols-4" : "grid-cols-3"
-          }`}
-        >
-          {visibleNavigation.map((item) => (
-            <li key={item.label}>
-              <Link
-                aria-current={item.label === currentItem ? "page" : undefined}
-                href={item.href}
-                className={`flex min-h-16 items-center justify-center px-2 text-xs font-semibold ${
-                  item.label === currentItem ? "text-blue-700" : "text-slate-500"
-                }`}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
     </div>
   );
 }
