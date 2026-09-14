@@ -7,7 +7,7 @@
 
 Appen har hittills endast rollen `coach`. Alla aktiva lagmedlemmar kan läsa lagets tabeller och flera skrivande serverfunktioner verifierar aktivt medlemskap utan att kräva en viss produktroll. Produkten behöver nu en inloggad besökarroll som kan läsa planering men inte administrera laget.
 
-Besökaren ska kunna läsa översikt, träningar, matcher och spelarnamn i matchuttagningar. Besökaren får inte se spelarnivåer, spelarlistan, spelarprofiler eller spelarhistorik och får inte ändra data. Eftersom spelarens namn är tillåtet i en uttagning men spelarresursen i övrigt är förbjuden räcker det inte att dölja sidor och fält i UI:t.
+Besökaren ska kunna läsa översikt, träningar, matcher och spelarnamn i matchuttagningar. Besökaren får inte se spelarnivåer, spelarlistan, spelarprofiler eller spelarhistorik och får inte ändra lagdata. Planerad tränarnärvaro är ett senare, uttryckligt undantag: en aktiv besökare får uppdatera endast sin egen närvaropost enligt ADR-018. Eftersom spelarens namn är tillåtet i en uttagning men spelarresursen i övrigt är förbjuden räcker det inte att dölja sidor och fält i UI:t.
 
 ## Beslut
 
@@ -18,12 +18,12 @@ Besökaren ska kunna läsa översikt, träningar, matcher och spelarnamn i match
 - En matchuttagning får returnera spelarens id och namn till `viewer`, men inte nivå, generell matchstatistik eller historik.
 - `viewer` får inte generell `select`-åtkomst till `players` eller `match_players`. Tillåten matchinformation exponeras genom rollmedvetna databasfunktioner med minimala returvärden.
 - Spelarlista, spelarprofil och spelarhistorik kräver uttryckligen rollen `coach` i den auktoritativa server- eller databasgränsen.
-- Varje skrivande databasfunktion och servermutation kräver uttryckligen ett aktivt medlemskap med rollen `coach`.
+- Varje skrivande databasfunktion och servermutation kräver uttryckligen ett aktivt medlemskap med rollen `coach`, utom den avgränsade funktionen för egen planerad tränarnärvaro i ADR-018.
 - Lagkontexten returnerar den verifierade medlemmens roll så att serverrendering och navigation kan anpassas. UI-begränsningen är ett användbarhetslager och ersätter inte databasens kontroll.
 
 ## Konsekvenser
 
-- En besökare kan följa lagets planering utan att kunna ändra den.
+- En besökare kan följa lagets planering utan att kunna ändra den, med undantag för den egna planerade tränarnärvaron.
 - Spelarnivåer och individuell historik lämnar inte serverns tillåtna datagräns för `viewer` och kan därför inte återfinnas genom nätverksinspektion eller direkta klientanrop.
 - Befintliga RLS-policyer, grants, läsfunktioner och samtliga skrivfunktioner måste inventeras. Ett generellt medlemskapstest är inte längre tillräckligt för skrivning eller spelarläsning.
 - UI:t behöver rollanpassad navigation och skrivskyddade varianter av gemensamma vyer.

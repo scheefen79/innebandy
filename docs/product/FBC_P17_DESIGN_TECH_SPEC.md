@@ -22,7 +22,7 @@ Produkten ska kännas som ett litet, snabbt planeringsverktyg – inte som ett k
 - Automatisk fördelning ska vara standard.
 - Tränaren ska kunna justera manuellt.
 - Spelarnivå används för balans, inte för att vissa ska få fler matcher.
-- Ingen träningsnärvaro.
+- Planerad tränarnärvaro för inloggade lagmedlemmar.
 - Ingen chatt, betalning eller lagkassa.
 - Ingen separat adminpanel i MVP.
 
@@ -57,7 +57,7 @@ Besökaren får inte:
 
 - se spelarnivåer
 - nå spelarlistan, ett spelarkort eller spelarhistorik
-- skapa, ändra eller ta bort data
+- skapa, ändra eller ta bort lagdata; undantaget är att ange eller ändra den egna planerade tränarnärvaron
 
 Ett spelarnamn får exponeras för besökaren endast i sitt matchsammanhang. Besökaren får inte kunna hämta spelaren som en fristående resurs. Begränsningen ska upprätthållas i databas och serverlogik, inte enbart genom dold navigation.
 
@@ -67,8 +67,8 @@ Ett spelarnamn får exponeras för besökaren endast i sitt matchsammanhang. Bes
 
 Bottom navigation på mobil:
 
-- Tränare: Översikt, Träningar, Matcher och Spelare
-- Besökare: Översikt, Träningar och Matcher
+- Tränare: Översikt, Träningar, Närvaro, Matcher och Spelare
+- Besökare: Översikt, Träningar, Närvaro och Matcher
 
 Desktop använder samma rollanpassade huvudvyer i en enkel sidomeny eller toppnavigation.
 
@@ -810,7 +810,7 @@ Undvik tekniska termer i gränssnittet.
 ## Ska inte byggas
 
 - träningsschema
-- träningsnärvaro
+- spelarnärvaro eller träningskallelser
 - pushnotiser
 - e-post
 - SMS
