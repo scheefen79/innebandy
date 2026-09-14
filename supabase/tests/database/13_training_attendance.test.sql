@@ -19,6 +19,7 @@ insert into public.seasons(id,team_id,name,starts_on,ends_on) values('f3000000-0
 insert into public.training_sessions(id,team_id,season_id,starts_at,ends_at,theme_block,focus,key_message,updated_by) values
  ('f4000000-0000-4000-8000-000000000001','f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001','2027-02-01 09:00+00','2027-02-01 10:00+00',1,'Passning','PASSA','f1000000-0000-4000-8000-000000000001'),
  ('f4000000-0000-4000-8000-000000000002','f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001','2027-02-08 09:00+00','2027-02-08 10:00+00',1,'Avslutat','KLART','f1000000-0000-4000-8000-000000000001');
+update public.team_members set display_name='Tränare ett' where user_id='f1000000-0000-4000-8000-000000000001';
 
 select has_table('public','training_attendance','training attendance table exists');
 set local role authenticated;
@@ -43,8 +44,8 @@ select throws_ok($$select public.save_training_attendance('f1000000-0000-4000-80
 reset role;
 set local role authenticated;
 set local request.jwt.claim.sub='f1000000-0000-4000-8000-000000000002';
-select is((public.get_training_attendance('f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001')->0->'responses'->0->>'name'),'attendance-coach','viewer sees the name of a coming trainer in the overview');
-select is((public.get_training_attendance('f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001')->0->'responses'->0->>'status'),'coming','viewer sees the coming status in the overview');
+select is((select response->>'name' from jsonb_array_elements(public.get_training_attendance('f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001')->0->'responses') response where response->>'userId'='f1000000-0000-4000-8000-000000000001'),'Tränare ett','viewer sees the configured name of a coming trainer in the overview');
+select is((select response->>'status' from jsonb_array_elements(public.get_training_attendance('f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001')->0->'responses') response where response->>'userId'='f1000000-0000-4000-8000-000000000001'),'coming','viewer sees the coming status in the overview');
 
 set local request.jwt.claim.sub='f1000000-0000-4000-8000-000000000003';
 select throws_ok($$select public.get_training_attendance('f2000000-0000-4000-8000-000000000001','f3000000-0000-4000-8000-000000000001')$$,'42501','NOT_AUTHORIZED','outsider cannot read attendance overview');
