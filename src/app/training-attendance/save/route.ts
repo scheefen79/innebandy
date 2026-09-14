@@ -19,5 +19,5 @@ export async function POST(request: NextRequest) {
   const status = String(form.get("status") ?? "");
   if (!isUuid(trainingId) || (status !== "coming" && status !== "absent")) return go("/training-attendance?change=invalid");
   const result = await saveTrainingAttendance(createAdminClient(), { actorUserId: userId, teamId: context.teamId, seasonId: context.seasonId, trainingId, status });
-  return go(result === "ok" ? "/training-attendance?change=saved" : "/training-attendance?change=invalid");
+  return go(result === "ok" ? `/training-attendance?change=saved&open=${encodeURIComponent(trainingId)}` : "/training-attendance?change=invalid");
 }

@@ -14,7 +14,7 @@ beforeEach(() => save.mockReset().mockResolvedValue("ok"));
 it("saves only the authenticated member's response through the server boundary", async () => {
   const response = await POST(request());
   expect(save).toHaveBeenCalledWith({ kind: "admin" }, expect.objectContaining({ actorUserId: "member", status: "coming" }));
-  expect(response.headers.get("location")).toBe("https://app.example/training-attendance?change=saved");
+  expect(response.headers.get("location")).toBe("https://app.example/training-attendance?change=saved&open=e4000000-0000-4000-8000-000000000001");
 });
 it("rejects an invalid status before saving", async () => {
   const response = await POST(request("maybe"));

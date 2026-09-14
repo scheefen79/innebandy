@@ -4,16 +4,16 @@ import type { TeamRole } from "@/lib/auth/team-context";
 
 type AppShellProps = {
   children: ReactNode;
-  currentItem?: "Kommande" | "Träningar" | "Närvaro" | "Matcher" | "Spelare" | "Medlemmar";
+  currentItem?: "Kommande" | "Träningar" | "Matcher" | "Spelare" | "Tränarnärvaro" | "Medlemmar";
   role?: TeamRole;
 };
 
 const navigation = [
   { href: "/", label: "Kommande" },
   { href: "/trainings", label: "Träningar" },
-  { href: "/training-attendance", label: "Närvaro" },
   { href: "/matches", label: "Matcher" },
   { href: "/players", label: "Spelare" },
+  { href: "/training-attendance", label: "Tränarnärvaro" },
   { href: "/team", label: "Medlemmar" },
 ] as const;
 
