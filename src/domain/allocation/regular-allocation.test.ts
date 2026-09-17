@@ -19,7 +19,7 @@ function allocationCounts(allocations: Array<{ playerIds: string[] }>) {
 }
 
 describe("generateRegularAllocation", () => {
-  it("fördelar referensarkets 108 platser rättvist", () => {
+  it("fördelar referensarkets 90 platser rättvist", () => {
     const players = Array.from({ length: 23 }, (_, index) =>
       player(`p${index + 1}`, {
         level: ((index % 3) + 1) as 1 | 2 | 3,
@@ -27,7 +27,7 @@ describe("generateRegularAllocation", () => {
       }),
     );
     const matches = Array.from({ length: 9 }, (_, index) =>
-      match(`m${index + 1}`, { order: index + 1, targetSize: 12 }),
+      match(`m${index + 1}`, { order: index + 1, targetSize: 10 }),
     );
 
     const result = expectSuccess(
@@ -36,12 +36,12 @@ describe("generateRegularAllocation", () => {
     const counts = allocationCounts(result.allocations);
 
     expect(result.allocations).toHaveLength(9);
-    expect(result.allocations.every(({ playerIds }) => playerIds.length === 12)).toBe(true);
+    expect(result.allocations.every(({ playerIds }) => playerIds.length === 10)).toBe(true);
     expect(
       result.allocations.every(({ playerIds }) => new Set(playerIds).size === playerIds.length),
     ).toBe(true);
-    expect([...counts.values()].reduce((sum, count) => sum + count, 0)).toBe(108);
-    expect([...counts.values()].every((count) => count === 4 || count === 5)).toBe(true);
+    expect([...counts.values()].reduce((sum, count) => sum + count, 0)).toBe(90);
+    expect([...counts.values()].every((count) => count === 3 || count === 4)).toBe(true);
     expect(Math.max(...counts.values()) - Math.min(...counts.values())).toBe(1);
   });
 

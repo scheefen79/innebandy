@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createMatch } from "@/features/matches/create-match";
+import { DEFAULT_TARGET_PLAYERS } from "@/features/matches/match-defaults";
 import { validateMatchInput } from "@/features/matches/match-validation";
 import { createSupabaseMatchRepository } from "@/features/matches/supabase-match-repository";
 import { loadTeamContext } from "@/lib/auth/team-context";
@@ -24,12 +25,7 @@ export async function POST(request: NextRequest) {
     ["opponent", "date", "time", "location", "target_players", "request_id"]
       .map((key) => [key, String(formData.get(key) ?? "")]),
   );
-  const { count, error: countError } = await supabase.from("players")
-    .select("id", { count: "exact", head: true })
-    .eq("team_id", context.teamId).eq("season_id", context.seasonId).eq("is_active", true);
-  if (countError) throw new Error("Det gick inte att räkna aktiva spelare.");
-
-  const validated = validateMatchInput(values, count ? Math.ceil(count / 2) : null);
+  const validated = validateMatchInput(values, DEFAULT_TARGET_PLAYERS);
   if (!validated.ok) {
     return applyAuthState(redirectTo(request, `/matches/new?error=${encodeURIComponent(validated.error)}`));
   }

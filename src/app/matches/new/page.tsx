@@ -4,6 +4,7 @@ import { AppShell } from "@/components/app-shell";
 import { loadTeamContext } from "@/lib/auth/team-context";
 import { getVerifiedUserId } from "@/lib/auth/verified-user";
 import { createClient } from "@/lib/supabase/server";
+import { DEFAULT_TARGET_PLAYERS } from "@/features/matches/match-defaults";
 import { SubmitButton } from "./submit-button";
 
 export const dynamic = "force-dynamic";
@@ -18,7 +19,7 @@ export default async function NewMatchPage({ searchParams }: { searchParams: Pro
   const { count, error: countError } = await supabase.from("players").select("id", { count: "exact", head: true })
     .eq("team_id", context.teamId).eq("season_id", context.seasonId).eq("is_active", true);
   if (countError) throw new Error("Det gick inte att räkna aktiva spelare.");
-  const defaultTarget = count ? Math.ceil(count / 2) : undefined;
+  const activePlayers = count ?? 0;
   const error = (await searchParams).error;
 
   return <AppShell currentItem="Matcher" role={context.role}><div className="mx-auto max-w-xl">
@@ -30,8 +31,8 @@ export default async function NewMatchPage({ searchParams }: { searchParams: Pro
       <label className="block"><span className="text-sm font-semibold text-slate-800">Motståndare</span><input required maxLength={100} name="opponent" autoComplete="off" className="mt-2 min-h-11 w-full rounded-xl border border-slate-300 px-3 text-base focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200" /></label>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2"><label className="block"><span className="text-sm font-semibold text-slate-800">Datum</span><input required type="date" name="date" className="mt-2 min-h-11 w-full rounded-xl border border-slate-300 px-3 text-base" /></label><label className="block"><span className="text-sm font-semibold text-slate-800">Tid</span><input required type="time" name="time" className="mt-2 min-h-11 w-full rounded-xl border border-slate-300 px-3 text-base" /></label></div>
       <label className="block"><span className="text-sm font-semibold text-slate-800">Plats <span className="font-normal text-slate-500">(valfritt)</span></span><input maxLength={200} name="location" autoComplete="off" className="mt-2 min-h-11 w-full rounded-xl border border-slate-300 px-3 text-base" /></label>
-      <label className="block"><span className="text-sm font-semibold text-slate-800">Antal matchplatser</span><input required type="number" min="1" step="1" name="target_players" defaultValue={defaultTarget} className="mt-2 min-h-11 w-full rounded-xl border border-slate-300 px-3 text-base" /><span className="mt-2 block text-xs text-slate-500">Förslag: hälften av de aktiva spelarna, avrundat uppåt.</span></label>
-      {!defaultTarget ? <p className="rounded-xl bg-amber-50 p-3 text-sm text-amber-900">Laget saknar aktiva spelare, så du behöver ange antalet platser själv.</p> : null}
+      <label className="block"><span className="text-sm font-semibold text-slate-800">Antal matchplatser</span><input required type="number" min="1" step="1" name="target_players" defaultValue={DEFAULT_TARGET_PLAYERS} className="mt-2 min-h-11 w-full rounded-xl border border-slate-300 px-3 text-base" /><span className="mt-2 block text-xs text-slate-500">Standard är {DEFAULT_TARGET_PLAYERS} kallade spelare per match. Ändra bara om just den här matchen kräver det.</span></label>
+      {activePlayers < DEFAULT_TARGET_PLAYERS ? <p className="rounded-xl bg-amber-50 p-3 text-sm text-amber-900">Laget har {activePlayers} aktiva spelare, färre än {DEFAULT_TARGET_PLAYERS} matchplatser. Sänk antalet platser, annars går uttagningen inte att generera.</p> : null}
       <SubmitButton />
     </form>
   </div></AppShell>;
