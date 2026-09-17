@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { DEFAULT_TARGET_PLAYERS } from "./match-defaults";
 import { validateMatchInput } from "./match-validation";
 
 const valid = {
@@ -12,6 +13,12 @@ describe("validateMatchInput", () => {
       opponent: "Täby FC", startsAt: "2026-09-10T16:30:00.000Z", location: "Sporthallen",
       targetPlayers: 8, requestId: valid.request_id,
     } });
+  });
+
+  it("falls back to the standard squad of ten when the field is left empty", () => {
+    expect(validateMatchInput(valid, DEFAULT_TARGET_PLAYERS)).toMatchObject({
+      ok: true, value: { targetPlayers: 10 },
+    });
   });
 
   it("allows an explicit positive target when there are no active players", () => {

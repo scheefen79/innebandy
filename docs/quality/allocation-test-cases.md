@@ -6,14 +6,14 @@ Dokumentet beskriver observerbart beteende. Testerna ska implementeras mot en re
 
 ### O1: Jämn fördelning från referensarket
 
-Givet 23 aktiva spelare, nio matcher och tolv platser per match finns 108 ordinarie matchplatser.
+Givet 23 aktiva spelare, nio matcher och tio platser per match finns 90 ordinarie matchplatser.
 
 Förväntat:
 
-- varje match får exakt 12 spelare
-- varje spelare får 4 eller 5 ordinarie matcher
+- varje match får exakt 10 spelare
+- varje spelare får 3 eller 4 ordinarie matcher
 - skillnaden mellan högsta och lägsta antal är 1
-- totalt antal tilldelningar är 108
+- totalt antal tilldelningar är 90
 
 ### O2: Nivå påverkar inte total rättvisa
 
@@ -137,7 +137,7 @@ Förväntat:
 
 ### F1: Fler platser än aktiva spelare
 
-Givet 10 aktiva spelare och target 12.
+Givet 8 aktiva spelare och target 10.
 
 Förväntat:
 
