@@ -4,12 +4,13 @@ import { useState } from "react";
 import { ExerciseAdditionPicker, ExerciseReplacementPicker } from "./exercise-replacement-picker";
 import type { ExerciseCatalogItem } from "@/features/trainings/exercise-catalog";
 import type { TrainingItem, TrainingPlan, TrainingSection } from "@/features/trainings/training-plans";
+import { trainingWeekdayPlural } from "@/features/trainings/training-series";
 
 type EditableTrainingItem = TrainingItem & { replacementCatalogId?: string; additionCatalogId?: string; sourceChangeMode?: "manual" };
 
 const sectionText: Record<TrainingSection, string> = { gathering: "Samling", warmup: "Uppvärmning", technique: "Teknik", match_exercise: "Matchövning", closing: "Avslutning" };
 
-export function TrainingForm({ training }: { training: TrainingPlan }) {
+export function TrainingForm({ training, seriesCount }: { training: TrainingPlan; seriesCount: number }) {
   const [items, setItems] = useState<EditableTrainingItem[]>(() => training.items.map(item => item.sourceTitle && /^https:\/\/(www\.)?innebandy\.se\/ovningsbanken\//.test(item.sourceUrl ?? "") ? { ...item, title: item.sourceTitle } : item));
   const update = (index: number, patch: Partial<TrainingItem>) => setItems(current => current.map((item, itemIndex) => itemIndex === index ? { ...item, ...patch, replacementCatalogId: undefined } : item));
   const replace = (index: number, exercise: ExerciseCatalogItem) => setItems(current => current.map((item, itemIndex) => itemIndex === index ? {
@@ -42,6 +43,13 @@ export function TrainingForm({ training }: { training: TrainingPlan }) {
       </section>)}
     </div><ExerciseAdditionPicker themeBlock={training.themeBlock} onAdd={addCatalogExercise} onCreateManual={addManualExercise} /></fieldset>
     <label className="block"><span className="font-semibold">Status</span><select name="status" defaultValue={training.status} className="mt-2 min-h-12 w-full rounded-xl border border-slate-300 px-3"><option value="draft">Ej planerad</option><option value="planned">Planerad</option>{training.status === "planned" ? <option value="completed">Genomförd</option> : null}</select></label>
-    <button className="min-h-12 w-full rounded-xl bg-blue-700 px-4 font-semibold text-white">Spara träningsplan</button>
+    {/* Enskild sparning måste ligga först: Enter i ett textfält utlöser formulärets första submit-knapp. */}
+    <div className="space-y-3">
+      <button name="scope" value="single" className="min-h-12 w-full rounded-xl bg-blue-700 px-4 font-semibold text-white">Spara denna träning</button>
+      {seriesCount ? <>
+        <button name="scope" value="series" className="min-h-12 w-full rounded-xl border-2 border-blue-700 bg-white px-4 font-semibold text-blue-700">{`Spara för alla ${trainingWeekdayPlural(training.startsAt)} i block ${training.themeBlock} (${seriesCount} st)`}</button>
+        <p className="text-sm text-slate-600">Kopierar fokus, huvudbudskap, anteckningar och alla moment till kommande {trainingWeekdayPlural(training.startsAt)} i blocket. Tider och status ändras inte.</p>
+      </> : null}
+    </div>
   </form>;
 }

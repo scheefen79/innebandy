@@ -2,6 +2,7 @@ import {Fragment} from "react";
 import Link from "next/link";
 import {notFound,redirect} from "next/navigation";
 import {AppShell} from "@/components/app-shell";
+import {trainingWeekdayPlural} from "@/features/trainings/training-series";
 import {loadTeamContext} from "@/lib/auth/team-context";
 import {getVerifiedUserId} from "@/lib/auth/verified-user";
 import {createClient} from "@/lib/supabase/server";
@@ -20,7 +21,7 @@ const sectionStyle={
  closing:{label:"Avslutning",card:"border-slate-200 bg-white",badge:"bg-slate-100 text-slate-700"},
 } as const;
 
-export default async function TrainingPage({params,searchParams}:{params:Promise<{id:string}>;searchParams:Promise<{change?:string}>}){
+export default async function TrainingPage({params,searchParams}:{params:Promise<{id:string}>;searchParams:Promise<{change?:string;count?:string}>}){
  const {id}=await params;
  const supabase=await createClient();
  const userId=await getVerifiedUserId();
@@ -30,11 +31,14 @@ export default async function TrainingPage({params,searchParams}:{params:Promise
  let training;
  try{training=await loadTrainingPlan(supabase,context.teamId,context.seasonId,id)}catch{notFound()}
  const [query,attendance]=await Promise.all([searchParams,loadTrainingAttendance(supabase,context.teamId,context.seasonId)]);
+ // count kommer från URL:en och är användarredigerbart, så det parsas och klamras innan det visas.
+ const seriesCount=Math.max(0,Math.min(50,Number.parseInt(query.count??"",10)||0));
  const responses=attendance.find(candidate=>candidate.id===id)?.responses??[];
  const coming=responses.filter(response=>response.status==="coming");
  return <AppShell currentItem="Träningar" role={context.role}><main className="mx-auto max-w-3xl">
   <Link href="/trainings" className="inline-flex min-h-11 items-center text-sm font-semibold text-blue-700">← Till träningar</Link>
   {query.change==="saved"?<p role="status" className="mb-4 rounded-xl bg-emerald-50 p-3 text-sm text-emerald-900">Träningsplanen är sparad.</p>:null}
+  {query.change==="series"?<p role="status" className="mb-4 rounded-xl bg-emerald-50 p-3 text-sm text-emerald-900">{seriesCount?`Träningsplanen är sparad och kopierad till ${seriesCount} kommande ${trainingWeekdayPlural(training.startsAt)} i block ${training.themeBlock}.`:"Träningsplanen är sparad. Ingen kommande träning i serien behövde uppdateras."}</p>:null}
   {query.change==="stale"?<p role="alert" className="mb-4 rounded-xl bg-amber-50 p-3 text-sm text-amber-950">En annan tränare har ändrat planen. Kontrollera den senaste versionen innan du försöker igen.</p>:null}
   <article className="rounded-2xl bg-white p-5 shadow-sm sm:p-7">
    <div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-sm font-semibold text-blue-700">Block {training.themeBlock}</p><h1 className="mt-1 text-3xl font-bold text-slate-950">{training.focus}</h1><p className="mt-2 text-slate-600">{formatTrainingTime(training.startsAt,training.endsAt)}</p></div><span className="rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-800">{trainingStatusText(training.status)}</span></div>

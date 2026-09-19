@@ -174,7 +174,6 @@ Sektioner: `gathering`, `warmup`, `technique`, `match_exercise`, `closing`. Posi
 - automatiska notifieringar
 - automatisk import eller synk från Övningsbanken
 - generell sökfunktion i hela Övningsbanken
-- mallredigering som förändrar flera framtida träningar samtidigt
 - versionshistorik med återställning
 - skapa eller radera extra träningstillfällen
 - återöppna en genomförd träning
