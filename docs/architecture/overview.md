@@ -70,3 +70,4 @@ PostgreSQL lagrar projektets tillstånd. Supabase Auth identifierar tränaren oc
 - ADR-014: källhostade övningsbilder med attribution
 - ADR-015: engångsverifierad identitet per request
 - ADR-016: rollbaserad tränar- och besökaråtkomst
+- ADR-020: serieuppdatering av träningsplaner per veckodag och block

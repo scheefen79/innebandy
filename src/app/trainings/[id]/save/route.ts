@@ -4,7 +4,7 @@ import { getVerifiedUserId } from "@/lib/auth/verified-user";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createRouteHandlerClient } from "@/lib/supabase/route-handler";
 import { hasValidCatalogReplacements } from "@/features/trainings/exercise-catalog";
-import { canonicalizeSourceItemTitles, loadTrainingPlan, saveTrainingPlan, validateTrainingPayload } from "@/features/trainings/training-plans";
+import { canonicalizeSourceItemTitles, loadTrainingPlan, saveTrainingPlan, saveTrainingPlanSeries, validateTrainingPayload } from "@/features/trainings/training-plans";
 
 export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -28,17 +28,21 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   const items = canonicalizeSourceItemTitles(validated.value.items);
   let existing;
   try { existing = await loadTrainingPlan(supabase, context.teamId, context.seasonId, id); } catch { return go(`/trainings/${id}/edit?error=invalid`); }
+  // Katalogkontrollen körs bara mot det redigerade passet. hasValidCatalogReplacements matchar items mot
+  // existing.items via clientItemId, så ett anrop per syskon skulle avvisa varje katalogersättning. Alla
+  // syskon delar theme_block med passet, så en payload som är giltig här är giltig för hela serien.
   if (existing.status === "completed" || !hasValidCatalogReplacements(items, existing)) return go(`/trainings/${id}/edit?error=invalid`);
 
-  const result = await saveTrainingPlan(createAdminClient(), {
-    actorUserId: userId,
-    teamId: context.teamId,
-    seasonId: context.seasonId,
-    trainingId: id,
-    revision,
-    requestId: `${id}:${revision}`,
-    ...validated.value, items,
-  });
+  const common = { actorUserId: userId, teamId: context.teamId, seasonId: context.seasonId, trainingId: id, revision, ...validated.value, items };
+  // Allt utom det uttryckliga seriealternativet, inklusive submit utan scope, sparar bara det enskilda passet.
+  if (String(form.get("scope") ?? "") === "series") {
+    const series = await saveTrainingPlanSeries(createAdminClient(), { ...common, requestId: `${id}:${revision}:series` });
+    if (series.result === "stale") return go(`/trainings/${id}?change=stale`);
+    if (series.result === "invalid") return go(`/trainings/${id}/edit?error=invalid`);
+    return go(`/trainings/${id}?change=series&count=${series.count}`);
+  }
+
+  const result = await saveTrainingPlan(createAdminClient(), { ...common, requestId: `${id}:${revision}` });
   if (result === "stale") return go(`/trainings/${id}?change=stale`);
   if (result === "invalid") return go(`/trainings/${id}/edit?error=invalid`);
   return go(`/trainings/${id}?change=saved`);

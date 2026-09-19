@@ -22,6 +22,7 @@ Tre tränare behöver gemensamt planera 27 träningar under hösten 2026. Grundi
 - Tränarna kan anpassa en specifik träning utan sidoeffekter på resten av blocket.
 - Duplicerat övningsinnehåll accepteras för att göra beteendet enkelt och förutsägbart.
 - En senare global malländring måste vara en uttrycklig funktion med egen konfliktmodell.
+- Den funktionen finns nu och är beskriven i ADR-020: serieuppdatering per veckodag och block.
 - Revisionskontroll förhindrar tyst last-write-wins när två tränare arbetar samtidigt.
 - Datamodellen kan senare återanvändas för andra säsonger, men första bootstrapen är avgränsad till Hösten 2026.
 
