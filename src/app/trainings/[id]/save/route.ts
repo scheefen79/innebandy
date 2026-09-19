@@ -31,7 +31,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   // Katalogkontrollen körs bara mot det redigerade passet. hasValidCatalogReplacements matchar items mot
   // existing.items via clientItemId, så ett anrop per syskon skulle avvisa varje katalogersättning. Alla
   // syskon delar theme_block med passet, så en payload som är giltig här är giltig för hela serien.
-  if (existing.status === "completed" || !hasValidCatalogReplacements(items, existing)) return go(`/trainings/${id}/edit?error=invalid`);
+  if (existing.status === "completed" || existing.status === "cancelled" || !hasValidCatalogReplacements(items, existing)) return go(`/trainings/${id}/edit?error=invalid`);
 
   const common = { actorUserId: userId, teamId: context.teamId, seasonId: context.seasonId, trainingId: id, revision, ...validated.value, items };
   // Allt utom det uttryckliga seriealternativet, inklusive submit utan scope, sparar bara det enskilda passet.
