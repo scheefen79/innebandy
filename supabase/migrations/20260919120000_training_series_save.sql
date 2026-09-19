@@ -11,7 +11,7 @@ create function public.save_training_plan_series_unchecked(
  requested_status public.training_session_status,requested_items jsonb
 ) returns integer language plpgsql volatile security definer set search_path=''
 as $$
-declare current_session public.training_sessions%rowtype; series_hash text; sibling public.training_sessions%rowtype; updated_count integer:=0;
+declare current_session public.training_sessions%rowtype; series_hash text; sibling public.training_sessions%rowtype; updated_count integer:=0; next_revision integer;
 begin
  if coalesce(auth.jwt()->>'role','')<>'service_role' then raise exception using errcode='42501',message='SERVER_ONLY'; end if;
  select * into current_session from public.training_sessions where id=target_training_id and team_id=target_team_id and season_id=target_season_id;
@@ -24,9 +24,23 @@ begin
   where team_id=target_team_id and season_id=target_season_id and theme_block=current_session.theme_block
   order by id for update;
 
+ -- Läs om efter låset. Den första läsningen är olåst och kan vara inaktuell; theme_block är däremot
+ -- oföränderligt efter bootstrap, så det duger för att avgöra vilka rader som ska låsas.
+ select * into current_session from public.training_sessions where id=target_training_id;
+
+ -- Ett inställt pass får aldrig spridas till serien. save_training_plan_unchecked saknar den kontrollen,
+ -- så den görs här innan något skrivs.
+ if current_session.status='cancelled' then raise exception using errcode='P0001',message='TRAINING_CANCELLED'; end if;
+
  -- Det redigerade passet sparas genom det etablerade enskilda kontraktet: fältvalidering, revisionskontroll,
  -- statusövergångar, TRAINING_COMPLETED och idempotens. Allt det körs alltså före varje syskonskrivning.
- perform public.save_training_plan_unchecked(actor_user_id,target_team_id,target_season_id,target_training_id,expected_revision,request_id,requested_focus,requested_key_message,requested_notes,requested_status,requested_items);
+ next_revision:=public.save_training_plan_unchecked(actor_user_id,target_team_id,target_season_id,target_training_id,expected_revision,request_id,requested_focus,requested_key_message,requested_notes,requested_status,requested_items);
+
+ -- Repris av en redan committad serie. save_training_plan_unchecked returnerar oförändrad revision när
+ -- request_id och payload matchar, och gör det utan revisionskontroll. Hela serien skrevs i samma
+ -- transaktion, så ingenting återstår att göra. Utan den här genvägen skulle syskonloopen skriva om ett
+ -- syskon som en kollega hunnit redigera enskilt sedan serien sparades.
+ if next_revision=current_session.revision then return 0; end if;
 
  -- requested_status ingår medvetet inte: status propageras inte till syskonen.
  series_hash:=md5(jsonb_build_array('series',target_training_id,expected_revision,requested_focus,requested_key_message,requested_notes,requested_items)::text);
@@ -40,10 +54,6 @@ begin
     and (starts_at at time zone 'Europe/Stockholm')::date>=(now() at time zone 'Europe/Stockholm')::date
   order by starts_at,id
  loop
-  if sibling.last_save_request_id=request_id then
-   if sibling.last_save_payload_hash is distinct from series_hash then raise exception using errcode='P0001',message='REQUEST_CONFLICT'; end if;
-   updated_count:=updated_count+1; continue;
-  end if;
   -- Ingen omvalidering här: save_training_plan_unchecked har redan avvisat ogiltiga requested_items i samma
   -- transaktion. Kolumnlistan speglar den funktionens insert exakt så att de hålls i synk.
   delete from public.training_items where training_session_id=sibling.id;
