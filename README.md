@@ -17,6 +17,7 @@ Den lokala MVP:n har autentisering, lagbehörighet, översikt, spelarhantering, 
 - [Implementation 04: ordinarie laguttagningar](docs/planning/implementation-04-selection-persistence.md)
 - [Implementation 10: produktionssättning och pilot](docs/planning/implementation-10-production-pilot.md)
 - [Produktionsrunbook](docs/deployment/production-runbook.md)
+- [Implementation 17: automatiserad verifiering och databasrelease](docs/planning/implementation-17-release-automation.md)
 - [Definition of Done](docs/quality/definition-of-done.md)
 - [Checklista för oberoende granskning](docs/quality/review-checklist.md)
 - [Autonomikontrakt för agentarbetet](docs/workflow/autonomy-contract.md)
@@ -60,5 +61,18 @@ pnpm release:preflight
 ```
 
 Databasmigrationer och RLS-tester körs enligt [guiden för lokal Supabase-utveckling](docs/development/supabase-local.md).
+
+## Deploy
+
+Varje pull request verifieras automatiskt av `.github/workflows/verify.yml`, och `main` är skyddad
+så att båda jobben måste vara gröna före merge.
+
+Vid merge till `main` deployar Vercel appen, och Supabases GitHub-integration kör nya migrationer
+i `supabase/migrations/`. Inget av det behöver köras för hand.
+
+Ordningen mellan app och databas är en regel, inte en spärr: additiva migrationer kan mergas som
+vanligt, medan destruktiva körs i en egen merge efter att koden som slutat använda det borttagna
+är live. Detaljerna och den manuella reservvägen finns i [produktionsrunbooken](docs/deployment/production-runbook.md),
+och beslutet i [ADR-021](docs/architecture/decisions/ADR-021-automated-release-pipeline.md).
 
 Kopiera `.env.example` till `.env.local` och fyll i Supabase URL samt publishable key. Lägg aldrig riktiga hemligheter i Git.
