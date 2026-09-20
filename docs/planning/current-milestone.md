@@ -1,4 +1,21 @@
-# Aktuell milstolpe: Implementation 10 – produktionssättning och pilot
+# Aktuell milstolpe: Implementation 17 – automatiserad verifiering och databasrelease
+
+## Mål
+
+Ingen ändring ska kunna nå `main` utan att testerna bevisligen körts, och ingen migration ska kunna glömmas bort.
+
+Scope och acceptanskriterier finns i `docs/planning/implementation-17-release-automation.md`. Beslutet finns i ADR-021, och den operativa ordningen i `docs/deployment/production-runbook.md`.
+
+## Leverabler
+
+- [x] Verifierande arbetsflöde som kör guards, lint, typkontroll, tester, bygge och hela databassviten på varje pull request.
+- [x] Guarderna har en enda definition som både lokal preflight och CI använder.
+- [x] `pnpm release:preflight` går igenom.
+- [ ] `main` skyddad med krav på pull request och på båda checkarna.
+- [ ] Supabases GitHub-integration påslagen så att migrationer körs vid merge.
+- [ ] Preview-databas kopplad så att previews inte når produktionsdata.
+
+## Föregående milstolpe: Implementation 10 – produktionssättning och pilot
 
 ## Mål
 
@@ -10,8 +27,8 @@ Detaljerat föreslaget scope och acceptanskriterier finns i `docs/planning/imple
 
 - [x] Implementation 10 och ADR-012 granskade och godkända.
 - [x] Produktionscheck och releasekommandon dokumenterade och verifierade.
-- [ ] Skarp Supabase-miljö skapad och länkad.
-- [ ] Migrationer applicerade utan utvecklingsseed.
+- [x] Skarp Supabase-miljö skapad och länkad.
+- [x] Migrationer applicerade utan utvecklingsseed.
 - [ ] Lag, aktiv säsong och tre tränarkonton skapade kontrollerat.
 - [ ] Vercel Production konfigurerad med rätt miljövariabler.
 - [ ] Skarp smoke test och mobil acceptans genomförda.

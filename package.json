@@ -15,7 +15,7 @@
     "db:test:player-concurrency": "bash supabase/tests/database/player_management_concurrency.sh",
     "db:test:team-concurrency": "bash supabase/tests/database/team_membership_concurrency.sh",
     "db:test:production-bootstrap": "bash supabase/tests/database/production_bootstrap.sh",
-    "db:lint": "supabase db lint --local",
+    "db:lint": "supabase db lint --local --fail-on warning",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint .",

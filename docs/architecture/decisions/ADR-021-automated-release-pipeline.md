@@ -25,9 +25,10 @@ eller piloten får högre konsekvens vid fel"* — är därmed uppfyllt av det t
 ## Beslut
 
 - **Verifiering automatiseras och blir en grind.** `.github/workflows/verify.yml` kör repots
-  guards, lint, typkontroll, enhetstester, bygge och hela databassviten inklusive pgTAP och de sju
-  samtidighetsskripten. `main` skyddas så att en pull request krävs och båda jobben måste vara
-  gröna före merge.
+  guards, lint, typkontroll, enhetstester, bygge och hela databassviten inklusive pgTAP, de sex
+  samtidighetsskripten och production-bootstrap. `main` ska skyddas så att en pull request krävs
+  och båda jobben måste vara gröna före merge. Skyddet sätts i GitHubs inställningar och är
+  alltså inte en del av arbetsflödesfilen; utan det är arbetsflödet rådgivande.
 - **Databasmigrering automatiseras genom Supabases GitHub-integration.** Migrationer i
   `supabase/migrations/` körs vid merge till `main`. Integrationen rör bara migrationer; API-,
   Auth- och seedkonfiguration ignoreras, så `seed.sql` kan inte nå produktion.
@@ -53,7 +54,8 @@ kommandot är ofarligt.
 
 ## Konsekvenser
 
-- En migration kan inte längre glömmas bort, och `main` kan inte längre mergas med röda tester.
+- En migration kan inte längre glömmas bort. Merge med röda tester blockeras när grenskyddet är
+  påslaget; arbetsflödet ensamt hindrar ingenting.
 - Ingen automatisk stoppunkt finns kvar före produktionsmigrering. En destruktiv migration som
   passerar granskningen körs oövervakat. Supabase Free saknar backup och PITR, så runbookens krav
   på manuell dataexport före riskfyllda ändringar gäller fortsatt och skärps snarare av det här

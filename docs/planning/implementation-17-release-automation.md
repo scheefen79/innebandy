@@ -13,6 +13,7 @@ kunna glömmas bort. Flödet ska kräva så få manuella steg som möjligt utan 
 - Varje pull request kör repots guards, `lint`, `typecheck`, `test`, `build` och hela
   databassviten inklusive pgTAP, de sex samtidighetsskripten och production-bootstrap.
 - `main` är skyddad: pull request krävs och båda jobben måste vara gröna före merge.
+  Skyddet sätts i GitHubs inställningar. Tills det är påslaget är M2 och M3 inte uppfyllda.
 - Arbetsflödet har inga hemligheter och kan inte nå ett skarpt Supabase-projekt.
   `SUPABASE_SERVICE_ROLE_KEY` finns inte i CI.
 - Migrationer i `supabase/migrations/` körs automatiskt vid merge till `main`.

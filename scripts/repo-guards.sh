@@ -4,6 +4,9 @@
 # så att den lokala grinden och CI aldrig kan glida isär.
 set -euo pipefail
 
+# git grep och git ls-files är relativa till arbetskatalogen, inte till repot.
+cd "$(git rev-parse --show-toplevel)"
+
 tracked_env_files="$(git ls-files '.env*')"
 if [[ "$tracked_env_files" != ".env.example" ]]; then
   echo "Unexpected tracked environment file: $tracked_env_files" >&2

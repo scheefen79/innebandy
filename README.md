@@ -64,8 +64,9 @@ Databasmigrationer och RLS-tester körs enligt [guiden för lokal Supabase-utvec
 
 ## Deploy
 
-Varje pull request verifieras automatiskt av `.github/workflows/verify.yml`, och `main` är skyddad
-så att båda jobben måste vara gröna före merge.
+Varje pull request verifieras automatiskt av `.github/workflows/verify.yml`. Grinden blir
+bindande först när `main` skyddas med krav på pull request och på båda checkarna `Kod` och
+`Databas`; tills dess är arbetsflödet rådgivande.
 
 Vid merge till `main` deployar Vercel appen, och Supabases GitHub-integration kör nya migrationer
 i `supabase/migrations/`. Inget av det behöver köras för hand.

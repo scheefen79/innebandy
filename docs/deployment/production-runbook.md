@@ -18,7 +18,8 @@ Skriv inte lösenord, tokens eller service-role-nycklar i denna fil.
 
 Varje pull request körs automatiskt av `.github/workflows/verify.yml`: repots guards, lint,
 typkontroll, enhetstester, bygge samt hela databassviten med pgTAP och samtidighetsskripten.
-`main` är skyddad så att båda jobben måste vara gröna före merge.
+Grinden blir bindande först när `main` skyddas med krav på pull request och på båda checkarna;
+tills dess är arbetsflödet rådgivande.
 
 Samma kontroller kan köras lokalt i ett svep:
 

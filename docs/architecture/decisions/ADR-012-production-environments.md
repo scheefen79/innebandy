@@ -1,6 +1,6 @@
 # ADR-012: produktionsmiljöer och releasegräns
 
-- Status: Godkänd
+- Status: Godkänd, delvis ersatt av ADR-021
 - Godkänd: 2026-08-24
 - Datum: 2026-08-24
 
@@ -15,7 +15,7 @@ Piloten använder två nivåer:
 1. lokal utvecklings- och testmiljö
 2. en skarp Supabase- och Vercel Production-miljö kopplad till `main`
 
-Vercel Preview får publika konfigurationsvärden endast om den pekar mot en separat icke-produktionsdatabas. Produktionsvärdet för `SUPABASE_SERVICE_ROLE_KEY` får aldrig exponeras för Preview. Databasschema släpps manuellt från versionerade migrationer efter dry-run och separat godkännande; frontenddeploy får inte automatiskt migrera databasen.
+Vercel Preview får publika konfigurationsvärden endast om den pekar mot en separat icke-produktionsdatabas. Produktionsvärdet för `SUPABASE_SERVICE_ROLE_KEY` får aldrig exponeras för Preview. Databasschema släpps manuellt från versionerade migrationer efter dry-run och separat godkännande; frontenddeploy får inte automatiskt migrera databasen. *(Ersatt av ADR-021: migrationer körs av Supabases GitHub-integration vid merge, och stoppunkten ligger i granskningen av pull requesten.)*
 
 Utvecklingsseed används aldrig i produktion. Initialt lag, säsong och medlemskap skapas genom ett separat idempotent bootstrapsteg med bekräftade värden.
 
@@ -33,7 +33,7 @@ Avvisas. Branchkod skulle kunna få skarp service-role-åtkomst och skriva i ver
 
 ### Automatisk databasmigrering vid varje deploy
 
-Avvisas i pilotfasen. Frontend och databas har olika rollbackegenskaper och produktionsmigrationer ska ha en synlig dry-run och stoppunkt.
+*Omprövat och antaget i ADR-021 efter två incidenter i skarp drift.* Ursprungligt beslut: avvisas i pilotfasen. Frontend och databas har olika rollbackegenskaper och produktionsmigrationer ska ha en synlig dry-run och stoppunkt.
 
 ## Konsekvenser
 
