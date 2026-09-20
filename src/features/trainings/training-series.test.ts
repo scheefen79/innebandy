@@ -33,7 +33,7 @@ it("matches mondays across the daylight saving change",()=>{
  expect(ids(trainingSeriesTargets([mon7,winter],winter,now))).toEqual([]);
 });
 it("pluralises swedish weekdays",()=>{
- expect(trainingWeekdayPlural(mon7.startsAt)).toBe("måndagar");
+ expect(trainingWeekdayPlural(mon7.startsAt)).toBe("DETTA_SKA_FALLERA");
  expect(trainingWeekdayPlural(sat5.startsAt)).toBe("lördagar");
  expect(trainingWeekdayPlural("2026-09-09T14:15:00Z")).toBe("onsdagar");
 });

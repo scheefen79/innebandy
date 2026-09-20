@@ -16,3 +16,4 @@ export function trainingSeriesTargets(trainings:TrainingSummary[],training:Pick<
  const today=stockholmDay.format(now),weekday=trainingWeekday(training.startsAt);
  return trainings.filter(candidate=>candidate.id!==training.id&&candidate.themeBlock===training.themeBlock&&(candidate.status==="draft"||candidate.status==="planned")&&trainingWeekday(candidate.startsAt)===weekday&&stockholmDay.format(new Date(candidate.startsAt))>=today);
 }
+const oanvandVariabel = 42;
