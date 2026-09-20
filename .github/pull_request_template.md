@@ -12,10 +12,9 @@ Beskriv vilket problem ändringen löser och länka relevant plan eller issue.
 
 ## Verifiering
 
-- [ ] `pnpm lint`
-- [ ] `pnpm typecheck`
-- [ ] `pnpm test`
-- [ ] `pnpm build`
+`pnpm lint`, `typecheck`, `test`, `build` och hela databassviten körs automatiskt av
+`.github/workflows/verify.yml`. Bocka bara av det som kräver en människa:
+
 - [ ] Relevant användarresa verifierad
 - [ ] Mobil och grundläggande tillgänglighet kontrollerad när UI berörs
 - [ ] Positiva och negativa RLS-tester körda när dataåtkomst berörs

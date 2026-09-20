@@ -14,7 +14,14 @@ Denna runbook är en checklista. Kommandon som skriver till Supabase, Vercel ell
 
 Skriv inte lösenord, tokens eller service-role-nycklar i denna fil.
 
-## 2. Lokal releasekontroll
+## 2. Releasekontroll
+
+Varje pull request körs automatiskt av `.github/workflows/verify.yml`: repots guards, lint,
+typkontroll, enhetstester, bygge samt hela databassviten med pgTAP och samtidighetsskripten.
+Grinden blir bindande först när `main` skyddas med krav på pull request och på båda checkarna;
+tills dess är arbetsflödet rådgivande.
+
+Samma kontroller kan köras lokalt i ett svep:
 
 ```bash
 pnpm release:preflight
@@ -24,11 +31,41 @@ Preflighten kör kod-, databas-, samtidighets-, bootstrap-, build- och secret-ko
 
 ## 3. Supabase-migrering
 
+Migrationer körs normalt **automatiskt** vid merge till `main` genom Supabases
+GitHub-integration. Se ADR-021. Du behöver alltså inte göra något här i det vanliga fallet.
+
+### Ordningen mellan app och databas
+
+Supabase och Vercel startar på samma merge och arbetar parallellt, så appen kan vara någon minut
+före databasen.
+
+- **Additiva migrationer** — en ny tabell, kolumn eller funktion — är ofarliga i det glappet.
+  Merga som vanligt.
+- **Destruktiva migrationer** — en borttagen kolumn eller funktion, eller en som skriver om
+  befintlig data — körs i en **egen merge efter** att koden som slutat använda det borttagna är
+  live. Annars dör den gamla koden som fortfarande kör.
+
+Ta alltid en manuell dataexport före en migration som ändrar eller tar bort befintlig data.
+Supabase Free saknar backup och PITR, så det finns inget att återställa från.
+
+### Manuell migrering
+
+Behövs bara om integrationen är ur funktion, eller om du medvetet vill migrera före merge:
+
 ```bash
 pnpm exec supabase login
 pnpm exec supabase link --project-ref <BEKRÄFTAD_PROJECT_REF>
 pnpm exec supabase db push --dry-run
 pnpm exec supabase db push
+```
+
+`db push` skickar migrationsfilerna i den gren du står på, inte det som ligger på GitHub.
+Kontrollera grenen först.
+
+Kontrollera att inget ligger omigrerat:
+
+```bash
+pnpm exec supabase migration list
 ```
 
 Kör aldrig följande mot produktion:

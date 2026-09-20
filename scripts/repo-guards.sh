@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Spårade filer får aldrig innehålla miljöfiler, Vercel-state, hemligheter eller riktiga
+# personuppgifter. Körs både av scripts/release-preflight.sh och av .github/workflows/verify.yml
+# så att den lokala grinden och CI aldrig kan glida isär.
+set -euo pipefail
+
+# git grep och git ls-files är relativa till arbetskatalogen, inte till repot.
+cd "$(git rev-parse --show-toplevel)"
+
+tracked_env_files="$(git ls-files '.env*')"
+if [[ "$tracked_env_files" != ".env.example" ]]; then
+  echo "Unexpected tracked environment file: $tracked_env_files" >&2
+  exit 1
+fi
+
+if git ls-files | grep -q '^\.vercel/'; then
+  echo ".vercel must not be tracked." >&2
+  exit 1
+fi
+
+if git grep -nE '(sbp_[A-Za-z0-9_-]{20,}|sb_secret_[A-Za-z0-9_-]{20,}|gh[opsu]_[A-Za-z0-9]{20,}|eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\.)' -- ':!pnpm-lock.yaml'; then
+  echo "Possible tracked secret detected." >&2
+  exit 1
+fi
+
+if git grep -nE '@(gmail|hotmail|outlook)\.com'; then
+  echo "Possible real personal email detected in a tracked production artifact." >&2
+  exit 1
+fi
+
+echo "Repository guards passed."

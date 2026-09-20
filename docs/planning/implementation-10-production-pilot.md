@@ -93,7 +93,6 @@ Supabase-organisation och projektref väljs vid projektskapandet. Region, säson
 - ny produktfunktionalitet
 - generell onboarding eller självregistrering
 - automatiserad import från XLSX
-- CI/CD som automatiskt migrerar produktionsdatabasen
 - separat stagingmiljö
 - egen domän, SMTP eller självservice för lösenordsåterställning om det inte beslutas separat
 

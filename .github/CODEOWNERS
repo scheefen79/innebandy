@@ -1,0 +1,5 @@
+# Verifieringsgrinden gäller checkens namn, inte dess innehåll. Utan ägarskap här kan en pull
+# request ta bort guard- eller teststeg ur arbetsflödet och ändå rapportera grönt under samma
+# checknamn. Se ADR-021.
+/.github/    @scheefen79
+/scripts/    @scheefen79

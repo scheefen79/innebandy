@@ -41,7 +41,7 @@ Coach öppnar "Medlemmar"
 
 Supabases inbyggda e-postutskick är begränsat till 2 e-postmeddelanden per timme, totalt för hela projektet, delat mellan inbjudningar, lösenordsåterställningar och allt annat Auth skickar. Det räcker inte ens för de tre ursprungliga tränarna i följd och gör funktionen opålitlig från första användningen.
 
-Laget har varken en egen domän eller avsikt att skaffa en. Renodlade e-postleverantörer (Resend, Brevo, MailerSend m.fl.) kräver domänverifiering (DNS-poster) för att skicka till andra mottagare än det egna kontot, vilket gör dem opraktiska här. Vald lösning är istället att konfigurera custom SMTP i Supabase mot **Googles egen SMTP-server** (`smtp.gmail.com`) med ett dedikerat Gmail-konto (t.ex. `fbcsollentunap17@gmail.com`) och ett genererat App Password. Ingen domän krävs, kontot är gratis, och gränsen på 500 mottagare/dygn ligger långt över lagets faktiska behov. Custom SMTP ingår i nuvarande Supabase Free-plan utan kostnad.
+Laget har varken en egen domän eller avsikt att skaffa en. Renodlade e-postleverantörer (Resend, Brevo, MailerSend m.fl.) kräver domänverifiering (DNS-poster) för att skicka till andra mottagare än det egna kontot, vilket gör dem opraktiska här. Vald lösning är istället att konfigurera custom SMTP i Supabase mot **Googles egen SMTP-server** (`smtp.gmail.com`) med ett dedikerat Gmail-konto för laget och ett genererat App Password. Ingen domän krävs, kontot är gratis, och gränsen på 500 mottagare/dygn ligger långt över lagets faktiska behov. Custom SMTP ingår i nuvarande Supabase Free-plan utan kostnad.
 
 Detta verifieras genom att skicka en riktig testinbjudan från det dedikerade Gmail-kontot och bekräfta att den kommer fram inom rimlig tid, inte bara att Supabase-anropet lyckas.
 

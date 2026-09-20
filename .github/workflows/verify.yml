@@ -1,0 +1,82 @@
+# Kör samma kontroller som scripts/release-preflight.sh, men uppdelat i två jobb så att ett
+# snabbt fel syns inom några minuter i stället för efter hela databassviten.
+#
+# Filen får aldrig ges secrets. Alla databastester körs mot en efemär lokal Supabase i runnern,
+# aldrig mot ett skarpt projekt. Se ADR-012 och ADR-021.
+name: Verify
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  checks:
+    name: Kod
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Spårade hemligheter och personuppgifter
+        run: bash scripts/repo-guards.sh
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - name: Bygg
+        # Alla process.env-läsningar ligger inuti funktioner och varje Supabase-berörd sida är
+        # force-dynamic, så bygget klarar sig utan riktiga värden. SUPABASE_SERVICE_ROLE_KEY får
+        # aldrig finnas här: ADR-012 förbjuder produktionsnyckeln utanför Production.
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ci-placeholder
+        run: pnpm build
+
+  database:
+    name: Databas
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Installera ripgrep
+        # Fyra concurrency-skript kör "if ! rg -q ...". Utan rg rapporterar de att testet inte
+        # serialiserade i stället för att kommandot saknas, alltså ett falskt negativt som ser ut
+        # som en riktig bugg. Installera explicit i stället för att lita på runnerbilden.
+        run: sudo apt-get update && sudo apt-get install -y ripgrep
+      - name: Starta Supabase
+        # De tunga tjänsterna behövs inte: hela sviten är pgTAP och docker exec psql. auth måste
+        # vara kvar eftersom varje concurrency-skript skriver i auth.users.
+        run: pnpm exec supabase start -x studio,realtime,storage-api,imgproxy,edge-runtime,logflare,vector,mailpit
+      - name: Applicera migrationer och seed
+        run: pnpm db:reset
+      - run: pnpm db:test
+      - run: pnpm db:lint
+      - run: pnpm db:test:concurrency
+      - run: pnpm db:test:manual-concurrency
+      - run: pnpm db:test:extra-concurrency
+      - run: pnpm db:test:completion-concurrency
+      - run: pnpm db:test:player-concurrency
+      - run: pnpm db:test:team-concurrency
+      - run: pnpm db:test:production-bootstrap
