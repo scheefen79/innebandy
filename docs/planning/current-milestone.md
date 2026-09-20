@@ -11,9 +11,9 @@ Scope och acceptanskriterier finns i `docs/planning/implementation-17-release-au
 - [x] Verifierande arbetsflöde som kör guards, lint, typkontroll, tester, bygge och hela databassviten på varje pull request.
 - [x] Guarderna har en enda definition som både lokal preflight och CI använder.
 - [x] `pnpm release:preflight` går igenom.
-- [ ] `main` skyddad med krav på pull request och på båda checkarna.
-- [ ] Supabases GitHub-integration påslagen så att migrationer körs vid merge.
-- [ ] Preview-databas kopplad så att previews inte når produktionsdata.
+- [x] `main` skyddad med krav på pull request och på båda checkarna.
+- [x] Supabases GitHub-integration påslagen så att migrationer körs vid merge. Fungerar först bevisad vid nästa merge som innehåller en migration.
+- [x] Preview-databas kopplad. Projekt `uwmmxbovzhvgvdfyqzzd` i `eu-north-1` med samtliga migrationer och syntetisk seed; Vercels Preview-variabler pekar dit.
 
 ## Föregående milstolpe: Implementation 10 – produktionssättning och pilot
 

@@ -22,6 +22,8 @@ kunna glömmas bort. Flödet ska kräva så få manuella steg som möjligt utan 
   både den lokala preflighten och CI använder.
 - Ordningsregeln för additiva och destruktiva migrationer är dokumenterad i runbooken.
 - Previewmiljön pekar på en egen databas och kan inte skriva i lagets riktiga data.
+- Previews fungerar. Före ändringen saknade Preview Supabase-variabler helt och kraschade på
+  varje request, vilket inte märktes eftersom previews ligger bakom Vercels inloggning.
 
 ## Mått
 
@@ -30,7 +32,7 @@ kunna glömmas bort. Flödet ska kräva så få manuella steg som möjligt utan 
 | M1 | Migrationer som kan ligga omigrerade utan att någon märker det | obegränsat | 0 |
 | M2 | Andel pull requests där testerna bevisligen körts | 0 % | 100 % |
 | M3 | Merge möjlig med röda tester | ja | nej |
-| M4 | Previews som kan skriva i lagets riktiga data | okänt | 0 |
+| M4 | Previews som kan skriva i lagets riktiga data | 0 (visade sig redan uppfyllt) | 0 |
 | M5 | `pnpm release:preflight` grön | nej | ja |
 
 ## Avgränsning
