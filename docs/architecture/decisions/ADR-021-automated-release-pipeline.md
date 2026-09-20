@@ -41,8 +41,11 @@ eller piloten får högre konsekvens vid fel"* — är därmed uppfyllt av det t
   det glappet. Destruktiva migrationer körs i en egen merge efter att koden som slutat använda det
   borttagna är live.
 - **Previewmiljön får en egen databas.** Ett andra Supabase-projekt på Free-planen, som Vercels
-  Preview pekar på. Det är inte en utökning av ADR-012 utan ett uppfyllande av dess krav att
-  previews aldrig får skarp åtkomst.
+  Preview pekar på. Vid genomförandet visade det sig att Preview aldrig haft några
+  Supabase-variabler alls: ADR-012:s krav att previews inte får skarp åtkomst var alltså redan
+  uppfyllt, och previews var i stället helt trasiga eftersom proxyn kastar när konfigurationen
+  saknas. Det märktes inte, eftersom previews ligger bakom Vercels inloggning. Beslutet handlar
+  därför om att göra previews användbara, inte om att täppa till ett läckage.
 - **Egen migreringspipeline väljs bort.** Ett eget arbetsflöde med godkännandesteg och deploy hook
   hade gett exakt ordning och en stoppunkt, men till priset av flera hundra rader arbetsflöde,
   tre hemligheter och en avstängd Vercel-integration. Supabases nativa väg ger merparten av nyttan
