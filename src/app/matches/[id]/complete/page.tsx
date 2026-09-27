@@ -29,8 +29,8 @@ export default async function CompleteMatchPage({ params, searchParams }: { para
   return <AppShell currentItem="Matcher" role={context.role}><main className="mx-auto max-w-2xl">
     <Link href={`/matches/${id}`} className="inline-flex min-h-11 items-center text-sm font-semibold text-blue-700">← Till matchen</Link>
     <h1 className="mt-2 text-3xl font-bold text-slate-950">Genomför match</h1>
-    <p className="mt-2 text-slate-600">{match.opponent}. Alla uttagna är markerade som spelade. Avmarkera dem som inte deltog.</p>
+    <p className="mt-2 text-slate-600">{match.opponent}. Kontrollera de uttagna och lägg till eventuella extra spelare som faktiskt deltog.</p>
     {error ? <div role="alert" className="mt-5 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-950">{error === "stale" ? "Uttagningen ändrades innan matchen sparades. Kontrollera deltagarna igen." : error === "completed" ? "Matchen har redan genomförts med ett annat deltagande." : "Deltagandet kunde inte sparas. Kontrollera matchen och försök igen."}</div> : null}
-    <div className="mt-6"><CompletionForm action={`/matches/${id}/complete/save`} fingerprint={source.fingerprint} participants={source.participants} /></div>
+    <div className="mt-6"><CompletionForm action={`/matches/${id}/complete/save`} fingerprint={source.fingerprint} participants={source.participants} extraCandidates={source.extraCandidates} /></div>
   </main></AppShell>;
 }

@@ -1,4 +1,21 @@
-# Aktuell milstolpe: Implementation 17 – automatiserad verifiering och databasrelease
+# Aktuell milstolpe: Implementation 18 – extra spelare vid genomförd match
+
+## Mål
+
+När en match genomförs ska tränaren kunna registrera exakt vilka som deltog, inklusive en eller flera extra spelare som inte lades till före matchstart.
+
+Scope och acceptanskriterier finns i `docs/planning/implementation-18-completion-extra-players.md`. Det atomiska beslutet finns i ADR-010.
+
+## Leverabler
+
+- [x] Genomförandevyn kan välja flera nya extra spelare.
+- [x] Befintliga ordinarie och extra deltagare kan fortfarande markeras som spelade eller frånvarande.
+- [x] Nya extra rader, deltagande och matchstatus sparas atomiskt.
+- [x] Ordinarie rättvisa och extrastatistik förblir separata.
+- [x] Automatiska kontroller, databasens negativa tester och oberoende granskning är genomförda.
+- [ ] Lokal mobil användarresa är genomförd med ett syntetiskt Auth-konto.
+
+## Föregående milstolpe: Implementation 17 – automatiserad verifiering och databasrelease
 
 ## Mål
 

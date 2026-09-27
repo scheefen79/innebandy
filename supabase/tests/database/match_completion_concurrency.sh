@@ -6,6 +6,7 @@ coach_id="e1000000-0000-4000-8000-000000000001"
 team_id="e2000000-0000-4000-8000-000000000001"
 season_id="e3000000-0000-4000-8000-000000000001"
 player_id="e4000000-0000-4000-8000-000000000001"
+extra_player_id="e4000000-0000-4000-8000-000000000002"
 same_match="e5000000-0000-4000-8000-000000000001"
 different_match="e5000000-0000-4000-8000-000000000002"
 result_dir="$(mktemp -d)"
@@ -30,7 +31,9 @@ insert into auth.users (id,email) values ('$coach_id','completion-concurrency@ex
 insert into public.teams (id,name,slug) values ('$team_id','Completion concurrency','completion-concurrency');
 insert into public.team_members (team_id,user_id) values ('$team_id','$coach_id');
 insert into public.seasons (id,team_id,name,starts_on,ends_on) values ('$season_id','$team_id','Season','2026-08-01','2027-05-31');
-insert into public.players (id,team_id,season_id,first_name,level,rotation_order) values ('$player_id','$team_id','$season_id','Player',1,1);
+insert into public.players (id,team_id,season_id,first_name,level,rotation_order) values
+  ('$player_id','$team_id','$season_id','Player',1,1),
+  ('$extra_player_id','$team_id','$season_id','Late extra',2,2);
 insert into public.matches (id,team_id,season_id,opponent,starts_at,target_players,request_id) values
   ('$same_match','$team_id','$season_id','Same',now()-interval '1 day',1,'e6000000-0000-4000-8000-000000000001'),
   ('$different_match','$team_id','$season_id','Different',now()-interval '1 day',1,'e6000000-0000-4000-8000-000000000002');
@@ -47,10 +50,10 @@ SQL
 }
 
 run_first() {
-  local match_id="$1" played="$2" fp="$3" application="$4" output="$5"
+  local match_id="$1" participation="$2" fp="$3" application="$4" output="$5"
   docker exec -i "$db_container" psql -U postgres -d postgres -v ON_ERROR_STOP=1 >"$output" 2>&1 <<SQL &
 begin; set application_name='$application'; set local role service_role; set local request.jwt.claims='{"role":"service_role"}';
-select public.complete_match('$coach_id','$team_id','$season_id','$match_id','$fp','[{"playerId":"$player_id","played":$played}]');
+select public.complete_match('$coach_id','$team_id','$season_id','$match_id','$fp','$participation');
 select pg_sleep(2); commit;
 SQL
   first_pid=$!
@@ -63,15 +66,19 @@ SQL
 }
 
 same_fp="$(fingerprint "$same_match")"
-run_first "$same_match" true "$same_fp" completion_same_first "$result_dir/same-first"
+same_participation='[{"playerId":"'$player_id'","played":true},{"playerId":"'$extra_player_id'","played":true}]'
+run_first "$same_match" "$same_participation" "$same_fp" completion_same_first "$result_dir/same-first"
 docker exec -i "$db_container" psql -U postgres -d postgres -v ON_ERROR_STOP=1 >"$result_dir/same-second" 2>&1 <<SQL
 begin; set local role service_role; set local request.jwt.claims='{"role":"service_role"}';
-select public.complete_match('$coach_id','$team_id','$season_id','$same_match','$same_fp','[{"playerId":"$player_id","played":true}]'); commit;
+select public.complete_match('$coach_id','$team_id','$season_id','$same_match','$same_fp','$same_participation'); commit;
 SQL
 wait "$first_pid"
+same_saved="$(docker exec -i "$db_container" psql -U postgres -d postgres -Atq -c "select count(*) from public.match_players where match_id='$same_match' and played;")"
+[[ "$same_saved" == "2" ]] || { echo "Concurrent identical completion did not preserve the late extra player."; exit 1; }
 
 different_fp="$(fingerprint "$different_match")"
-run_first "$different_match" true "$different_fp" completion_different_first "$result_dir/different-first"
+different_participation='[{"playerId":"'$player_id'","played":true}]'
+run_first "$different_match" "$different_participation" "$different_fp" completion_different_first "$result_dir/different-first"
 set +e
 docker exec -i "$db_container" psql -U postgres -d postgres -v ON_ERROR_STOP=1 >"$result_dir/different-second" 2>&1 <<SQL
 begin; set local role service_role; set local request.jwt.claims='{"role":"service_role"}';

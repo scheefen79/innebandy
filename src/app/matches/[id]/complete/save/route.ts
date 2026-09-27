@@ -20,8 +20,9 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   const fingerprint = String(form.get("fingerprint") ?? "");
   const playerIds = form.getAll("playerId").map(String);
   const playedPlayerIds = form.getAll("playedPlayerId").map(String);
-  const participation = buildParticipation(playerIds, playedPlayerIds);
-  if (!isUuid(id) || !/^[a-f0-9]{32}$/.test(fingerprint) || playerIds.length === 0 || !playerIds.every(isUuid) || !playedPlayerIds.every(isUuid) || !participation) return redirectTo(`/matches/${id}/complete?error=invalid`);
+  const extraPlayerIds = form.getAll("extraPlayerId").map(String);
+  const participation = buildParticipation(playerIds, playedPlayerIds, extraPlayerIds);
+  if (!isUuid(id) || !/^[a-f0-9]{32}$/.test(fingerprint) || playerIds.length === 0 || !playerIds.every(isUuid) || !playedPlayerIds.every(isUuid) || !extraPlayerIds.every(isUuid) || !participation) return redirectTo(`/matches/${id}/complete?error=invalid`);
   const result = await completeMatch(createAdminClient(), { actorUserId: userId, teamId: context.teamId, seasonId: context.seasonId, matchId: id, fingerprint, participation });
   if (result === "completed") return redirectTo(`/matches/${id}?completion=conflict`);
   if (result !== "ok") return redirectTo(`/matches/${id}/complete?error=${result}`);

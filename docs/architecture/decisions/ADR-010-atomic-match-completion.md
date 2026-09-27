@@ -10,10 +10,10 @@ Matchstatusen `completed` är samtidigt gränsen där planerade uttagningar blir
 ## Beslut
 
 - Matchcompletion är en enda atomisk server-only databasoperation som uppdaterar `played` för varje aktuell selected-rad och därefter sätter matchstatus till `completed`.
-- Input måste innehålla exakt ett booleskt beslut för varje `regular/selected` och `extra/selected` i matchen. Removed-rader ingår aldrig och behåller `played=false`.
+- Input måste innehålla exakt ett booleskt beslut för varje befintlig `regular/selected` och `extra/selected` i matchen. Den får dessutom innehålla en eller flera aktiva spelare utan befintlig matchkoppling; de skapas atomiskt som `extra/manual/selected/played=true`. Removed-rader ingår aldrig och behåller `played=false`.
 - Matchen måste vara `upcoming`, ha passerad `starts_at` och ha exakt `target_players` ordinarie selected-rader.
 - Match, uttagningsrader och manuella par låses i stabil ordning. Ett versionsmärkt fingeravtryck skyddar hela uttagningsunderlaget.
-- Kontrollordningen är lås, behörighet/målidentitet, strukturell inputvalidering, en särskild completed-gren, domänvillkor för ny completion, stale, exakt setvalidering och mutation. Completed-grenen jämför fullständigt inskickat deltagande med det sparade före fingeravtrycket.
+- Kontrollordningen är lås, behörighet/målidentitet, strukturell inputvalidering, en särskild completed-gren, domänvillkor för ny completion, stale, kontroll av samtliga befintliga deltagare, validering av nya extra spelare och mutation. Completed-grenen jämför fullständigt inskickat deltagande med det sparade före fingeravtrycket.
 - Identisk retry konvergerar trots att completion har ändrat fingeravtrycket. Vid ett annat beslut efter att matchen genomförts gäller first-write-wins och `MATCH_ALREADY_COMPLETED`; Implementation 07 tillåter ingen efterhandsredigering.
 - Den uppskjutna integritetsregeln för manuella ordinarie par tillåter `played=true` på selected-sidan endast när den kopplade matchens slutläge i samma transaktion är `completed`, och förbjuder det alltid på removed-sidan. `upcoming` och `cancelled` får aldrig ha ett manuellt par med spelad selected-rad. Paret och dess kopplingar bevaras för historik.
 - Endast `status='completed'` tillsammans med rätt selection type och `played=true` får påverka respektive historik. Completion startar ingen omfördelning.
@@ -24,6 +24,7 @@ Matchstatusen `completed` är samtidigt gränsen där planerade uttagningar blir
 - Matchstatus och rättvisehistorik kan aldrig hamna i olika transaktionstillstånd.
 - Frånvaro kan redovisas utan att den planerade uttagningen eller manuella beslutet försvinner.
 - Genomförda extra inhopp börjar påverka rekommendationen först vid completion.
+- Extra spelare som blev kända först efter matchen kan registreras utan en separat preliminär skrivning eller risk för ett halvfärdigt statistikläge.
 - Samtidiga tränare kan inte skriva över varandras olika deltagandebeslut.
 - Felregistrering efter save kan inte rättas i denna implementation; ett framtida korrigeringsflöde behöver revisionsspår och ett separat produktbeslut.
 

@@ -7,18 +7,26 @@ describe("match completion", () => {
     const rpc = vi.fn().mockResolvedValue({ data: { fingerprint: "fp", participants: [
       { playerId: "regular", firstName: "Ada", lastName: "A", selectionType: "regular", played: false },
       { playerId: "extra", firstName: "Bo", lastName: null, selectionType: "extra", played: false },
-    ] }, error: null });
+    ], extraCandidates: [{ playerId: "late-extra", firstName: "Cia", lastName: "C" }] }, error: null });
     const result = await loadMatchCompletionSource({ rpc } as unknown as SupabaseClient, "team", "season", "match");
     expect(result.participants).toEqual([
       { playerId: "regular", name: "Ada A", selectionType: "regular", played: false },
       { playerId: "extra", name: "Bo", selectionType: "extra", played: false },
     ]);
+    expect(result.extraCandidates).toEqual([{ playerId: "late-extra", name: "Cia C" }]);
   });
 
-  it("builds a full boolean decision and rejects duplicate or unknown ids", () => {
-    expect(buildParticipation(["a", "b"], ["a"])).toEqual([{ playerId: "a", played: true }, { playerId: "b", played: false }]);
+  it("builds a full boolean decision with several late extra players and rejects ambiguous ids", () => {
+    expect(buildParticipation(["a", "b"], ["a"], ["c", "d"])).toEqual([
+      { playerId: "a", played: true },
+      { playerId: "b", played: false },
+      { playerId: "c", played: true },
+      { playerId: "d", played: true },
+    ]);
     expect(buildParticipation(["a", "a"], ["a"])).toBeNull();
     expect(buildParticipation(["a"], ["b"])).toBeNull();
+    expect(buildParticipation(["a"], ["a"], ["a"])).toBeNull();
+    expect(buildParticipation(["a"], ["a"], ["b", "b"])).toBeNull();
   });
 
   it("defaults every selected participant to played and summarizes regular and extra separately", () => {

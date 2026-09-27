@@ -397,7 +397,7 @@ Spelarnivå påverkar inte rekommendationen. Tränaren kan alltid välja en anna
 
 Alla kommande uttagningar är planerade tills matchen har spelats.
 
-När tränaren markerar matchen som genomförd föreslår systemet att alla ordinarie uttagna och registrerade extra inhoppare deltog. Tränaren korrigerar återbud eller frånvaro och sparar deltagandet.
+När tränaren markerar matchen som genomförd föreslår systemet att alla ordinarie uttagna och registrerade extra inhoppare deltog. Tränaren korrigerar återbud eller frånvaro och kan lägga till en eller flera aktiva spelare som extra inhoppare om de deltog utan att vara registrerade före matchen. Deltagandet och eventuella nya extra inhoppare sparas atomiskt.
 
 Historiken ska skilja mellan:
 
