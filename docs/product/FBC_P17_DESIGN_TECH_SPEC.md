@@ -373,7 +373,7 @@ Manuell ändring ska alltid vara möjlig.
 
 ## 8.7 Justera ordinarie lag
 
-`Justera ordinarie lag` flyttar en ordinarie matchplats mellan två spelare.
+`Justera ordinarie lag` flyttar en eller flera ordinarie matchplatser mellan spelare. Varje spelare som står över ersätts av en spelare som tränaren väljer, så antalet ordinarie platser är oförändrat. Alla byten sparas atomiskt.
 
 - den tillagda spelaren räknas som ordinarie
 - den borttagna spelaren får inte den ordinarie matchen
@@ -391,7 +391,7 @@ Prioriteringsordning:
 3. längst tid sedan senaste genomförda extra inhopp
 4. säsongens fasta, reproducerbara rotationsordning
 
-Spelarnivå påverkar inte rekommendationen. Tränaren kan alltid välja en annan tillgänglig spelare. Endast ett faktiskt genomfört inhopp ökar räknaren; förfrågningar och avböjanden lagras inte i MVP.
+Spelarnivå påverkar inte rekommendationen. Tränaren kan alltid välja en eller flera andra tillgängliga spelare, och de sparas atomiskt. Tillgänglig betyder aktiv spelare utan någon uttagningsrad i matchen. Endast ett faktiskt genomfört inhopp ökar räknaren; förfrågningar och avböjanden lagras inte i MVP.
 
 ## 8.9 Genomför match
 

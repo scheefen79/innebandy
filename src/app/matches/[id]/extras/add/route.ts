@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isUuid } from "@/features/matches/match-validation";
-import { mutateExtraSubstitute } from "@/features/selections/extra-substitute";
+import { mutateExtraSubstitutes, parseExtraPlayerIds } from "@/features/selections/extra-substitute";
 import { loadTeamContext } from "@/lib/auth/team-context";
 import { getVerifiedUserId } from "@/lib/auth/verified-user";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -17,12 +17,12 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   const context = await loadTeamContext(supabase);
   if (!context || context.role !== "coach") return redirectTo("/access-denied");
   const form = await request.formData();
-  const playerId = String(form.get("playerId") ?? "");
+  const playerIds = parseExtraPlayerIds(form.getAll("playerId").map(String), isUuid);
   const fingerprint = String(form.get("fingerprint") ?? "");
-  if (![id, playerId].every(isUuid) || !/^[a-f0-9]{32}$/.test(fingerprint)) return redirectTo(`/matches/${id}/extras?error=invalid`);
-  const result = await mutateExtraSubstitute(createAdminClient(), "add_extra_substitute", {
+  if (!isUuid(id) || !playerIds || !/^[a-f0-9]{32}$/.test(fingerprint)) return redirectTo(`/matches/${id}/extras?error=invalid`);
+  const result = await mutateExtraSubstitutes(createAdminClient(), {
     actorUserId: userId, teamId: context.teamId, seasonId: context.seasonId,
-    matchId: id, playerId, fingerprint,
+    matchId: id, playerIds, fingerprint,
   });
   if (result !== "ok") return redirectTo(`/matches/${id}/extras?error=${result}`);
   return redirectTo(`/matches/${id}?extra=added`);

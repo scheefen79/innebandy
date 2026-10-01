@@ -9,6 +9,8 @@ En tränare behöver kunna flytta en ordinarie matchplats utan att bytet skrivs 
 
 ## Beslut
 
+> Flera byten i ett steg sparas atomiskt enligt ADR-022; parstrukturen nedan är oförändrad.
+
 - Ett manuellt ordinarie byte lagras som två ömsesidigt kopplade `match_players`-rader: en `manual/removed` för spelaren som går ut och en `manual/selected` för spelaren som går in.
 - `replaced_player_id` pekar i båda riktningarna och används för att identifiera det exakta paret vid presentation och återställning.
 - Databasen validerar med en `DEFERRABLE INITIALLY DEFERRED` constraint-trigger att varje `regular/manual`-rad vid transaktionens slut har exakt en ömsesidig motpart i samma match, lag och säsong, med en annan spelare och motsatt selection-status. Ensamma och korskopplade mutationer kan därmed inte committas.

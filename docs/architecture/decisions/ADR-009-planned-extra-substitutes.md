@@ -10,6 +10,8 @@ Tränarna behöver fylla tillfälliga luckor utan att ge samma spelare alla extr
 
 ## Beslut
 
+> Flera extra inhoppare sparas atomiskt i ett steg enligt ADR-022; kandidatregeln nedan är oförändrad.
+
 - En planerad extra inhoppare lagras som en egen `match_players`-rad med `extra/manual/selected`, `played=false` och utan `replaced_player_id`.
 - Extra raden ligger utanför matchens ordinarie `target_players` och förändrar eller ersätter aldrig en ordinarie plats.
 - Kandidatordningen byggs server-side och använder ADR-005:s deterministiska extrafunktion. Lägst antal genomförda extra inhopp är första kriterium. Vid lika extrahistorik prioriteras lägst antal ordinarie matcher, därefter längst väntetid och fast rotationsordning. Den senaste genomförda extratidpunkten är den räknade matchens `starts_at`; uttagningsradens revisionsfält eller tiden då deltagandet sparades används inte. Nivå ingår inte.

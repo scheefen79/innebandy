@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isUuid } from "@/features/matches/match-validation";
-import { mutateManualAdjustment } from "@/features/selections/manual-adjustment";
+import { mutateManualAdjustments, parseAdjustmentPairs } from "@/features/selections/manual-adjustment";
 import { loadTeamContext } from "@/lib/auth/team-context";
 import { getVerifiedUserId } from "@/lib/auth/verified-user";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -17,13 +17,12 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   const context = await loadTeamContext(supabase);
   if (!context || context.role !== "coach") return redirectTo("/access-denied");
   const form = await request.formData();
-  const outgoingPlayerId = String(form.get("outgoingPlayerId") ?? "");
-  const incomingPlayerId = String(form.get("incomingPlayerId") ?? "");
+  const pairs = parseAdjustmentPairs(form, isUuid);
   const fingerprint = String(form.get("fingerprint") ?? "");
-  if (![id, outgoingPlayerId, incomingPlayerId].every(isUuid) || !/^[a-f0-9]{32}$/.test(fingerprint)) return redirectTo(`/matches/${id}/adjust?error=invalid`);
-  const result = await mutateManualAdjustment(createAdminClient(), "create_manual_regular_adjustment", {
+  if (!isUuid(id) || !pairs || !/^[a-f0-9]{32}$/.test(fingerprint)) return redirectTo(`/matches/${id}/adjust?error=invalid`);
+  const result = await mutateManualAdjustments(createAdminClient(), {
     actorUserId: userId, teamId: context.teamId, seasonId: context.seasonId,
-    matchId: id, outgoingPlayerId, incomingPlayerId, fingerprint,
+    matchId: id, pairs, fingerprint,
   });
   if (result !== "ok") return redirectTo(`/matches/${id}/adjust?error=${result}`);
   return redirectTo(`/matches/${id}?adjustment=saved`);
