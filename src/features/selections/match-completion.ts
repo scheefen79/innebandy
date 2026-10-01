@@ -7,6 +7,11 @@ export type CompletionParticipant = {
   played: boolean;
 };
 
+export type CompletionExtraCandidate = {
+  playerId: string;
+  name: string;
+};
+
 export function defaultPlayedPlayerIds(participants: CompletionParticipant[]) {
   return participants.map((participant) => participant.playerId);
 }
@@ -22,15 +27,15 @@ export async function loadMatchCompletionSource(
   teamId: string,
   seasonId: string,
   matchId: string,
-): Promise<{ fingerprint: string; participants: CompletionParticipant[] }> {
+): Promise<{ fingerprint: string; participants: CompletionParticipant[]; extraCandidates: CompletionExtraCandidate[] }> {
   const { data, error } = await supabase.rpc("get_match_completion_source", {
     target_team_id: teamId,
     target_season_id: seasonId,
     target_match_id: matchId,
   });
   if (error) throw new Error("Det gick inte att hämta deltagandet.");
-  const envelope = data as { fingerprint?: unknown; participants?: unknown } | null;
-  if (!envelope || typeof envelope.fingerprint !== "string" || !Array.isArray(envelope.participants)) {
+  const envelope = data as { fingerprint?: unknown; participants?: unknown; extraCandidates?: unknown } | null;
+  if (!envelope || typeof envelope.fingerprint !== "string" || !Array.isArray(envelope.participants) || !Array.isArray(envelope.extraCandidates)) {
     throw new Error("Deltagandeunderlaget är ogiltigt.");
   }
   const participants = envelope.participants.map((raw) => {
@@ -45,15 +50,28 @@ export async function loadMatchCompletionSource(
       played: item.played,
     };
   });
-  return { fingerprint: envelope.fingerprint, participants };
+  const extraCandidates = envelope.extraCandidates.map((raw) => {
+    const item = raw as Record<string, unknown>;
+    if (typeof item.playerId !== "string") throw new Error("Deltagandeunderlaget är ogiltigt.");
+    return {
+      playerId: item.playerId,
+      name: [item.firstName, item.lastName].filter((value) => typeof value === "string" && value).join(" "),
+    };
+  });
+  return { fingerprint: envelope.fingerprint, participants, extraCandidates };
 }
 
-export function buildParticipation(playerIds: string[], playedPlayerIds: string[]) {
+export function buildParticipation(playerIds: string[], playedPlayerIds: string[], extraPlayerIds: string[] = []) {
   if (new Set(playerIds).size !== playerIds.length) return null;
   const allowed = new Set(playerIds);
   const played = new Set(playedPlayerIds);
   if (played.size !== playedPlayerIds.length || playedPlayerIds.some((id) => !allowed.has(id))) return null;
-  return playerIds.map((playerId) => ({ playerId, played: played.has(playerId) }));
+  const extras = new Set(extraPlayerIds);
+  if (extras.size !== extraPlayerIds.length || extraPlayerIds.some((id) => allowed.has(id))) return null;
+  return [
+    ...playerIds.map((playerId) => ({ playerId, played: played.has(playerId) })),
+    ...extraPlayerIds.map((playerId) => ({ playerId, played: true })),
+  ];
 }
 
 export async function completeMatch(

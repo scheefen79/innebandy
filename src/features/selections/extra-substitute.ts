@@ -99,3 +99,36 @@ export async function mutateExtraSubstitute(
   if (error.message.includes("INVALID_EXTRA_SELECTION") || error.message.includes("MATCH_NOT_AVAILABLE")) return "invalid";
   throw new Error("Det gick inte att spara den extra inhopparen.");
 }
+
+const MAX_EXTRA_BATCH = 20;
+
+export function parseExtraPlayerIds(values: string[], isValidId: (value: string) => boolean): string[] | null {
+  if (values.length < 1 || values.length > MAX_EXTRA_BATCH) return null;
+  if (!values.every(isValidId) || new Set(values).size !== values.length) return null;
+  return values;
+}
+
+export async function mutateExtraSubstitutes(
+  adminSupabase: SupabaseClient,
+  input: {
+    actorUserId: string;
+    teamId: string;
+    seasonId: string;
+    matchId: string;
+    playerIds: string[];
+    fingerprint: string;
+  },
+): Promise<"ok" | "stale" | "invalid"> {
+  const { error } = await adminSupabase.rpc("add_extra_substitutes", {
+    actor_user_id: input.actorUserId,
+    target_team_id: input.teamId,
+    target_season_id: input.seasonId,
+    target_match_id: input.matchId,
+    target_player_ids: input.playerIds,
+    expected_fingerprint: input.fingerprint,
+  });
+  if (!error) return "ok";
+  if (error.message.includes("STALE_SELECTION")) return "stale";
+  if (error.message.includes("INVALID_EXTRA_SELECTION") || error.message.includes("MATCH_NOT_AVAILABLE")) return "invalid";
+  throw new Error("Det gick inte att spara de extra inhopparna.");
+}

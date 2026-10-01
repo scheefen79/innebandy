@@ -63,8 +63,8 @@ Spelarkort och matchhistorik ska därför skilja mellan ordinarie tilldelningar,
 
 UI:t har två separata flöden:
 
-1. `Justera ordinarie lag` flyttar en ordinarie matchplats mellan spelare. Den tillagda spelaren räknas som ordinarie och den borttagna spelaren får inte den ordinarie matchen.
-2. `Lägg till extra inhoppare` registrerar en extra match utanför den ordinarie fördelningen och påverkar endast den separata extrarotationen efter genomförd match.
+1. `Justera ordinarie lag` flyttar en eller flera ordinarie matchplatser mellan spelare (lika många ut som in, sparas atomiskt, ADR-022). Den tillagda spelaren räknas som ordinarie och den borttagna spelaren får inte den ordinarie matchen.
+2. `Lägg till extra inhoppare` registrerar en eller flera extra matcher utanför den ordinarie fördelningen och påverkar endast den separata extrarotationen efter genomförd match.
 
 Appen visar ändrade spelare som `Manuellt tillagd`, `Manuellt borttagen` eller `Extra inhoppare`. Tränaren kan välja `Återställ manuellt byte`, varefter systemet åter får bestämma uttagningen automatiskt.
 

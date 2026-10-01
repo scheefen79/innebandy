@@ -1,4 +1,38 @@
-# Aktuell milstolpe: Implementation 17 – automatiserad verifiering och databasrelease
+# Aktuell milstolpe: Implementation 19 – flera byten och extra inhoppare i ett steg
+
+## Mål
+
+Tränaren kan byta flera ordinarie spelare och lägga till flera extra inhoppare i ett atomiskt steg.
+
+Scope och acceptanskriterier finns i `docs/planning/implementation-19-batch-squad-adjustments.md`. Beslutet finns i ADR-022.
+
+## Leverabler
+
+- [x] Atomiska databasfunktioner `create_manual_regular_adjustments` och `add_extra_substitutes` med negativa tester.
+- [x] Server-, route- och UI-lager för flera byten (kryssrutor och par) och flera extra (kryssrutor).
+- [x] Spec, öppna frågor och ADR:er uppdaterade.
+- [x] Lint, typkontroll, Vitest, bygge, databastester och db lint passerar.
+- [ ] Lokal mobil användarresa med ett syntetiskt Auth-konto.
+- [ ] Oberoende skrivskyddad granskning.
+
+## Föregående milstolpe: Implementation 18 – extra spelare vid genomförd match
+
+## Mål
+
+När en match genomförs ska tränaren kunna registrera exakt vilka som deltog, inklusive en eller flera extra spelare som inte lades till före matchstart.
+
+Scope och acceptanskriterier finns i `docs/planning/implementation-18-completion-extra-players.md`. Det atomiska beslutet finns i ADR-010.
+
+## Leverabler
+
+- [x] Genomförandevyn kan välja flera nya extra spelare.
+- [x] Befintliga ordinarie och extra deltagare kan fortfarande markeras som spelade eller frånvarande.
+- [x] Nya extra rader, deltagande och matchstatus sparas atomiskt.
+- [x] Ordinarie rättvisa och extrastatistik förblir separata.
+- [x] Automatiska kontroller, databasens negativa tester och oberoende granskning är genomförda.
+- [ ] Lokal mobil användarresa är genomförd med ett syntetiskt Auth-konto.
+
+## Föregående milstolpe: Implementation 17 – automatiserad verifiering och databasrelease
 
 ## Mål
 

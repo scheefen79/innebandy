@@ -12,16 +12,24 @@ import { POST } from "./route";
 const matchId = "d5000000-0000-4000-8000-000000000001";
 const playerA = "d4000000-0000-4000-8000-000000000001";
 const playerB = "d4000000-0000-4000-8000-000000000002";
+const extraPlayer = "d4000000-0000-4000-8000-000000000003";
 
 beforeEach(() => complete.mockReset().mockResolvedValue("ok"));
 
-it("sends a complete boolean decision through the server-only boundary", async () => {
+it("sends a complete boolean decision with late extra players through the server-only boundary", async () => {
   const body = new URLSearchParams({ fingerprint: "a".repeat(32) });
-  body.append("playerId", playerA); body.append("playerId", playerB); body.append("playedPlayerId", playerA);
+  body.append("playerId", playerA); body.append("playerId", playerB); body.append("playedPlayerId", playerA); body.append("extraPlayerId", extraPlayer);
   const response = await POST(new NextRequest(`https://app.example/matches/${matchId}/complete/save`, { method: "POST", body }), { params: Promise.resolve({ id: matchId }) });
-  expect(complete).toHaveBeenCalledWith({ kind: "admin" }, expect.objectContaining({ matchId, participation: [{ playerId: playerA, played: true }, { playerId: playerB, played: false }] }));
+  expect(complete).toHaveBeenCalledWith({ kind: "admin" }, expect.objectContaining({ matchId, participation: [{ playerId: playerA, played: true }, { playerId: playerB, played: false }, { playerId: extraPlayer, played: true }] }));
   expect(response.status).toBe(303);
   expect(response.headers.get("location")).toBe(`https://app.example/matches/${matchId}?completion=saved`);
+});
+
+it("rejects an extra player that also appears in the current roster", async () => {
+  const body = new URLSearchParams({ fingerprint: "a".repeat(32), playerId: playerA, playedPlayerId: playerA, extraPlayerId: playerA });
+  const response = await POST(new NextRequest(`https://app.example/matches/${matchId}/complete/save`, { method: "POST", body }), { params: Promise.resolve({ id: matchId }) });
+  expect(complete).not.toHaveBeenCalled();
+  expect(response.headers.get("location")).toBe(`https://app.example/matches/${matchId}/complete?error=invalid`);
 });
 
 it("rejects duplicate or unknown player decisions before the database call", async () => {
