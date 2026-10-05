@@ -3,6 +3,7 @@ import { isUuid } from "./match-validation";
 
 export type MatchListItem = {
   id: string; opponent: string; startsAt: string; location: string | null;
+  phase?: "planning" | "week" | "locked" | "legacy"; acceptedPlayers?: number; pendingPlayers?: number; historyRequired?: boolean;
   selectedPlayers: number; targetPlayers: number; status: "upcoming" | "completed" | "cancelled";
 };
 

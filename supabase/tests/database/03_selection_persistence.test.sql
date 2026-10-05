@@ -71,6 +71,11 @@ select throws_ok(
   'a selection cannot connect a player from another team'
 );
 
+insert into public.match_calls(match_id,team_id,season_id,player_id,in_plan,offered_regular,response)
+select mp.match_id,mp.team_id,mp.season_id,mp.player_id,true,true,'withdrawn'
+from public.match_players mp join public.matches m on m.id=mp.match_id
+where m.status='completed' and mp.selection_type='regular' and mp.played;
+
 set local role authenticated;
 set local request.jwt.claim.sub = '91000000-0000-4000-8000-000000000001';
 
@@ -86,7 +91,7 @@ select results_eq(
     ) player
   $$,
   array['2:2'::text],
-  'completed and preserved regular selections form the fairness baseline'
+  'confirmed regular offers and preserved plans form the fairness baseline'
 );
 
 select results_eq(

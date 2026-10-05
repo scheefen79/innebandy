@@ -1,28 +1,3 @@
-import { NextRequest, NextResponse } from "next/server";
-import { isUuid } from "@/features/matches/match-validation";
-import { mutateExtraSubstitute } from "@/features/selections/extra-substitute";
-import { loadTeamContext } from "@/lib/auth/team-context";
-import { getVerifiedUserId } from "@/lib/auth/verified-user";
-import { createAdminClient } from "@/lib/supabase/admin";
-import { createRouteHandlerClient } from "@/lib/supabase/route-handler";
-
+import { redirectLegacyMatchPost } from "@/features/match-workflow/legacy-route";
 export const dynamic = "force-dynamic";
-
-export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const { applyAuthState, supabase } = createRouteHandlerClient(request);
-  const redirectTo = (path: string) => applyAuthState(NextResponse.redirect(new URL(path, request.url), 303));
-  const userId = await getVerifiedUserId();
-  if (!userId) return redirectTo(`/login?next=${encodeURIComponent(`/matches/${id}`)}`);
-  const context = await loadTeamContext(supabase);
-  if (!context || context.role !== "coach") return redirectTo("/access-denied");
-  const form = await request.formData();
-  const playerId = String(form.get("playerId") ?? "");
-  const fingerprint = String(form.get("fingerprint") ?? "");
-  if (![id, playerId].every(isUuid) || !/^[a-f0-9]{32}$/.test(fingerprint)) return redirectTo(`/matches/${id}?extra=invalid`);
-  const result = await mutateExtraSubstitute(createAdminClient(), "remove_extra_substitute", {
-    actorUserId: userId, teamId: context.teamId, seasonId: context.seasonId,
-    matchId: id, playerId, fingerprint,
-  });
-  return redirectTo(`/matches/${id}?extra=${result === "ok" ? "removed" : result}`);
-}
+export const POST = redirectLegacyMatchPost;

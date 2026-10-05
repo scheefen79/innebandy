@@ -1,5 +1,9 @@
 # ADR-009: Planerade extra inhopp som separat uttagning
 
+## Ändring 2026-10-05
+
+I matchveckan ryms extra inom totalgränsen tio tillsammans med ja och väntande ordinarie. Full ordinarie trupp krävs inte. Extra-ranking använder erbjudna ordinarie som sekundärt mått. Se [ADR-023](ADR-023-two-phase-match-planning.md), som ersätter motstridiga delar nedan. Tidigare beslut bevaras som historik.
+
 - Status: Accepterad
 - Datum: 2026-08-21
 - Ändrad: 2026-08-24

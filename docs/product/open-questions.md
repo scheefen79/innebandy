@@ -22,29 +22,11 @@ Datamodellen får stödja fler tränare och besökare, men MVP innehåller ingen
 
 Nivån används för att skapa balanserade matchtrupper och får inte påverka hur många matcher en spelare tilldelas. UI, seeddata, tester och förklarande text ska använda samma riktning på skalan.
 
-### 3. Genomförd match
+### 3. Kallelser och faktisk medverkan
 
-**Beslut:** Ordinarie matcher och extra inhopp följer två separata rättvisestrukturer.
+**Beslut 2026-10-05:** ADR-023 ersätter tidigare beslut om att inte registrera förfrågningar och avböjanden. Generatorn skapar grundplanen; matchveckan fryser planen och registrerar externt skickade kallelser samt svar. En skickad ordinarie kallelse räknas en gång även vid nej/indragning. Inställda matcher undantas. Extra-ranking är genomförda extra, erbjudna ordinarie, senaste extra och fast rotation; nivå används endast för balans.
 
-- Ordinarie uttagningar fördelas enligt säsongens vanliga rotations- och nivåbalansregler.
-- Extra inhopp fördelas i en separat rotation så att samma spelare inte återkommande får extramatcherna.
-- Ett extra inhopp påverkar inte spelarens framtida ordinarie matchfördelning.
-- En ordinarie uttagning används endast som sekundärt kriterium när spelare har lika många genomförda extra inhopp.
-- När en match markeras som genomförd registreras ordinarie uttagna och extra inkallade som spelade som standard. Tränaren kan markera återbud eller frånvaro individuellt.
-- Endast ett faktiskt genomfört extra inhopp ökar spelarens inhoppsräknare.
-- Förfrågningar och avböjanden registreras inte i MVP.
-- Spelarnivå påverkar inte rekommendationen av extra inhoppare. Nivå används endast för den ordinarie lagbalansen.
-
-Prioriteringsordning för extra inhopp:
-
-1. Lägst antal genomförda extra inhopp.
-2. Lägst antal ordinarie matcher.
-3. Längst tid sedan senaste genomförda extra inhopp.
-4. Säsongens fasta, reproducerbara rotationsordning som sista utslagsregel.
-
-Tränaren kan alltid välja en annan tillgänglig spelare än den som appen rekommenderar.
-
-Spelarkort och matchhistorik ska därför skilja mellan ordinarie tilldelningar, extra inhopp och faktiskt spelade matcher.
+Ja och väntande svar reserverar högst tio platser inklusive extra. Återbud kräver ingen ersättare. Ett till tio faktiska deltagare låses efter start när väntande svar hanterats; noll innebär inställd match. Coach kan rätta med obligatorisk anledning och revisionshistorik. Äldre erbjudanden kompletteras och bekräftas manuellt innan generering, och ofullständig historik märks i statistik. Ingen extern integration införs.
 
 ### 4. Borttagning av match
 
@@ -61,12 +43,7 @@ Spelarkort och matchhistorik ska därför skilja mellan ordinarie tilldelningar,
 
 **Beslut:** Manuella ändringar bevaras automatiskt vid framtida omfördelning. Låsningen är ett internt systembeteende och ska inte kräva att tränaren förstår eller administrerar tekniska låstyper.
 
-UI:t har två separata flöden:
-
-1. `Justera ordinarie lag` flyttar en eller flera ordinarie matchplatser mellan spelare (lika många ut som in, sparas atomiskt, ADR-022). Den tillagda spelaren räknas som ordinarie och den borttagna spelaren får inte den ordinarie matchen.
-2. `Lägg till extra inhoppare` registrerar en eller flera extra matcher utanför den ordinarie fördelningen och påverkar endast den separata extrarotationen efter genomförd match.
-
-Appen visar ändrade spelare som `Manuellt tillagd`, `Manuellt borttagen` eller `Extra inhoppare`. Tränaren kan välja `Återställ manuellt byte`, varefter systemet åter får bestämma uttagningen automatiskt.
+Före matchveckan kan grundplanen justeras med bevarade, kopplade ordinarie byten. Efter `Starta matchveckan` hanteras varje kallelse och svar oberoende och sparas atomiskt. Grundplanen fryses och omfördelas inte. ADR-023 ersätter tidigare fas 2-flöde med extra utanför målantalet.
 
 ### 6. Omfördelning efter förändringar
 
@@ -83,28 +60,13 @@ Vid omfördelning:
 - matcher före den valda startmatchen ändras inte
 - manuella ändringar bevaras
 - endast automatiskt tilldelade platser får räknas om
-- genomförda ordinarie matcher används när rättvisan för återstående matcher beräknas
+- erbjudna ordinarie och bevarad framtida grundplan används när rättvisan för återstående matcher beräknas
+- påbörjade matchveckor undantas från generering
 - extra inhopp hålls separat från den ordinarie fördelningen
 
 ### Match- och deltagandestatus
 
-Kommande uttagningar är `Planerad` fram till att matchen har spelats. Det finns ingen status `Bekräftad` före matchen.
-
-Matchstatus:
-
-- `Planerad` – matchen är kommande och uttagningen kan ändras.
-- `Genomförd` – matchen har spelats och deltagandet har sparats.
-- `Inställd` – matchen blev inte spelad.
-
-När en match markeras som genomförd föreslår appen att alla ordinarie uttagna och registrerade extra inhoppare deltog. Tränaren korrigerar eventuella återbud och sparar sedan deltagandet.
-
-Deltagandestatus per spelare:
-
-- `Spelade`
-- `Deltog inte`
-- `Extra inhoppare`
-
-Först när deltagandet sparas uppdateras historiken och räknaren för genomförda extra inhopp.
+Matchstatus är fortsatt `upcoming`, `completed` eller `cancelled`. Separat matchfas är grundplan, matchvecka, låst eller äldre historik. Kallelsestatus är ej kallad, inväntar svar, tackat ja, tackat nej eller indragen. Ja är ett svar på kallelsen; faktisk medverkan registreras separat. Endast faktiskt deltagande ökar genomförda matcher och extra.
 
 ### 7. Oavgjorda kandidater
 

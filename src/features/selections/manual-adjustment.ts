@@ -46,6 +46,7 @@ export async function mutateManualAdjustment(
     expected_fingerprint: input.fingerprint,
   });
   if (!error) return "ok";
+  if (error.message.includes("FROZEN_MATCH_PLAN")) return "stale";
   if (error.message.includes("STALE_SELECTION")) return "stale";
   if (error.message.includes("INVALID_ADJUSTMENT") || error.message.includes("MATCH_NOT_AVAILABLE")) return "invalid";
   throw new Error("Det gick inte att spara det manuella bytet.");
@@ -88,6 +89,7 @@ export async function mutateManualAdjustments(
     expected_fingerprint: input.fingerprint,
   });
   if (!error) return "ok";
+  if (error.message.includes("FROZEN_MATCH_PLAN")) return "stale";
   if (error.message.includes("STALE_SELECTION")) return "stale";
   if (error.message.includes("INVALID_ADJUSTMENT") || error.message.includes("MATCH_NOT_AVAILABLE")) return "invalid";
   throw new Error("Det gick inte att spara de manuella byten.");

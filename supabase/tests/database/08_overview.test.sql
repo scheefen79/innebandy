@@ -32,6 +32,11 @@ insert into match_players(team_id,season_id,match_id,player_id,selection_type,se
  ('a2000000-0000-4000-8000-000000000001','a3000000-0000-4000-8000-000000000001','a5000000-0000-4000-8000-000000000003','a4000000-0000-4000-8000-000000000002','regular','automatic','selected',false),
  ('a2000000-0000-4000-8000-000000000001','a3000000-0000-4000-8000-000000000001','a5000000-0000-4000-8000-000000000004','a4000000-0000-4000-8000-000000000001','regular','automatic','selected',false);
 
+insert into public.match_calls(match_id,team_id,season_id,player_id,in_plan,offered_regular,response)
+select mp.match_id,mp.team_id,mp.season_id,mp.player_id,true,true,'withdrawn'
+from public.match_players mp join public.matches m on m.id=mp.match_id
+where m.status='completed' and mp.selection_type='regular' and mp.played;
+
 select has_function('public','get_overview',array['uuid'],'overview function exists');
 select has_function('public','get_home_overview',array[]::text[],'atomic home function exists');
 select has_function('public','get_team_context',array[]::text[],'single-call context function exists');
@@ -41,7 +46,7 @@ select results_eq($$select get_overview('a2000000-0000-4000-8000-000000000001')-
 select results_eq($$select jsonb_array_length(get_overview('a2000000-0000-4000-8000-000000000001')->'upcomingMatches')$$,array[1],'only future upcoming matches are listed');
 select results_eq($$select (get_overview('a2000000-0000-4000-8000-000000000001')->'upcomingMatches'->0->>'selectedPlayers')::integer$$,array[2],'regular and extra selected players are counted for roster size');
 select results_eq($$select jsonb_array_length(get_overview('a2000000-0000-4000-8000-000000000001')->'players')$$,array[2],'only active players are included');
-select results_eq($$select (jsonb_path_query_first(get_overview('a2000000-0000-4000-8000-000000000001')->'players','$[*] ? (@.id == "a4000000-0000-4000-8000-000000000001")')->>'regularCount')::integer$$,array[3],'played completed and selected upcoming regular rows count');
+select results_eq($$select (jsonb_path_query_first(get_overview('a2000000-0000-4000-8000-000000000001')->'players','$[*] ? (@.id == "a4000000-0000-4000-8000-000000000001")')->>'regularCount')::integer$$,array[3],'confirmed historical offers and upcoming regular plans count');
 select results_eq($$select (jsonb_path_query_first(get_overview('a2000000-0000-4000-8000-000000000001')->'players','$[*] ? (@.id == "a4000000-0000-4000-8000-000000000002")')->>'regularCount')::integer$$,array[0],'extra and completed absence do not count as regular fairness');
 select results_eq($$select get_overview('a2000000-0000-4000-8000-000000000001')->'nextTraining'->>'id'$$,array['a7000000-0000-4000-8000-000000000001'],'nearest future training is returned');
 select lives_ok($$select get_home_overview()$$,'home overview loads without a separate context query');

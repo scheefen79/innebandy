@@ -72,3 +72,11 @@ PostgreSQL lagrar projektets tillstånd. Supabase Auth identifierar tränaren oc
 - ADR-016: rollbaserad tränar- och besökaråtkomst
 - ADR-020: serieuppdatering av träningsplaner per veckodag och block
 - ADR-021: automatiserad verifiering och databasrelease
+
+## Matchplanering i två faser (ADR-023)
+
+Grundplanen lagras i `match_players`. `match_workflows` fryser planen vid uttrycklig start av matchveckan och håller revision och historikstatus. `match_calls` håller skickade ordinarie erbjudanden och manuellt registrerade svar. `match_participation` är auktoritativt efter låsning, och `match_workflow_events` bevarar före/efter, aktör, tidpunkt och idempotenta request-id:n.
+
+`get_match_workflow` kräver aktiv coach. Server-only `save_match_workflow` verifierar coach, lag och säsong och tar lås i ordningen säsong, match, spelare. En hel åtgärd sparas atomiskt med förväntad revision. Tabellerna har coachbegränsad läsning och inga direkta klientskrivningar. En trigger skyddar frysta planer även från äldre mutationsvägar.
+
+Gemensamma läsmodeller kombinerar äldre deltagande och nytt låst deltagande utan dubbelräkning. Erbjudandehistorik måste bekräftas manuellt före generering; individuell statistik markeras ofullständig under kompletteringen. Viewer ser bara begränsad matchtrupp. Full Supabase-, pgTAP- och samtidighetsverifiering krävs före integration; lokala testbegränsningar finns i Implementation 20.

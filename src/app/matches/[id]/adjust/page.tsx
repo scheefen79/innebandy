@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import { loadMatchWorkflow } from "@/features/match-workflow/workflow";
 import { AppShell } from "@/components/app-shell";
 import { loadMatch } from "@/features/matches/load-matches";
 import { loadMatchRoster } from "@/features/selections/load-match-roster";
@@ -20,6 +21,7 @@ export default async function AdjustMatchPage({ params, searchParams }: { params
   if (!context || context.role !== "coach") redirect("/access-denied");
   const match = await loadMatch(supabase, context.teamId, context.seasonId, id);
   if (!match) notFound();
+  if ((await loadMatchWorkflow(supabase, context.teamId, context.seasonId, id)).phase !== "planning") redirect(`/matches/${id}/week`);
   if (match.status !== "upcoming" || Date.parse(match.startsAt) <= Date.parse(new Date().toISOString())) redirect(`/matches/${id}`);
   const [roster, fingerprint] = await Promise.all([
     loadMatchRoster(supabase, context.teamId, context.seasonId, id),

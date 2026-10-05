@@ -1,5 +1,9 @@
 # ADR-008: Manuella ordinarie byten som kopplade beslut
 
+## Ändring 2026-10-05
+
+Kopplade manuella byten används endast före matchveckan i grundplanen. Fas 2 använder oberoende kallelser och svar utan krav på ersättare. Se [ADR-023](ADR-023-two-phase-match-planning.md), som ersätter motstridiga delar nedan. Tidigare beslut bevaras som historik.
+
 - Status: Accepterad
 - Datum: 2026-08-20
 

@@ -11,6 +11,7 @@
     "db:test:concurrency": "bash supabase/tests/database/selection_concurrency.sh",
     "db:test:manual-concurrency": "bash supabase/tests/database/manual_adjustment_concurrency.sh",
     "db:test:extra-concurrency": "bash supabase/tests/database/extra_substitute_concurrency.sh",
+    "db:test:workflow-concurrency": "bash supabase/tests/database/match_workflow_concurrency.sh",
     "db:test:completion-concurrency": "bash supabase/tests/database/match_completion_concurrency.sh",
     "db:test:player-concurrency": "bash supabase/tests/database/player_management_concurrency.sh",
     "db:test:team-concurrency": "bash supabase/tests/database/team_membership_concurrency.sh",

@@ -22,7 +22,7 @@ export async function loadPlayerList(
     const level = player.level as PlayerLevel;
     const lastName = typeof player.lastName === "string" ? player.lastName : null;
     const number = (value: unknown) => typeof value === "number" ? value : 0;
-    return { id: player.id, name: [player.firstName, lastName].filter(Boolean).join(" "), level, levelLabel: getPlayerLevelLabel(level), plannedRegular: number(player.plannedRegular), completedRegular: number(player.completedRegular), plannedExtra: number(player.plannedExtra), completedExtra: number(player.completedExtra) };
+    return { id: player.id, name: [player.firstName, lastName].filter(Boolean).join(" "), level, levelLabel: getPlayerLevelLabel(level), offeredHistoryComplete: player.historyComplete === true, offeredRegular: number(player.offeredRegular), plannedRegular: number(player.plannedRegular), completedRegular: number(player.completedRegular), plannedExtra: number(player.plannedExtra), completedExtra: number(player.completedExtra) };
   });
 
   return {

@@ -20,7 +20,7 @@ describe("loadPlayerList", () => {
           name: "Ada Lovelace",
           level: 1,
           levelLabel: "Nivå 1 · Högst",
-          plannedRegular: 0, completedRegular: 1, plannedExtra: 0, completedExtra: 0,
+          offeredHistoryComplete: false, offeredRegular: 0, plannedRegular: 0, completedRegular: 1, plannedExtra: 0, completedExtra: 0,
         },
       ],
       seasonName: "Testsäsong",

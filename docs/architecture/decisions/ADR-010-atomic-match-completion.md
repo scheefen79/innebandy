@@ -1,5 +1,9 @@
 # ADR-010: Atomisk matchcompletion och deltagande
 
+## Ändring 2026-10-05
+
+Det nya flödet låser ett till tio faktiska deltagare efter start utan krav på exakt målantal ordinarie. Coach kan rätta med anledning och bevarad före/efter-historik. Se [ADR-023](ADR-023-two-phase-match-planning.md), som ersätter motstridiga delar nedan. Tidigare beslut bevaras som historik.
+
 - Status: Accepterad
 - Datum: 2026-08-24
 

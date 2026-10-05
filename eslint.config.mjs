@@ -13,6 +13,7 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
     "supabase/.temp/**",
+    "node_modules.fore-aterinstallation-2026-10-02/**",
   ]),
 ]);
 

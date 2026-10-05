@@ -1,5 +1,9 @@
 # ADR-007: Atomisk persistens av ordinarie uttagningar
 
+## Ändring 2026-10-05
+
+Atomisk persistens och samtidighet kvarstår. Frysta matchveckor får inte skrivas över och äldre kallelsehistorik måste bekräftas innan generering. Se [ADR-023](ADR-023-two-phase-match-planning.md), som ersätter motstridiga delar nedan. Tidigare beslut bevaras som historik.
+
 - Status: Accepterad
 - Datum: 2026-08-20
 

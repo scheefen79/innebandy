@@ -1,5 +1,9 @@
 # ADR-005: Ren och deterministisk fördelningsmotor
 
+## Ändring 2026-10-05
+
+Fördelningsmotorn är fortsatt ren och deterministisk. Dess databasunderlag använder erbjudna ordinarie platser plus bevarad framtida plan. Påbörjade matchveckor undantas från generering. Se [ADR-023](ADR-023-two-phase-match-planning.md), som ersätter motstridiga delar nedan. Tidigare beslut bevaras som historik.
+
 - Status: Accepterad
 - Datum: 2026-08-17
 

@@ -21,7 +21,7 @@ export type AllocationPreview = {
 
 export type AllocationPreviewResult =
   | { ok: true; preview: AllocationPreview }
-  | { ok: false; errors: AllocationError[] };
+  | { ok: false; errors: Array<AllocationError | { code: "HISTORY_REVIEW_REQUIRED" | "ROSTER_CAPACITY" }> };
 
 function isEnvelope(value: unknown): value is AllocationSourceEnvelope {
   if (!value || typeof value !== "object") return false;
@@ -42,6 +42,8 @@ export async function loadAllocationPreview(
     target_season_id: seasonId,
     boundary,
   });
+  if (error?.message.includes("HISTORY_REVIEW_REQUIRED")) return { ok: false, errors: [{ code: "HISTORY_REVIEW_REQUIRED" }] };
+  if (error?.message.includes("ROSTER_CAPACITY")) return { ok: false, errors: [{ code: "ROSTER_CAPACITY" }] };
   if (error || !isEnvelope(data)) throw new Error("Det gick inte att skapa förhandsgranskningen.");
 
   const result = generateRegularAllocation(data.source);
@@ -58,7 +60,9 @@ export async function loadAllocationPreview(
   };
 }
 
-export const allocationErrorText: Record<AllocationError["code"], string> = {
+export const allocationErrorText: Record<AllocationError["code"] | "HISTORY_REVIEW_REQUIRED" | "ROSTER_CAPACITY", string> = {
+  HISTORY_REVIEW_REQUIRED: "Bekräfta tidigare ordinarie kallelser innan du skapar en ny grundplan.",
+  ROSTER_CAPACITY: "En match i grundplanen har fler än tio platser. Antalet behöver rättas innan fördelning.",
   CONFLICTING_MANUAL_SELECTION: "Två manuella beslut motsäger varandra.",
   DUPLICATE_MATCH_ID: "Matchunderlaget innehåller en dubblett.",
   DUPLICATE_MATCH_ORDER: "Matchordningen är inte entydig.",

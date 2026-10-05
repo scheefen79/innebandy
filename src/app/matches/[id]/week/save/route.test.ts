@@ -1,0 +1,17 @@
+import { NextRequest } from "next/server";
+import { beforeEach, expect, it, vi } from "vitest";
+const mocks=vi.hoisted(()=>({actor:vi.fn(),context:vi.fn(),save:vi.fn(),admin:vi.fn()}));
+vi.mock("@/lib/supabase/route-handler",()=>({createRouteHandlerClient:()=>({supabase:{},applyAuthState:(r:Response)=>r})}));
+vi.mock("@/lib/auth/verified-user",()=>({getVerifiedUserId:mocks.actor}));
+vi.mock("@/lib/auth/team-context",()=>({loadTeamContext:mocks.context}));
+vi.mock("@/lib/supabase/admin",()=>({createAdminClient:mocks.admin}));
+vi.mock("@/features/match-workflow/workflow",async original=>({...await original<typeof import("@/features/match-workflow/workflow")>(),saveMatchWorkflow:mocks.save}));
+import { POST } from "./route";
+const id="d5000000-0000-4000-8000-000000000001";
+const post=(body:URLSearchParams)=>POST(new NextRequest("https://app.example/week/save",{method:"POST",body}),{params:Promise.resolve({id})});
+const valid=()=>new URLSearchParams({action:"start",revision:"0",requestId:"d6000000-0000-4000-8000-000000000001"});
+beforeEach(()=>{vi.clearAllMocks();mocks.actor.mockResolvedValue("verified-actor");mocks.context.mockResolvedValue({role:"coach",teamId:"team",seasonId:"season"});mocks.admin.mockReturnValue({admin:true});mocks.save.mockResolvedValue(null);});
+it("uses only verified identity and team context",async()=>{const body=valid();body.set("actorUserId","forged");const result=await post(body);expect(mocks.save).toHaveBeenCalledWith({admin:true},"verified-actor","team","season",id,expect.objectContaining({action:"start",revision:0}));expect(result.headers.get("location")).toContain("saved=1");});
+it("denies viewers, nonmembers and unauthenticated users before admin creation",async()=>{for(const context of [{role:"viewer"},null]){mocks.context.mockResolvedValue(context);expect((await post(valid())).headers.get("location")).toContain("access-denied");}mocks.actor.mockResolvedValue(null);expect((await post(valid())).headers.get("location")).toContain("login");expect(mocks.admin).not.toHaveBeenCalled();});
+it("rejects malformed input before invoking persistence",async()=>{const f=valid();f.set("revision","-1");expect((await post(f)).headers.get("location")).toContain("INVALID_WORKFLOW");expect(mocks.save).not.toHaveBeenCalled();});
+it("returns capacity and stale conflicts to a recoverable view",async()=>{for(const code of ["ROSTER_CAPACITY","STALE_WORKFLOW","UNRESOLVED_RESPONSES"]){mocks.save.mockResolvedValue(code);expect((await post(valid())).headers.get("location")).toContain(`error=${code}`);}});
