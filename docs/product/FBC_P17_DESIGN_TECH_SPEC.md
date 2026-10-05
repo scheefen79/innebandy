@@ -374,6 +374,10 @@ Coach kan rätta låst deltagande med obligatorisk anledning. Före/efter, aktö
 
 Fördelningen ändras aldrig automatiskt när trupp, matcher, platser eller nivåer ändras. Tränaren väljer nästa eller en vald framtida grundplan som start. Genomförda, inställda, tidigare planerade och frysta matchveckor samt manuella beslut bevaras.
 
+## 8.11 Ställ in match och omfördela
+
+Coach kan ställa in en ej genomförd match från matchdetaljen, grundplanen eller matchveckan. Bekräftelse markerar matchen inställd och öppnar förhandsgranskning av återstående framtida grundplaner. Ny fördelning sparas först genom uttryckligt val. Påbörjade matchveckor, spelade matcher och manuella beslut bevaras. Om omfördelning blockeras eller granskningen avbryts är matchen fortfarande inställd och övriga planer oförändrade. Redan inställda matcher erbjuder en länk för att återuppta omfördelning. Se ADR-024.
+
 ---
 
 # 9. Uttagningsalgoritm

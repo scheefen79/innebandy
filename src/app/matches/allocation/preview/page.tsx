@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { AppShell } from "@/components/app-shell";
+import { isUuid } from "@/features/matches/match-validation";
+import { loadMatch } from "@/features/matches/load-matches";
 import { loadMatches } from "@/features/matches/load-matches";
 import { formatStockholmDateTime } from "@/features/matches/match-time";
 import { loadPlayerList } from "@/features/players/load-player-list";
@@ -16,7 +18,7 @@ import { SaveAllocationButton } from "./save-allocation-button";
 
 export const dynamic = "force-dynamic";
 
-export default async function AllocationPreviewPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+export default async function AllocationPreviewPage({ searchParams }: { searchParams: Promise<{ error?: string; cancelled?: string }> }) {
   const supabase = await createClient();
   const userId = await getVerifiedUserId();
   if (!userId) redirect("/login?next=/matches/allocation/preview");
@@ -29,10 +31,15 @@ export default async function AllocationPreviewPage({ searchParams }: { searchPa
     loadMatches(supabase, context.teamId, context.seasonId, "upcoming", boundary),
     loadPlayerList(supabase, context.teamId),
   ]);
-  const error = (await searchParams).error;
+  const query = await searchParams;
+  const error = query.error;
+  const cancelledMatch = query.cancelled && isUuid(query.cancelled)
+    ? await loadMatch(supabase, context.teamId, context.seasonId, query.cancelled) : null;
+  const cancellationNotice = cancelledMatch?.status === "cancelled"
+    ? <p role="status" className="mt-4 rounded-xl bg-emerald-50 p-4 text-sm text-emerald-950">Matchen mot {cancelledMatch.opponent} är inställd. Den nya fördelningen för resterande grundplaner sparas först när du väljer att spara nedan. Påbörjade matchveckor och spelade matcher bevaras.</p> : null;
 
   if (!previewResult.ok) {
-    return <AppShell currentItem="Matcher" role={context.role}><div className="mx-auto max-w-2xl"><Link href="/matches" className="inline-flex min-h-11 items-center text-sm font-semibold text-blue-700">← Till matcher</Link><div role="alert" className="mt-4 rounded-2xl border border-red-200 bg-white p-6"><h1 className="text-xl font-bold text-slate-950">Fördelningen kunde inte skapas</h1><ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-red-800">{previewResult.errors.map((item, index) => <li key={`${item.code}-${index}`}>{allocationErrorText[item.code]}</li>)}</ul>{previewResult.errors.some(item => item.code === "HISTORY_REVIEW_REQUIRED") ? <Link href="/matches/history" className="mt-4 inline-flex min-h-11 items-center font-semibold text-blue-700 underline">Komplettera tidigare kallelser</Link> : null}</div></div></AppShell>;
+    return <AppShell currentItem="Matcher" role={context.role}><div className="mx-auto max-w-2xl"><Link href="/matches" className="inline-flex min-h-11 items-center text-sm font-semibold text-blue-700">← Till matcher</Link>{cancellationNotice}<div role="alert" className="mt-4 rounded-2xl border border-red-200 bg-white p-6"><h1 className="text-xl font-bold text-slate-950">Fördelningen kunde inte skapas</h1><ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-red-800">{previewResult.errors.map((item, index) => <li key={`${item.code}-${index}`}>{allocationErrorText[item.code]}</li>)}</ul>{previewResult.errors.some(item => item.code === "HISTORY_REVIEW_REQUIRED") ? <Link href="/matches/history" className="mt-4 inline-flex min-h-11 items-center font-semibold text-blue-700 underline">Komplettera tidigare kallelser</Link> : null}</div></div></AppShell>;
   }
 
   const matchById = new Map(matches.map((match) => [match.id, match]));
@@ -41,7 +48,8 @@ export default async function AllocationPreviewPage({ searchParams }: { searchPa
   return <AppShell currentItem="Matcher" role={context.role}><div className="mx-auto max-w-3xl">
     <Link href="/matches" className="inline-flex min-h-11 items-center text-sm font-semibold text-blue-700">← Till matcher</Link>
     <h1 className="mt-2 text-3xl font-bold text-slate-950">Förhandsgranska fördelning</h1>
-    <p className="mt-2 text-sm text-slate-600">Kontrollera lagen innan hela fördelningen sparas.</p>
+    <p className="mt-2 text-sm text-slate-600">Kontrollera grundplanerna innan fördelningen sparas. Inställda matcher räknas bort. Påbörjade matchveckor, spelade matcher och manuella beslut bevaras.</p>
+    {cancellationNotice}
     {error === "stale" ? <div role="alert" className="mt-5 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">Underlaget ändrades efter förhandsgranskningen. Kontrollera den nya fördelningen och spara igen.</div> : null}
     {previewResult.preview.warnings.length ? <section className="mt-5 rounded-xl border border-amber-200 bg-amber-50 p-4"><h2 className="font-semibold text-amber-950">Varningar</h2><ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-amber-900">{previewResult.preview.warnings.map((warning, index) => <li key={`${warning.code}-${index}`}>{allocationWarningText(warning)}</li>)}</ul></section> : null}
     {previewResult.preview.allocations.length === 0 ? <div className="mt-6 rounded-2xl border border-dashed border-slate-300 bg-white p-6 text-center"><h2 className="font-semibold text-slate-900">Inga matcher att omfördela</h2><p className="mt-2 text-sm text-slate-600">Matcher med påbörjad matchvecka bevaras. Skapa en ny match eller planera matcher som ännu inte börjat.</p></div> : <div className="mt-6 space-y-4">{previewResult.preview.allocations.map((allocation) => {
