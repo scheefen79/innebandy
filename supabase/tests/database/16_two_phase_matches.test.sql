@@ -1,7 +1,7 @@
 begin;
 create extension if not exists pgtap with schema extensions;
 set local search_path=public,extensions;
-select plan(41);
+select plan(42);
 insert into auth.users(id,email) values('ef000000-0000-4000-8000-000000000001','week-coach@example.test'),('ef000000-0000-4000-8000-000000000002','week-viewer@example.test'),('ef000000-0000-4000-8000-000000000003','week-outsider@example.test');
 insert into public.teams(id,name,slug) values('ef000000-0000-4000-8000-000000000004','Synthetic workflow','synthetic-workflow');
 insert into public.team_members(team_id,user_id,role) values('ef000000-0000-4000-8000-000000000004','ef000000-0000-4000-8000-000000000001','coach'),('ef000000-0000-4000-8000-000000000004','ef000000-0000-4000-8000-000000000002','viewer');
@@ -45,6 +45,7 @@ set local role authenticated; set local request.jwt.claim.sub='ef000000-0000-400
 select throws_ok($test$select public.get_match_workflow('ef000000-0000-4000-8000-000000000004','ef000000-0000-4000-8000-000000000005','ef000000-0000-4000-8000-000000000006')$test$,'42501','NOT_AUTHORIZED','viewer cannot load invitations');
 select throws_ok($test$select pg_temp.change_week('start')$test$,'42501','permission denied for function save_match_workflow','authenticated cannot mutate directly');
 select results_eq($test$select count(*)::integer from public.match_workflows$test$,array[0],'viewer RLS hides workflow metadata');
+select ok(exists(select 1 from jsonb_array_elements(public.get_match_list('ef000000-0000-4000-8000-000000000004','ef000000-0000-4000-8000-000000000005','upcoming',now())) m where m->>'id'='ef000000-0000-4000-8000-000000000006'),'upcoming list retains started matches awaiting participation lock');
 set local role anon;
 select throws_ok($test$select public.get_match_workflow('ef000000-0000-4000-8000-000000000004','ef000000-0000-4000-8000-000000000005','ef000000-0000-4000-8000-000000000006')$test$,'42501','permission denied for function get_match_workflow','anonymous cannot load invitation data');
 reset role; set local role service_role; set local request.jwt.claims='{"role":"service_role"}';

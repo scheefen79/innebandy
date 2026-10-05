@@ -557,6 +557,9 @@ declare result jsonb; coach boolean;
 begin
  if not private.is_active_team_member(target_team_id) then raise exception using errcode='42501',message='NOT_AUTHORIZED'; end if;
  if requested_filter not in ('upcoming','all') then raise exception using errcode='P0001',message='INVALID_MATCH_FILTER'; end if;
+ -- Keep the legacy RPC parameter for existing callers. Unlocked matches remain
+ -- visible after their start time, so requested_now no longer filters this list.
+ perform requested_now;
  coach:=private.is_active_team_coach(target_team_id);
  select coalesce(jsonb_agg(jsonb_build_object('id',m.id,'opponent',m.opponent,'startsAt',m.starts_at,'location',m.location,'targetPlayers',m.target_players,'status',m.status,
  'selectedPlayers',(select count(*) from private.effective_match_players mp where mp.match_id=m.id and mp.selection_status='selected'))
