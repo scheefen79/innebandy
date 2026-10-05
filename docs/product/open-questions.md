@@ -34,7 +34,7 @@ Ja och väntande svar reserverar högst tio platser inklusive extra. Återbud kr
 
 - En inställd match räknas inte som en ordinarie match för spelarna.
 - Inställning av en match utlöser inte automatisk omfördelning.
-- Appen visar i stället att fördelningen kan ha blivit ojämn och erbjuder `Omfördela framtida matcher`.
+- Efter bekräftad inställning öppnar appen förhandsgranskning av resterande framtida grundplaner. Tränaren granskar och sparar uttryckligen; inget sparas automatiskt (ADR-024).
 - Manuella låsningar ska bevaras vid omfördelning.
 
 ## Måste avgöras före fördelningsmotorn

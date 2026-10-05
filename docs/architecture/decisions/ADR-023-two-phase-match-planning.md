@@ -1,6 +1,6 @@
 # ADR-023: grundplan, externa kallelser och låst deltagande
 
-- Status: Accepterat och lokalt implementerat/verifierat. Full Supabase- och samtidighetsgrind återstår före integration.
+- Status: Accepterat och lokalt implementerat/verifierat. Full databas- och kodgrind passerade i CI för `52a28a5` (453 pgTAP-tester och verkliga samtidighetstester).
 - Datum: 2026-10-05
 - Plan: `docs/planning/implementation-20-two-phase-match-planning.md`.
 
@@ -50,3 +50,7 @@ Historikkomplettering är en engångsinsats som kräver mänsklig kontroll. Omf�
 ## Skäl att ompröva
 
 Om kallelseverktyget erbjuder en godkänd integration, laget ändrar spelform eller rättvisan ska baseras på faktiskt deltagande i stället för erbjudanden behövs ett nytt uttryckligt beslut.
+
+## Komplettering 2026-10-05
+
+[ADR-024](ADR-024-cancel-and-preview-redistribution.md) gör inställning tillgänglig i båda faserna och öppnar förhandsgranskning av resterande grundplaner. Ny fördelning sparas uttryckligen; övriga frysta matchveckor och spelad historik bevaras.

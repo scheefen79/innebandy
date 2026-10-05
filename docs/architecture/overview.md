@@ -80,3 +80,7 @@ Grundplanen lagras i `match_players`. `match_workflows` fryser planen vid uttryc
 `get_match_workflow` kräver aktiv coach. Server-only `save_match_workflow` verifierar coach, lag och säsong och tar lås i ordningen säsong, match, spelare. En hel åtgärd sparas atomiskt med förväntad revision. Tabellerna har coachbegränsad läsning och inga direkta klientskrivningar. En trigger skyddar frysta planer även från äldre mutationsvägar.
 
 Gemensamma läsmodeller kombinerar äldre deltagande och nytt låst deltagande utan dubbelräkning. Erbjudandehistorik måste bekräftas manuellt före generering; individuell statistik markeras ofullständig under kompletteringen. Viewer ser bara begränsad matchtrupp. Full Supabase-, pgTAP- och samtidighetsverifiering krävs före integration; lokala testbegränsningar finns i Implementation 20.
+
+## Inställning och ny fördelning (ADR-024)
+
+Gemensam inställningskontroll använder befintlig matchmutation, varefter en aktuell förhandsgranskning öppnas. Inställning och senare uttrycklig omfördelningssparning är separata transaktioner. Om granskning misslyckas eller avbryts bevaras inställningen och övriga planer ändras inte. Inga nya tabeller eller behörigheter krävs.

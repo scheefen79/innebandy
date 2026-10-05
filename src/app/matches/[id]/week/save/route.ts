@@ -18,5 +18,6 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   const command = parseWorkflowCommand(await request.formData());
   if (!command) return redirectTo(`/matches/${id}/week?error=INVALID_WORKFLOW`);
   const error = await saveMatchWorkflow(createAdminClient(), actor, context.teamId, context.seasonId, id, command);
+  if (!error && command.action === "cancel") return redirectTo(`/matches/allocation/preview?cancelled=${id}`);
   return redirectTo(`/matches/${id}/week?${error ? `error=${error}` : "saved=1"}`);
 }

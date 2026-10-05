@@ -1,6 +1,12 @@
-# Aktuell milstolpe: Implementation 20 – matchplanering i två faser
+# Aktuell milstolpe: Implementation 21 – ställ in och omfördela
 
-Planen godkändes 2026-10-05 och arbetet återupptogs efter användarens paus. Lokal implementation är genomförd. Full Supabase-verifiering återstår före integration.
+Användaren har valt förhandsgranskning och uttrycklig sparning. [Plan och avbockning](implementation-21-cancel-and-redistribute.md) beskriver tillägget och verifieringen. [ADR-024](../architecture/decisions/ADR-024-cancel-and-preview-redistribution.md) beskriver beslutet.
+
+---
+
+# Föregående milstolpe: Implementation 20 – matchplanering i två faser
+
+Planen godkändes 2026-10-05 och arbetet återupptogs efter användarens paus. Lokal implementation är genomförd. Full Supabase-databasgrind och kodgrind passerade i CI för `52a28a5`.
 
 - Arbetsgren: `codex/two-phase-match-planning`, bas `5fb65bc`.
 - [Utvecklingsplan, avbockning och återupptagningspunkt](implementation-20-two-phase-match-planning.md).
@@ -17,11 +23,11 @@ Planen godkändes 2026-10-05 och arbetet återupptogs efter användarens paus. L
 - [x] Mobilresa 390 px och desktopjämförelse med syntetiska data.
 - [x] Första oberoende granskningen; tre P2 rättade.
 - [x] Slutlig uppföljande granskning; inga nya P0–P2-fynd.
-- [ ] Full Supabase/pgTAP/db lint och samtidighet i två PostgreSQL-sessioner.
+- [x] Full Supabase/pgTAP/db lint och samtidighet i två PostgreSQL-sessioner (CI för `52a28a5`).
 - [x] Separat godkännande för commit och push av arbetsgrenen.
 - [ ] Separat godkännande för PR och produktionsändringar.
 
-Det nya samtidighetstestet ingår i befintlig CI och release-preflight. Docker/Supabase-runtime saknas på denna maskin; den återstående grinden får inte ersättas med adapterresultatet. Ingen verklig matchdata har ändrats.
+Det nya samtidighetstestet ingår i befintlig CI och release-preflight. Docker/Supabase-runtime saknas på denna maskin; CI verifierade denna grind med riktig Supabase, inte med adapter. Ingen verklig matchdata har ändrats.
 
 ---
 
