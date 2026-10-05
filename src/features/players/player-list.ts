@@ -13,6 +13,8 @@ export type PlayerListItem = {
   name: string;
   level: PlayerLevel;
   levelLabel: string;
+  offeredRegular?: number;
+  offeredHistoryComplete?: boolean;
   plannedRegular: number;
   completedRegular: number;
   plannedExtra: number;

@@ -1,6 +1,6 @@
 # Exempelbaserade testfall för matchfördelning
 
-Dokumentet beskriver observerbart beteende. Testerna ska implementeras mot en ren, deterministisk domänmodul.
+Dokumentet beskriver observerbart beteende. Fördelning testas mot en ren, deterministisk domänmodul; matchveckans persistens och behörighet i databasen. ADR-023 gäller för det nya tvåfasflödet.
 
 ## Ordinarie fördelning
 
@@ -56,9 +56,9 @@ Förväntat: A rekommenderas först oberoende av spelarnivå.
 
 ### E1b: Ordinarie antal bryter lika extrahistorik
 
-Givet två spelare med lika många genomförda extra inhopp men 4 respektive 5 ordinarie matcher.
+Givet två spelare med lika många genomförda extra inhopp men 4 respektive 5 erbjudna ordinarie platser.
 
-Förväntat: spelaren med 4 ordinarie matcher rekommenderas först.
+Förväntat: spelaren med 4 erbjudna ordinarie platser rekommenderas först.
 
 ### E2: Längst väntetid avgör lika antal
 
@@ -121,7 +121,7 @@ Givet ordinarie uttagna och extra inhoppare i en planerad match.
 
 När matchen markeras som genomförd.
 
-Förväntat: alla föreslås som spelade tills tränaren korrigerar och sparar deltagandet.
+Förväntat i matchveckan: ja föreslås som deltagare. Tränaren väljer exakt ett till tio faktiska deltagare efter start; väntande svar måste hanteras före låsning.
 
 ### S2: Inställd match räknas inte
 
@@ -164,3 +164,21 @@ Förväntat:
 - den nya genereringen stoppas med ett strukturerat fel
 - inga nya partiella uttagningar returneras
 - befintliga uttagningar ska därför kunna lämnas oförändrade av applikationslagret
+
+## Matchvecka enligt ADR-023
+
+### W1: Sex återbud och fem extra
+
+Tio i grundplanen markeras kallade. Sex tackar nej, fyra ja och fem extra ja. Lås nio faktiska deltagare efter start. Förväntat: tio erbjudna ordinarie, fyra spelade ordinarie och fem spelade extra. Inga parvisa ersättningar krävs.
+
+### W2: Kapacitet, atomicitet och återaktivering
+
+Ja plus väntande får inte överstiga tio. Om en batch skulle ge elva rullas hela åtgärden tillbaka. Nej/indragning behåller ett erbjudande; återaktivering skapar inget nytt.
+
+### W3: Fryst plan och historik
+
+Påbörjad matchvecka ändras inte av omfördelning eller äldre mutationsvägar. Äldre extrauttagning blir ej kallad, aldrig automatiskt väntande. Äldre erbjudanden bekräftas manuellt; inaktiva historiska spelare kan väljas. Ofullständiga antal markeras tills samtliga äldre ej inställda matcher granskats; generatorn spärras under tiden.
+
+### W4: Rättning, behörighet och samtidighet
+
+Coach rättar låst deltagande med anledning och bevarad före/efter-historik. Viewer, annat lag och direkta klientskrivningar nekas. Identiska request-id:n konvergerar till samma revision; en äldre sparning kan inte skriva över en konkurrerande deltagandelåsning. Det sistnämnda körs i `db:test:workflow-concurrency`, inte i en in-process adapter.

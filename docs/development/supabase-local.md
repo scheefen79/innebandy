@@ -58,3 +58,7 @@ Lokal Supabase fångar utgående e-post i Mailpit (`pnpm exec supabase status` v
 ## Exempeldata
 
 Seed-filen innehåller endast syntetiska namn: ett lag, en säsong, tre exempelspelare på nivå 1–3 och en kommande exempelmatch. Riktiga spelarnamn, motståndare, platser eller tränaruppgifter ska inte läggas i repot.
+
+## Verifiera matchveckans samtidighet
+
+Efter lokalt `db:reset` körs `pnpm db:test:workflow-concurrency`. Två PostgreSQL-sessioner verifierar identiska återförsök och en gammal svarssparning som tävlar med låsning av deltagande. Testet ingår i CI och release-preflight och använder endast syntetiska lokala fixtures. Kräver Docker och lokal Supabase; en in-process PostgreSQL-motor kan inte ersätta detta test.

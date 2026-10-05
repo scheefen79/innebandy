@@ -243,7 +243,7 @@ I redigeringsläge:
 - välj ersättare
 - visa direkt hur många matcher båda spelarna har
 
-Systemet ska inte blockera manuella val, bara varna.
+Fas 2 öppnas via `Starta matchveckan` och `Hantera matchveckan`. Den visar kallelser och svar, reserverade platser, kandidatstatistik och låsning/rättning. Kapacitet och behörighet upprätthålls även i databasen.
 
 Besökare ser matchuttagningen utan redigeringskontroller och utan nivåer eller historikmått.
 
@@ -268,7 +268,8 @@ Visa:
 
 - namn
 - nivå
-- totalt antal planerade matcher
+- erbjudna ordinarie, spelade ordinarie, spelade extra, totalt spelade och framtida planerade
+- tydlig markering när erbjudandehistoriken är ofullständig
 
 Klick öppnar spelarkort.
 
@@ -347,70 +348,31 @@ Ingen nivåhistorik behövs i MVP.
 
 ## 8.5 Lägg till match
 
-Fält:
+Datum, tid, motståndare, valfri plats och önskad storlek på grundplanen. Standard är tio (ADR-019). Nya grundplaner och matchveckor har högst tio platser totalt inklusive extra.
 
-- datum
-- tid
-- motståndare
-- plats, valfritt
-- antal spelare att kalla, valfritt
+## 8.6 Generera grundplan – fas 1
 
-Default:
+Skapa en deterministisk plan för hela säsongen: jämn fördelning av erbjudna ordinarie plus framtida planerade platser, exakt önskat antal i varje grundplan, proportionell nivåbalans, väntetid och fast säsongsrotation. Nivå påverkar inte totalantalet. Äldre ej inställda matchers erbjudanden måste först kompletteras och bekräftas manuellt. Befintliga uttagningar är endast förslag till denna historik.
 
-`ceil(antal aktiva spelare * 0.5)`
+## 8.7 Starta och hantera matchveckan – fas 2
 
-## 8.6 Generera matchfördelning
+Före matchveckan kan tränaren justera ordinarie grundplan med kopplade byten som bevaras vid omfördelning. `Starta matchveckan` fryser planen och undantar matchen från generering. Kallelser skickas samma vecka i ett annat verktyg. Sanna registrerar status per spelare: ej kallad, inväntar svar, tackat ja, tackat nej eller indragen. Flera ändringar sparas atomiskt.
 
-Prioriteringsordning:
+En ordinarie plats räknas som erbjuden först när kallelsen markeras som skickad. Nej och indragning raderar inte erbjudandet; återaktivering dubbelräknas inte. Återbud kräver ingen omedelbar ersättare. Ja och väntande svar reserverar tillsammans högst tio platser inklusive extra. Matchveckan visar ja, väntande och lediga platser.
 
-1. så jämnt antal matcher per spelare som möjligt
-2. skapa exakt önskat antal spelare per match
-3. proportionell och balanserad mix av nivå 1–3
-4. prioritera den som väntat längst sedan sin senaste ordinarie match
-5. använd en fast, reproducerbar rotationsordning som sista utslagsregel
+## 8.8 Kalla extra spelare
 
-Manuell ändring ska alltid vara möjlig.
+Spelare utanför den frysta grundplanen är extra. Rekommendationen prioriterar genomförda extra, erbjudna ordinarie, tid sedan senaste extra och fast rotation. Nivå påverkar inte ordningen. Tränaren kan välja en annan aktiv kandidat; nej och indragna kallelser måste återaktiveras uttryckligen. Endast faktiskt spelad extra medverkan ökar extraräknaren.
 
-## 8.7 Justera ordinarie lag
+## 8.9 Lås och rätta deltagande
 
-`Justera ordinarie lag` flyttar en eller flera ordinarie matchplatser mellan spelare. Varje spelare som står över ersätts av en spelare som tränaren väljer, så antalet ordinarie platser är oförändrat. Alla byten sparas atomiskt.
+Truppen kan ändras även efter start fram till låsning. Efter start registreras ett till tio faktiska deltagare atomiskt. Väntande svar måste först hanteras; noll deltagare hanteras som inställd match. Sena aktiva deltagare kan läggas till. Spelad ordinarie respektive extra medverkan hålls åtskild från plan och erbjudanden.
 
-- den tillagda spelaren räknas som ordinarie
-- den borttagna spelaren får inte den ordinarie matchen
-- ändringen bevaras vid framtida omfördelning
-- tränaren kan återställa det manuella bytet
+Coach kan rätta låst deltagande med obligatorisk anledning. Före/efter, aktör och tidpunkt bevaras. Ingen framtida plan ändras automatiskt. Äldre genomförda matcher behåller sin historik tills en uttrycklig rättning görs.
 
-## 8.8 Lägg till extra inhoppare
+## 8.10 Omfördela framtida grundplaner
 
-Extra inhopp hanteras separat från ordinarie matchfördelning.
-
-Prioriteringsordning:
-
-1. lägst antal genomförda extra inhopp
-2. lägst antal ordinarie matcher
-3. längst tid sedan senaste genomförda extra inhopp
-4. säsongens fasta, reproducerbara rotationsordning
-
-Spelarnivå påverkar inte rekommendationen. Tränaren kan alltid välja en eller flera andra tillgängliga spelare, och de sparas atomiskt. Tillgänglig betyder aktiv spelare utan någon uttagningsrad i matchen. Endast ett faktiskt genomfört inhopp ökar räknaren; förfrågningar och avböjanden lagras inte i MVP.
-
-## 8.9 Genomför match
-
-Alla kommande uttagningar är planerade tills matchen har spelats.
-
-När tränaren markerar matchen som genomförd föreslår systemet att alla ordinarie uttagna och registrerade extra inhoppare deltog. Tränaren korrigerar återbud eller frånvaro och kan lägga till en eller flera aktiva spelare som extra inhoppare om de deltog utan att vara registrerade före matchen. Deltagandet och eventuella nya extra inhoppare sparas atomiskt.
-
-Historiken ska skilja mellan:
-
-- ordinarie tilldelningar
-- genomförda ordinarie matcher
-- genomförda extra inhopp
-- uttagen men deltog inte
-
-## 8.10 Omfördela framtida matcher
-
-Fördelningen ändras aldrig automatiskt när trupp, matcher, platser eller nivåer ändras. Appen visar att fördelningen behöver uppdateras.
-
-Tränaren väljer om omfördelningen ska börja vid nästa planerade match eller vid en vald framtida match. Genomförda och inställda matcher, tidigare planerade matcher samt manuella ändringar bevaras.
+Fördelningen ändras aldrig automatiskt när trupp, matcher, platser eller nivåer ändras. Tränaren väljer nästa eller en vald framtida grundplan som start. Genomförda, inställda, tidigare planerade och frysta matchveckor samt manuella beslut bevaras.
 
 ---
 
@@ -426,7 +388,7 @@ Tränaren väljer om omfördelningen ska börja vid nästa planerade match eller
 
 ## Grundprincip
 
-Minimera skillnaden mellan spelarnas antal matcher.
+Minimera skillnaden mellan spelarnas erbjudna ordinarie platser plus bevarade framtida grundplaner. Inställda matcher undantas.
 
 Sekundärt mål: matchtruppen ska spegla truppens nivåfördelning så nära som möjligt.
 
@@ -444,7 +406,7 @@ Samma input ska alltid ge samma resultat. Den fasta rotationen får inte baseras
 
 ## Separat extrarotation
 
-Ordinarie matcher och extra inhopp är två oberoende rättvisesystem. Ett extra inhopp påverkar inte framtida ordinarie fördelning och en ordinarie match påverkar inte prioriteten för extra inhopp.
+Extra påverkar inte framtida ordinarie fördelning. Erbjudna ordinarie används som sekundärt utslagsmått efter genomförda extra. Se ADR-023.
 
 ## Krav
 
@@ -456,7 +418,7 @@ Efter full fördelning:
 - manuella beslut ska överleva omfördelning
 - extra inhopp ska fördelas separat och rättvist
 
-Om en perfekt fördelning inte är möjlig ska systemet visa ett tydligt fel eller en varning. Det får inte tyst skapa ett ofullständigt lag eller skriva över manuella beslut.
+Om en perfekt fördelning inte är möjlig ska systemet visa ett tydligt fel eller en varning. Grundplanen får inte bli ofullständig tyst eller skriva över manuella beslut. Matchveckan tillåter uttryckligen färre än tio deltagare.
 
 ---
 
@@ -578,6 +540,15 @@ unique(match_id, player_id)
 
 ---
 
+## Matchveckans tabeller (ADR-023)
+
+- `match_workflows`: match, lag, säsong, fas, revision och historikgranskning.
+- `match_calls`: spelare, fryst grundplantillhörighet, erbjuden ordinarie och kallelsesvar.
+- `match_participation`: faktisk spelare och ordinarie/extra efter låsning.
+- `match_workflow_events`: åtgärd, anledning, före/efter, aktör, tidpunkt, revision och request-id.
+
+Alla relationer verifierar lag och säsong. Coachbegränsad RLS-läsning, server-only atomiska mutationer och skydd av fryst `match_players`-plan. Gemensamma läsmodeller förhindrar dubbelräkning av äldre och nytt deltagande.
+
 # 13. Matchstatus
 
 Använd endast:
@@ -586,7 +557,7 @@ Använd endast:
 - completed
 - cancelled
 
-I UI visas dessa som `Planerad`, `Genomförd` och `Inställd`. Det finns ingen status `Bekräftad` före matchen.
+I UI visas dessa som `Planerad`, `Genomförd` och `Inställd`. Separat matchfas är grundplan, matchvecka, låst eller äldre historik. Kallelser har egna svar; faktisk medverkan registreras separat.
 
 ---
 
@@ -616,7 +587,8 @@ I UI visas dessa som `Planerad`, `Genomförd` och `Inställd`. Det finns ingen s
 - addExtraPlayer
 - resetManualChange
 - suggestExtraPlayers
-- markMatchCompleted
+- get_match_workflow (coach)
+- save_match_workflow (server-only): start, responses, history, lock, correct, cancel
 
 ---
 
@@ -628,9 +600,13 @@ Returnera:
 
 - namn
 - nivå
-- antal planerade matcher
-- antal spelade matcher
-- antal genomförda extra inhopp
+- erbjudna ordinarie platser
+- spelade ordinarie och spelade extra
+- totalt faktiskt spelade
+- framtida planerade platser
+- flagga för ofullständig erbjudandehistorik
+
+Sök och sortering, mobilkort och jämförbar desktoptabell.
 
 ## Spelarkort
 
@@ -912,12 +888,18 @@ Undvik tekniska termer i gränssnittet.
 
 ## Fördelning
 
-- varje match får target antal spelare
+- varje grundplan får target antal spelare; matchveckan tillåter färre
+- sex återbud från tio ordinarie och fem extra ger nio deltagare: tio erbjudna ordinarie, fyra spelade ordinarie och fem spelade extra
+- nej/indragning bevarar erbjudandet, återaktivering dubbelräknas inte
+- högst tio ja/väntande tillsammans; obesvarade måste hanteras före låsning
+- låst deltagande kan rättas med anledning och revisionshistorik
+- historikspärr och ofullständig statistik visas tydligt
+- viewers nekas matchveckans svar och individuell statistik
 - skillnaden i antal matcher per spelare är så liten som möjligt
 - nivåerna fördelas balanserat
 - manuell ändring är möjlig
 - ordinarie matcher och extra inhopp redovisas och fördelas separat
-- extra inhopp rekommenderas efter lägst antal genomförda inhopp, därefter lägst antal ordinarie matcher och längst väntetid, utan hänsyn till nivå
+- extra inhopp rekommenderas efter lägst antal genomförda inhopp, därefter lägst antal erbjudna ordinarie platser och längst väntetid, utan hänsyn till nivå
 - samma input ger samma automatiska fördelning
 - manuella ändringar bevaras vid omfördelning
 

@@ -1,4 +1,31 @@
-# Aktuell milstolpe: Implementation 19 – flera byten och extra inhoppare i ett steg
+# Aktuell milstolpe: Implementation 20 – matchplanering i två faser
+
+Planen godkändes 2026-10-05 och arbetet återupptogs efter användarens paus. Lokal implementation är genomförd. Full Supabase-verifiering återstår före integration.
+
+- Arbetsgren: `codex/two-phase-match-planning`, bas `5fb65bc`.
+- [Utvecklingsplan, avbockning och återupptagningspunkt](implementation-20-two-phase-match-planning.md).
+- [ADR-023: grundplan, externa kallelser och låst deltagande](../architecture/decisions/ADR-023-two-phase-match-planning.md).
+
+## Status
+
+- [x] Produktval, godkänd plan och arbetsgren.
+- [x] Databas, atomiska åtgärder, fryst grundplan och erbjudandebaserad rättvisa.
+- [x] Matchveckans server- och UI-flöden integrerade.
+- [x] Historikkomplettering och spelaröversikt med sökning och sortering.
+- [x] ADR-023, nio berörda äldre ADR:er, produktspecifikation och arkitektur uppdaterade.
+- [x] 194 automatiska applikationstester och 451 databasassertions på isolerad PostgreSQL via adapter.
+- [x] Mobilresa 390 px och desktopjämförelse med syntetiska data.
+- [x] Första oberoende granskningen; tre P2 rättade.
+- [x] Slutlig uppföljande granskning; inga nya P0–P2-fynd.
+- [ ] Full Supabase/pgTAP/db lint och samtidighet i två PostgreSQL-sessioner.
+- [x] Separat godkännande för commit och push av arbetsgrenen.
+- [ ] Separat godkännande för PR och produktionsändringar.
+
+Det nya samtidighetstestet ingår i befintlig CI och release-preflight. Docker/Supabase-runtime saknas på denna maskin; den återstående grinden får inte ersättas med adapterresultatet. Ingen verklig matchdata har ändrats.
+
+---
+
+# Föregående milstolpe: Implementation 19 – flera byten och extra inhoppare i ett steg
 
 ## Mål
 

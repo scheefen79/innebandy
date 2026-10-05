@@ -4,7 +4,7 @@ Ett mobile-first planeringsverktyg för tränare i FBC Sollentuna P17. Tjänsten
 
 ## Status
 
-Den lokala MVP:n har autentisering, lagbehörighet, översikt, spelarhantering, matcher, ordinarie fördelning, manuella byten, extra inhopp och matchcompletion. Nästa milstolpe är Implementation 10: säker produktionssättning och pilot för tre tränare.
+Den lokala MVP:n har autentisering, lagbehörighet, översikt, spelarhantering, matcher, ordinarie fördelning, manuella byten, extra inhopp och matchcompletion. Aktuell utveckling är [Implementation 20: matchplanering i två faser](docs/planning/implementation-20-two-phase-match-planning.md), med externa kallelser, flexibel matchvecka och låst faktiskt deltagande. Se planen för verifieringsstatus och kvarvarande integrationskontroller.
 
 ## Dokumentation
 

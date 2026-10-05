@@ -1,0 +1,10 @@
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { expect, it } from "vitest";
+import { WorkflowView } from "./workflow-view";
+import type { MatchWorkflow } from "@/features/match-workflow/workflow";
+const base:MatchWorkflow={phase:"week",revision:0,historyRequired:false,status:"upcoming",startsAt:"2020-01-01T10:00:00Z",players:[],events:[]};
+const render=(workflow:MatchWorkflow)=>renderToStaticMarkup(createElement(WorkflowView,{workflow,action:"/save",requestId:"request",now:"2026-10-05T10:00:00Z"}));
+it("shows capacity, empty groups and a participation action without a full roster",()=>{const html=render(base);expect(html).toContain("10 lediga platser");expect(html).toContain("Inga spelare i denna grupp");expect(html).toContain("Lås deltagandet");expect(html).toContain('aria-live="polite"');});
+it("requires explicit confirmation of unknown historical offers",()=>{const html=render({...base,phase:"legacy",historyRequired:true});expect(html).toContain("endast förslag");expect(html).toContain('name="historyConfirmed"');});
+it("exposes a correction reason and preserves locked status",()=>{const html=render({...base,phase:"locked",status:"completed"});expect(html).toContain("Deltagandet är låst");expect(html).toContain('name="reason"');expect(html).not.toContain("Spara 0 ändringar");});

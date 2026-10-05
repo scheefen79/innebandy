@@ -1,5 +1,9 @@
 # ADR-019: standardtrupp om tio kallade spelare per match
 
+## Ändring 2026-10-05
+
+Standardstorleken tio kvarstår för grundplanen. Tio är också totalgräns för reserverade platser och nytt låst deltagande, inklusive extra. Färre deltagare tillåts; äldre historik skrivs inte ned. Se [ADR-023](ADR-023-two-phase-match-planning.md), som ersätter motstridiga delar nedan. Tidigare beslut bevaras som historik.
+
 - Status: Accepterad
 - Datum: 2026-09-17
 

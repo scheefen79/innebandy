@@ -1,5 +1,9 @@
 # ADR-022: Atomiska batcher för manuella byten och extra inhoppare
 
+## Ändring 2026-10-05
+
+Atomiska kopplade bytespar gäller grundplanens justering före matchveckan. Det nya matchveckoflödet sparar flera oberoende svar atomiskt och kräver inga bytespar. Se [ADR-023](ADR-023-two-phase-match-planning.md), som ersätter motstridiga delar nedan. Tidigare beslut bevaras som historik.
+
 - Status: Accepterad
 - Datum: 2026-10-01
 

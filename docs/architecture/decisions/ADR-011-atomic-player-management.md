@@ -1,5 +1,9 @@
 # ADR-011: atomisk spelarhantering och separat historik
 
+## Ändring 2026-10-05
+
+Spelaröversikt och profil visar erbjudna ordinarie, spelade ordinarie, spelade extra, totalt spelade och framtida planer. Ofullständig kallelsehistorik markeras uttryckligen. Se [ADR-023](ADR-023-two-phase-match-planning.md), som ersätter motstridiga delar nedan. Tidigare beslut bevaras som historik.
+
 - Status: Accepterad
 - Datum: 2026-08-24
 
