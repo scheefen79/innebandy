@@ -1,7 +1,7 @@
 begin;
 create extension if not exists pgtap with schema extensions;
 set local search_path=public,extensions;
-select plan(40);
+select plan(41);
 insert into auth.users(id,email) values('ef000000-0000-4000-8000-000000000001','week-coach@example.test'),('ef000000-0000-4000-8000-000000000002','week-viewer@example.test'),('ef000000-0000-4000-8000-000000000003','week-outsider@example.test');
 insert into public.teams(id,name,slug) values('ef000000-0000-4000-8000-000000000004','Synthetic workflow','synthetic-workflow');
 insert into public.team_members(team_id,user_id,role) values('ef000000-0000-4000-8000-000000000004','ef000000-0000-4000-8000-000000000001','coach'),('ef000000-0000-4000-8000-000000000004','ef000000-0000-4000-8000-000000000002','viewer');
@@ -56,7 +56,12 @@ reset role;
 select ok(not (private.player_match_totals('ef000000-0000-4000-8000-000000000116')->>'historyComplete')::boolean,'unknown history is explicitly marked incomplete');
 set local role service_role;
 
-select throws_ok($test$update public.match_players set played=true where match_id='ef000000-0000-4000-8000-000000000006'$test$,'P0001','FROZEN_MATCH_PLAN','legacy writes cannot change frozen plan');
+-- Test the trigger as the table owner, matching SECURITY DEFINER mutation rights.
+-- service_role has no direct UPDATE grant and is rejected before the trigger runs.
+reset role;
+select throws_ok($test$update public.match_players set played=true where match_id='ef000000-0000-4000-8000-000000000006'$test$,'P0001','FROZEN_MATCH_PLAN','privileged writes cannot change frozen plan');
+set local role service_role;
+select throws_ok($test$update public.match_players set played=true where match_id='ef000000-0000-4000-8000-000000000006'$test$,'42501','permission denied for table match_players','service role cannot bypass RPC through direct table writes');
 select throws_ok($test$select pg_temp.change_week('responses','[null]')$test$,'P0001','INVALID_WORKFLOW','malformed payload rejected');
 select lives_ok($test$select pg_temp.change_week('responses','[{"playerId":"ef000000-0000-4000-8000-000000000101","response":"pending"},{"playerId":"ef000000-0000-4000-8000-000000000102","response":"pending"},{"playerId":"ef000000-0000-4000-8000-000000000103","response":"pending"},{"playerId":"ef000000-0000-4000-8000-000000000104","response":"pending"},{"playerId":"ef000000-0000-4000-8000-000000000105","response":"pending"},{"playerId":"ef000000-0000-4000-8000-000000000106","response":"pending"},{"playerId":"ef000000-0000-4000-8000-000000000107","response":"pending"},{"playerId":"ef000000-0000-4000-8000-000000000108","response":"pending"},{"playerId":"ef000000-0000-4000-8000-000000000109","response":"pending"},{"playerId":"ef000000-0000-4000-8000-000000000110","response":"pending"}]')$test$,'ten pending calls reserve ten places');
 select throws_ok($test$select pg_temp.change_week('responses','[{"playerId":"ef000000-0000-4000-8000-000000000111","response":"pending"}]')$test$,'P0001','ROSTER_CAPACITY','eleventh reserved place rejected');

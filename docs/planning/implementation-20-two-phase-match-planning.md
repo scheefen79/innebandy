@@ -105,3 +105,9 @@ Verifiera dessutom elfte reserverade platsen, färre än tio deltagare, obesvara
 - Befintliga ospårade `.DS_Store`, `.pnpm-store/` och `node_modules.fore-aterinstallation-2026-10-02/` är bevarade. Arkivet undantas nu från lint, typkontroll och testupptäckt.
 - Befintliga beroenden används med `pnpm --config.verify-deps-before-run=false <script>` för att undvika oavsiktlig återinstallation.
 - Vid slutgranskningen var ändringen lokal och nya filer ospårade; granskningen omfattade även dessa. Användaren har därefter godkänt commit och push av hela ändringen.
+
+## CI-uppföljning: rollval i databastest 10
+
+Första riktiga Supabase/pgTAP-körningen för `9b1f83a` körde 451 tester. Ett fel: test 10 i SQL-fil 16 försökte nå frysnings-triggern som `service_role`, men rollen saknar direkt UPDATE på `match_players` och nekades korrekt med 42501 före triggern.
+
+Testet separerar nu skrivbehörighet från frysningsskydd: tabellägaren verifierar `FROZEN_MATCH_PLAN`, och en ny assertion verifierar att `service_role` nekas direkt UPDATE. Inga produktionsbehörigheter, migrationer eller affärsregler ändras. Den tillfälliga PostgreSQL-adapterns breda efterhandsgrant till service-role har tagits bort; samma migrationsgrants används nu och 452 assertions passerar lokalt. Ny riktig CI-körning återstår för denna rättning.
